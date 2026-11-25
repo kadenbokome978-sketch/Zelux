@@ -35,7 +35,7 @@ Motion must explain something, guide attention or give feedback. If it does none
 
 - One-shot reveals via `data-reveal` (+ `style="--d:80ms"` stagger). Handled by `src/scripts/reveal.ts`; gated on `.js` and `prefers-reduced-motion: no-preference`.
 - Hover/focus feedback: colour, underline grow (`.link-u`, `.btn-ghost`), small translate (≤6px), arrow nudge.
-- Step-through diagrams (LeadFlow pattern): advance with `setInterval` only while visible (IntersectionObserver), stop when off screen.
+- Step-through demos (LeadFlow pattern): play through once when first seen (IntersectionObserver), then rest on the result; steps are clickable and a "Play again" button replays. No endless loops.
 - State transitions on toggles, chips, accordions.
 
 ## Timing (tokens in global.css: use them, no one-off durations)

@@ -1,165 +1,241 @@
 ---
-// Before / after: the same enquiry handled by hand, then by a connected system.
-// JS steps through the visible flow while it's on screen. Without JS, or with
-// reduced motion, the "after" flow is shown complete and the toggle is hidden.
-const flows = {
-  before: [
-    { label: 'Enquiry arrives', meta: 'Website · 09:41' },
-    { label: 'Sits in the inbox', meta: 'Seen at 18:30' },
-    { label: 'Copied by hand', meta: 'Into a spreadsheet' },
-    { label: 'Reply goes out', meta: 'Next morning' },
-    { label: 'Lead has gone', meta: 'Booked someone else', bad: true },
-  ],
+// Before / after demo: one example enquiry ("Sarah", fictional) handled by hand vs by a connected system.
+// Plays through once when it scrolls into view, then stops (no endless loop). Steps are clickable,
+// "Play again" replays. Without JS, or with reduced motion, the finished "after" flow is shown.
+type Step = { id: string; label: string; time: string; icon: string; preview: { kind: string; lines: string[] } };
+
+const icons: Record<string, string> = {
+  inbox: 'M3 12h4l2 3h6l2-3h4M5 5h14l2 7v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6l2-7Z',
+  sort: 'M4 6h16M7 12h10M10 18h4',
+  reply: 'M4 5h16v11H9l-5 4V5Z',
+  calendar: 'M4 7h16v13H4V7Zm0 4h16M8 3v4m8-4v4',
+  database: 'M12 4c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Zm8 3v10c0 1.7-3.6 3-8 3s-8-1.3-8-3V7m16 5c0 1.7-3.6 3-8 3s-8-1.3-8-3',
+  clock: 'M12 7v5l3 2M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18Z',
+  copy: 'M8 8h11v12H8V8Zm-3 8V4h11',
+  x: 'M6 6l12 12M18 6 6 18',
+};
+
+const flows: Record<'before' | 'after', Step[]> = {
   after: [
-    { label: 'Enquiry arrives', meta: 'Website · 09:41' },
-    { label: 'Sorted', meta: 'Job type · area · urgency' },
-    { label: 'Reply drafted', meta: 'You approve · 09:42' },
-    { label: 'Call booked', meta: 'In your calendar' },
-    { label: 'Logged', meta: 'CRM updated · 09:43' },
+    { id: 'a1', label: 'Enquiry arrives', time: '09:41', icon: 'inbox', preview: { kind: 'message', lines: ['Sarah K.', 'Boiler not firing up, no hot water. Havant. Any chance this week?'] } },
+    { id: 'a2', label: 'Sorted', time: '09:41', icon: 'sort', preview: { kind: 'tags', lines: ['Boiler repair', 'PO9 · in area', 'Urgent'] } },
+    { id: 'a3', label: 'Reply drafted', time: '09:42', icon: 'reply', preview: { kind: 'reply', lines: ['Hi Sarah, sorry to hear that. I can come Tuesday at 9:00. Book it here and it’s yours.', 'Approve & send'] } },
+    { id: 'a4', label: 'Call booked', time: '09:42', icon: 'calendar', preview: { kind: 'slot', lines: ['Tue 9:00', 'Boiler repair · Sarah K. · Havant'] } },
+    { id: 'a5', label: 'Logged', time: '09:43', icon: 'database', preview: { kind: 'crm', lines: ['Sarah K.', 'Source: website', 'Status: booked'] } },
+  ],
+  before: [
+    { id: 'b1', label: 'Enquiry arrives', time: '09:41', icon: 'inbox', preview: { kind: 'note', lines: ['Lands in an inbox with 40 others while you’re under a sink.'] } },
+    { id: 'b2', label: 'Seen at last', time: '18:30', icon: 'clock', preview: { kind: 'note', lines: ['Spotted between jobs. You mean to reply after tea.'] } },
+    { id: 'b3', label: 'Copied by hand', time: '21:15', icon: 'copy', preview: { kind: 'note', lines: ['Typed into a spreadsheet so it doesn’t get lost.'] } },
+    { id: 'b4', label: 'Reply sent', time: 'Next day', icon: 'reply', preview: { kind: 'note', lines: ['“Hi Sarah, I could do Thursday?”'] } },
+    { id: 'b5', label: 'Lead lost', time: 'Too late', icon: 'x', preview: { kind: 'lost', lines: ['“Thanks, someone came out yesterday.”'] } },
   ],
 };
 ---
-<figure id="leadflow" class="leadflow panel overflow-hidden" data-mode="after" aria-label="The same enquiry handled two ways. By hand it waits in the inbox, is copied into a spreadsheet, gets a reply the next morning and the customer books someone else. With a connected system it is sorted, a reply is drafted for you to approve, a call is booked and the CRM is updated within two minutes.">
-  <div class="flex flex-wrap items-center justify-between gap-3 border-b border-hairline px-4 py-2.5 sm:px-5">
-    <div class="lf-toggle inline-flex rounded-full border border-hairline-strong p-0.5" role="group" aria-label="Show workflow">
-      <button type="button" data-set="before" aria-pressed="false">Before</button>
-      <button type="button" data-set="after" aria-pressed="true">After</button>
+<figure id="leadflow" class="lf" data-mode="after" aria-label="Example: the same enquiry handled two ways. By hand it waits all day, gets copied into a spreadsheet, gets a reply the next day and the customer books someone else. With a connected system it is sorted, a reply is drafted for you to approve, a visit is booked and it is logged within two minutes.">
+  <div class="lf-head">
+    <div class="lf-toggle" role="group" aria-label="Show the enquiry handled">
+      <span class="lf-thumb" aria-hidden="true"></span>
+      <button type="button" data-set="before" aria-pressed="false">By hand</button>
+      <button type="button" data-set="after" aria-pressed="true">Connected</button>
     </div>
-    <span class="flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3">
-      <span class="lf-live h-1.5 w-1.5 rounded-full" aria-hidden="true"></span>
-      <span class="lf-status">Same enquiry, connected system</span>
-    </span>
+    <p class="lf-result" aria-live="polite">
+      <span class="lf-result-big">2 minutes</span>
+      <span class="lf-result-small">enquiry to booked visit</span>
+    </p>
   </div>
-  {Object.entries(flows).map(([mode, steps]) => (
-    <ol class="lf-track flex flex-col p-4 sm:p-5 lg:flex-row lg:items-stretch" data-flow={mode} hidden={mode === 'before'}>
-      {steps.map((s, i) => (
-        <>
-          {i > 0 && <li class="lf-link" aria-hidden="true"><span></span></li>}
-          <li class:list={['lf-node', (s as { bad?: boolean }).bad && 'is-bad']}>
-            <span class="lf-dot" aria-hidden="true"></span>
-            <span class="font-mono text-[0.6875rem] text-ink-3">0{i + 1}</span>
-            <span class="lf-label mt-3 block text-[1.0625rem] font-medium tracking-[-0.01em]">{s.label}</span>
-            <span class="mt-1.5 block font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-3">{s.meta}</span>
+
+  {(['after', 'before'] as const).map((mode) => (
+    <div class="lf-flow" data-flow={mode} hidden={mode === 'before'}>
+      <ol class="lf-steps">
+        <li class="lf-track" aria-hidden="true"><span class="lf-fill"></span><span class="lf-token">Sarah</span></li>
+        {flows[mode].map((s, i) => (
+          <li class:list={['lf-step', s.icon === 'x' && 'is-bad']} data-i={i}>
+            <button type="button" class="lf-node" data-go={i} aria-label={`Step ${i + 1}: ${s.label}, ${s.time}`}>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d={icons[s.icon]} /></svg>
+            </button>
+            <span class="lf-label">{s.label}</span>
+            <span class="lf-time">{s.time}</span>
           </li>
-        </>
-      ))}
-    </ol>
+        ))}
+      </ol>
+      <div class="lf-previews">
+        {flows[mode].map((s, i) => (
+          <div class:list={['lf-preview', `is-${s.preview.kind}`]} data-i={i}>
+            {s.preview.kind === 'message' && (<><p class="lf-pv-who"><span class="lf-avatar">S</span>{s.preview.lines[0]}<span class="lf-pv-meta">via your website</span></p><p class="lf-pv-text">{s.preview.lines[1]}</p></>)}
+            {s.preview.kind === 'tags' && (<div class="lf-tags">{s.preview.lines.map((t) => <span>{t}</span>)}</div>)}
+            {s.preview.kind === 'reply' && (<><p class="lf-pv-text">{s.preview.lines[0]}</p><span class="lf-approve">{s.preview.lines[1]}</span></>)}
+            {s.preview.kind === 'slot' && (<p class="lf-slot"><b>{s.preview.lines[0]}</b><span>{s.preview.lines[1]}</span><i>Booked</i></p>)}
+            {s.preview.kind === 'crm' && (<div class="lf-crm">{s.preview.lines.map((t) => <span>{t}</span>)}</div>)}
+            {(s.preview.kind === 'note' || s.preview.kind === 'lost') && (<p class="lf-pv-text">{s.preview.lines[0]}</p>)}
+          </div>
+        ))}
+      </div>
+    </div>
   ))}
-  <figcaption class="flex items-center justify-between border-t border-hairline px-4 py-3 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3 sm:px-5">
-    <span>Illustrative example</span>
-    <span class="lf-foot">About 2 minutes, and booked</span>
+
+  <figcaption class="lf-foot">
+    <span>Illustrative example · Sarah is made up</span>
+    <button type="button" class="lf-replay">Play again ↺</button>
   </figcaption>
 </figure>
 
 <style>
-  .lf-toggle button {
-    min-height: 36px; padding: 0 0.9rem; font-size: 0.8125rem; font-weight: 500;
-    color: var(--color-ink-2); border-radius: 999px; transition: background-color var(--dur-ui), color var(--dur-ui), transform var(--dur-ui) var(--ease-out-soft);
+  .lf {
+    margin: 0; padding: 1.25rem; border-radius: calc(var(--radius-card) + 0.5rem);
+    background: var(--color-deep); color: var(--color-deep-ink);
+    --lf-ac: var(--color-accent-on-deep); --lf-muted: var(--color-deep-ink-2); --lf-line: var(--color-deep-line);
   }
-  .lf-toggle button:active { transform: scale(0.97);
-  }
-  .lf-toggle button[aria-pressed='true'] { background: var(--color-ink); color: var(--color-canvas); }
+  @media (min-width: 768px) { .lf { padding: 1.75rem 2rem; } }
+  .lf[data-mode='before'] { --lf-ac: #c5cdd9; }
 
+  /* header: toggle + result */
+  .lf-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+  .lf-toggle { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: var(--color-deep-2); border: 1px solid var(--lf-line); }
+  .lf-toggle button { position: relative; z-index: 1; min-height: 40px; padding: 0 1.1rem; border-radius: 999px; font-size: 0.875rem; font-weight: 600; color: var(--lf-muted); transition: color var(--dur-ui); }
+  .lf-toggle button[aria-pressed='true'] { color: var(--color-deep); }
+  .lf-thumb { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 999px; background: var(--color-deep-ink); transform: translateX(100%); transition: transform var(--dur-ui) var(--ease-out-soft); }
+  .lf[data-mode='before'] .lf-thumb { transform: none; }
+  .lf-result { display: flex; align-items: baseline; gap: 0.6rem; }
+  .lf-result-big { font-family: var(--font-serif); font-size: clamp(1.75rem, 3vw, 2.25rem); line-height: 1; letter-spacing: -0.03em; color: var(--color-accent-on-deep); }
+  .lf[data-mode='before'] .lf-result-big { color: #ff8f86; }
+  .lf-result-small { font-size: 0.875rem; color: var(--lf-muted); }
+
+  /* steps */
+  .lf-flow { margin-top: 1.75rem; display: grid; gap: 1.25rem; }
+  @media (min-width: 1024px) { .lf-flow { grid-template-columns: 7fr 5fr; align-items: center; gap: 2rem; } }
+  .lf-steps { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.25rem; margin: 0; padding: 2.25rem 0 0; list-style: none; }
+  @media (max-width: 520px) { .lf-steps { padding-top: 0; } }
+  .lf-step { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
   .lf-node {
-    position: relative; flex: 1 1 0; padding: 1rem 1.1rem 1.1rem;
-    border: 1px solid var(--color-hairline); border-radius: var(--radius-inner); background: var(--color-paper);
-    transition: border-color 400ms var(--ease-out-soft);
+    position: relative; z-index: 1; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 999px;
+    background: var(--color-deep-2); border: 1px solid var(--lf-line); color: var(--lf-muted);
+    transition: background-color var(--dur-ui), border-color var(--dur-ui), color var(--dur-ui), transform var(--dur-ui) var(--ease-out-soft), box-shadow var(--dur-ui);
   }
-  .lf-dot { position: absolute; top: 1.1rem; right: 1.1rem; width: 7px; height: 7px; border-radius: 999px; background: #c5cdd9; transition: background-color 300ms, box-shadow 300ms; }
-  .lf-label { color: var(--color-ink-3); transition: color 300ms; }
+  .lf-node svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .lf-node:active { transform: scale(0.94); }
+  .lf-label { font-size: 0.875rem; font-weight: 600; line-height: 1.2; color: var(--lf-muted); transition: color var(--dur-ui); }
+  .lf-time { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.06em; color: var(--lf-muted); }
+  @media (max-width: 520px) { .lf-label { font-size: 0.75rem; } .lf-node { width: 44px; height: 44px; } }
 
-  .lf-link { position: relative; height: 18px; width: 1px; margin-left: 1.6rem; background: var(--color-hairline); }
-  .lf-link span { position: absolute; inset: 0; background: var(--color-accent); transform: scaleY(0); transform-origin: top; transition: transform 500ms var(--ease-out-soft); }
-  @media (min-width: 1024px) {
-    .lf-link { height: 1px; width: auto; min-width: 1.75rem; flex: 0 0 1.75rem; margin: 0; align-self: center; }
-    .lf-link span { transform: scaleX(0); transform-origin: left; }
+  .lf-step.on .lf-node { background: var(--lf-ac); border-color: var(--lf-ac); color: var(--color-deep); }
+  .lf-step.on .lf-label { color: var(--color-deep-ink); }
+  .lf-step.now .lf-node { box-shadow: 0 0 0 6px rgb(110 160 255 / 0.22); }
+  .lf[data-mode='before'] .lf-step.now .lf-node { box-shadow: 0 0 0 6px rgb(197 205 217 / 0.18); }
+  .lf-step.is-bad.on .lf-node { background: #ff8f86; border-color: #ff8f86; }
+  .lf-step.is-bad.on .lf-label { color: #ffb4ae; }
+
+  /* track behind the nodes, with a moving "Sarah" token */
+  .lf-track { position: absolute; left: 10%; right: 10%; top: calc(2.25rem + 26px); height: 2px; background: var(--lf-line); border-radius: 2px; }
+  .lf-fill { position: absolute; inset: 0; background: var(--lf-ac); border-radius: 2px; transform-origin: left; transform: scaleX(var(--p, 1)); transition: transform 600ms var(--ease-out-soft); }
+  .lf-token {
+    position: absolute; top: -60px; left: calc(var(--p, 1) * 100%); transform: translateX(-50%);
+    padding: 2px 8px; border-radius: 999px; background: var(--color-deep-ink); color: var(--color-deep);
+    font-size: 0.6875rem; font-weight: 700; white-space: nowrap; transition: left 600ms var(--ease-out-soft);
   }
+  @media (max-width: 520px) { .lf-track { top: 22px; } .lf-token { display: none; } }
 
-  .lf-node.on { border-color: var(--color-hairline-accent); }
-  .lf-node.on .lf-label { color: var(--color-ink); }
-  .lf-node.on .lf-dot { background: var(--color-accent); box-shadow: 0 0 0 4px rgb(37 99 235 / 0.14); }
-  .lf-link.on span { transform: none; }
-  .lf-node.is-now { border-color: var(--color-accent); }
+  /* preview cards: one visible at a time, crossfading */
+  .lf-previews { position: relative; display: grid; min-height: 9.5rem; }
+  .lf-preview {
+    grid-area: 1 / 1; align-self: center; padding: 1.1rem 1.25rem; border-radius: var(--radius-card);
+    background: var(--color-paper); color: var(--color-ink);
+    opacity: 0; transform: translateY(8px); transition: opacity var(--dur-ui) var(--ease-out-soft), transform var(--dur-ui) var(--ease-out-soft);
+    pointer-events: none;
+  }
+  .lf-preview.show { opacity: 1; transform: none; pointer-events: auto; }
+  .lf-pv-who { display: flex; align-items: center; gap: 0.6rem; font-weight: 600; font-size: 0.9375rem; }
+  .lf-avatar { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: var(--color-accent-tint); color: var(--color-accent-hover); font-size: 0.8125rem; font-weight: 700; }
+  .lf-pv-meta { margin-left: auto; font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 400; color: var(--color-ink-3); }
+  .lf-pv-text { margin-top: 0.5rem; font-size: 0.9375rem; line-height: 1.55; color: var(--color-ink-2); }
+  .is-note .lf-pv-text, .is-lost .lf-pv-text, .is-reply .lf-pv-text { margin-top: 0; }
+  .is-lost { background: #fff1f0; }
+  .is-lost .lf-pv-text { color: #8c1d17; font-weight: 600; }
+  .lf-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .lf-tags span { padding: 0.35rem 0.8rem; border-radius: 999px; background: var(--color-accent-tint); color: var(--color-accent-hover); font-size: 0.875rem; font-weight: 600; }
+  .lf-tags span:last-child { background: #fde8e6; color: #8c1d17; }
+  .lf-approve { display: inline-flex; margin-top: 0.75rem; padding: 0.45rem 1rem; border-radius: 999px; background: var(--color-accent); color: var(--color-on-accent); font-size: 0.875rem; font-weight: 600; }
+  .lf-slot { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 1rem; align-items: center; }
+  .lf-slot b { grid-row: span 2; display: grid; place-items: center; min-width: 4.5rem; padding: 0.6rem; border-radius: var(--radius-inner); background: var(--color-accent); color: var(--color-on-accent); font-family: var(--font-serif); font-size: 1.125rem; }
+  .lf-slot span { font-size: 0.875rem; color: var(--color-ink-2); }
+  .lf-slot i { font-style: normal; font-size: 0.8125rem; font-weight: 700; color: var(--color-live); }
+  .lf-crm { display: grid; gap: 0.35rem; }
+  .lf-crm span { display: flex; justify-content: space-between; padding-bottom: 0.35rem; border-bottom: 1px solid var(--color-hairline); font-size: 0.875rem; color: var(--color-ink-2); }
+  .lf-crm span:first-child { font-weight: 600; color: var(--color-ink); }
+  .lf-crm span:last-child { border: 0; color: var(--color-live); font-weight: 600; }
 
-  /* Before: grey, slow, ends badly */
-  [data-flow='before'] .lf-link span { background: var(--color-ink-3); }
-  [data-flow='before'] .lf-node.on { border-color: var(--color-hairline-strong); }
-  [data-flow='before'] .lf-node.on .lf-dot { background: var(--color-ink-3); box-shadow: none; }
-  [data-flow='before'] .lf-node.is-now { border-color: var(--color-ink-2); }
-  [data-flow='before'] .lf-node.is-bad.on { border-color: #b3261e; }
-  [data-flow='before'] .lf-node.is-bad.on .lf-dot { background: #b3261e; }
-  [data-flow='before'] .lf-node.is-bad.on .lf-label { color: #b3261e; }
-
-  .lf-live { background: var(--color-live); }
-  .leadflow[data-mode='before'] .lf-live { background: #b3261e; }
-  @media (prefers-reduced-motion: no-preference) { .lf-live { animation: lf-blink 1.6s ease-in-out infinite; } }
-  @keyframes lf-blink { 50% { opacity: 0.35; } }
+  .lf-foot { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--lf-line); display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lf-muted); }
+  .lf-replay { flex: none; white-space: nowrap; min-height: 36px; padding: 0 0.9rem; border-radius: 999px; border: 1px solid var(--lf-line); font: inherit; color: var(--color-deep-ink); letter-spacing: 0.06em; }
+  @media (hover: hover) and (pointer: fine) {
+    .lf-replay:hover, .lf-node:hover { border-color: var(--color-deep-ink-2); }
+    .lf-toggle button[aria-pressed='false']:hover { color: var(--color-deep-ink); }
+  }
 </style>
 
 <style is:global>
-  /* No JS: hide the toggle and show the finished "after" flow */
-  html:not(.js) .lf-toggle { display: none; }
-  html:not(.js) .lf-node { border-color: var(--color-hairline-accent); }
-  html:not(.js) .lf-node .lf-label { color: var(--color-ink); }
-  html:not(.js) .lf-node .lf-dot { background: var(--color-accent); }
-  html:not(.js) .lf-link span { transform: none; }
+  /* No JS: show the finished "connected" flow with its last preview, hide the controls */
+  html:not(.js) .lf-toggle, html:not(.js) .lf-replay { display: none; }
+  html:not(.js) .lf-step .lf-node { background: var(--color-accent-on-deep); border-color: var(--color-accent-on-deep); color: var(--color-deep); }
+  html:not(.js) .lf-step .lf-label { color: var(--color-deep-ink); }
+  html:not(.js) .lf-preview[data-i='2'] { opacity: 1; transform: none; }
 </style>
 
 <script>
   const fig = document.getElementById('leadflow');
   if (fig) {
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const status = fig.querySelector('.lf-status')!;
-    const foot = fig.querySelector('.lf-foot')!;
     const copy = {
-      before: ['Same enquiry, handled by hand', 'About 24 hours, and lost'],
-      after: ['Same enquiry, connected system', 'About 2 minutes, and booked'],
+      after: ['2 minutes', 'enquiry to booked visit'],
+      before: ['Next day', 'and Sarah has booked someone else'],
     } as const;
     type Mode = keyof typeof copy;
     const total = 5;
     let mode: Mode = 'after';
     let step = 0;
     let timer: number | undefined;
-    let visible = false;
+    let played = false;
 
+    const flow = () => fig.querySelector<HTMLElement>(`[data-flow="${mode}"]`)!;
     const paint = (n: number) => {
-      let nodes = 0;
-      fig.querySelectorAll<HTMLElement>(`[data-flow="${mode}"] > li`).forEach((el) => {
-        if (el.classList.contains('lf-node')) {
-          nodes++;
-          el.classList.toggle('on', nodes <= n);
-          el.classList.toggle('is-now', nodes === n && n < total);
-        } else {
-          el.classList.toggle('on', nodes < n);
-        }
+      const f = flow();
+      f.querySelectorAll<HTMLElement>('.lf-step').forEach((el, i) => {
+        el.classList.toggle('on', i < n);
+        el.classList.toggle('now', i === n - 1);
       });
+      f.querySelectorAll<HTMLElement>('.lf-preview').forEach((el, i) => el.classList.toggle('show', i === Math.max(0, n - 1)));
+      const p = n <= 1 ? 0 : (n - 1) / (total - 1);
+      f.querySelector<HTMLElement>('.lf-track')?.style.setProperty('--p', String(p));
     };
     const stop = () => { clearInterval(timer); timer = undefined; };
-    const start = () => {
+    const play = () => {
       stop();
-      if (reduce) { paint(total); return; }
-      step = 0; paint(0);
-      if (visible) timer = window.setInterval(() => {
-        step = step >= total + 2 ? 0 : step + 1; // hold the finished state for two beats
-        paint(Math.min(step, total));
-      }, mode === 'before' ? 1400 : 850);
+      if (reduce) { step = total; paint(total); return; }
+      step = 1; paint(1);
+      timer = window.setInterval(() => {
+        step++;
+        paint(step);
+        if (step >= total) stop(); // play once, then rest on the result
+      }, mode === 'before' ? 1500 : 1000);
     };
     const setMode = (m: Mode) => {
       mode = m;
       fig.dataset.mode = m;
-      fig.querySelectorAll<HTMLElement>('[data-flow]').forEach((ol) => (ol.hidden = ol.dataset.flow !== m));
+      fig.querySelectorAll<HTMLElement>('[data-flow]').forEach((el) => (el.hidden = el.dataset.flow !== m));
       fig.querySelectorAll<HTMLButtonElement>('.lf-toggle button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.set === m)));
-      status.textContent = copy[m][0];
-      foot.textContent = copy[m][1];
-      start();
+      fig.querySelector('.lf-result-big')!.textContent = copy[m][0];
+      fig.querySelector('.lf-result-small')!.textContent = copy[m][1];
+      play();
     };
-    fig.querySelectorAll<HTMLButtonElement>('.lf-toggle button').forEach((b) =>
-      b.addEventListener('click', () => setMode(b.dataset.set as Mode)),
+
+    fig.querySelectorAll<HTMLButtonElement>('.lf-toggle button').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.set as Mode)));
+    fig.querySelectorAll<HTMLButtonElement>('.lf-node').forEach((b) =>
+      b.addEventListener('click', () => { stop(); step = Number(b.dataset.go) + 1; paint(step); }),
     );
-    new IntersectionObserver(([e]) => {
-      visible = e.isIntersecting;
-      if (visible) { if (!timer) start(); } else stop();
-    }, { threshold: 0.35 }).observe(fig);
-    setMode('after');
+    fig.querySelector('.lf-replay')?.addEventListener('click', play);
+
+    paint(total); // finished state until it's seen
+    new IntersectionObserver(([e], io) => {
+      if (e.isIntersecting && !played) { played = true; play(); io.disconnect(); }
+    }, { threshold: 0.4 }).observe(fig);
   }
 </script>
