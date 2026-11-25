@@ -33,7 +33,7 @@ const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '');
 const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co-founded') ? 'Live · Co-founded' : 'Live · Client');
 ---
 <section class="pc" aria-roledescription="carousel" aria-label="Projects" data-carousel>
-  <div class="pc-track" tabindex="0" role="region" aria-label="Projects, scroll sideways or use the arrow buttons">
+  <div class="pc-track" data-lenis-prevent tabindex="0" role="region" aria-label="Projects, scroll sideways or use the arrow buttons">
     {slides.map((s, i) => (
       <div
         class="pc-slide"
@@ -101,12 +101,16 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
   .pc { position: relative; }
   .pc-track {
     display: flex; gap: 1.25rem; margin: 0; padding: 0.25rem 0 0.5rem;
-    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    overflow-x: auto; overscroll-behavior-x: contain;
     scrollbar-width: none; border-radius: var(--radius-card);
   }
   .pc-track::-webkit-scrollbar { display: none; }
+  /* Native snapping only for touch, where a flick has momentum. Mouse/trackpad snapping is done in JS
+     (CSS snap made slow trackpad swipes and wheel scrolls spring back to the same slide). */
+  @media (pointer: coarse) { .pc-track { scroll-snap-type: x mandatory; } }
   .pc-track:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
-  .pc-track.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+  .pc-track.is-dragging { scroll-snap-type: none; scroll-behavior: auto; cursor: grabbing; user-select: none; }
+  .pc-track.is-dragging .pc-slide { transition: none; }
   @media (hover: hover) and (pointer: fine) { .pc-track { cursor: grab; } }
 
   .pc-slide {
@@ -189,64 +193,114 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
     const bar = root.querySelector<HTMLElement>('.pc-progress span');
     const [prev, next] = Array.from(root.querySelectorAll<HTMLButtonElement>('.pc-btn'));
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let active = 0;
+    let dragging = false;
+    let current = 0; // slide the controls point at (updated straight away on click, synced when scrolling stops)
 
-    const setActive = (i: number) => {
-      active = i;
-      slides.forEach((s, j) => s.classList.toggle('is-active', j === i));
+    const paintControls = (i: number) => {
       if (now) now.textContent = String(i + 1);
       bar?.style.setProperty('--p', String((i + 1) / slides.length));
-      prev.disabled = i === 0;
-      next.disabled = i === slides.length - 1;
+      prev.disabled = i <= 0;
+      next.disabled = i >= slides.length - 1;
     };
+    const paintActive = (i: number) => slides.forEach((s, j) => s.classList.toggle('is-active', j === i));
+
+    // Which slide is most visible, measured against the track itself (works at both ends).
+    const visible = new Map<Element, number>();
+    const mostVisible = () => {
+      let best = current, ratio = -1;
+      slides.forEach((s, j) => { const r = visible.get(s) ?? 0; if (r > ratio + 0.01) { ratio = r; best = j; } });
+      return best;
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => visible.set(e.target, e.intersectionRatio));
+    }, { root: track, threshold: [0, 0.25, 0.5, 0.75, 1] });
+    slides.forEach((s) => io.observe(s));
+
+    // Only settle the "active" look once scrolling stops, so slides don't twitch mid-swipe.
+    let settleTimer = 0;
+    let programmatic = false;
+    let lastLeft = track.scrollLeft;
+    const coarse = matchMedia('(pointer: coarse)');
+    const offsetOf = (i: number) => Math.min(slides[i].offsetLeft - slides[0].offsetLeft, track.scrollWidth - track.clientWidth);
+    const settle = () => {
+      const left = track.scrollLeft;
+      if (!coarse.matches && !programmatic && !dragging) {
+        // Snap in the direction of travel once the user has nudged ~12% of a slide.
+        const dir = Math.sign(left - lastLeft);
+        const width = slides[0].offsetWidth;
+        const from = offsetOf(current);
+        let target = current;
+        if (Math.abs(left - from) > width * 0.12) {
+          let best = current, dist = Infinity;
+          slides.forEach((_, j) => { const d = Math.abs(offsetOf(j) - left); if (d < dist) { dist = d; best = j; } });
+          target = best === current ? current + (dir || Math.sign(left - from)) : best;
+        }
+        target = Math.max(0, Math.min(slides.length - 1, target));
+        if (Math.abs(offsetOf(target) - left) > 2) { go(target); return; }
+      }
+      programmatic = false;
+      current = mostVisible();
+      paintControls(current);
+      paintActive(current);
+      lastLeft = track.scrollLeft;
+    };
+    const onScroll = () => { clearTimeout(settleTimer); settleTimer = window.setTimeout(settle, 140); };
+    track.addEventListener('scroll', onScroll, { passive: true });
+    if ('onscrollend' in window) track.addEventListener('scrollend', () => { clearTimeout(settleTimer); settle(); });
+
     const go = (i: number) => {
-      const target = slides[Math.max(0, Math.min(slides.length - 1, i))];
-      track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+      current = Math.max(0, Math.min(slides.length - 1, i));
+      paintControls(current);
+      paintActive(current);
+      programmatic = true;
+      lastLeft = offsetOf(current);
+      track.scrollTo({ left: offsetOf(current), behavior: reduce ? 'auto' : 'smooth' });
+      // if already there, no scroll event fires: clear the flag ourselves
+      if (Math.abs(track.scrollLeft - offsetOf(current)) < 2) programmatic = false;
     };
-
-    // Which slide is in front: the one closest to the track's left edge.
-    let raf = 0;
-    track.addEventListener('scroll', () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const x = track.scrollLeft;
-        let best = 0, dist = Infinity;
-        slides.forEach((s, j) => { const d = Math.abs(s.offsetLeft - track.offsetLeft - x); if (d < dist) { dist = d; best = j; } });
-        if (best !== active) setActive(best);
-      });
-    }, { passive: true });
-
-    prev.addEventListener('click', () => go(active - 1));
-    next.addEventListener('click', () => go(active + 1));
+    prev.addEventListener('click', () => go(current - 1));
+    next.addEventListener('click', () => go(current + 1));
     track.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(active + 1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); go(active - 1); }
+      if (e.target !== track) return; // let links inside slides keep their own keys
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+      if (e.key === 'Home') { e.preventDefault(); go(0); }
+      if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
     });
 
-    // Mouse drag (touch and trackpads already scroll natively).
-    let startX = 0, startLeft = 0, dragging = false, moved = false;
+    // Mouse drag (touch and trackpads scroll natively). Pointer capture keeps the drag even off the track.
+    let startX = 0, startLeft = 0, moved = false, swallow = false;
     track.addEventListener('pointerdown', (e) => {
       if (e.pointerType !== 'mouse' || e.button !== 0) return;
       dragging = true; moved = false; startX = e.clientX; startLeft = track.scrollLeft;
     });
-    window.addEventListener('pointermove', (e) => {
+    track.addEventListener('pointermove', (e) => {
       if (!dragging) return;
       const dx = e.clientX - startX;
-      if (!moved && Math.abs(dx) > 6) { moved = true; track.classList.add('is-dragging'); }
+      if (!moved && Math.abs(dx) > 6) { moved = true; track.setPointerCapture(e.pointerId); track.classList.add('is-dragging'); }
       if (moved) track.scrollLeft = startLeft - dx;
     });
-    window.addEventListener('pointerup', () => {
+    const endDrag = (e: PointerEvent) => {
       if (!dragging) return;
       dragging = false;
-      if (moved) {
-        track.classList.remove('is-dragging');
-        go(active);
-        // swallow the click that ends a drag so links don't open by accident
-        track.addEventListener('click', (ev) => { ev.preventDefault(); ev.stopPropagation(); }, { capture: true, once: true });
-      }
-    });
+      if (!moved) return;
+      track.classList.remove('is-dragging');
+      if (track.hasPointerCapture(e.pointerId)) track.releasePointerCapture(e.pointerId);
+      lastLeft = startLeft; // so settle() snaps in the drag direction
+      settle();
+      swallow = true; // the click that ends a drag shouldn't open a link
+      setTimeout(() => (swallow = false), 0);
+    };
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('click', (e) => { if (swallow) { e.preventDefault(); e.stopPropagation(); } }, true);
     track.addEventListener('dragstart', (e) => e.preventDefault());
 
-    setActive(0);
+    // Keep the current slide in place if the window is resized.
+    let resizeTimer = 0;
+    addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = window.setTimeout(() => go(current), 150); });
+
+    paintControls(0);
+    paintActive(0);
   });
 </script>
