@@ -1,0 +1,86 @@
+---
+import Wordmark from './Wordmark.astro';
+interface Props { currentPath: string }
+const { currentPath } = Astro.props;
+const links = [
+  { href: '/services', label: 'Services' },
+  { href: '/work', label: 'Work' },
+  { href: '/#about', label: 'About' },
+];
+const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(href);
+---
+<header class="sticky top-0 z-50 border-b border-hairline bg-canvas/85 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/70">
+  <div class="container-z flex h-16 items-center justify-between">
+    <a href="/" class="flex min-h-11 items-center" aria-label="Zelux home"><Wordmark /></a>
+
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-8">
+      <ul class="flex items-center gap-7 text-[0.875rem]">
+        {links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class:list={['link-u py-2 transition-colors', isActive(l.href) ? 'text-ink' : 'text-ink-2 hover:text-ink']}
+              aria-current={isActive(l.href) ? 'page' : undefined}
+            >{l.label}</a>
+          </li>
+        ))}
+      </ul>
+      <a href="/book" class="btn-primary !min-h-10 !px-4 !text-[0.875rem]">Book a call</a>
+    </nav>
+
+    <button
+      id="menu-btn"
+      type="button"
+      class="md:hidden -mr-2 flex h-11 w-11 items-center justify-center text-ink"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open menu"
+    >
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path class="l1" d="M3 8h16" stroke="currentColor" stroke-width="1.25" />
+        <path class="l2" d="M3 14h16" stroke="currentColor" stroke-width="1.25" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden hidden border-t border-hairline bg-canvas">
+    <nav aria-label="Mobile" class="container-z py-4">
+      <ul>
+        {links.map((l, i) => (
+          <li class="border-b border-hairline">
+            <a href={l.href} class="flex min-h-14 items-center justify-between font-serif text-[1.75rem] text-ink">
+              {l.label}
+              <span class="font-mono text-xs text-ink-3">0{i + 1}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href="/book" class="btn-primary mt-6 w-full">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    menu?.classList.toggle('hidden', open);
+    document.body.style.overflow = open ? '' : 'hidden';
+  });
+  menu?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      btn?.setAttribute('aria-expanded', 'false');
+      menu.classList.add('hidden');
+      document.body.style.overflow = '';
+    }),
+  );
+</script>
+
+<style>
+  #menu-btn path { transition: transform 220ms var(--ease-out-soft); transform-origin: 11px 11px; }
+  #menu-btn[aria-expanded='true'] .l1 { transform: translateY(3px) rotate(45deg); }
+  #menu-btn[aria-expanded='true'] .l2 { transform: translateY(-3px) rotate(-45deg); }
+</style>

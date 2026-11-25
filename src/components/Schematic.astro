@@ -1,0 +1,73 @@
+---
+// Signature visual: a hairline system schematic showing what Zelux actually builds.
+// Enquiry → Auto-sort → (Calendar | CRM) → Follow-up. Brass pulse travels the path.
+const nodes = [
+  { id: 'n1', x: 24, y: 28, w: 196, label: 'Enquiry form', meta: 'website · 09:41' },
+  { id: 'n2', x: 24, y: 152, w: 196, label: 'Auto-sort', meta: 'qualify · route', accent: true },
+  { id: 'n3', x: 300, y: 152, w: 196, label: 'Calendar', meta: 'intro call booked' },
+  { id: 'n4', x: 24, y: 276, w: 196, label: 'CRM', meta: 'lead logged' },
+  { id: 'n5', x: 300, y: 276, w: 196, label: 'Follow-up', meta: 'reply drafted' },
+];
+const H = 72;
+---
+<figure class="panel relative overflow-hidden p-0" aria-label="Diagram: an enquiry is triaged automatically, booked into a calendar, logged in a CRM, and followed up.">
+  <div class="flex items-center justify-between border-b border-hairline px-4 py-3">
+    <span class="eyebrow !text-[0.6875rem]">System / Lead flow</span>
+    <span class="flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3">
+      <span class="h-1.5 w-1.5 rounded-full bg-live"></span> Running
+    </span>
+  </div>
+  <svg viewBox="0 0 520 380" class="block h-auto w-full" role="img" aria-hidden="true">
+    <defs>
+      <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M20 0H0V20" fill="none" stroke="#17171c" stroke-width="1" />
+      </pattern>
+    </defs>
+    <rect width="520" height="380" fill="url(#grid)" />
+
+    <!-- connectors -->
+    <g fill="none" stroke="#2c2c34" stroke-width="1">
+      <path d="M122 100V152" />
+      <path d="M220 188H300" />
+      <path d="M122 224V276" />
+      <path d="M398 224V276" />
+    </g>
+    <!-- travelling pulse -->
+    <path
+      class="sig-pulse"
+      d="M122 100V188H398V312"
+      pathLength="500"
+      fill="none"
+      stroke="#C8A96A"
+      stroke-width="1.5"
+      stroke-dasharray="40 1000"
+      stroke-dashoffset="-500"
+      stroke-linecap="square"
+    />
+
+    {nodes.map((n) => (
+      <g>
+        <rect x={n.x} y={n.y} width={n.w} height={H} rx="2" fill="#0d0d10" stroke={n.accent ? '#4A3F28' : '#23232A'} />
+        <circle class={n.accent ? 'sig-node-on' : ''} cx={n.x + 18} cy={n.y + 26} r="3" fill={n.accent ? '#C8A96A' : '#3a3a44'} />
+        <text x={n.x + 32} y={n.y + 30} fill="#F4F2EC" font-family="Inter Variable, sans-serif" font-size="14" font-weight="500">{n.label}</text>
+        <text x={n.x + 18} y={n.y + 54} fill="#8A8A93" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="1.2">{n.meta.toUpperCase()}</text>
+      </g>
+    ))}
+  </svg>
+  <figcaption class="flex items-center justify-between border-t border-hairline px-4 py-3 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3">
+    <span>Illustrative build</span>
+    <span>Your tools, connected</span>
+  </figcaption>
+</figure>
+
+<style>
+  @keyframes sig-travel-z {
+    0% { stroke-dashoffset: 40; opacity: 0; }
+    6% { opacity: 1; }
+    72% { stroke-dashoffset: -500; opacity: 1; }
+    82%, 100% { stroke-dashoffset: -500; opacity: 0; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.sig-pulse) { animation: sig-travel-z 5.5s cubic-bezier(0.45, 0, 0.2, 1) infinite; }
+  }
+</style>

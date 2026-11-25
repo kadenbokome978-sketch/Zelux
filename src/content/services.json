@@ -1,0 +1,61 @@
+[
+  {
+    "index": "01",
+    "slug": "websites",
+    "title": "Websites that convert",
+    "summary": "Fast, mobile-first sites built around one job: turning visitors into enquiries, bookings or sales. Includes copy structure, booking or payment setup, and clean SEO foundations.",
+    "bestFor": "Your current site looks dated on a phone, hides what you actually do, or relies on back-and-forth emails just to book a slot.",
+    "included": [
+      "Page structure and copy guidance written around how your buyers decide",
+      "Custom design, built mobile-first and tested on real phones and tablets",
+      "Online booking, enquiry forms or payments wired in",
+      "SEO foundations: titles, descriptions, sitemap, structured data",
+      "Hosting setup on your own accounts, plus domain and DNS",
+      "A short handover so you can edit your own content"
+    ],
+    "notIncluded": [
+      "Paid ads management",
+      "Photography or video shoots (I'll advise on what's worth getting)",
+      "Ongoing content writing, unless agreed in scope"
+    ],
+    "timeline": "Typically 1–3 weeks once copy, photos and access are in place."
+  },
+  {
+    "index": "02",
+    "slug": "automation",
+    "title": "Workflow automation",
+    "summary": "Useful automations wired into tools you already use: lead routing, enquiry triage, follow-up workflows, internal knowledge systems and custom reporting.",
+    "bestFor": "You or your team are losing hours each week copying data between inboxes, spreadsheets and booking tools.",
+    "included": [
+      "A short mapping session to find where time and leads are leaking",
+      "Automations connecting your forms, inbox, calendar and spreadsheets",
+      "Smart sorting, summaries and drafted replies where they save real time",
+      "Plain-English documentation of what runs, when, and why",
+      "Testing with real examples before anything goes live"
+    ],
+    "notIncluded": [
+      "Gimmick chatbots bolted onto your homepage",
+      "Replacing systems that already work well",
+      "Software licences (these sit in your name, at your cost)"
+    ],
+    "timeline": "Scoped to size. Most focused workflows ship within 1–2 weeks."
+  },
+  {
+    "index": "03",
+    "slug": "care",
+    "title": "Ongoing care & iteration",
+    "summary": "Hosting, updates, new pages and fixes, without keeping an expensive agency on retainer.",
+    "bestFor": "You want a site that stays fast and current without having to learn DNS, forms or deployment tools yourself.",
+    "included": [
+      "Uptime and form monitoring",
+      "Small content changes and new pages",
+      "Security and dependency updates",
+      "Priority fixes if anything breaks"
+    ],
+    "notIncluded": [
+      "Full redesigns (quoted separately)",
+      "Lock-in. Rolling monthly, cancel with 30 days' notice"
+    ],
+    "timeline": "Rolling monthly, after launch."
+  }
+]

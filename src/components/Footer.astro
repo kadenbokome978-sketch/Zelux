@@ -1,0 +1,35 @@
+---
+import Wordmark from './Wordmark.astro';
+import site from '../content/site.json';
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-hairline">
+  <div class="container-z grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1.2fr] md:py-20">
+    <div>
+      <Wordmark />
+      <p class="mt-5 max-w-[30ch] text-ink-2">{site.tagline}</p>
+    </div>
+    <nav aria-label="Footer">
+      <p class="eyebrow mb-4">Navigate</p>
+      <ul class="space-y-1">
+        <li><a class="link-u inline-flex min-h-10 items-center text-ink-2 hover:text-ink" href="/services">Services</a></li>
+        <li><a class="link-u inline-flex min-h-10 items-center text-ink-2 hover:text-ink" href="/work">Work</a></li>
+        <li><a class="link-u inline-flex min-h-10 items-center text-ink-2 hover:text-ink" href="/book">Book a call</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="eyebrow mb-4">Legal & contact</p>
+      <ul class="space-y-1">
+        <li><a class="link-u inline-flex min-h-10 items-center text-ink-2 hover:text-ink" href="/privacy">Privacy policy</a></li>
+        <li><a class="link-u inline-flex min-h-10 items-center text-ink-2 hover:text-ink" href="/cookies">Cookie notice</a></li>
+        <li><a class="link-u inline-flex min-h-10 items-center text-ink hover:text-brass-hover" href={`mailto:${site.email}`}>{site.email}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-hairline">
+    <div class="container-z flex flex-col gap-2 py-6 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3 sm:flex-row sm:justify-between">
+      <span>{site.legalLine}</span>
+      <span>© {year} Zelux</span>
+    </div>
+  </div>
+</footer>

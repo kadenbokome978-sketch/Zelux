@@ -1,0 +1,37 @@
+[
+  {
+    "_note": "PLACEHOLDER: replace with James Green Sports once live (est. Dec 2026) and Clause 8.4 applies. Do not publish before launch or if James opts out in writing.",
+    "index": "01",
+    "title": "Sports coaching platform",
+    "sector": "Coaching · Sport",
+    "status": "In build · Launch est. Dec 2026",
+    "friction": "Bookings and payments handled by message, with no single place for clients to book, pay or buy kit.",
+    "built": "Bespoke coaching site with online booking and payments, plus an integrated merch shop.",
+    "outcome": "Case study published after launch.",
+    "isPlaceholder": true,
+    "href": null
+  },
+  {
+    "_note": "PLACEHOLDER: only show Forge (forgeweldinguk.com) if Dean explicitly approves in writing.",
+    "index": "02",
+    "title": "Local trade website & lead system",
+    "sector": "Trades",
+    "status": "Slot reserved · Permission pending",
+    "friction": "Details shared once the client has approved publication.",
+    "built": "Details shared once the client has approved publication.",
+    "outcome": "Available for review on request.",
+    "isPlaceholder": true,
+    "href": null
+  },
+  {
+    "index": "03",
+    "title": "KrapMaps",
+    "sector": "Founder work · Consumer travel app",
+    "status": "Live · Co-founded",
+    "friction": "Travellers can't find a bin when they need one. Kaden co-founded KrapMaps with Harley Treagust to fix that with a crowdsourced map.",
+    "built": "Content and operations lead: marketing site, social content systems and internal dashboards.",
+    "outcome": "Co-founded venture, not a Zelux client project.",
+    "isPlaceholder": false,
+    "href": "https://krapmaps.app"
+  }
+]

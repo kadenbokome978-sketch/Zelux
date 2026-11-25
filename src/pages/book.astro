@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../content/site.json';
+
+const calLink = import.meta.env.PUBLIC_CAL_LINK || site.calLink;
+const web3Key = import.meta.env.PUBLIC_WEB3FORMS_KEY || '';
+const agenda = [
+  'Your current bottleneck: what\'s costing you time or leads',
+  'What a lean build would look like for you',
+  'Rough cost and timeline, said plainly',
+];
+---
+<Base
+  title="Book a 20-Minute Intro Call | Zelux"
+  description="Book a free 20-minute call with Kaden at Zelux to talk through your website or automation project, or send a short enquiry. Reply within one working day."
+>
+  <section class="container-z pb-20 pt-16 md:pb-28 md:pt-24">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
+      <!-- Booking -->
+      <div class="lg:col-span-7">
+        <p class="eyebrow" data-reveal>Book a call</p>
+        <h1 class="h-section mt-6 !text-[clamp(2.5rem,5vw,4rem)]" data-reveal style="--d:80ms">Book a 20-minute <em class="italic text-brass">intro call.</em></h1>
+        <ol class="mt-8 border-t border-hairline" data-reveal style="--d:160ms">
+          {agenda.map((a, i) => (
+            <li class="flex gap-5 border-b border-hairline py-4 text-ink-2">
+              <span class="pt-0.5 font-mono text-xs text-brass">0{i + 1}</span>{a}
+            </li>
+          ))}
+        </ol>
+
+        <div class="panel mt-10 overflow-hidden" data-reveal style="--d:200ms">
+          <div class="flex items-center justify-between border-b border-hairline px-4 py-3">
+            <span class="eyebrow !text-[0.6875rem]">Calendar · 20 min · Video call</span>
+            <a href={`https://cal.com/${calLink}`} target="_blank" rel="noopener" class="link-u font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-2 hover:text-ink">Open in new tab ↗</a>
+          </div>
+          <div id="cal-inline" class="min-h-[560px] w-full" data-cal-link={calLink}>
+            <div id="cal-fallback" class="flex min-h-[560px] flex-col items-center justify-center gap-4 p-8 text-center">
+              <span class="h-6 w-6 animate-spin rounded-full border border-hairline border-t-brass motion-reduce:animate-none" aria-hidden="true"></span>
+              <p class="text-sm text-ink-3">Loading calendar…</p>
+              <a href={`https://cal.com/${calLink}`} target="_blank" rel="noopener" class="btn-ghost text-sm">Calendar not loading? Open booking page ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enquiry form -->
+      <aside class="lg:col-span-5 lg:pt-[7.5rem]" data-reveal style="--d:240ms">
+        <div class="panel p-6 md:p-8 lg:sticky lg:top-24">
+          <h2 class="font-serif text-[2rem] leading-tight text-ink">Prefer to write first?</h2>
+          <p class="body mt-3 text-[0.9375rem]">Send a short note. I reply personally, usually within one working day.</p>
+
+          <form id="enquiry" class="mt-8 grid gap-5" novalidate data-key={web3Key}>
+            <input type="hidden" name="subject" value="New enquiry from zelux.co.uk" />
+            <input type="hidden" name="from_name" value="Zelux website" />
+            <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+            <div class="grid gap-2">
+              <label for="f-name" class="text-sm text-ink">Name</label>
+              <input id="f-name" name="name" class="field" autocomplete="name" required />
+            </div>
+            <div class="grid gap-2">
+              <label for="f-email" class="text-sm text-ink">Email</label>
+              <input id="f-email" name="email" type="email" class="field" autocomplete="email" inputmode="email" required />
+            </div>
+            <div class="grid gap-2">
+              <label for="f-biz" class="text-sm text-ink">Business / website <span class="text-ink-3">(optional)</span></label>
+              <input id="f-biz" name="business" class="field" autocomplete="organization" placeholder="yourbusiness.co.uk" />
+            </div>
+            <div class="grid gap-2">
+              <label for="f-msg" class="text-sm text-ink">What are you looking to build or fix?</label>
+              <textarea id="f-msg" name="message" rows="4" class="field resize-y" required></textarea>
+            </div>
+
+            <p id="form-status" class="hidden rounded-[2px] border px-4 py-3 text-sm" role="status" aria-live="polite"></p>
+
+            <button type="submit" class="btn-primary w-full disabled:cursor-wait disabled:opacity-60">
+              <span class="label">Send enquiry</span> <span class="arrow" aria-hidden="true">→</span>
+            </button>
+            <p class="text-xs leading-relaxed text-ink-3">
+              Your details are only used to reply to you. See the <a href="/privacy" class="underline underline-offset-2 hover:text-ink">privacy policy</a>.
+              Or email <a href={`mailto:${site.email}`} class="text-ink-2 underline underline-offset-2 hover:text-ink">{site.email}</a>.
+            </p>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // ---- Cal.com inline embed (loaded only on this page) ----
+  const host = document.getElementById('cal-inline');
+  const calLink = host?.dataset.calLink;
+  if (host && calLink) {
+    // Official Cal.com loader snippet
+    (function (C: any, A: string, L: string) {
+      const p = function (a: any, ar: any) { a.q.push(ar); };
+      const d = C.document;
+      C.Cal = C.Cal || function () {
+        const cal = C.Cal; const ar = arguments;
+        if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; }
+        if (ar[0] === L) {
+          const api: any = function () { p(api, arguments); };
+          const namespace = ar[1]; api.q = api.q || [];
+          if (typeof namespace === 'string') { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ['initNamespace', namespace]); } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+    const Cal = (window as any).Cal;
+    Cal('init', 'zelux', { origin: 'https://cal.com' });
+    Cal.ns.zelux('inline', {
+      elementOrSelector: '#cal-inline',
+      calLink,
+      config: { layout: 'month_view', theme: 'dark', useSlotsViewOnSmallScreen: 'true' },
+    });
+    Cal.ns.zelux('ui', {
+      theme: 'dark',
+      hideEventTypeDetails: false,
+      layout: 'month_view',
+      cssVarsPerTheme: { dark: { 'cal-brand': '#C8A96A', 'cal-brand-text': '#09090B', 'cal-bg': '#111114', 'cal-bg-muted': '#09090B', 'cal-border': '#23232A' } },
+    });
+    Cal.ns.zelux('on', {
+      action: 'linkReady',
+      callback: () => document.getElementById('cal-fallback')?.remove(),
+    });
+    // If blocked (privacy extensions etc.), make the fallback obvious.
+    setTimeout(() => {
+      const fb = document.getElementById('cal-fallback');
+      if (fb) fb.querySelector('p')!.textContent = 'The calendar is taking a while (an ad or privacy blocker may be stopping it).';
+    }, 8000);
+  }
+
+  // ---- Web3Forms enquiry ----
+  const form = document.getElementById('enquiry') as HTMLFormElement | null;
+  const status = document.getElementById('form-status')!;
+  const show = (msg: string, ok: boolean) => {
+    status.textContent = msg;
+    status.className = `rounded-[2px] border px-4 py-3 text-sm ${ok ? 'border-[#1f4d3d] text-[#9fe3c6] bg-[#0c1a15]' : 'border-[#5a2a2a] text-[#f0b4b4] bg-[#1a0e0e]'}`;
+  };
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      const bad = form.querySelector<HTMLElement>(':invalid');
+      bad?.focus();
+      show('Please add your name, a valid email, and a short message.', false);
+      return;
+    }
+    const key = form.dataset.key;
+    if (!key) {
+      show('The form isn\'t connected yet. Please email kaden@zelux.co.uk directly.', false);
+      return;
+    }
+    const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+    const label = btn.querySelector('.label')!;
+    btn.disabled = true; label.textContent = 'Sending…';
+    try {
+      const data = new FormData(form);
+      data.append('access_key', key);
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { Accept: 'application/json' }, body: data });
+      const json = await res.json();
+      if (json.success) {
+        form.reset();
+        show('Thanks, that\'s landed. I\'ll reply personally, usually within one working day.', true);
+      } else throw new Error(json.message);
+    } catch {
+      show('Something went wrong sending that. Please email kaden@zelux.co.uk instead.', false);
+    } finally {
+      btn.disabled = false; label.textContent = 'Send enquiry';
+    }
+  });
+</script>

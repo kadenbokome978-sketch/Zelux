@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ClosingBand from '../components/ClosingBand.astro';
+import services from '../content/services.json';
+---
+<Base
+  title="Services — Websites, Automation & Care | Zelux"
+  description="Websites that convert, workflow automation, and ongoing care for UK businesses. Clear scope, what's included, what isn't, and a fixed price."
+>
+  <section class="container-z pb-12 pt-14 md:pb-16 md:pt-20">
+    <SectionHead as="h1" eyebrow="Services" title="What I build," italic="and what I don't." intro="Three focused services, written the way the contract reads: what's included, what isn't, and how long it takes." />
+    <nav aria-label="Services on this page" class="mt-14 flex flex-wrap gap-2" data-reveal>
+      {services.map((s) => (
+        <a href={`#${s.slug}`} class="inline-flex min-h-11 items-center gap-3 rounded-[2px] border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink">
+          <span class="font-mono text-xs text-brass">{s.index}</span>{s.title}
+        </a>
+      ))}
+    </nav>
+  </section>
+
+  {services.map((s) => (
+    <section id={s.slug} class="scroll-mt-16 border-t border-hairline">
+      <div class="container-z grid gap-12 py-14 md:grid-cols-12 md:gap-8 md:py-20">
+        <div class="md:col-span-5" data-reveal>
+          <p class="font-mono text-xs text-brass">{s.index}</p>
+          <h2 class="h-section mt-5">{s.title}</h2>
+          <p class="body mt-6 text-[1.0625rem]">{s.summary}</p>
+          <div class="mt-8 border-l border-brass pl-5">
+            <p class="eyebrow !text-[0.6875rem]">Best if</p>
+            <p class="mt-2 text-ink-2">{s.bestFor}</p>
+          </div>
+          <p class="mt-8 font-mono text-xs uppercase tracking-[0.12em] text-ink-3">Timeline · <span class="normal-case tracking-normal text-ink-2 font-sans text-sm">{s.timeline}</span></p>
+        </div>
+        <div class="grid gap-5 md:col-span-6 md:col-start-7" data-reveal style="--d:120ms">
+          <div class="panel p-6 md:p-8">
+            <p class="eyebrow !text-ink">What's included</p>
+            <ul class="mt-5 divide-y divide-hairline">
+              {s.included.map((x) => (
+                <li class="flex gap-4 py-3 text-[0.9375rem] leading-relaxed text-ink-2">
+                  <span class="mt-[0.7em] h-px w-3 shrink-0 bg-brass" aria-hidden="true"></span>{x}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="rounded-[2px] border border-dashed border-hairline p-6 md:p-8">
+            <p class="eyebrow">Not included</p>
+            <ul class="mt-5 space-y-3">
+              {s.notIncluded.map((x) => (
+                <li class="flex gap-4 text-[0.9375rem] leading-relaxed text-ink-3">
+                  <span class="mt-[0.7em] h-px w-3 shrink-0 bg-ink-3/50" aria-hidden="true"></span>{x}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <ClosingBand />
+</Base>
