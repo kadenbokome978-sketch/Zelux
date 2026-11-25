@@ -93,45 +93,6 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
     </div>
   </section>
 
-  <!-- VALUE: time / money / revenue -->
-  <section class="border-b border-hairline">
-    <div class="container-z py-16 md:py-24">
-      <div class="grid gap-6 lg:grid-cols-12 lg:items-end" data-reveal>
-        <h2 class="h-section lg:col-span-7">{site.value.title} <em class="text-accent">{site.value.titleAccent}</em></h2>
-        <p class="body lg:col-span-5">{site.value.intro}</p>
-      </div>
-      <div class="mt-10 grid gap-5 md:mt-12 lg:grid-cols-3">
-        {site.value.groups.map((g, gi) => (
-          <div class="flex" data-reveal style={`--d:${gi * 50}ms`}>
-          <SpotlightCard client:visible theme="light" spotlightColor="#2563eb" intensity={0.55} borderGlow={0.9} className="flex w-full flex-col p-6 md:p-7" style={{ '--spotlight-card-border': '#dde3eb', '--spotlight-card-surface': '#fcfdff' }}>
-            <p class="inline-flex self-start rounded-full bg-accent-tint px-2.5 py-1 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent-hover">{g.label}</p>
-            <ul class="mt-5 divide-y divide-hairline">
-              {g.points.map((pt) => (
-                <li class="py-4 first:pt-0 last:pb-0">
-                  <h3 class="text-[1.0625rem] font-semibold leading-snug tracking-[-0.01em] text-ink">{pt.t}</h3>
-                  <p class="mt-1.5 text-[0.9375rem] leading-relaxed text-ink-2">{pt.b}</p>
-                </li>
-              ))}
-            </ul>
-          </SpotlightCard>
-          </div>
-        ))}
-      </div>
-      <div class="mt-5 grid items-center gap-5 rounded-card border border-accent bg-paper p-6 md:grid-cols-12 md:p-7" data-reveal>
-        <div class="flex items-center gap-4 md:col-span-5">
-          <span class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-full bg-accent text-on-accent" aria-hidden="true">
-            <span class="text-[1.375rem] font-semibold leading-none">7</span><span class="font-mono text-[0.5625rem] uppercase tracking-[0.12em]">days</span>
-          </span>
-          <div>
-            <p class="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent">{site.guarantee.title}</p>
-            <h3 class="mt-1 text-[1.5rem] font-semibold leading-tight tracking-[-0.025em] text-ink">{site.guarantee.short}</h3>
-          </div>
-        </div>
-        <p class="text-[0.9375rem] leading-relaxed text-ink-2 md:col-span-7">{site.guarantee.terms}</p>
-      </div>
-    </div>
-  </section>
-
   <!-- SERVICES -->
   <section>
     <div class="container-z py-16 md:py-24">
@@ -185,7 +146,21 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
           ))}
         </ol>
       </div>
-      <ul class="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-deep-line pt-6 font-mono text-xs uppercase tracking-[0.12em] text-deep-ink-2" data-reveal>
+      <div class="mt-12" data-reveal>
+        <SpotlightCard client:visible theme="dark" spotlightColor="#6ea0ff" intensity={0.5} borderGlow={0.9} className="grid items-center gap-5 p-6 md:grid-cols-12 md:p-7" style={{ '--spotlight-card-border': '#263352', '--spotlight-card-surface': '#16213a' }}>
+          <div class="flex items-center gap-4 md:col-span-5">
+            <span class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-full bg-accent-on-deep text-deep" aria-hidden="true">
+              <span class="text-[1.375rem] font-semibold leading-none">7</span><span class="font-mono text-[0.5625rem] uppercase tracking-[0.12em]">days</span>
+            </span>
+            <div>
+              <p class="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent-on-deep">{site.guarantee.title}</p>
+              <h3 class="mt-1 text-[1.5rem] font-semibold leading-tight tracking-[-0.025em] text-deep-ink">{site.guarantee.short}</h3>
+            </div>
+          </div>
+          <p class="text-[0.9375rem] leading-relaxed text-deep-ink-2 md:col-span-7">{site.guarantee.terms}</p>
+        </SpotlightCard>
+      </div>
+      <ul class="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-deep-line pt-6 font-mono text-xs uppercase tracking-[0.12em] text-deep-ink-2" data-reveal>
         {site.pricing.points.map((pt) => <li class="flex items-center gap-2.5"><span class="h-px w-3 bg-accent-on-deep" aria-hidden="true"></span>{pt}</li>)}
       </ul>
     </div>
