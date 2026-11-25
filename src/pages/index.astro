@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import Schematic from '../components/Schematic.astro';
+import LeadFlow from '../components/LeadFlow.astro';
 import Faq from '../components/Faq.astro';
 import ClosingBand from '../components/ClosingBand.astro';
 import site from '../content/site.json';
@@ -15,36 +15,47 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
   description="Bespoke websites, workflow automation and connected business systems for UK businesses. Direct with Kaden Ekuma Bokome. Book a 20-minute intro call."
 >
   <!-- HERO -->
-  <section>
-    <div class="container-z grid items-center gap-12 py-14 md:py-20 lg:grid-cols-12 lg:gap-10">
-      <div class="lg:col-span-7 lg:pr-6">
-        <p class="eyebrow" data-reveal>{site.hero.eyebrow}</p>
-        <h1 class="h-display mt-6" data-reveal style="--d:80ms">
-          {site.hero.titleLead} <em class="text-brass">{site.hero.titleItalic}</em>
-        </h1>
-        <p class="lead mt-6 max-w-[54ch]" data-reveal style="--d:160ms">{site.hero.subtitle}</p>
-        <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-2" data-reveal style="--d:240ms">
-          <a href="/book" class="btn-primary">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
+  <section class="hero-grid relative">
+    <div class="container-z pb-10 pt-10 md:pb-14 md:pt-16">
+      <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3" data-reveal>
+        <p class="eyebrow">{site.hero.eyebrow}</p>
+        <p class="flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-live" aria-hidden="true"></span>{site.hero.status}
+        </p>
+      </div>
+      <h1 class="h-hero mt-8 md:mt-10" data-reveal style="--d:80ms">
+        {site.hero.titleLead} <em class="text-brass">{site.hero.titleItalic}</em>
+      </h1>
+      <div class="mt-8 grid gap-8 md:mt-12 md:grid-cols-12 md:items-end" data-reveal style="--d:160ms">
+        <p class="lead max-w-[52ch] md:col-span-7">{site.hero.subtitle}</p>
+        <div class="flex flex-wrap items-center gap-x-7 gap-y-2 md:col-span-5 md:justify-end">
+          <a href="/book" class="btn-primary btn-lg">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
           <a href="/services" class="btn-ghost">See what we build</a>
         </div>
       </div>
-      <div class="hidden sm:block lg:col-span-5" data-reveal style="--d:320ms">
-        <Schematic />
+      <div class="mt-12 md:mt-16" data-reveal style="--d:240ms">
+        <LeadFlow />
       </div>
     </div>
-    <!-- Pillars as a compact strip -->
-    <div class="border-y border-hairline">
-      <div class="container-z grid md:grid-cols-3 md:divide-x md:divide-hairline">
-        {site.pillars.map((p, i) => (
-          <div class:list={['py-6 md:px-6', i === 0 && 'md:pl-0', i === 2 && 'md:pr-0', i > 0 && 'border-t border-hairline md:border-t-0']} data-reveal style={`--d:${i * 80}ms`}>
-            <p class="flex items-baseline gap-3">
-              <span class="font-mono text-xs text-brass">{p.index}</span>
-              <span class="font-serif text-[1.375rem] leading-tight text-ink">{p.title}</span>
-            </p>
-            <p class="mt-2 pl-8 text-[0.9375rem] leading-relaxed text-ink-2">{p.body}</p>
-          </div>
-        ))}
+  </section>
+
+  <!-- STATEMENT (brass band) -->
+  <section class="band-brass">
+    <div class="container-z grid gap-10 py-14 md:py-20 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-7" data-reveal>
+        <p class="font-mono text-xs uppercase tracking-[0.14em]">01 / How Zelux is different</p>
+        <h2 class="h-statement mt-6">You speak to the person who builds it.</h2>
+        <p class="mt-6 max-w-[46ch] text-[1.0625rem] leading-relaxed text-brass-ink-2">{site.pillars[0].body}</p>
       </div>
+      <ul class="grid gap-px self-end overflow-hidden rounded-[2px] border border-brass-line bg-brass-line lg:col-span-5">
+        {site.pillars.slice(1).map((p, i) => (
+          <li class="bg-brass p-6" data-reveal style={`--d:${(i + 1) * 90}ms`}>
+            <p class="font-mono text-xs">{p.index}</p>
+            <h3 class="mt-2 text-[1.375rem] font-medium leading-tight tracking-[-0.02em]">{p.title}</h3>
+            <p class="mt-2 text-[0.9375rem] leading-relaxed text-brass-ink-2">{p.body}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -55,13 +66,13 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
         <h2 class="h-section">Three things, <em class="text-brass">done well.</em></h2>
         <a href="/services" class="btn-ghost">Full scope & what's included →</a>
       </div>
-      <div class="mt-10 border-t border-hairline">
+      <div class="mt-10 border-t border-hairline md:mt-14">
         {services.map((s, i) => (
-          <a href={`/services#${s.slug}`} class="group grid gap-3 border-b border-hairline py-7 md:grid-cols-12 md:gap-8" data-reveal style={`--d:${i * 60}ms`}>
-            <p class="font-mono text-xs text-brass md:col-span-1 md:pt-2.5">{s.index}</p>
-            <h3 class="font-serif text-[1.75rem] leading-[1.1] text-ink transition-colors group-hover:text-brass-hover md:col-span-4 md:text-[2rem]">{s.title}</h3>
-            <p class="body text-[0.9375rem] md:col-span-6">{s.summary}</p>
-            <span class="hidden self-start pt-2 text-right text-ink-3 transition-all duration-200 group-hover:translate-x-1 group-hover:text-brass md:col-span-1 md:block" aria-hidden="true">→</span>
+          <a href={`/services#${s.slug}`} class="svc-row group grid gap-3 border-b border-hairline py-7 md:grid-cols-12 md:items-center md:gap-8 md:py-8" data-reveal style={`--d:${i * 60}ms`}>
+            <p class="font-mono text-xs text-brass md:col-span-1">{s.index}</p>
+            <h3 class="svc-title md:col-span-7">{s.title}</h3>
+            <p class="body text-[0.9375rem] md:col-span-3">{s.summary.split(". ")[0]}.</p>
+            <span class="svc-arrow hidden justify-self-end md:col-span-1 md:flex" aria-hidden="true">→</span>
           </a>
         ))}
       </div>
@@ -70,25 +81,40 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- AUTOMATIONS -->
   <section id="automations" class="scroll-mt-16 border-t border-hairline">
-    <div class="container-z py-16 md:py-24">
-      <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
-        <div>
-          <p class="eyebrow">Automations</p>
-          <h2 class="h-section mt-4">Admin that <em class="text-brass">runs itself.</em></h2>
-        </div>
-        <a href="/services#automations" class="btn-ghost">How each one works →</a>
+    <div class="marquee border-b border-hairline pb-2 pt-6 md:pt-8" data-paused="false">
+      <div class="marquee-track" aria-hidden="true">
+        {[0, 1].map(() => (
+          <div class="marquee-group">
+            {automations.map((a, i) => (
+              <span class:list={['marquee-item', i % 2 ? 'is-outline' : '']}>{a.title}<span class="marquee-sep">/</span></span>
+            ))}
+          </div>
+        ))}
       </div>
-      <ul class="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[2px] border border-hairline bg-hairline lg:grid-cols-5">
+      <div class="container-z flex justify-end">
+        <button type="button" class="marquee-toggle mt-3 inline-flex min-h-10 items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3 hover:text-ink" aria-pressed="false">
+          <span class="marquee-toggle-label">Pause motion</span>
+        </button>
+      </div>
+    </div>
+    <div class="container-z grid gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-4" data-reveal>
+        <p class="eyebrow">Automations</p>
+        <h2 class="h-section mt-4">Admin that <em class="text-brass">runs itself.</em></h2>
+        <p class="body mt-5 max-w-[36ch]">Ten jobs most small businesses still do by hand. Each one is wired into the tools you already use.</p>
+        <a href="/services#automations" class="btn-ghost mt-4">How each one works →</a>
+      </div>
+      <ol class="grid gap-x-10 sm:grid-cols-2 lg:col-span-8">
         {automations.map((a, i) => (
-          <li data-reveal style={`--d:${(i % 5) * 50}ms`}>
-            <a href={`/services#auto-${a.index}`} class="group flex h-full flex-col bg-canvas p-4 transition-colors hover:bg-surface sm:p-5">
+          <li class="border-t border-hairline" data-reveal style={`--d:${(i % 2) * 60}ms`}>
+            <a href={`/services#auto-${a.index}`} class="group flex min-h-12 items-baseline gap-4 py-3 sm:py-4">
               <span class="font-mono text-[0.6875rem] text-brass">{a.index}</span>
-              <span class="mt-3 text-[0.9375rem] font-medium leading-snug tracking-[-0.01em] text-ink group-hover:text-brass-hover sm:text-base">{a.title}</span>
-              <span class="mt-2 hidden text-[0.8125rem] leading-relaxed text-ink-3 sm:block">{a.body.split('. ')[0]}.</span>
+              <span class="text-[1.125rem] leading-snug tracking-[-0.015em] text-ink transition-colors group-hover:text-brass-hover">{a.title}</span>
+              <span class="ml-auto text-ink-3 opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">→</span>
             </a>
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   </section>
 
@@ -102,12 +128,12 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
           <p class="body mt-5 max-w-[40ch]">{pricing.body}</p>
           <a href="/book" class="btn-dark mt-8">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <ol class="grid gap-px self-start overflow-hidden rounded-[2px] border border-bone-line bg-bone-line sm:grid-cols-2 lg:col-span-8">
+        <ol class="grid grid-cols-2 gap-x-6 gap-y-8 self-start lg:col-span-8 xl:grid-cols-4">
           {site.steps.map((s, i) => (
-            <li class="bg-bone p-6 md:p-7" data-reveal style={`--d:${i * 80}ms`}>
-              <p class="font-mono text-xs text-brass-deep">{s.index}</p>
-              <h3 class="mt-3 text-[1.0625rem] font-semibold">{s.title}</h3>
-              <p class="mt-2 text-[0.9375rem] leading-relaxed text-bone-ink-2">{s.body}</p>
+            <li class="border-t border-bone-ink pt-5" data-reveal style={`--d:${i * 80}ms`}>
+              <p class="step-num">{s.index}</p>
+              <h3 class="mt-4 text-[1.25rem] font-semibold tracking-[-0.02em]">{s.title}</h3>
+              <p class="mt-2 max-w-[38ch] text-[0.875rem] leading-relaxed text-bone-ink-2">{s.body}</p>
             </li>
           ))}
         </ol>

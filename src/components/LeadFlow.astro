@@ -1,0 +1,124 @@
+---
+// Signature visual: an example enquiry moving through a connected system, step by step.
+// JS advances one step at a time while visible. Without JS, or with reduced motion,
+// every step is shown complete.
+const steps = [
+  { label: 'Enquiry form', meta: 'Website · 09:41' },
+  { label: 'Auto-sort', meta: 'Qualified · routed' },
+  { label: 'Calendar', meta: 'Intro call booked' },
+  { label: 'CRM', meta: 'Lead logged' },
+  { label: 'Follow-up', meta: 'Reply sent · 09:43' },
+];
+---
+<figure id="leadflow" class="leadflow panel overflow-hidden" data-step={steps.length} aria-label="Example: an enquiry from the website is sorted automatically, booked into a calendar, logged in a CRM and followed up, in about two minutes.">
+  <div class="flex items-center justify-between border-b border-hairline px-4 py-3 sm:px-5">
+    <span class="eyebrow !text-[0.6875rem]">Example build / Lead flow</span>
+    <span class="flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3">
+      <span class="lf-live h-1.5 w-1.5 rounded-full bg-live" aria-hidden="true"></span>
+      <span>Step <span class="lf-count">{steps.length}</span>/{steps.length}</span>
+    </span>
+  </div>
+  <ol class="lf-track relative flex flex-col gap-0 p-4 sm:p-5 lg:flex-row lg:items-stretch">
+    {steps.map((s, i) => (
+      <>
+        {i > 0 && <li class="lf-link" data-i={i} aria-hidden="true"><span></span></li>}
+        <li class="lf-node" data-i={i}>
+          <span class="lf-dot" aria-hidden="true"></span>
+          <span class="font-mono text-[0.6875rem] text-ink-3">0{i + 1}</span>
+          <span class="lf-label mt-3 block text-[1.0625rem] font-medium tracking-[-0.01em]">{s.label}</span>
+          <span class="mt-1.5 block font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-3">{s.meta}</span>
+        </li>
+      </>
+    ))}
+  </ol>
+  <figcaption class="flex items-center justify-between border-t border-hairline px-4 py-3 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3 sm:px-5">
+    <span>Illustrative</span>
+    <span>Your tools, connected</span>
+  </figcaption>
+</figure>
+
+<style>
+  .lf-node {
+    position: relative;
+    flex: 1 1 0;
+    padding: 1rem 1.1rem 1.1rem;
+    border: 1px solid var(--color-hairline);
+    border-radius: 2px;
+    background: #0d0d10;
+    transition: border-color 400ms var(--ease-out-soft), background-color 400ms var(--ease-out-soft);
+  }
+  .lf-dot {
+    position: absolute; top: 1.1rem; right: 1.1rem;
+    width: 7px; height: 7px; border-radius: 999px;
+    background: #3a3a44;
+    transition: background-color 300ms, box-shadow 300ms;
+  }
+  .lf-label { color: var(--color-ink-2); transition: color 300ms; }
+
+  /* connectors: vertical on mobile, horizontal on desktop */
+  .lf-link { position: relative; height: 18px; width: 1px; margin-left: 1.6rem; background: var(--color-hairline); }
+  .lf-link span { position: absolute; inset: 0; background: var(--color-brass); transform: scaleY(0); transform-origin: top; transition: transform 500ms var(--ease-out-soft); }
+  @media (min-width: 1024px) {
+    .lf-link { height: 1px; width: auto; min-width: 1.75rem; flex: 0 0 1.75rem; margin: 0; align-self: center; }
+    .lf-link span { transform: scaleX(0); transform-origin: left; }
+  }
+
+  /* active state, driven by data-step on the figure */
+  .leadflow[data-step='1'] .lf-node[data-i='0'],
+  .leadflow[data-step='2'] .lf-node:is([data-i='0'],[data-i='1']),
+  .leadflow[data-step='3'] .lf-node:is([data-i='0'],[data-i='1'],[data-i='2']),
+  .leadflow[data-step='4'] .lf-node:not([data-i='4']),
+  .leadflow[data-step='5'] .lf-node { border-color: var(--color-hairline-accent); background: var(--color-surface); }
+
+  .leadflow[data-step='1'] .lf-node[data-i='0'] :is(.lf-label),
+  .leadflow[data-step='2'] .lf-node:is([data-i='0'],[data-i='1']) .lf-label,
+  .leadflow[data-step='3'] .lf-node:is([data-i='0'],[data-i='1'],[data-i='2']) .lf-label,
+  .leadflow[data-step='4'] .lf-node:not([data-i='4']) .lf-label,
+  .leadflow[data-step='5'] .lf-node .lf-label { color: var(--color-ink); }
+
+  .leadflow[data-step='1'] .lf-node[data-i='0'] .lf-dot,
+  .leadflow[data-step='2'] .lf-node:is([data-i='0'],[data-i='1']) .lf-dot,
+  .leadflow[data-step='3'] .lf-node:is([data-i='0'],[data-i='1'],[data-i='2']) .lf-dot,
+  .leadflow[data-step='4'] .lf-node:not([data-i='4']) .lf-dot,
+  .leadflow[data-step='5'] .lf-node .lf-dot { background: var(--color-brass); box-shadow: 0 0 0 4px rgb(200 169 106 / 0.14); }
+
+  .leadflow[data-step='2'] .lf-link[data-i='1'] span,
+  .leadflow[data-step='3'] .lf-link:is([data-i='1'],[data-i='2']) span,
+  .leadflow[data-step='4'] .lf-link:not([data-i='4']) span,
+  .leadflow[data-step='5'] .lf-link span { transform: none; }
+
+  /* the node that just became active gets a brief brass edge */
+  .leadflow .lf-node.is-now { border-color: var(--color-brass); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lf-live { animation: lf-blink 1.6s ease-in-out infinite; }
+  }
+  @keyframes lf-blink { 50% { opacity: 0.35; } }
+</style>
+
+<script>
+  const fig = document.getElementById('leadflow');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (fig && !reduce) {
+    const total = 5;
+    const count = fig.querySelector('.lf-count');
+    const nodes = fig.querySelectorAll<HTMLElement>('.lf-node');
+    let step = 0;
+    let timer: number | undefined;
+    const set = (n: number) => {
+      fig.dataset.step = String(n);
+      if (count) count.textContent = String(Math.max(n, 1));
+      nodes.forEach((el, i) => el.classList.toggle('is-now', i === n - 1));
+    };
+    const tick = () => {
+      step = step >= total + 2 ? 0 : step + 1; // two beats holding the finished state, then reset
+      set(Math.min(step, total));
+    };
+    set(0);
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !timer) { tick(); timer = window.setInterval(tick, 1100); }
+      else if (!e.isIntersecting && timer) { clearInterval(timer); timer = undefined; }
+    }, { threshold: 0.35 });
+    io.observe(fig);
+  }
+</script>

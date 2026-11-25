@@ -2,14 +2,14 @@
 import site from '../content/site.json';
 ---
 <section class="band-bone">
-  <div class="container-z flex flex-col gap-8 py-14 md:flex-row md:items-center md:justify-between md:py-20" data-reveal>
+  <div class="container-z flex flex-col gap-10 py-16 md:py-24 lg:flex-row lg:items-end lg:justify-between" data-reveal>
     <div>
-      <h2 class="h-section">Ready to get it <em class="text-brass-deep">built?</em></h2>
+      <h2 class="h-statement max-w-[12ch]">Ready to get it <em class="text-brass-deep">built?</em></h2>
       <p class="body mt-4 max-w-[52ch] text-[1.0625rem]">{site.closing.body}</p>
     </div>
-    <div class="flex shrink-0 flex-col gap-2 md:items-end">
-      <a href="/book" class="btn-dark w-full md:w-auto">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
-      <a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center justify-center text-sm text-bone-ink-2 underline decoration-bone-line underline-offset-4 hover:text-bone-ink md:justify-end">or email {site.email}</a>
+    <div class="flex shrink-0 flex-col gap-2 lg:items-end">
+      <a href="/book" class="btn-dark btn-lg w-full md:w-auto">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
+      <a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center justify-center text-sm text-bone-ink-2 underline decoration-bone-line underline-offset-4 hover:text-bone-ink lg:justify-end">or email {site.email}</a>
     </div>
   </div>
 </section>

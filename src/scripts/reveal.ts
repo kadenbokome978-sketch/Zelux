@@ -29,3 +29,15 @@ document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
     panel?.toggleAttribute('inert', open);
   });
 });
+
+// Marquee pause / play (WCAG 2.2.2: moving content can be paused)
+document.querySelectorAll<HTMLElement>('.marquee').forEach((m) => {
+  const btn = m.querySelector<HTMLButtonElement>('.marquee-toggle');
+  const label = btn?.querySelector('.marquee-toggle-label');
+  btn?.addEventListener('click', () => {
+    const paused = m.dataset.paused === 'true';
+    m.dataset.paused = String(!paused);
+    btn.setAttribute('aria-pressed', String(!paused));
+    if (label) label.textContent = paused ? 'Pause motion' : 'Play motion';
+  });
+});
