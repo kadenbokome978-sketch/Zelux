@@ -39,7 +39,7 @@ const toolLabel = Object.fromEntries(tools.map((t) => [t.id, t.label]));
   </div>
 
   <div class="lg:col-span-7">
-    <div class="det-out panel min-h-[22rem] bg-white" aria-live="polite">
+    <div class="det-out panel min-h-[22rem] bg-paper" aria-live="polite">
       <div class="det-empty flex h-full min-h-[22rem] flex-col items-center justify-center gap-3 p-8 text-center">
         <span class="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3">Your blueprint</span>
         <p class="max-w-[34ch] text-ink-2">Pick a job on the left and you'll see how it would run, where you stay in control, and what it connects to.</p>
@@ -79,12 +79,13 @@ const toolLabel = Object.fromEntries(tools.map((t) => [t.id, t.label]));
 <style>
   .chip {
     min-height: 40px; padding: 0 0.9rem; border: 1px solid var(--color-hairline-strong); border-radius: 999px;
-    background: #fff; color: var(--color-ink); font-size: 0.9375rem; text-align: left;
-    transition: background-color 160ms, border-color 160ms, color 160ms;
+    background: var(--color-paper); color: var(--color-ink); font-size: 0.9375rem; text-align: left;
+    transition: background-color var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast), transform var(--dur-ui) var(--ease-out-soft);
   }
   .chip-sm { min-height: 36px; font-size: 0.875rem; }
-  .chip:hover { border-color: var(--color-accent); }
-  .chip[aria-pressed='true'] { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+  @media (hover: hover) and (pointer: fine) { .chip:hover { border-color: var(--color-accent); } }
+  .chip:active:not(:disabled) { transform: scale(0.97); }
+  .chip[aria-pressed='true'] { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-on-accent); }
   .chip[aria-pressed='true']::before { content: '✓ '; }
   .chip:disabled { opacity: 0.45; cursor: not-allowed; }
   html:not(.js) .detector { display: none; }

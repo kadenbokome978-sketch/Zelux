@@ -25,7 +25,7 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
           </li>
         ))}
       </ul>
-      <a href="/book" class="btn-primary !min-h-10 !px-4 !text-[0.875rem]">Book a call</a>
+      <a href="/book" class="btn-primary !min-h-10 !px-4 !text-[0.875rem]">Book a free call</a>
     </nav>
 
     <a id="menu-fallback" href="#footer-nav" class="md:hidden flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.12em] text-ink-2">Menu</a>
@@ -48,7 +48,7 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
     <nav aria-label="Mobile" class="container-z py-4">
       <ul>
         {links.map((l, i) => (
-          <li class="border-b border-hairline">
+          <li class="menu-item border-b border-hairline" style={`--i:${i}`}>
             <a href={l.href} class="flex min-h-14 items-center justify-between font-serif text-[1.75rem] text-ink">
               {l.label}
               <span class="text-ink-3" aria-hidden="true">→</span>
@@ -56,7 +56,7 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
           </li>
         ))}
       </ul>
-      <a href="/book" class="btn-primary mt-6 w-full">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
+      <a href="/book" class="menu-item btn-primary mt-6 w-full" style="--i:3">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a>
     </nav>
   </div>
 </header>
@@ -84,7 +84,15 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
 </script>
 
 <style>
-  #menu-btn path { transition: transform 220ms var(--ease-out-soft); transform-origin: 11px 11px; }
+  #menu-btn path { transition: transform var(--dur-ui) var(--ease-out-soft); transform-origin: 11px 11px; }
   #menu-btn[aria-expanded='true'] .l1 { transform: translateY(3px) rotate(45deg); }
   #menu-btn[aria-expanded='true'] .l2 { transform: translateY(-3px) rotate(-45deg); }
+  /* Mobile menu items slide in one after another when the menu opens (CSS only, no JS needed) */
+  #mobile-menu:not(.hidden) .menu-item {
+    transition: opacity var(--dur-ui) var(--ease-out-soft), transform var(--dur-ui) var(--ease-out-soft);
+    transition-delay: calc(var(--i) * 40ms);
+  }
+  @starting-style {
+    #mobile-menu:not(.hidden) .menu-item { opacity: 0; transform: translateY(8px); }
+  }
 </style>

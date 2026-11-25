@@ -13,11 +13,15 @@ declare global {
   interface Window { lenis?: Lenis }
 }
 
-if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+// gsap.matchMedia() runs this only while reduced motion is off, and reverts it automatically
+// (smooth scroll and scroll animations removed) if the visitor switches reduced motion on.
+const mm = gsap.matchMedia();
+mm.add('(prefers-reduced-motion: no-preference)', () => {
   const lenis = new Lenis({ autoRaf: false, lerp: 0.12 });
   window.lenis = lenis;
   lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  const raf = (time: number) => lenis.raf(time * 1000);
+  gsap.ticker.add(raf);
   gsap.ticker.lagSmoothing(0);
 
   // How it works: a progress line draws across each step as the section scrolls past.
@@ -30,4 +34,13 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       { scaleX: 1, ease: 'none', stagger: 0.6, scrollTrigger: { trigger: list, start: 'top 85%', end: 'bottom 60%', scrub: 0.6 } },
     );
   }
-}
+
+  return () => {
+    gsap.ticker.remove(raf);
+    lenis.destroy();
+    window.lenis = undefined;
+  };
+});
+
+// Web fonts change line breaks (and so section heights): recalculate scroll positions once they're in.
+document.fonts?.ready.then(() => ScrollTrigger.refresh());

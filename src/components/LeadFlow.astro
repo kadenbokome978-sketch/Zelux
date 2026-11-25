@@ -54,13 +54,15 @@ const flows = {
 <style>
   .lf-toggle button {
     min-height: 36px; padding: 0 0.9rem; font-size: 0.8125rem; font-weight: 500;
-    color: var(--color-ink-2); border-radius: 1px; transition: background-color 200ms, color 200ms;
+    color: var(--color-ink-2); border-radius: 1px; transition: background-color var(--dur-ui), color var(--dur-ui), transform var(--dur-ui) var(--ease-out-soft);
+  }
+  .lf-toggle button:active { transform: scale(0.97);
   }
   .lf-toggle button[aria-pressed='true'] { background: var(--color-ink); color: var(--color-canvas); }
 
   .lf-node {
     position: relative; flex: 1 1 0; padding: 1rem 1.1rem 1.1rem;
-    border: 1px solid var(--color-hairline); border-radius: 2px; background: #fff;
+    border: 1px solid var(--color-hairline); border-radius: 2px; background: var(--color-paper);
     transition: border-color 400ms var(--ease-out-soft);
   }
   .lf-dot { position: absolute; top: 1.1rem; right: 1.1rem; width: 7px; height: 7px; border-radius: 999px; background: #c5cdd9; transition: background-color 300ms, box-shadow 300ms; }

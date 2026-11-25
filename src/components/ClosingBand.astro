@@ -9,7 +9,7 @@ import Magnet from './react-bits/Magnet';
       <p class="body mt-4 max-w-[52ch] text-[1.0625rem]">{site.closing.body}</p>
     </div>
     <div class="flex shrink-0 flex-col gap-2 lg:items-end">
-      <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} wrapperClassName="w-full md:w-auto" innerClassName="w-full"><a href="/book" class="btn-primary btn-lg w-full">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
+      <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }} wrapperClassName="w-full md:w-auto" innerClassName="w-full"><a href="/book" class="btn-primary btn-lg w-full">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
       <a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center justify-center text-sm text-deep-ink-2 underline decoration-deep-line underline-offset-4 hover:text-deep-ink lg:justify-end">or email {site.email}</a>
     </div>
   </div>

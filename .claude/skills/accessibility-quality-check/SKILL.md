@@ -29,6 +29,15 @@ Run on `/`, `/services`, `/book` against `npm run preview` or the deployed URL. 
 - **Reduced motion and no JS:** emulate both; the section must still make sense.
 - **Console:** no errors (except blocked third-party embeds in sandboxes).
 
+## 3b. Interaction details (UI/UX Pro Max pre-delivery list)
+
+- Every clickable thing shows a pointer cursor (global rule in global.css covers buttons) and a distinct hover, focus, pressed and disabled state. Disabled = reduced opacity + `disabled` attribute.
+- Touch targets ≥ 44×44px with comfortable spacing; no hover-only information.
+- Hover transforms gated to `(hover: hover) and (pointer: fine)`.
+- Body text ≥ 16px on mobile, line-height 1.5–1.75; tabular figures for prices and timers.
+- Forms: visible labels, error under the field, inline validation on blur, focus the first invalid field on submit, loading → success/error feedback.
+- Use `min-h-dvh`/`svh` rather than `100vh`. Test landscape on a phone.
+
 ## 4. SEO
 
 Unique `<title>` and meta description per page (via `Base.astro` props), one h1, descriptive link text, images with `alt` and width/height, canonical correct, new pages appear in the sitemap. Share image is `public/og-image.png` (1200×630).

@@ -14,6 +14,12 @@ Motion must explain something, guide attention or give feedback. If it does none
 - **React Bits** (copied into `src/components/react-bits/`, React islands via `@astrojs/react`): currently `ScrollReveal` (statement band), `SpotlightCard` (value cards), `Magnet` (main CTAs). Copy new ones from the TS + Tailwind variant, keep the attribution header, and adapt them to the design system (2px radius, no shadows, site type classes).
 - `src/scripts/motion.ts` is lazy-loaded after `load`/idle from `Base.astro`. Keep it that way so motion never delays first paint.
 
+### GSAP rules
+- Wrap motion setup in `gsap.matchMedia()` with `(prefers-reduced-motion: no-preference)` and return a cleanup, so switching reduced motion on reverts it live (motion.ts does this).
+- `ScrollTrigger.refresh()` after `document.fonts.ready` and after anything that changes layout; never on every resize.
+- Use `stagger` rather than many tweens with manual delays; `gsap.quickTo()` for anything that follows the pointer; `autoAlpha` when something should become non-interactive at 0.
+- `will-change` only on elements that actually animate.
+
 ### React Bits rules
 - Hydrate with `client:visible` (or `client:idle` for small, above-the-fold pieces). Never `client:load` for decoration.
 - Pass plain text via props (e.g. `ScrollReveal text="..."`): Astro slot content arrives as HTML, not a string.
@@ -22,15 +28,24 @@ Motion must explain something, guide attention or give feedback. If it does none
 
 ## Allowed
 
+- Entry transitions for things toggled by `hidden`/`display`: CSS `@starting-style` (see the mobile menu in Navbar.astro), no JS.
+- Hover transforms only inside `@media (hover: hover) and (pointer: fine)` (Tailwind v4 `hover:` utilities already do this; custom CSS must do it by hand) so touch screens don't get sticky hover.
+
 - One-shot reveals via `data-reveal` (+ `style="--d:80ms"` stagger). Handled by `src/scripts/reveal.ts`; gated on `.js` and `prefers-reduced-motion: no-preference`.
 - Hover/focus feedback: colour, underline grow (`.link-u`, `.btn-ghost`), small translate (≤6px), arrow nudge.
 - Step-through diagrams (LeadFlow pattern): advance with `setInterval` only while visible (IntersectionObserver), stop when off screen.
 - State transitions on toggles, chips, accordions.
 
-## Timing
+## Timing (tokens in global.css: use them, no one-off durations)
 
-- UI feedback 150–300ms, `var(--ease-out-soft)`.
-- Reveals ~700ms. Storytelling steps 850–1400ms per step.
+- `--dur-fast` 160ms: colour/opacity feedback. `--dur-ui` 220ms: transforms, underlines, toggles. `--dur-slow` 600ms: scroll reveals. One easing: `var(--ease-out-soft)` (expo-style ease-out). No bounce, no elastic.
+- Springs (Magnet) critically damped: `{ stiffness: 170, damping: 26 }`, so no overshoot.
+- Exit faster than enter (~60–70%): e.g. FAQ opens at 320ms, closes at `--dur-ui`.
+- Stagger list items 30–50ms apart (`--d` in 50ms steps; menu items 40ms).
+- Faded text never sits below 0.2 opacity (ScrollReveal `baseOpacity` ≥ 0.22).
+- Frequency principle: things people use constantly (nav links, the menu toggle) get little or no motion; rare moments can have more.
+- Never scale from 0; press feedback is `scale(0.97–0.98)` on `:active`.
+- Storytelling steps 850–1400ms per step.
 - Nothing loops faster than once per ~5s; anything that moves for more than 5s needs a pause control (WCAG 2.2.2) or must stop on its own.
 
 ## Not allowed
@@ -43,7 +58,7 @@ Motion must explain something, guide attention or give feedback. If it does none
 
 ## Accessibility and resilience (every interaction)
 
-- `prefers-reduced-motion: reduce` → show the end state, no movement.
+- `prefers-reduced-motion: reduce` → show the end state, no movement. global.css collapses every transition and animation to 0.01ms under reduced motion, opacity included.
 - No JS → content still readable and useful. Use `html:not(.js)` / `.js` gates, `<noscript>` fallbacks, and never hide content behind JS by default.
 - Real `<button>`s with `aria-pressed` / `aria-expanded`; results in `aria-live="polite"`; focus never lost or trapped; Escape closes overlays.
 - Styles for elements created in JS must be `:global(...)` in Astro components (scoped styles won't reach them).

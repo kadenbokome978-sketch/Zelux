@@ -32,7 +32,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
       <div class="mt-8 grid gap-8 md:mt-12 md:grid-cols-12 md:items-end" data-reveal style="--d:160ms">
         <p class="lead max-w-[52ch] md:col-span-7">{site.hero.subtitle}</p>
         <div class="flex flex-wrap items-center gap-x-7 gap-y-2 md:col-span-5 md:justify-end">
-          <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10}><a href="/book" class="btn-primary btn-lg">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
+          <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }}><a href="/book" class="btn-primary btn-lg">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
           <a href="#time-saver" class="btn-ghost">Find what to automate ↓</a>
         </div>
       </div>
@@ -49,9 +49,9 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- STATEMENT (accent band) -->
   <section class="band-deep">
-    <div class="container-z grid gap-10 py-14 md:py-20 lg:grid-cols-12 lg:gap-10">
+    <div class="container-z grid gap-10 py-16 md:py-28 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-7" data-reveal>
-        <ScrollReveal client:visible containerClassName="h-statement" baseOpacity={0.18} enableBlur={false} baseRotation={0} stagger={0.08} wordAnimationEnd="center 40%" text="You speak to the person who builds it." />
+        <ScrollReveal client:visible containerClassName="h-statement" baseOpacity={0.22} enableBlur={false} baseRotation={0} stagger={0.08} wordAnimationEnd="center 40%" text="You speak to the person who builds it." />
         <p class="mt-6 max-w-[46ch] text-[1.0625rem] leading-relaxed text-deep-ink-2">{site.pillars[0].body}</p>
       </div>
       <div class="self-end lg:col-span-5" data-reveal style="--d:90ms">
@@ -69,7 +69,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- TIME-SAVER DETECTOR -->
   <section id="time-saver" class="scroll-mt-16 border-b border-hairline bg-surface">
-    <div class="container-z py-16 md:py-24">
+    <div class="container-z py-14 md:py-20">
       <div class="max-w-[46rem]" data-reveal>
         <p class="eyebrow">Try it</p>
         <h2 class="h-section mt-4">What should stop <em class="text-accent">taking your time?</em></h2>
@@ -88,8 +88,8 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
       </div>
       <div class="mt-10 grid gap-5 md:mt-12 lg:grid-cols-3">
         {site.value.groups.map((g, gi) => (
-          <div class="flex" data-reveal style={`--d:${gi * 90}ms`}>
-          <SpotlightCard client:visible theme="light" spotlightColor="#2563eb" intensity={0.55} borderGlow={0.9} className="flex w-full flex-col p-6 md:p-7" style={{ '--spotlight-card-border': '#dde3eb' }}>
+          <div class="flex" data-reveal style={`--d:${gi * 50}ms`}>
+          <SpotlightCard client:visible theme="light" spotlightColor="#2563eb" intensity={0.55} borderGlow={0.9} className="flex w-full flex-col p-6 md:p-7" style={{ '--spotlight-card-border': '#dde3eb', '--spotlight-card-surface': '#fcfdff' }}>
             <p class="inline-flex self-start rounded-[2px] bg-accent-tint px-2.5 py-1 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent-hover">{g.label}</p>
             <ul class="mt-5 divide-y divide-hairline">
               {g.points.map((pt) => (
@@ -103,9 +103,9 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
           </div>
         ))}
       </div>
-      <div class="mt-5 grid items-center gap-5 rounded-[2px] border border-accent bg-white p-6 md:grid-cols-12 md:p-7" data-reveal>
+      <div class="mt-5 grid items-center gap-5 rounded-[2px] border border-accent bg-paper p-6 md:grid-cols-12 md:p-7" data-reveal>
         <div class="flex items-center gap-4 md:col-span-5">
-          <span class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-full bg-accent text-white" aria-hidden="true">
+          <span class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-full bg-accent text-on-accent" aria-hidden="true">
             <span class="text-[1.375rem] font-semibold leading-none">7</span><span class="font-mono text-[0.5625rem] uppercase tracking-[0.12em]">days</span>
           </span>
           <div>
@@ -128,8 +128,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
       <div class="mt-10 border-t border-hairline md:mt-14">
         {services.map((s, i) => (
           <a href={`/services#${s.slug}`} class="svc-row group grid gap-3 border-b border-hairline py-7 md:grid-cols-12 md:items-center md:gap-8 md:py-8" data-reveal style={`--d:${i * 60}ms`}>
-            <p class="font-mono text-xs text-accent md:col-span-1">{s.index}</p>
-            <h3 class="svc-title md:col-span-7">{s.title}</h3>
+            <h3 class="svc-title md:col-span-8">{s.title}</h3>
             <p class="body text-[0.9375rem] md:col-span-3">{s.summary.split(". ")[0].replace(/\.$/, "")}.</p>
             <span class="svc-arrow hidden justify-self-end md:col-span-1 md:flex" aria-hidden="true">→</span>
           </a>
@@ -143,8 +142,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
     <div class="container-z py-16 md:py-24">
       <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
         <div>
-          <p class="eyebrow">Work</p>
-          <h2 class="h-section mt-4">Real projects, <em class="text-accent">shown with permission.</em></h2>
+          <h2 class="h-section">Real projects, <em class="text-accent">shown with permission.</em></h2>
         </div>
         <a href="/work" class="btn-ghost">All work →</a>
       </div>
@@ -160,11 +158,11 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
           <p class="eyebrow">How it works</p>
           <h2 class="h-section mt-5">Plain steps, <em class="text-accent-on-deep">one price.</em></h2>
           <p class="body mt-5 max-w-[40ch]">{pricing.body}</p>
-          <a href="/book" class="btn-primary mt-8">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="/book" class="btn-primary mt-8">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <ol class="grid grid-cols-2 gap-x-6 gap-y-8 self-start lg:col-span-8 xl:grid-cols-4">
           {site.steps.map((s, i) => (
-            <li class="relative border-t border-deep-line pt-5" data-reveal style={`--d:${i * 80}ms`}>
+            <li class="relative border-t border-deep-line pt-5" data-reveal style={`--d:${i * 50}ms`}>
               <span class="step-line absolute -top-px left-0 h-px w-full origin-left bg-accent-on-deep" aria-hidden="true"></span>
               <p class="step-num">{s.index}</p>
               <h3 class="mt-4 text-[1.25rem] font-semibold tracking-[-0.02em]">{s.title}</h3>
@@ -183,8 +181,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
   <section id="about" class="scroll-mt-16 border-t border-hairline">
     <div class="container-z grid gap-14 py-16 md:py-24 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-5" data-reveal>
-        <p class="eyebrow">About</p>
-        <h2 class="h-section mt-5"><em>{site.about.title}</em></h2>
+        <h2 class="h-section"><em>{site.about.title}</em></h2>
         <p class="lead mt-6 !text-ink">{site.about.paragraphs[0]}</p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7 lg:pt-10" data-reveal style="--d:120ms">

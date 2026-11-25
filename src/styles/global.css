@@ -1,5 +1,6 @@
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
+@import "@fontsource-variable/funnel-display";
 @import "tailwindcss";
 
 @theme {
@@ -13,6 +14,9 @@
   --color-ink: #0f172a;
   --color-ink-2: #475569;
   --color-ink-3: #5b677a;
+  /* Near-whites tinted toward the navy hue (never pure #fff) */
+  --color-paper: #fcfdff;
+  --color-on-accent: #f8fafc;
 
   /* 10%: one accent, used for action and emphasis only */
   --color-accent: #2563eb;
@@ -28,12 +32,18 @@
   --color-deep-ink-2: #a5b1c4;
   --color-accent-on-deep: #6ea0ff;
 
-  --font-serif: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  /* Display face for headings only (used with restraint); Geist carries body text */
+  --font-serif: "Funnel Display Variable", "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, monospace;
 
   --radius-sharp: 2px;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Motion scale: one easing, three durations. Don't invent one-off timings. */
+  --dur-fast: var(--dur-fast);   /* colour, opacity feedback */
+  --dur-ui: var(--dur-ui);     /* transforms, underlines, toggles */
+  --dur-slow: 600ms;   /* scroll reveals */
 }
 
 @layer base {
@@ -52,14 +62,25 @@
   }
   ::selection {
     background: var(--color-accent);
-    color: #fff;
+    color: var(--color-on-accent);
   }
+  /* Tailwind v4 dropped pointer cursors on buttons */
+  button:not(:disabled), [role="button"], label[for] { cursor: pointer; }
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
+  }
+  /* Reduced motion means no motion: transitions and animations collapse to an instant change */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+    }
   }
 }
 
@@ -80,7 +101,7 @@
     font-weight: 500;
     font-size: clamp(2.5rem, 5.6vw, 4.5rem);
     line-height: 1.02;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
   .h-section {
@@ -94,11 +115,11 @@
   .h-hero {
     font-family: var(--font-serif);
     font-weight: 500;
-    font-size: clamp(2.5rem, 5.6vw, 4.75rem);
-    line-height: 1;
-    letter-spacing: -0.045em;
+    font-size: clamp(2.25rem, 4.6vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
     text-wrap: balance;
-    max-width: 18ch;
+    max-width: 22ch;
   }
   .h-statement {
     font-family: var(--font-serif);
@@ -114,29 +135,31 @@
   .btn-primary {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
     min-height: 48px; padding: 0 1.4rem;
-    background: var(--color-accent); color: #fff;
+    background: var(--color-accent); color: var(--color-on-accent);
     font-weight: 500; font-size: 0.9375rem; letter-spacing: -0.005em;
     border-radius: var(--radius-sharp);
-    transition: background-color 180ms var(--ease-out-soft);
+    transition: background-color var(--dur-fast) var(--ease-out-soft);
   }
   .btn-primary:hover { background: var(--color-accent-hover); }
+  .btn-primary:active, .btn-ghost:active { transform: scale(0.98); }
+  .btn-primary { transition-property: background-color, transform; }
   .btn-lg { min-height: 56px; padding: 0 1.75rem; font-size: 1rem; }
-  .btn-primary .arrow { transition: transform 200ms var(--ease-out-soft); }
-  .btn-primary:hover .arrow { transform: translateX(3px); }
+  .btn-primary .arrow { transition: transform var(--dur-ui) var(--ease-out-soft); }
+  @media (hover: hover) and (pointer: fine) { .btn-primary:hover .arrow { transform: translateX(3px); } }
 
   .btn-ghost {
     display: inline-flex; align-items: center; min-height: 48px; padding: 0 0.25rem;
     color: var(--color-ink); font-size: 0.9375rem;
     background-image: linear-gradient(var(--color-accent), var(--color-accent));
     background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 calc(100% - 12px);
-    transition: background-size 220ms var(--ease-out-soft), color 180ms;
+    transition: background-size var(--dur-ui) var(--ease-out-soft), color var(--dur-fast);
   }
   .btn-ghost:hover { background-size: 100% 1px; color: var(--color-accent); }
 
   .link-u {
     background-image: linear-gradient(currentColor, currentColor);
     background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%;
-    transition: background-size 220ms var(--ease-out-soft), color 180ms;
+    transition: background-size var(--dur-ui) var(--ease-out-soft), color var(--dur-fast);
   }
   .link-u:hover { background-size: 100% 1px; }
 
@@ -144,9 +167,9 @@
 
   .field {
     width: 100%; min-height: 48px; padding: 0.75rem 0.9rem;
-    background: #fff; color: var(--color-ink);
+    background: var(--color-paper); color: var(--color-ink);
     border: 1px solid var(--color-hairline-strong); border-radius: var(--radius-sharp);
-    font-size: 1rem; transition: border-color 160ms;
+    font-size: 1rem; transition: border-color var(--dur-fast);
   }
   .field::placeholder { color: #7a827e; }
   .field:hover { border-color: var(--color-ink-3); }
@@ -168,18 +191,21 @@
   .svc-title {
     font-family: var(--font-serif); font-weight: 500;
     font-size: clamp(1.625rem, 2.6vw, 2.25rem); line-height: 1.1; letter-spacing: -0.035em; text-wrap: balance;
-    color: var(--color-ink); transition: color 200ms, transform 300ms var(--ease-out-soft);
+    color: var(--color-ink); transition: color var(--dur-ui), transform 300ms var(--ease-out-soft);
   }
-  .svc-row:hover .svc-title, .svc-row:focus-visible .svc-title { color: var(--color-accent); }
+  .svc-row:focus-visible .svc-title { color: var(--color-accent); }
+  /* Hover styles only where a real pointer can hover (no sticky hover after a tap on touch screens) */
+  @media (hover: hover) and (pointer: fine) {
+    .svc-row:hover .svc-title { color: var(--color-accent); transform: translateX(6px); }
+    .svc-row:hover .svc-arrow { border-color: var(--color-accent); background: var(--color-accent); color: var(--color-on-accent); transform: rotate(-45deg); }
+  }
   .svc-arrow {
     width: 3rem; height: 3rem; align-items: center; justify-content: center;
     border: 1px solid var(--color-hairline-strong); border-radius: 999px; color: var(--color-ink-2);
-    transition: border-color 200ms, color 200ms, background-color 200ms, transform 300ms var(--ease-out-soft);
+    transition: border-color var(--dur-ui), color var(--dur-ui), background-color var(--dur-ui), transform var(--dur-ui) var(--ease-out-soft);
   }
-  .svc-row:hover .svc-arrow, .svc-row:focus-visible .svc-arrow { border-color: var(--color-accent); background: var(--color-accent); color: #fff; transform: rotate(-45deg); }
-  @media (prefers-reduced-motion: no-preference) {
-    .svc-row:hover .svc-title { transform: translateX(6px); }
-  }
+  .svc-row:focus-visible .svc-arrow { border-color: var(--color-accent); background: var(--color-accent); color: var(--color-on-accent); transform: rotate(-45deg); }
+
 
   /* Process: oversized step numerals */
   .step-num {
@@ -209,7 +235,7 @@
     transform: translateY(12px);
   }
   .reveal-ready [data-reveal].is-revealing {
-    transition: opacity 700ms var(--ease-out-soft), transform 700ms var(--ease-out-soft);
+    transition: opacity var(--dur-slow) var(--ease-out-soft), transform var(--dur-slow) var(--ease-out-soft);
     transition-delay: var(--d, 0ms);
   }
 
@@ -224,6 +250,8 @@
 .js .faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 320ms var(--ease-out-soft); }
 .js .faq-panel > div { overflow: hidden; }
 .js .faq-item[data-open="true"] .faq-panel { grid-template-rows: 1fr; }
+/* Closing is quicker than opening */
+.js .faq-item[data-open="false"] .faq-panel { transition-duration: var(--dur-ui); }
 .faq-item[data-open="true"] .faq-icon { transform: rotate(45deg); color: var(--color-accent); }
 html:not(.js) .faq-icon { display: none; }
 

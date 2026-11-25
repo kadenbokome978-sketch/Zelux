@@ -22,6 +22,13 @@ description: How Zelux copy should sound, with banned words, claims rules and th
 - Say how something works, not how great it is: "Unpaid after 7 days, a polite reminder follows" beats "Get paid faster".
 - Vary rhythm. Not every item needs two sentences, not every list needs three points.
 
+## Interface copy (from Anthropic's frontend-design skill)
+
+- Buttons say exactly what happens ("Book a free 20-min call", "Send enquiry"), never "Submit" or "Learn more". Keep an action's name the same through the flow.
+- Errors state the cause and the fix, in the site's voice, without apologising. Empty states invite the next action (the Detector's empty panel does this).
+- No headings restated by an eyebrow or an intro. Every word earns its place.
+- Name things by what the visitor recognises ("replying to enquiries"), not how the system is built ("webhook", "CRM sync").
+
 ## Hard rules
 
 - Never write "AI", "artificial intelligence", "machine learning", "agent", "LLM" or "GPT" in public copy, meta or schema. Say "automation", "connected system", "drafted for you to approve".
