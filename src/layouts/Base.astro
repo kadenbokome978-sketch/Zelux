@@ -52,8 +52,8 @@ const jsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#09090B" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#F7F4EE" />
+    <meta name="color-scheme" content="light" />
     <link rel="preload" href={geistLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -76,7 +76,7 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="min-h-svh flex flex-col">
-    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:bg-brass focus:text-canvas focus:px-4 focus:py-3 rounded-[2px]">Skip to content</a>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:bg-accent focus:text-white focus:px-4 focus:py-3 rounded-[2px]">Skip to content</a>
     <Navbar currentPath={path} />
     <main id="main" class="flex-1">
       <slot />

@@ -44,20 +44,20 @@ const steps = [
     padding: 1rem 1.1rem 1.1rem;
     border: 1px solid var(--color-hairline);
     border-radius: 2px;
-    background: #0d0d10;
+    background: #fff;
     transition: border-color 400ms var(--ease-out-soft), background-color 400ms var(--ease-out-soft);
   }
   .lf-dot {
     position: absolute; top: 1.1rem; right: 1.1rem;
     width: 7px; height: 7px; border-radius: 999px;
-    background: #3a3a44;
+    background: #cfc8bb;
     transition: background-color 300ms, box-shadow 300ms;
   }
   .lf-label { color: var(--color-ink-2); transition: color 300ms; }
 
   /* connectors: vertical on mobile, horizontal on desktop */
   .lf-link { position: relative; height: 18px; width: 1px; margin-left: 1.6rem; background: var(--color-hairline); }
-  .lf-link span { position: absolute; inset: 0; background: var(--color-brass); transform: scaleY(0); transform-origin: top; transition: transform 500ms var(--ease-out-soft); }
+  .lf-link span { position: absolute; inset: 0; background: var(--color-accent); transform: scaleY(0); transform-origin: top; transition: transform 500ms var(--ease-out-soft); }
   @media (min-width: 1024px) {
     .lf-link { height: 1px; width: auto; min-width: 1.75rem; flex: 0 0 1.75rem; margin: 0; align-self: center; }
     .lf-link span { transform: scaleX(0); transform-origin: left; }
@@ -68,7 +68,7 @@ const steps = [
   .leadflow[data-step='2'] .lf-node:is([data-i='0'],[data-i='1']),
   .leadflow[data-step='3'] .lf-node:is([data-i='0'],[data-i='1'],[data-i='2']),
   .leadflow[data-step='4'] .lf-node:not([data-i='4']),
-  .leadflow[data-step='5'] .lf-node { border-color: var(--color-hairline-accent); background: var(--color-surface); }
+  .leadflow[data-step='5'] .lf-node { border-color: var(--color-hairline-accent); background: #fff; }
 
   .leadflow[data-step='1'] .lf-node[data-i='0'] :is(.lf-label),
   .leadflow[data-step='2'] .lf-node:is([data-i='0'],[data-i='1']) .lf-label,
@@ -80,15 +80,15 @@ const steps = [
   .leadflow[data-step='2'] .lf-node:is([data-i='0'],[data-i='1']) .lf-dot,
   .leadflow[data-step='3'] .lf-node:is([data-i='0'],[data-i='1'],[data-i='2']) .lf-dot,
   .leadflow[data-step='4'] .lf-node:not([data-i='4']) .lf-dot,
-  .leadflow[data-step='5'] .lf-node .lf-dot { background: var(--color-brass); box-shadow: 0 0 0 4px rgb(200 169 106 / 0.14); }
+  .leadflow[data-step='5'] .lf-node .lf-dot { background: var(--color-accent); box-shadow: 0 0 0 4px rgb(187 65 24 / 0.14); }
 
   .leadflow[data-step='2'] .lf-link[data-i='1'] span,
   .leadflow[data-step='3'] .lf-link:is([data-i='1'],[data-i='2']) span,
   .leadflow[data-step='4'] .lf-link:not([data-i='4']) span,
   .leadflow[data-step='5'] .lf-link span { transform: none; }
 
-  /* the node that just became active gets a brief brass edge */
-  .leadflow .lf-node.is-now { border-color: var(--color-brass); }
+  /* the node that just became active gets a brief accent edge */
+  .leadflow .lf-node.is-now { border-color: var(--color-accent); }
 
   @media (prefers-reduced-motion: no-preference) {
     .lf-live { animation: lf-blink 1.6s ease-in-out infinite; }

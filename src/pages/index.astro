@@ -24,7 +24,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
         </p>
       </div>
       <h1 class="h-hero mt-8 md:mt-10" data-reveal style="--d:80ms">
-        {site.hero.titleLead} <em class="text-brass">{site.hero.titleItalic}</em>
+        {site.hero.titleLead} <em class="text-accent">{site.hero.titleItalic}</em>
       </h1>
       <div class="mt-8 grid gap-8 md:mt-12 md:grid-cols-12 md:items-end" data-reveal style="--d:160ms">
         <p class="lead max-w-[52ch] md:col-span-7">{site.hero.subtitle}</p>
@@ -39,18 +39,18 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
     </div>
   </section>
 
-  <!-- STATEMENT (brass band) -->
-  <section class="band-brass">
+  <!-- STATEMENT (accent band) -->
+  <section class="band-deep">
     <div class="container-z grid gap-10 py-14 md:py-20 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-7" data-reveal>
         <h2 class="h-statement">You speak to the person who builds it.</h2>
-        <p class="mt-6 max-w-[46ch] text-[1.0625rem] leading-relaxed text-brass-ink-2">{site.pillars[0].body}</p>
+        <p class="mt-6 max-w-[46ch] text-[1.0625rem] leading-relaxed text-deep-ink-2">{site.pillars[0].body}</p>
       </div>
-      <ul class="grid gap-px self-end overflow-hidden rounded-[2px] border border-brass-line bg-brass-line lg:col-span-5">
+      <ul class="grid gap-px self-end overflow-hidden rounded-[2px] border border-deep-line bg-deep-line lg:col-span-5">
         {site.pillars.slice(1).map((p, i) => (
-          <li class="bg-brass p-6" data-reveal style={`--d:${(i + 1) * 90}ms`}>
+          <li class="bg-deep p-6" data-reveal style={`--d:${(i + 1) * 90}ms`}>
             <h3 class="text-[1.375rem] font-medium leading-tight tracking-[-0.02em]">{p.title}</h3>
-            <p class="mt-2 text-[0.9375rem] leading-relaxed text-brass-ink-2">{p.body}</p>
+            <p class="mt-2 text-[0.9375rem] leading-relaxed text-deep-ink-2">{p.body}</p>
           </li>
         ))}
       </ul>
@@ -61,13 +61,13 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
   <section>
     <div class="container-z py-16 md:py-24">
       <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
-        <h2 class="h-section">Three things, <em class="text-brass">done well.</em></h2>
+        <h2 class="h-section">Three things, <em class="text-accent">done well.</em></h2>
         <a href="/services" class="btn-ghost">Full scope & what's included →</a>
       </div>
       <div class="mt-10 border-t border-hairline md:mt-14">
         {services.map((s, i) => (
           <a href={`/services#${s.slug}`} class="svc-row group grid gap-3 border-b border-hairline py-7 md:grid-cols-12 md:items-center md:gap-8 md:py-8" data-reveal style={`--d:${i * 60}ms`}>
-            <p class="font-mono text-xs text-brass md:col-span-1">{s.index}</p>
+            <p class="font-mono text-xs text-accent md:col-span-1">{s.index}</p>
             <h3 class="svc-title md:col-span-7">{s.title}</h3>
             <p class="body text-[0.9375rem] md:col-span-3">{s.summary.split(". ")[0].replace(/\.$/, "")}.</p>
             <span class="svc-arrow hidden justify-self-end md:col-span-1 md:flex" aria-hidden="true">→</span>
@@ -83,7 +83,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
       <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
         <div>
           <p class="eyebrow">Work</p>
-          <h2 class="h-section mt-4">Real projects, <em class="text-brass">shown with permission.</em></h2>
+          <h2 class="h-section mt-4">Real projects, <em class="text-accent">shown with permission.</em></h2>
         </div>
         <a href="/work" class="btn-ghost">All work →</a>
       </div>
@@ -96,7 +96,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
     <div class="container-z grid gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-4" data-reveal>
         <p class="eyebrow">Automations</p>
-        <h2 class="h-section mt-4">Admin that <em class="text-brass">runs itself.</em></h2>
+        <h2 class="h-section mt-4">Admin that <em class="text-accent">runs itself.</em></h2>
         <p class="body mt-5 max-w-[36ch]">Ten jobs most small businesses still do by hand. Each one is wired into the tools you already use.</p>
         <a href="/services#automations" class="btn-ghost mt-4">How each one works →</a>
       </div>
@@ -104,8 +104,8 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
         {automations.map((a, i) => (
           <li class="border-t border-hairline" data-reveal style={`--d:${(i % 2) * 60}ms`}>
             <a href={`/services#auto-${a.index}`} class="group flex min-h-12 items-baseline gap-4 py-3 sm:py-4">
-              <span class="font-mono text-[0.6875rem] text-brass">{a.index}</span>
-              <span class="text-[1.125rem] leading-snug tracking-[-0.015em] text-ink transition-colors group-hover:text-brass-hover">{a.title}</span>
+              <span class="font-mono text-[0.6875rem] text-accent">{a.index}</span>
+              <span class="text-[1.125rem] leading-snug tracking-[-0.015em] text-ink transition-colors group-hover:text-accent-hover">{a.title}</span>
               <span class="ml-auto text-ink-3 opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">→</span>
             </a>
           </li>
@@ -114,28 +114,28 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
     </div>
   </section>
 
-  <!-- PROCESS + PRICING (bone band) -->
-  <section class="band-bone">
+  <!-- PROCESS + PRICING (deep band) -->
+  <section class="band-deep">
     <div class="container-z py-16 md:py-24">
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-8">
         <div class="lg:col-span-4" data-reveal>
           <p class="eyebrow">How it works</p>
-          <h2 class="h-section mt-5">Plain steps, <em class="text-brass-deep">one price.</em></h2>
+          <h2 class="h-section mt-5">Plain steps, <em class="text-accent-on-deep">one price.</em></h2>
           <p class="body mt-5 max-w-[40ch]">{pricing.body}</p>
-          <a href="/book" class="btn-dark mt-8">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="/book" class="btn-primary mt-8">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <ol class="grid grid-cols-2 gap-x-6 gap-y-8 self-start lg:col-span-8 xl:grid-cols-4">
           {site.steps.map((s, i) => (
-            <li class="border-t border-bone-ink pt-5" data-reveal style={`--d:${i * 80}ms`}>
+            <li class="border-t border-deep-ink pt-5" data-reveal style={`--d:${i * 80}ms`}>
               <p class="step-num">{s.index}</p>
               <h3 class="mt-4 text-[1.25rem] font-semibold tracking-[-0.02em]">{s.title}</h3>
-              <p class="mt-2 max-w-[38ch] text-[0.875rem] leading-relaxed text-bone-ink-2">{s.body}</p>
+              <p class="mt-2 max-w-[38ch] text-[0.875rem] leading-relaxed text-deep-ink-2">{s.body}</p>
             </li>
           ))}
         </ol>
       </div>
-      <ul class="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-bone-line pt-6 font-mono text-xs uppercase tracking-[0.12em] text-bone-ink-2" data-reveal>
-        {site.pricing.points.map((pt) => <li class="flex items-center gap-2.5"><span class="h-px w-3 bg-brass-deep" aria-hidden="true"></span>{pt}</li>)}
+      <ul class="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-deep-line pt-6 font-mono text-xs uppercase tracking-[0.12em] text-deep-ink-2" data-reveal>
+        {site.pricing.points.map((pt) => <li class="flex items-center gap-2.5"><span class="h-px w-3 bg-accent-on-deep" aria-hidden="true"></span>{pt}</li>)}
       </ul>
     </div>
   </section>
@@ -159,7 +159,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
   <!-- FAQ -->
   <section class="border-t border-hairline">
     <div class="container-z grid gap-8 py-16 md:grid-cols-12 md:gap-8 md:py-24">
-      <h2 class="h-section md:col-span-4" data-reveal>Straight <em class="text-brass">answers.</em></h2>
+      <h2 class="h-section md:col-span-4" data-reveal>Straight <em class="text-accent">answers.</em></h2>
       <div class="md:col-span-8"><Faq /></div>
     </div>
   </section>

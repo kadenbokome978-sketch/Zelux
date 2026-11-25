@@ -14,10 +14,10 @@ import automations from '../content/automations.json';
     <nav aria-label="Services on this page" class="mt-14 flex flex-wrap gap-2" data-reveal>
       {services.map((s) => (
         <a href={`#${s.slug}`} class="inline-flex min-h-11 items-center gap-3 rounded-[2px] border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink">
-          <span class="font-mono text-xs text-brass">{s.index}</span>{s.title}
+          <span class="font-mono text-xs text-accent">{s.index}</span>{s.title}
         </a>
       ))}
-      <a href="#automations" class="inline-flex min-h-11 items-center gap-3 rounded-[2px] border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink"><span class="font-mono text-xs text-brass">10×</span>Automations</a>
+      <a href="#automations" class="inline-flex min-h-11 items-center gap-3 rounded-[2px] border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink"><span class="font-mono text-xs text-accent">10×</span>Automations</a>
     </nav>
   </section>
 
@@ -25,10 +25,10 @@ import automations from '../content/automations.json';
     <section id={s.slug} class="scroll-mt-16 border-t border-hairline">
       <div class="container-z grid gap-12 py-14 md:grid-cols-12 md:gap-8 md:py-20">
         <div class="md:col-span-5" data-reveal>
-          <p class="font-mono text-xs text-brass">{s.index}</p>
+          <p class="font-mono text-xs text-accent">{s.index}</p>
           <h2 class="h-section mt-5">{s.title}</h2>
           <p class="body mt-6 text-[1.0625rem]">{s.summary}</p>
-          <div class="mt-8 border-l border-brass pl-5">
+          <div class="mt-8 border-l border-accent pl-5">
             <p class="eyebrow !text-[0.6875rem]">Best if</p>
             <p class="mt-2 text-ink-2">{s.bestFor}</p>
           </div>
@@ -40,7 +40,7 @@ import automations from '../content/automations.json';
             <ul class="mt-5 divide-y divide-hairline">
               {s.included.map((x) => (
                 <li class="flex gap-4 py-3 text-[0.9375rem] leading-relaxed text-ink-2">
-                  <span class="mt-[0.7em] h-px w-3 shrink-0 bg-brass" aria-hidden="true"></span>{x}
+                  <span class="mt-[0.7em] h-px w-3 shrink-0 bg-accent" aria-hidden="true"></span>{x}
                 </li>
               ))}
             </ul>
@@ -65,7 +65,7 @@ import automations from '../content/automations.json';
       <div class="grid gap-6 md:grid-cols-12 md:gap-8" data-reveal>
         <p class="eyebrow md:col-span-3 md:pt-2">Automations I build</p>
         <div class="md:col-span-9">
-          <h2 class="h-section">Ten ways to get <em class="text-brass">hours back.</em></h2>
+          <h2 class="h-section">Ten ways to get <em class="text-accent">hours back.</em></h2>
           <p class="lead mt-5 max-w-[56ch]">Each one is set up around the tools you already use, tested with real examples, and handed over with plain-English notes.</p>
         </div>
       </div>
@@ -73,7 +73,7 @@ import automations from '../content/automations.json';
         {automations.map((a) => (
           <li id={`auto-${a.index}`} class="scroll-mt-20 bg-canvas p-6 md:p-7" data-reveal>
             <p class="flex items-baseline gap-4">
-              <span class="font-mono text-xs text-brass">{a.index}</span>
+              <span class="font-mono text-xs text-accent">{a.index}</span>
               <span class="text-[1.125rem] font-medium tracking-[-0.015em] text-ink">{a.title}</span>
             </p>
             <p class="body mt-3 pl-8 text-[0.9375rem]">{a.body}</p>

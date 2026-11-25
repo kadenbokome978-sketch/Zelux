@@ -12,17 +12,17 @@ const rows = [
   ['Outcome', item.outcome],
 ];
 ---
-<article class="panel group flex h-full flex-col transition-colors duration-200 hover:border-[#2f2f37]" data-reveal style={`--d:${delay}ms`}>
+<article class="panel group flex h-full flex-col transition-colors duration-200 hover:border-hairline-strong" data-reveal style={`--d:${delay}ms`}>
   <header class="flex items-start justify-between gap-4 border-b border-hairline p-6">
     <div>
-      <p class="font-mono text-xs text-brass">{item.index}</p>
+      <p class="font-mono text-xs text-accent">{item.index}</p>
       <Heading class="mt-3 font-serif text-[1.75rem] leading-[1.1] text-ink">{item.title}</Heading>
       <p class="mt-2 text-sm text-ink-3">{item.sector}</p>
     </div>
     <span
       class:list={[
         'shrink-0 rounded-[2px] border px-2 py-1 font-mono text-[0.625rem] uppercase tracking-[0.12em]',
-        item.isPlaceholder ? 'border-hairline text-ink-3' : 'border-hairline-accent text-brass',
+        item.isPlaceholder ? 'border-hairline text-ink-3' : 'border-hairline-accent text-accent',
       ]}
     >{item.isPlaceholder ? 'Slot reserved' : 'Live'}</span>
   </header>
@@ -37,7 +37,7 @@ const rows = [
   <footer class="flex items-center justify-between border-t border-hairline px-6 py-4 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3">
     <span>{item.status}</span>
     {item.href && (
-      <a href={item.href} target="_blank" rel="noopener" class="link-u inline-flex min-h-10 items-center text-ink hover:text-brass-hover">Visit ↗</a>
+      <a href={item.href} target="_blank" rel="noopener" class="link-u inline-flex min-h-10 items-center text-ink hover:text-accent-hover">Visit ↗</a>
     )}
   </footer>
 </article>

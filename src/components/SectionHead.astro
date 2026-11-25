@@ -5,11 +5,11 @@ const Tag = as;
 ---
 <div class="grid gap-6 md:grid-cols-12 md:gap-8" data-reveal>
   <p class="eyebrow md:col-span-3 md:pt-3">
-    {index && <span class="text-brass">{index}</span>}{index && <span class="mx-2 text-hairline">/</span>}{eyebrow}
+    {index && <span class="text-accent">{index}</span>}{index && <span class="mx-2 text-hairline">/</span>}{eyebrow}
   </p>
   <div class="md:col-span-9">
     <Tag class={as === 'h1' ? 'h-display' : 'h-section'}>
-      {title}{italic && <> <em class="text-brass">{italic}</em></>}
+      {title}{italic && <> <em class="text-accent">{italic}</em></>}
     </Tag>
     {intro && <p class="lead mt-6 max-w-[58ch]">{intro}</p>}
   </div>

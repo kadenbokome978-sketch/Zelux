@@ -11,35 +11,35 @@ const badge = (w: Item) => (w.isPlaceholder ? (w.status.startsWith('In build') ?
 <div class="grid gap-5 lg:grid-cols-12">
   <!-- Lead project -->
   <article class="panel group flex flex-col overflow-hidden lg:col-span-7" data-reveal>
-    <div class="relative aspect-[16/10] overflow-hidden border-b border-hairline bg-[#0d0d10]">
+    <div class="relative aspect-[16/10] overflow-hidden border-b border-hairline bg-surface">
       {lead.image ? (
         <img src={lead.image} alt={`${lead.title} website`} class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]" loading="lazy" width="1600" height="1000" />
       ) : (
         <>
           <svg viewBox="0 0 640 400" class="h-full w-full" role="img" aria-label="Illustration of a map with bin locations marked">
             <defs>
-              <pattern id="wk-grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#16161b" /></pattern>
+              <pattern id="wk-grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#e6e0d5" /></pattern>
             </defs>
             <rect width="640" height="400" fill="url(#wk-grid)" />
-            <g fill="none" stroke="#26262e" stroke-width="10" stroke-linecap="round">
+            <g fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round">
               <path d="M-20 300 C 120 280, 200 180, 340 170 S 560 120, 680 60" />
               <path d="M140 -20 C 160 120, 190 260, 170 420" />
               <path d="M420 -20 C 400 140, 460 260, 520 420" />
             </g>
-            <g fill="none" stroke="#1d1d23" stroke-width="5">
+            <g fill="none" stroke="#fbf9f5" stroke-width="5">
               <path d="M-20 120 H 660" /><path d="M260 -20 V 420" /><path d="M-20 360 C 200 340, 420 380, 660 330" />
             </g>
             {[[170, 238], [338, 170], [458, 150], [262, 92], [520, 300], [96, 120]].map(([x, y], i) => (
               <g transform={`translate(${x} ${y})`}>
-                <circle r={i === 1 ? 26 : 16} fill="#c8a96a" opacity="0.12" class={i === 1 ? 'wk-ping' : ''} />
-                <path d="M0 -18 C 10 -18, 14 -10, 14 -6 C 14 4, 0 14, 0 14 C 0 14, -14 4, -14 -6 C -14 -10, -10 -18, 0 -18 Z" fill={i === 1 ? '#c8a96a' : '#3a3a44'} transform="translate(0 -6) scale(0.8)" />
+                <circle r={i === 1 ? 26 : 16} fill="#bb4118" opacity="0.12" class={i === 1 ? 'wk-ping' : ''} />
+                <path d="M0 -18 C 10 -18, 14 -10, 14 -6 C 14 4, 0 14, 0 14 C 0 14, -14 4, -14 -6 C -14 -10, -10 -18, 0 -18 Z" fill={i === 1 ? '#bb4118' : '#8f877a'} transform="translate(0 -6) scale(0.8)" />
               </g>
             ))}
           </svg>
           <span class="absolute bottom-3 left-3 font-mono text-[0.625rem] uppercase tracking-[0.12em] text-ink-3">Illustration</span>
         </>
       )}
-      <span class="absolute right-3 top-3 rounded-[2px] border border-hairline-accent bg-canvas/80 px-2 py-1 font-mono text-[0.625rem] uppercase tracking-[0.12em] text-brass">{badge(lead)}</span>
+      <span class="absolute right-3 top-3 rounded-[2px] border border-hairline-accent bg-canvas/80 px-2 py-1 font-mono text-[0.625rem] uppercase tracking-[0.12em] text-accent">{badge(lead)}</span>
     </div>
     <div class="flex flex-1 flex-col gap-4 p-6 md:p-7">
       <div class="flex items-baseline justify-between gap-4">
@@ -79,7 +79,7 @@ const badge = (w: Item) => (w.isPlaceholder ? (w.status.startsWith('In build') ?
 </div>
 
 <style>
-  .wk-hatch { background: repeating-linear-gradient(135deg, #0d0d10 0 10px, #111115 10px 11px); }
+  .wk-hatch { background: repeating-linear-gradient(135deg, #f1ece3 0 10px, #e4ddd0 10px 11px); }
   @media (prefers-reduced-motion: no-preference) {
     .wk-ping { animation: wk-ping 2.4s ease-out infinite; transform-box: fill-box; transform-origin: center; }
   }
