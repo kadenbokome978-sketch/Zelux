@@ -4,7 +4,7 @@ name: Quality
 # so a red run here means the live site may have a problem: fix forward quickly.
 on:
   push:
-    branches: ['**']
+    branches: [main]
   pull_request:
 
 jobs:
