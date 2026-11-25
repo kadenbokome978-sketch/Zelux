@@ -3,30 +3,30 @@
 @import "tailwindcss";
 
 @theme {
-  /* 60%: warm paper base */
-  --color-canvas: #f7f4ee;
-  --color-surface: #efeae1;
-  --color-surface-hover: #e8e2d6;
-  --color-hairline: #dcd5c8;
-  --color-hairline-strong: #8f877a;
-  --color-hairline-accent: #e3b8a6;
-  --color-ink: #14211f;
-  --color-ink-2: #4a5552;
-  --color-ink-3: #5f6965;
+  /* 60%: cool off-white base */
+  --color-canvas: #f8fafc;
+  --color-surface: #eef2f7;
+  --color-surface-hover: #e5eaf2;
+  --color-hairline: #dde3eb;
+  --color-hairline-strong: #8792a3;
+  --color-hairline-accent: #b9cbf5;
+  --color-ink: #0f172a;
+  --color-ink-2: #475569;
+  --color-ink-3: #5b677a;
 
   /* 10%: one accent, used for action and emphasis only */
-  --color-accent: #bb4118;
-  --color-accent-hover: #9f3713;
-  --color-accent-tint: #f6e3da;
-  --color-live: #2f8f5b;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-tint: #e3ebfd;
+  --color-live: #15803d;
 
-  /* 30%: deep green-ink, for text and the dark bands */
-  --color-deep: #14211f;
-  --color-deep-2: #1b2b28;
-  --color-deep-line: #2c3d39;
-  --color-deep-ink: #f2eee6;
-  --color-deep-ink-2: #aab6b1;
-  --color-accent-on-deep: #ff7a45;
+  /* 30%: deep navy, for text and the dark bands */
+  --color-deep: #0f172a;
+  --color-deep-2: #16213a;
+  --color-deep-line: #263352;
+  --color-deep-ink: #f1f5f9;
+  --color-deep-ink-2: #a5b1c4;
+  --color-accent-on-deep: #6ea0ff;
 
   --font-serif: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
@@ -162,7 +162,7 @@
   .band-deep ::selection { background: var(--color-accent-on-deep); color: var(--color-deep); }
   .band-deep :focus-visible { outline-color: var(--color-accent-on-deep); }
   .band-deep .btn-primary { background: var(--color-accent-on-deep); color: var(--color-deep); }
-  .band-deep .btn-primary:hover { background: #ff9466; }
+  .band-deep .btn-primary:hover { background: #8fb6ff; }
 
   /* Service rows */
   .svc-title {
@@ -235,5 +235,5 @@ html:not(.js) #menu-btn { display: none; }
 h1 em, h2 em, h3 em { font-style: normal; }
 
 /* Hero: faint hairline grid that fades out toward the bottom */
-.hero-grid { background-image: linear-gradient(var(--color-canvas), transparent 30%, transparent 70%, var(--color-canvas)), linear-gradient(90deg, #ece7de 1px, transparent 1px); background-size: 100% 100%, calc((min(100vw, 1160px) - 2.5rem) / 12) 100%; background-position: 0 0, center top; }
+.hero-grid { background-image: linear-gradient(var(--color-canvas), transparent 30%, transparent 70%, var(--color-canvas)), linear-gradient(90deg, #edf1f6 1px, transparent 1px); background-size: 100% 100%, calc((min(100vw, 1160px) - 2.5rem) / 12) 100%; background-position: 0 0, center top; }
 
