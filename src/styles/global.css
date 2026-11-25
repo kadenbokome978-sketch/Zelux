@@ -127,7 +127,10 @@
   }
   .field::placeholder { color: #63636b; }
   .field:hover { border-color: #33333c; }
-  .field:focus { outline: none; border-color: var(--color-brass); }
+  .field:focus { border-color: var(--color-brass); }
+  .field:focus-visible { outline: 2px solid var(--color-brass); outline-offset: 1px; }
+  .field[aria-invalid="true"] { border-color: #c96a6a; }
+  .field-error { font-size: 0.8125rem; color: #f0b4b4; }
 
   /* Bone band: the light third colour */
   .band-bone { background: var(--color-bone); color: var(--color-bone-ink); }
@@ -173,11 +176,16 @@
   50% { opacity: 1; }
 }
 
-/* FAQ accordion: animated grid rows */
-.faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 320ms var(--ease-out-soft); }
-.faq-panel > div { overflow: hidden; }
-.faq-item[data-open="true"] .faq-panel { grid-template-rows: 1fr; }
+/* FAQ accordion: animated grid rows. Collapses only once JS has run, so answers stay readable without it. */
+.js .faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 320ms var(--ease-out-soft); }
+.js .faq-panel > div { overflow: hidden; }
+.js .faq-item[data-open="true"] .faq-panel { grid-template-rows: 1fr; }
 .faq-item[data-open="true"] .faq-icon { transform: rotate(45deg); color: var(--color-brass); }
+html:not(.js) .faq-icon { display: none; }
+
+/* No-JS: the menu button can't work, so show a plain link to the footer navigation instead */
+html:not(.js) #menu-btn { display: none; }
+.js #menu-fallback { display: none; }
 @media (prefers-reduced-motion: reduce) { .faq-panel { transition: none; } }
 
 /* Display titles set in Geist: medium weight, tight tracking. Accent words are coloured, not italic. */

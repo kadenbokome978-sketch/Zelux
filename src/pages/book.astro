@@ -4,6 +4,8 @@ import site from '../content/site.json';
 
 const calLink = import.meta.env.PUBLIC_CAL_LINK || site.calLink;
 const web3Key = import.meta.env.PUBLIC_WEB3FORMS_KEY || '';
+// Without JS the form still posts: to Web3Forms when a key is set, otherwise it opens an email.
+const formAction = web3Key ? 'https://api.web3forms.com/submit' : `mailto:${site.email}?subject=${encodeURIComponent('Enquiry from zelux.co.uk')}`;
 const agenda = [
   'Your current bottleneck: what\'s costing you time or leads',
   'What a lean build would look like for you',
@@ -49,18 +51,21 @@ const agenda = [
           <h2 class="font-serif text-[2rem] leading-tight text-ink">Prefer to write first?</h2>
           <p class="body mt-3 text-[0.9375rem]">Send a short note. I reply personally, usually within one working day.</p>
 
-          <form id="enquiry" class="mt-8 grid gap-5" novalidate data-key={web3Key}>
+          <form id="enquiry" class="mt-8 grid gap-5" method="post" action={formAction} enctype={web3Key ? undefined : 'text/plain'} data-key={web3Key}>
+            {web3Key && <input type="hidden" name="access_key" value={web3Key} />}
             <input type="hidden" name="subject" value="New enquiry from zelux.co.uk" />
             <input type="hidden" name="from_name" value="Zelux website" />
             <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
             <div class="grid gap-2">
               <label for="f-name" class="text-sm text-ink">Name</label>
-              <input id="f-name" name="name" class="field" autocomplete="name" required />
+              <input id="f-name" name="name" class="field" autocomplete="name" required aria-describedby="f-name-err" />
+              <p id="f-name-err" class="field-error hidden">Please add your name.</p>
             </div>
             <div class="grid gap-2">
               <label for="f-email" class="text-sm text-ink">Email</label>
-              <input id="f-email" name="email" type="email" class="field" autocomplete="email" inputmode="email" required />
+              <input id="f-email" name="email" type="email" class="field" autocomplete="email" inputmode="email" required aria-describedby="f-email-err" />
+              <p id="f-email-err" class="field-error hidden">Please add an email address I can reply to, like name@business.co.uk.</p>
             </div>
             <div class="grid gap-2">
               <label for="f-biz" class="text-sm text-ink">Business / website <span class="text-ink-3">(optional)</span></label>
@@ -68,7 +73,8 @@ const agenda = [
             </div>
             <div class="grid gap-2">
               <label for="f-msg" class="text-sm text-ink">What are you looking to build or fix?</label>
-              <textarea id="f-msg" name="message" rows="4" class="field resize-y" required></textarea>
+              <textarea id="f-msg" name="message" rows="4" class="field resize-y" required aria-describedby="f-msg-err"></textarea>
+              <p id="f-msg-err" class="field-error hidden">A line or two is plenty. What would you like built or fixed?</p>
             </div>
 
             <p id="form-status" class="hidden rounded-[2px] border px-4 py-3 text-sm" role="status" aria-live="polite"></p>
@@ -140,12 +146,25 @@ const agenda = [
     status.textContent = msg;
     status.className = `rounded-[2px] border px-4 py-3 text-sm ${ok ? 'border-[#1f4d3d] text-[#9fe3c6] bg-[#0c1a15]' : 'border-[#5a2a2a] text-[#f0b4b4] bg-[#1a0e0e]'}`;
   };
+  // JS takes over validation so each field gets its own message.
+  if (form) form.noValidate = true;
+  const fields = form ? Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]')) : [];
+  const mark = (f: HTMLInputElement | HTMLTextAreaElement) => {
+    const ok = f.validity.valid;
+    f.setAttribute('aria-invalid', String(!ok));
+    document.getElementById(`${f.id}-err`)?.classList.toggle('hidden', ok);
+    return ok;
+  };
+  fields.forEach((f) => {
+    f.addEventListener('blur', () => { if (f.value) mark(f); });
+    f.addEventListener('input', () => { if (f.getAttribute('aria-invalid') === 'true') mark(f); });
+  });
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!form.checkValidity()) {
-      const bad = form.querySelector<HTMLElement>(':invalid');
-      bad?.focus();
-      show('Please add your name, a valid email, and a short message.', false);
+    const bad = fields.filter((f) => !mark(f));
+    if (bad.length) {
+      bad[0].focus();
+      show(bad.length === 1 ? 'One field needs a quick fix, marked above.' : `${bad.length} fields need a quick fix, marked above.`, false);
       return;
     }
     const key = form.dataset.key;
@@ -158,11 +177,11 @@ const agenda = [
     btn.disabled = true; label.textContent = 'Sending…';
     try {
       const data = new FormData(form);
-      data.append('access_key', key);
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { Accept: 'application/json' }, body: data });
       const json = await res.json();
       if (json.success) {
         form.reset();
+        fields.forEach((f) => f.removeAttribute('aria-invalid'));
         show('Thanks, that\'s landed. I\'ll reply personally, usually within one working day.', true);
       } else throw new Error(json.message);
     } catch {

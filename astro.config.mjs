@@ -7,7 +7,8 @@ export default defineConfig({
   site: 'https://zelux.co.uk',
   output: 'static',
   trailingSlash: 'never',
-  build: { format: 'file' },
+  // Inline the (small) stylesheet so first paint needs no extra round trip.
+  build: { format: 'file', inlineStylesheets: 'always' },
   integrations: [sitemap()],
   vite: { plugins: [tailwindcss()] },
 });

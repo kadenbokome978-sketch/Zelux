@@ -28,6 +28,7 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
       <a href="/book" class="btn-primary !min-h-10 !px-4 !text-[0.875rem]">Book a call</a>
     </nav>
 
+    <a id="menu-fallback" href="#footer-nav" class="md:hidden flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.12em] text-ink-2">Menu</a>
     <button
       id="menu-btn"
       type="button"
@@ -61,22 +62,24 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
 </header>
 
 <script>
-  const btn = document.getElementById('menu-btn');
+  const btn = document.getElementById('menu-btn') as HTMLButtonElement | null;
   const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => {
-    const open = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!open));
-    btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
-    menu?.classList.toggle('hidden', open);
-    document.body.style.overflow = open ? '' : 'hidden';
+  const setOpen = (open: boolean, returnFocus = false) => {
+    if (!btn || !menu) return;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.classList.toggle('hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) menu.querySelector<HTMLElement>('a')?.focus();
+    else if (returnFocus) btn.focus();
+  };
+  btn?.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn?.getAttribute('aria-expanded') === 'true') setOpen(false, true);
   });
-  menu?.querySelectorAll('a').forEach((a) =>
-    a.addEventListener('click', () => {
-      btn?.setAttribute('aria-expanded', 'false');
-      menu.classList.add('hidden');
-      document.body.style.overflow = '';
-    }),
-  );
+  // Close if the viewport grows past the mobile breakpoint while open
+  matchMedia('(min-width: 768px)').addEventListener('change', (m) => { if (m.matches) setOpen(false); });
 </script>
 
 <style>

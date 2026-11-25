@@ -20,9 +20,12 @@ if ('IntersectionObserver' in window && els.length) {
 // FAQ accordions
 document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
   const btn = item.querySelector<HTMLButtonElement>('button');
+  const panel = item.querySelector<HTMLElement>('.faq-panel');
+  panel?.toggleAttribute('inert', true);
   btn?.addEventListener('click', () => {
     const open = item.dataset.open === 'true';
     item.dataset.open = String(!open);
     btn.setAttribute('aria-expanded', String(!open));
+    panel?.toggleAttribute('inert', open);
   });
 });
