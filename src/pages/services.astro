@@ -4,6 +4,8 @@ import SectionHead from '../components/SectionHead.astro';
 import ClosingBand from '../components/ClosingBand.astro';
 import services from '../content/services.json';
 import automations from '../content/automations.json';
+import { icons } from '../content/icons';
+const serviceIcon: Record<string, string> = { websites: 'website', automation: 'cog', care: 'care' };
 ---
 <Base
   title="Services: Websites, Automation & Care | Zelux"
@@ -11,75 +13,81 @@ import automations from '../content/automations.json';
 >
   <section class="container-z pb-12 pt-14 md:pb-16 md:pt-20">
     <SectionHead as="h1" eyebrow="Services" title="What I build," italic="and what I don't." intro="Three focused services, written the way the contract reads: what's included, what isn't, and how long it takes." />
-    <nav aria-label="Services on this page" class="mt-14 flex flex-wrap gap-2" data-reveal>
+    <nav aria-label="Services on this page" class="mt-12 flex flex-wrap gap-2" data-reveal>
       {services.map((s) => (
-        <a href={`#${s.slug}`} class="inline-flex min-h-11 items-center gap-3 rounded-full border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink">
-          <span class="font-mono text-xs text-accent">{s.index}</span>{s.title}
+        <a href={`#${s.slug}`} class="inline-flex min-h-11 items-center gap-2.5 rounded-full border border-hairline bg-paper px-4 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[serviceIcon[s.slug]]} /></svg>{s.title}
         </a>
       ))}
-      <a href="#automations" class="inline-flex min-h-11 items-center gap-3 rounded-full border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink"><span class="font-mono text-xs text-accent">10×</span>Automations</a>
+      <a href="#automations" class="inline-flex min-h-11 items-center gap-2.5 rounded-full border border-hairline bg-paper px-4 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent">
+        <svg viewBox="0 0 24 24" class="h-4 w-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons.invoices} /></svg>The ten automations
+      </a>
     </nav>
   </section>
 
-  {services.map((s) => (
-    <section id={s.slug} class="scroll-mt-16 border-t border-hairline">
-      <div class="container-z grid gap-12 py-14 md:grid-cols-12 md:gap-8 md:py-20">
-        <div class="md:col-span-5" data-reveal>
-          <p class="font-mono text-xs text-accent">{s.index}</p>
-          <h2 class="h-section mt-5">{s.title}</h2>
-          <p class="body mt-6 text-[1.0625rem]">{s.summary}</p>
-          <div class="mt-8 border-l border-accent pl-5">
-            <p class="eyebrow !text-[0.6875rem]">Best if</p>
-            <p class="mt-2 text-ink-2">{s.bestFor}</p>
+  <div class="container-z grid gap-6 pb-16 md:pb-20">
+    {services.map((s, i) => (
+      <section id={s.slug} class="scroll-mt-20 overflow-hidden rounded-[calc(var(--radius-card)+0.5rem)] border border-hairline bg-paper" data-reveal>
+        <div class="grid lg:grid-cols-12">
+          <div class:list={['p-6 md:p-10 lg:col-span-6', i === 1 ? 'bg-deep text-deep-ink' : 'bg-surface']}>
+            <span class:list={['grid h-14 w-14 place-items-center rounded-[16px]', i === 1 ? 'bg-accent-on-deep text-deep' : 'bg-accent text-on-accent']}>
+              <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[serviceIcon[s.slug]]} /></svg>
+            </span>
+            <h2 class="h-section mt-6">{s.title}</h2>
+            <p class:list={['mt-4 text-[1.0625rem] leading-relaxed', i === 1 ? 'text-deep-ink-2' : 'text-ink-2']}>{s.summary}</p>
+            <div class:list={['mt-6 rounded-inner p-4', i === 1 ? 'bg-deep-2' : 'bg-paper']}>
+              <p class:list={['font-mono text-[0.6875rem] uppercase tracking-[0.12em]', i === 1 ? 'text-accent-on-deep' : 'text-accent-hover']}>Best if</p>
+              <p class:list={['mt-1.5 text-[0.9375rem] leading-relaxed', i === 1 ? 'text-deep-ink' : 'text-ink']}>{s.bestFor}</p>
+            </div>
+            <p class:list={['mt-6 text-sm', i === 1 ? 'text-deep-ink-2' : 'text-ink-2']}><strong class:list={[i === 1 ? 'text-deep-ink' : 'text-ink']}>Timeline:</strong> {s.timeline}</p>
           </div>
-          <p class="mt-8 font-mono text-xs uppercase tracking-[0.12em] text-ink-3">Timeline · <span class="normal-case tracking-normal text-ink-2 font-sans text-sm">{s.timeline}</span></p>
+          <div class="grid content-start gap-6 p-6 md:p-10 lg:col-span-6">
+            <div>
+              <h3 class="text-[1.0625rem] font-semibold text-ink">What's included</h3>
+              <ul class="mt-4 grid gap-3">
+                {s.included.map((x) => (
+                  <li class="flex gap-3 text-[0.9375rem] leading-relaxed text-ink-2">
+                    <svg class="mt-1 shrink-0 text-accent" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.75" /></svg>{x}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="rounded-inner bg-surface p-5">
+              <h3 class="text-[0.9375rem] font-semibold text-ink">Not included</h3>
+              <ul class="mt-3 grid gap-2.5">
+                {s.notIncluded.map((x) => (
+                  <li class="flex gap-3 text-[0.9375rem] leading-relaxed text-ink-2">
+                    <svg class="mt-1 shrink-0 text-ink-3" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>{x}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="grid gap-5 md:col-span-6 md:col-start-7" data-reveal style="--d:120ms">
-          <div class="panel p-6 md:p-8">
-            <p class="eyebrow !text-ink">What's included</p>
-            <ul class="mt-5 divide-y divide-hairline">
-              {s.included.map((x) => (
-                <li class="flex gap-4 py-3 text-[0.9375rem] leading-relaxed text-ink-2">
-                  <span class="mt-[0.7em] h-px w-3 shrink-0 bg-accent" aria-hidden="true"></span>{x}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div class="rounded-card border border-dashed border-hairline p-6 md:p-8">
-            <p class="eyebrow">Not included</p>
-            <ul class="mt-5 space-y-3">
-              {s.notIncluded.map((x) => (
-                <li class="flex gap-4 text-[0.9375rem] leading-relaxed text-ink-3">
-                  <span class="mt-[0.7em] h-px w-3 shrink-0 bg-ink-3/50" aria-hidden="true"></span>{x}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  ))}
+      </section>
+    ))}
+  </div>
 
-  <section id="automations" class="scroll-mt-16 border-t border-hairline">
+  <section id="automations" class="scroll-mt-16 border-t border-hairline bg-surface">
     <div class="container-z py-14 md:py-20">
-      <div class="grid gap-6 md:grid-cols-12 md:gap-8" data-reveal>
-        <p class="eyebrow md:col-span-3 md:pt-2">Automations I build</p>
-        <div class="md:col-span-9">
-          <h2 class="h-section">Ten ways to get <em class="text-accent">hours back.</em></h2>
-          <p class="lead mt-5 max-w-[56ch]">Each one is set up around the tools you already use, tested with real examples, and handed over with plain-English notes.</p>
-        </div>
+      <div class="grid gap-4 lg:grid-cols-12 lg:items-end" data-reveal>
+        <h2 class="h-section lg:col-span-7">Ten ways to get <em class="text-accent">hours back.</em></h2>
+        <p class="body lg:col-span-5">Each one is set up around the tools you already use, tested with real examples, and handed over with plain-English notes.</p>
       </div>
-      <ol class="mt-10 grid gap-px overflow-hidden rounded-card border border-hairline bg-hairline md:grid-cols-2">
+      <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {automations.map((a) => (
-          <li id={`auto-${a.index}`} class="scroll-mt-20 bg-canvas p-6 md:p-7" data-reveal>
-            <p class="flex items-baseline gap-4">
-              <span class="font-mono text-xs text-accent">{a.index}</span>
-              <span class="text-[1.125rem] font-medium tracking-[-0.015em] text-ink">{a.title}</span>
-            </p>
-            <p class="body mt-3 pl-8 text-[0.9375rem]">{a.body}</p>
+          <li id={`auto-${a.index}`} class="scroll-mt-20" data-reveal>
+            <a href={`/automations/${a.slug}`} class="group flex h-full flex-col gap-4 rounded-card border border-hairline bg-paper p-6 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-accent">
+              <span class="grid h-12 w-12 place-items-center rounded-[14px] bg-accent-tint text-accent-hover transition-colors group-hover:bg-accent group-hover:text-on-accent">
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[a.icon]} /></svg>
+              </span>
+              <span class="text-[1.125rem] font-semibold tracking-[-0.015em] text-ink">{a.title}</span>
+              <span class="text-[0.9375rem] leading-relaxed text-ink-2">{a.body.split('. ')[0].replace(/\.$/, '')}.</span>
+              <span class="mt-auto text-sm font-semibold text-accent">How it works →</span>
+            </a>
           </li>
         ))}
-      </ol>
+      </ul>
     </div>
   </section>
 

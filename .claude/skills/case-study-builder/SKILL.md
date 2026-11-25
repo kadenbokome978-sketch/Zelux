@@ -29,7 +29,7 @@ Proof is the thing the site is shortest on, so every real project should become 
 
 ## Where it goes
 
-- `src/content/work.json`: set `title`, `sector`, `status`, `friction`, `built`, `outcome`, `isPlaceholder: false`, `href`, and `image: "/work/<slug>.webp"`. WorkShowcase sorts live work first and uses the image instead of the illustration.
+- `src/content/work.json`: set `title`, `sector`, `status`, `friction`, `built`, `outcome`, `isPlaceholder: false`, `href`, `image: "/work/<slug>-desktop.webp"` and `imageMobile`. Live work appears in the homepage ProjectCarousel and as a full brand-tinted section on /portfolio (add its colours to the tint map in both).
 - Full write-ups (when there are 2+ real projects): a page per project at `/work/<slug>` using conversion-page-builder's case study template.
 
 ## Concept builds

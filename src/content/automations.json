@@ -2,51 +2,90 @@
   {
     "index": "01",
     "title": "Email marketing sequences",
-    "body": "A welcome email the day someone signs up, something useful a few days later, and a nudge if they go quiet. You write them once and every new subscriber gets them in order."
+    "body": "A welcome email the day someone signs up, something useful a few days later, and a nudge if they go quiet. You write them once and every new subscriber gets them in order.",
+    "slug": "email-marketing-sequences",
+    "icon": "quotes",
+    "seoTitle": "Automated email follow-ups",
+    "blueprint": "quotes"
   },
   {
     "index": "02",
     "title": "CRM lead capture and follow-up",
-    "body": "Enquiries from your website, Facebook and Instagram land in one list, tagged with where they came from. Each gets a reply within minutes in your own words, and you can see who still needs a call."
+    "body": "Enquiries from your website, Facebook and Instagram land in one list, tagged with where they came from. Each gets a reply within minutes in your own words, and you can see who still needs a call.",
+    "slug": "crm-lead-capture-and-follow-up",
+    "icon": "enquiries",
+    "seoTitle": "Enquiry and lead follow-up",
+    "blueprint": "enquiries"
   },
   {
     "index": "03",
     "title": "Social media scheduling",
-    "body": "Write a month of posts in one sitting and pick the days. They go out to each channel on schedule while you're on the tools."
+    "body": "Write a month of posts in one sitting and pick the days. They go out to each channel on schedule while you're on the tools.",
+    "slug": "social-media-scheduling",
+    "icon": "social",
+    "seoTitle": "Social media scheduling",
+    "blueprint": "social"
   },
   {
     "index": "04",
     "title": "Automated invoicing and payments",
-    "body": "When a job is marked done, the invoice goes out. Unpaid after 7 days, a polite reminder follows, then another at 14 (you set the timings). Payments that land are matched to the right invoice."
+    "body": "When a job is marked done, the invoice goes out. Unpaid after 7 days, a polite reminder follows, then another at 14 (you set the timings). Payments that land are matched to the right invoice.",
+    "slug": "automated-invoicing-and-payments",
+    "icon": "invoices",
+    "seoTitle": "Invoice chasing",
+    "blueprint": "invoices"
   },
   {
     "index": "05",
     "title": "Appointment booking",
-    "body": "Customers pick a slot from your real availability, get a confirmation straight away and a reminder the day before. They can move or cancel without ringing you."
+    "body": "Customers pick a slot from your real availability, get a confirmation straight away and a reminder the day before. They can move or cancel without ringing you.",
+    "slug": "appointment-booking",
+    "icon": "booking",
+    "seoTitle": "Online booking and reminders",
+    "blueprint": "booking"
   },
   {
     "index": "06",
     "title": "Customer support chat",
-    "body": "A chat box that answers the questions you already get asked, using answers you've approved. Anything it can't handle comes to you with the conversation attached."
+    "body": "A chat box that answers the questions you already get asked, using answers you've approved. Anything it can't handle comes to you with the conversation attached.",
+    "slug": "customer-support-chat",
+    "icon": "questions",
+    "seoTitle": "Answers to common questions",
+    "blueprint": "questions"
   },
   {
     "index": "07",
     "title": "Review collection",
-    "body": "A day or two after the job, the customer gets a short message with a one-tap link to your Google reviews. One reminder if they don't respond, then it stops."
+    "body": "A day or two after the job, the customer gets a short message with a one-tap link to your Google reviews. One reminder if they don't respond, then it stops.",
+    "slug": "review-collection",
+    "icon": "reviews",
+    "seoTitle": "Review requests",
+    "blueprint": "reviews"
   },
   {
     "index": "08",
     "title": "Inventory alerts",
-    "body": "Set a minimum for each product. When stock drops below it, you get a text or email saying what's low and how fast it's been selling."
+    "body": "Set a minimum for each product. When stock drops below it, you get a text or email saying what's low and how fast it's been selling.",
+    "slug": "inventory-alerts",
+    "icon": "stock",
+    "seoTitle": "Low-stock alerts"
   },
   {
     "index": "09",
     "title": "Order and shipping notifications",
-    "body": "Customers get an email when they order, when it ships with tracking, and when it's delivered. That's most \"where's my order?\" messages gone."
+    "body": "Customers get an email when they order, when it ships with tracking, and when it's delivered. That's most \"where's my order?\" messages gone.",
+    "slug": "order-and-shipping-notifications",
+    "icon": "orders",
+    "seoTitle": "Order and delivery updates",
+    "blueprint": "orders"
   },
   {
     "index": "10",
     "title": "Analytics reporting",
-    "body": "Sales, enquiries and where they came from, in one short report every Monday morning or whenever suits. No logging in to five dashboards."
+    "body": "Sales, enquiries and where they came from, in one short report every Monday morning or whenever suits. No logging in to five dashboards.",
+    "slug": "analytics-reporting",
+    "icon": "reporting",
+    "seoTitle": "Weekly business report",
+    "blueprint": "reporting"
   }
 ]

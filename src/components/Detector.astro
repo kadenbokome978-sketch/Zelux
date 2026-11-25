@@ -2,25 +2,17 @@
 // "What should stop taking your time?" Pick one job, see how it would run.
 // All blueprints are rendered on the server (readable without JS, good for search);
 // JS just switches which one is showing. Never empty: the first job is selected to start.
-import blueprints from '../content/blueprints.json';
+import allBlueprints from '../content/blueprints.json';
+const blueprints = allBlueprints.filter((b) => (b as { detector?: boolean }).detector !== false);
+import automations from '../content/automations.json';
+const slugFor = (auto: string) => automations.find((a) => a.index === auto)?.slug;
 
 const toolLabel: Record<string, string> = {
   email: 'Gmail / Outlook', calendar: 'Google / Outlook Calendar', sheets: 'Sheets / Excel', accounts: 'Xero / QuickBooks',
   payments: 'Stripe / SumUp', shop: 'Shopify / WooCommerce', social: 'Facebook / Instagram', sms: 'Text / WhatsApp',
   crm: 'A CRM', website: 'Your website',
 };
-// One simple line icon per job (24px grid, stroke only)
-const icons: Record<string, string> = {
-  enquiries: 'M3 12h4l2 3h6l2-3h4M5 5h14l2 7v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6l2-7Z',
-  booking: 'M4 7h16v13H4V7Zm0 4h16M8 3v4m8-4v4m-6 8 2 2 4-4',
-  invoices: 'M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm4 5h4m-4 4h4m-4 4h2',
-  reviews: 'm12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z',
-  questions: 'M4 5h16v11H9l-5 4V5Zm6 4a2 2 0 1 1 2.8 1.8c-.5.3-.8.7-.8 1.2m0 2.5v.1',
-  quotes: 'M7 3h7l5 5v13H7V3Zm7 0v5h5M10 13h6m-6 4h4',
-  reporting: 'M4 20V10m6 10V4m6 16v-7m4 7H2',
-  social: 'M4 10v4h3l6 4V6L7 10H4Zm13-1.5a4 4 0 0 1 0 7',
-  orders: 'M3 7l9-4 9 4-9 4-9-4Zm0 0v10l9 4 9-4V7m-9 4v10',
-};
+import { icons } from '../content/icons';
 const first = blueprints[0].id;
 ---
 <div id="detector" class="dt grid gap-6 lg:grid-cols-12 lg:gap-8">
@@ -29,7 +21,7 @@ const first = blueprints[0].id;
     <div class="dt-tiles" role="radiogroup" aria-label="Jobs">
       {blueprints.map((b) => (
         <a
-          href={`/services#auto-${b.auto}`}
+          href={`/automations/${slugFor(b.auto)}`}
           class="dt-tile"
           role="radio"
           aria-checked={b.id === first ? 'true' : 'false'}
@@ -68,7 +60,7 @@ const first = blueprints[0].id;
               <p class="dt-tools"><span>Works with</span>{b.tools.map((t) => <i>{toolLabel[t]}</i>)}</p>
               <div class="dt-actions">
                 <a class="btn-primary" href={`/book?need=${encodeURIComponent(need)}#enquiry`}>Get this built <span class="arrow" aria-hidden="true">→</span></a>
-                <a class="btn-ghost" href={`/services#auto-${b.auto}`}>More detail</a>
+                <a class="btn-ghost" href={`/automations/${slugFor(b.auto)}`}>More detail</a>
               </div>
             </div>
           </article>
