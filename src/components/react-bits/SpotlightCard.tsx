@@ -1,5 +1,5 @@
 // From React Bits by David Haz (https://github.com/DavidHDev/react-bits), MIT + Commons Clause.
-// Adapted for Zelux: 2px radius, no padding default, no drop shadow (design system rules).
+// Adapted for Zelux: card radius, no padding default, no drop shadow (design system rules).
 
 import React, { useEffect, useRef } from 'react';
 
@@ -79,7 +79,7 @@ const falloff = (color: string, softness: number) => {
 };
 
 const CARD =
-  'relative isolate overflow-hidden rounded-[2px] [background-color:var(--spotlight-card-surface)]';
+  'relative isolate overflow-hidden rounded-card [background-color:var(--spotlight-card-surface)]';
 
 const SpotlightCard = ({
   children,

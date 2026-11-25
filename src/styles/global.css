@@ -37,7 +37,10 @@
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, monospace;
 
-  --radius-sharp: 2px;
+  /* Soft, friendly shapes: cards, inner parts, pills */
+  --radius-card: 1.25rem;
+  --radius-inner: 0.75rem;
+  --radius-pill: 999px;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Motion scale: one easing, three durations. Don't invent one-off timings. */
@@ -137,7 +140,7 @@
     min-height: 48px; padding: 0 1.4rem;
     background: var(--color-accent); color: var(--color-on-accent);
     font-weight: 500; font-size: 0.9375rem; letter-spacing: -0.005em;
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-pill);
     transition: background-color var(--dur-fast) var(--ease-out-soft);
   }
   .btn-primary:hover { background: var(--color-accent-hover); }
@@ -163,12 +166,12 @@
   }
   .link-u:hover { background-size: 100% 1px; }
 
-  .panel { background: var(--color-surface); border: 1px solid var(--color-hairline); border-radius: var(--radius-sharp); }
+  .panel { background: var(--color-surface); border: 1px solid var(--color-hairline); border-radius: var(--radius-card); }
 
   .field {
     width: 100%; min-height: 48px; padding: 0.75rem 0.9rem;
     background: var(--color-paper); color: var(--color-ink);
-    border: 1px solid var(--color-hairline-strong); border-radius: var(--radius-sharp);
+    border: 1px solid var(--color-hairline-strong); border-radius: var(--radius-inner);
     font-size: 1rem; transition: border-color var(--dur-fast);
   }
   .field::placeholder { color: #7a827e; }
@@ -179,7 +182,8 @@
   .field-error { font-size: 0.8125rem; color: #b3261e; }
 
   /* Deep band: the supporting colour */
-  .band-deep { background: var(--color-deep); color: var(--color-deep-ink); }
+  .band-deep { background: var(--color-deep); color: var(--color-deep-ink); margin-inline: 0.5rem; border-radius: calc(var(--radius-card) + 0.75rem); }
+  @media (min-width: 768px) { .band-deep { margin-inline: 1rem; border-radius: 2.5rem; } }
   .band-deep .eyebrow { color: var(--color-deep-ink-2); }
   .band-deep .body, .band-deep .lead { color: var(--color-deep-ink-2); }
   .band-deep ::selection { background: var(--color-accent-on-deep); color: var(--color-deep); }

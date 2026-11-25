@@ -23,7 +23,7 @@ const rows = [
     </div>
     <span
       class:list={[
-        'shrink-0 rounded-[2px] border px-2 py-1 font-mono text-[0.625rem] uppercase tracking-[0.12em]',
+        'shrink-0 rounded-full border px-2 py-1 font-mono text-[0.625rem] uppercase tracking-[0.12em]',
         item.isPlaceholder ? 'border-hairline text-ink-3' : 'border-hairline-accent text-accent',
       ]}
     >{item.isPlaceholder ? (item.status.startsWith('In build') ? 'In build' : 'Slot reserved') : 'Live'}</span>

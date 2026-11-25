@@ -13,11 +13,11 @@ import automations from '../content/automations.json';
     <SectionHead as="h1" eyebrow="Services" title="What I build," italic="and what I don't." intro="Three focused services, written the way the contract reads: what's included, what isn't, and how long it takes." />
     <nav aria-label="Services on this page" class="mt-14 flex flex-wrap gap-2" data-reveal>
       {services.map((s) => (
-        <a href={`#${s.slug}`} class="inline-flex min-h-11 items-center gap-3 rounded-[2px] border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink">
+        <a href={`#${s.slug}`} class="inline-flex min-h-11 items-center gap-3 rounded-full border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink">
           <span class="font-mono text-xs text-accent">{s.index}</span>{s.title}
         </a>
       ))}
-      <a href="#automations" class="inline-flex min-h-11 items-center gap-3 rounded-[2px] border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink"><span class="font-mono text-xs text-accent">10×</span>Automations</a>
+      <a href="#automations" class="inline-flex min-h-11 items-center gap-3 rounded-full border border-hairline px-4 text-sm text-ink-2 transition-colors hover:border-hairline-accent hover:text-ink"><span class="font-mono text-xs text-accent">10×</span>Automations</a>
     </nav>
   </section>
 
@@ -45,7 +45,7 @@ import automations from '../content/automations.json';
               ))}
             </ul>
           </div>
-          <div class="rounded-[2px] border border-dashed border-hairline p-6 md:p-8">
+          <div class="rounded-card border border-dashed border-hairline p-6 md:p-8">
             <p class="eyebrow">Not included</p>
             <ul class="mt-5 space-y-3">
               {s.notIncluded.map((x) => (
@@ -69,7 +69,7 @@ import automations from '../content/automations.json';
           <p class="lead mt-5 max-w-[56ch]">Each one is set up around the tools you already use, tested with real examples, and handed over with plain-English notes.</p>
         </div>
       </div>
-      <ol class="mt-10 grid gap-px overflow-hidden rounded-[2px] border border-hairline bg-hairline md:grid-cols-2">
+      <ol class="mt-10 grid gap-px overflow-hidden rounded-card border border-hairline bg-hairline md:grid-cols-2">
         {automations.map((a) => (
           <li id={`auto-${a.index}`} class="scroll-mt-20 bg-canvas p-6 md:p-7" data-reveal>
             <p class="flex items-baseline gap-4">

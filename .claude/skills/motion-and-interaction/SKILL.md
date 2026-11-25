@@ -28,6 +28,8 @@ Motion must explain something, guide attention or give feedback. If it does none
 
 ## Allowed
 
+- Carousels: native scroll-snap first (works with no JS); JS only adds buttons, counter, arrow keys, mouse drag and the active state (see ProjectCarousel). Never auto-advance. Don't dim inactive slides with opacity (fails contrast); scale them slightly instead.
+
 - Entry transitions for things toggled by `hidden`/`display`: CSS `@starting-style` (see the mobile menu in Navbar.astro), no JS.
 - Hover transforms only inside `@media (hover: hover) and (pointer: fine)` (Tailwind v4 `hover:` utilities already do this; custom CSS must do it by hand) so touch screens don't get sticky hover.
 

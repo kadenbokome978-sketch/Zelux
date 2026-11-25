@@ -39,8 +39,8 @@ Rules:
 
 - Container: `.container-z` (max 1160px, 20px/32px gutters).
 - Section rhythm is deliberately uneven (identical padding everywhere reads as a template): statement band `py-16 md:py-28`, detector `py-14 md:py-20`, standard `py-16 md:py-24`. Separate sections with `border-t border-hairline` or a band change, not both.
-- 12-column grid on `lg`. Prefer asymmetric splits (5/7, 4/8, 7/5) over three equal cards. Three equal cards appear once on the homepage (value section); don't add another.
-- Radii: `rounded-[2px]` everywhere except pills/chips (`rounded-full`). No shadows except the small focus/dot ring already used.
+- 12-column grid on `lg`. Prefer asymmetric splits (5/7, 4/8, 7/5) over three equal cards. Three equal cards appear once on the homepage (value section); don't add another. Projects live in `ProjectCarousel` (one slide per project, tinted in that project's brand colours), not a grid.
+- Radii (Kaden asked for less rectangular, 25 Nov 2026): tokens `--radius-card` 1.25rem (`rounded-card`: cards, panels, carousel slides), `--radius-inner` 0.75rem (`rounded-inner`: fields, notes, nodes), `--radius-pill` (buttons, badges, chips, toggles: `rounded-full`). Dark bands are inset rounded blocks (`.band-deep`). Never go back to sharp 2px corners. Shadows only on device mockups (phones, browser frames).
 - Index numbers (`01`, `02`) only for real sequences (steps, lead flow, blueprint steps) or lists people refer to by number (the ten automations). Services are not a sequence: no numbers.
 - Eyebrow labels only when they add information the heading doesn't (location, "Try it", "How it works" above a clever heading). Never an eyebrow that restates the heading ("Work" above "Real projects").
 - Cards only when they're the best affordance. Never nested cards, never more than one identical card grid per page.
@@ -58,7 +58,7 @@ All copy lives in `src/content/*.json`. Components read from there; don't hardco
 - AI-default looks (from Anthropic's frontend-design skill): warm cream + serif + terracotta; near-black + one acid/vermilion accent; broadsheet hairline newspaper columns. Note: navy + blue for a tech studio is itself a category reflex. Kaden chose it, so keep it, but make the type, layout and Detector do the distinguishing.
 
 - Purple/cyan gradients, glows, glassmorphism, 3D blobs/orbs, neural-network meshes, robot imagery, stock photos of people at laptops.
-- Drop shadows, rounded-2xl SaaS cards, emoji icons.
+- Heavy drop shadows, emoji icons.
 - Marquees / auto-scrolling text (removed at Kaden's request).
 - Fake dashboards, fake logos, fake testimonials, invented stats.
 - The word "AI" anywhere (copy, alt text, meta, schema, images).
