@@ -4,7 +4,7 @@ interface Props { currentPath: string }
 const { currentPath } = Astro.props;
 const links = [
   { href: '/services', label: 'Services' },
-  { href: '/work', label: 'Work' },
+  { href: '/portfolio', label: 'Portfolio' },
   { href: '/#about', label: 'About' },
 ];
 const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(href);

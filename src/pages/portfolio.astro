@@ -6,11 +6,11 @@ import ClosingBand from '../components/ClosingBand.astro';
 import work from '../content/work.json';
 ---
 <Base
-  title="Work: Case Studies | Zelux"
+  title="Portfolio: Websites & Systems | Zelux"
   description="Websites and systems built by Zelux. Every case study is published only once a project is live and the client has approved it. No invented logos or stats."
 >
   <section class="container-z pb-16 pt-14 md:pb-24 md:pt-20">
-    <SectionHead as="h1" eyebrow="Work" title="Real projects." italic="Real permission." intro="Each entry follows the same structure: the friction, what was built, and the outcome. Reserved slots fill as client projects launch and sign-off lands." />
+    <SectionHead as="h1" eyebrow="Portfolio" title="Real projects." italic="Real permission." intro="Each entry follows the same structure: the friction, what was built, and the outcome. Reserved slots fill as client projects launch and sign-off lands." />
     <div class="mt-16 grid gap-5 md:mt-20 md:grid-cols-3">
       {work.map((w, i) => <CaseCard item={w} delay={i * 90} headingLevel="h2" />)}
     </div>

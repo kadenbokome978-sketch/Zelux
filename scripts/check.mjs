@@ -15,7 +15,7 @@ import { chromium } from 'playwright';
 const require = createRequire(import.meta.url);
 const axeSource = await readFile(require.resolve('axe-core/axe.min.js'), 'utf8');
 const DIST = new URL('../dist/', import.meta.url).pathname;
-const PAGES = ['/', '/services', '/work', '/book', '/privacy', '/cookies', '/404'];
+const PAGES = ['/', '/services', '/portfolio', '/book', '/privacy', '/cookies', '/404'];
 const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2', '.xml': 'application/xml', '.txt': 'text/plain' };
 
 const server = createServer(async (req, res) => {
