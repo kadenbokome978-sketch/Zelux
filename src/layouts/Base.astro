@@ -14,6 +14,9 @@ const { title, description, noindex = false } = Astro.props;
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
 const canonical = new URL(path === '/' ? '/' : path, site.url).href;
 const ogImage = new URL('/og-image.png', site.url).href;
+// Vercel Web Analytics + Speed Insights (cookieless). Only loads once switched on in the Vercel dashboard
+// and PUBLIC_VERCEL_ANALYTICS=on is set, otherwise the script paths 404.
+const analytics = import.meta.env.PUBLIC_VERCEL_ANALYTICS === 'on';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -74,6 +77,8 @@ const jsonLd = {
 
     <script is:inline>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {analytics && <script is:inline defer src="/_vercel/insights/script.js"></script>}
+    {analytics && <script is:inline defer src="/_vercel/speed-insights/script.js"></script>}
   </head>
   <body class="min-h-svh flex flex-col">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:bg-accent focus:text-white focus:px-4 focus:py-3 rounded-[2px]">Skip to content</a>

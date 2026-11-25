@@ -1,0 +1,26 @@
+name: Quality
+
+# Runs on every push and pull request. main auto-deploys to zelux.co.uk on Vercel,
+# so a red run here means the live site may have a problem: fix forward quickly.
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Accessibility, no-JS and copy rules
+        run: npm run check
+      - name: Lighthouse (mobile)
+        run: npx --yes @lhci/cli@0.14.0 autorun
