@@ -51,7 +51,7 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
           <li class="border-b border-hairline">
             <a href={l.href} class="flex min-h-14 items-center justify-between font-serif text-[1.75rem] text-ink">
               {l.label}
-              <span class="font-mono text-xs text-ink-3">0{i + 1}</span>
+              <span class="text-ink-3" aria-hidden="true">→</span>
             </a>
           </li>
         ))}

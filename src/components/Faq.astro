@@ -12,16 +12,13 @@ import faqs from '../content/faqs.json';
           aria-controls={`faq-${i}`}
           id={`faq-btn-${i}`}
         >
-          <span class="flex items-baseline gap-5">
-            <span class="font-mono text-xs text-ink-3">0{i + 1}</span>
-            <span>{f.q}</span>
-          </span>
+          <span>{f.q}</span>
           <span class="faq-icon text-xl leading-none text-ink-3 transition-transform duration-300" aria-hidden="true">+</span>
         </button>
       </h3>
       <div class="faq-panel" id={`faq-${i}`} role="region" aria-labelledby={`faq-btn-${i}`}>
         <div>
-          <p class="body max-w-[62ch] pb-6 pl-[2.6rem]">{f.a}</p>
+          <p class="body max-w-[62ch] pb-6">{f.a}</p>
         </div>
       </div>
     </div>

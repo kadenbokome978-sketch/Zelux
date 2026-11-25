@@ -33,6 +33,8 @@ Edit, commit to `main`, and Vercel rebuilds in about 20 seconds.
 npm install
 npm run dev      # http://localhost:4321
 npm run build    # outputs dist/
+npm run check    # after build: accessibility (WCAG 2.2 AA), no-JS, mobile overflow, copy rules
+                 # first time: npx playwright install chromium (or set CHROME_PATH)
 ```
 
 ## Deploy

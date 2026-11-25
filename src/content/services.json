@@ -2,7 +2,7 @@
   {
     "index": "01",
     "slug": "websites",
-    "title": "Websites that convert",
+    "title": "Websites that bring in work",
     "summary": "Fast, mobile-first sites built around one job: turning visitors into enquiries, bookings or sales. Includes copy structure, booking or payment setup, and clean SEO foundations.",
     "bestFor": "Your current site looks dated on a phone, hides what you actually do, or relies on back-and-forth emails just to book a slot.",
     "included": [
@@ -24,12 +24,12 @@
     "index": "02",
     "slug": "automation",
     "title": "Workflow automation",
-    "summary": "Useful automations wired into tools you already use: lead routing, enquiry triage, follow-up workflows, internal knowledge systems and custom reporting.",
+    "summary": "Automations wired into the tools you already use: enquiry routing, follow-ups, internal knowledge systems and reports.",
     "bestFor": "You or your team are losing hours each week copying data between inboxes, spreadsheets and booking tools.",
     "included": [
       "A short mapping session to find where time and leads are leaking",
       "Automations connecting your forms, inbox, calendar and spreadsheets",
-      "Smart sorting, summaries and drafted replies where they save real time",
+      "Sorting, summaries and drafted replies, only where they save real time",
       "Plain-English documentation of what runs, when, and why",
       "Testing with real examples before anything goes live"
     ],

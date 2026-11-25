@@ -43,15 +43,13 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
   <section class="band-brass">
     <div class="container-z grid gap-10 py-14 md:py-20 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-7" data-reveal>
-        <p class="font-mono text-xs uppercase tracking-[0.14em]">01 / How Zelux is different</p>
-        <h2 class="h-statement mt-6">You speak to the person who builds it.</h2>
+        <h2 class="h-statement">You speak to the person who builds it.</h2>
         <p class="mt-6 max-w-[46ch] text-[1.0625rem] leading-relaxed text-brass-ink-2">{site.pillars[0].body}</p>
       </div>
       <ul class="grid gap-px self-end overflow-hidden rounded-[2px] border border-brass-line bg-brass-line lg:col-span-5">
         {site.pillars.slice(1).map((p, i) => (
           <li class="bg-brass p-6" data-reveal style={`--d:${(i + 1) * 90}ms`}>
-            <p class="font-mono text-xs">{p.index}</p>
-            <h3 class="mt-2 text-[1.375rem] font-medium leading-tight tracking-[-0.02em]">{p.title}</h3>
+            <h3 class="text-[1.375rem] font-medium leading-tight tracking-[-0.02em]">{p.title}</h3>
             <p class="mt-2 text-[0.9375rem] leading-relaxed text-brass-ink-2">{p.body}</p>
           </li>
         ))}
