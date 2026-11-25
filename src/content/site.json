@@ -6,7 +6,7 @@
   "location": "Hampshire, UK",
   "legalLine": "Kaden Ekuma Bokome (UK Sole Trader) · Hampshire, UK · Not VAT registered",
   "tagline": "We design the front door. We automate the back office.",
-  "calLink": "kaden/20min",
+  "calLink": "",
   "hero": {
     "eyebrow": "Hampshire, UK · Websites & business systems",
     "titleLead": "Your website should win you work.",
@@ -164,5 +164,6 @@
     "title": "The 7-day guarantee",
     "short": "Live in 7 days or £100 off.",
     "terms": "Sites up to 5 pages go live within 7 days, or you get £100 off the final invoice. The 7 days start once the quote is accepted and your copy, photos and logins are in, and pause while a design is waiting on your feedback."
-  }
+  },
+  "_calNote": "Set PUBLIC_CAL_LINK in Vercel (or calLink here) to your Cal.com username/event, e.g. zelux/20min. 'none' or empty hides the calendar."
 }
