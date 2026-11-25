@@ -48,7 +48,7 @@ Rules:
 
 ## Components (reuse before inventing)
 
-React Bits islands in `src/components/react-bits/` (`ScrollReveal`, `SpotlightCard`, `Magnet`: see motion-and-interaction), `.btn-primary` (+ `.btn-lg`), `.btn-ghost`, `.link-u`, `.panel`, `.field`, `.field-error`, `.chip` (Detector), `.svc-row/.svc-title/.svc-arrow`, `.step-num`, `.band-deep`, `LeadFlow`, `Detector`, `WorkShowcase`, `CaseCard`, `Faq`, `ClosingBand`, `SectionHead`.
+React Bits islands in `src/components/react-bits/` (`ScrollReveal`, `SpotlightCard`, `Magnet`: see motion-and-interaction), `.btn-primary` (+ `.btn-lg`), `.btn-ghost`, `.link-u`, `.panel`, `.field`, `.field-error`, `.chip` (Detector), `.svc-row/.svc-title/.svc-arrow`, `.step-num`, `.band-deep`, `LeadFlow`, `Detector`, `WorkShowcase`, `ConceptPhone` (HTML/CSS phone mockups of made-up example sites; each has its own palette and must stay captioned "Concept … not a client"), `CaseCard`, `Faq`, `ClosingBand`, `SectionHead`.
 
 All copy lives in `src/content/*.json`. Components read from there; don't hardcode copy in markup.
 

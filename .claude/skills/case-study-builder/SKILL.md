@@ -32,6 +32,10 @@ Proof is the thing the site is shortest on, so every real project should become 
 - `src/content/work.json`: set `title`, `sector`, `status`, `friction`, `built`, `outcome`, `isPlaceholder: false`, `href`, and `image: "/work/<slug>.webp"`. WorkShowcase sorts live work first and uses the image instead of the illustration.
 - Full write-ups (when there are 2+ real projects): a page per project at `/work/<slug>` using conversion-page-builder's case study template.
 
+## Concept builds
+
+Until there's permitted client work, `ConceptPhone` shows fictional example sites (plumber, groomer, bakery). Rules: obviously made-up names, captioned "Concept: … · not a client", no ratings, review counts, testimonials or results, and replace them with real screenshots as soon as real work can be shown.
+
 ## Rules
 
 - No invented metrics, logos or quotes. No "up to" numbers.

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import LeadFlow from '../components/LeadFlow.astro';
 import WorkShowcase from '../components/WorkShowcase.astro';
 import Detector from '../components/Detector.astro';
+import ConceptPhone from '../components/ConceptPhone.astro';
 import ScrollReveal from '../components/react-bits/ScrollReveal';
 import SpotlightCard from '../components/react-bits/SpotlightCard';
 import Magnet from '../components/react-bits/Magnet';
@@ -26,21 +27,26 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
           <span class="h-1.5 w-1.5 rounded-full bg-live" aria-hidden="true"></span>{site.hero.status}
         </p>
       </div>
-      <h1 class="h-hero mt-8 md:mt-10" data-reveal style="--d:80ms">
-        {site.hero.titleLead} <em class="text-accent">{site.hero.titleItalic}</em>
-      </h1>
-      <div class="mt-8 grid gap-8 md:mt-12 md:grid-cols-12 md:items-end" data-reveal style="--d:160ms">
-        <p class="lead max-w-[52ch] md:col-span-7">{site.hero.subtitle}</p>
-        <div class="flex flex-wrap items-center gap-x-7 gap-y-2 md:col-span-5 md:justify-end">
-          <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }}><a href="/book" class="btn-primary btn-lg">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
-          <a href="#time-saver" class="btn-ghost">Find what to automate ↓</a>
+      <div class="mt-8 grid items-center gap-12 md:mt-10 lg:grid-cols-12 lg:gap-8">
+        <div class="lg:col-span-7">
+          <h1 class="h-hero" data-reveal style="--d:50ms">
+            {site.hero.titleLead} <em class="text-accent">{site.hero.titleItalic}</em>
+          </h1>
+          <p class="lead mt-6 max-w-[52ch]" data-reveal style="--d:100ms">{site.hero.subtitle}</p>
+          <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-2" data-reveal style="--d:150ms">
+            <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }}><a href="/book" class="btn-primary btn-lg">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
+            <a href="#time-saver" class="btn-ghost">Find what to automate ↓</a>
+          </div>
+          <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-hairline pt-5 text-[0.9375rem] font-medium text-ink" data-reveal style="--d:200ms">
+            {site.speed.map((t) => (
+              <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" class="text-accent"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.75" /></svg>{t}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="flex justify-center lg:col-span-5 lg:justify-end" data-reveal style="--d:200ms">
+          <ConceptPhone variant="plumber" size="lg" toast />
         </div>
       </div>
-      <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-hairline pt-5 text-[0.9375rem] font-medium text-ink" data-reveal style="--d:200ms">
-        {site.speed.map((t) => (
-          <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" class="text-accent"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.75" /></svg>{t}</li>
-        ))}
-      </ul>
       <div class="mt-12 md:mt-16" data-reveal style="--d:240ms">
         <LeadFlow />
       </div>
@@ -147,6 +153,17 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
         <a href="/work" class="btn-ghost">All work →</a>
       </div>
       <div class="mt-10 md:mt-12"><WorkShowcase /></div>
+      <div class="mt-5 grid items-center gap-10 overflow-hidden rounded-[2px] border border-hairline bg-surface p-6 md:p-10 lg:grid-cols-12" data-reveal>
+        <div class="lg:col-span-5">
+          <h3 class="font-serif text-[1.625rem] leading-tight text-ink">Concept builds</h3>
+          <p class="body mt-3 max-w-[44ch]">While client work stays under wraps until it's signed off, these show the kind of site I build: each one designed around a single job, booking a groom or ordering tomorrow's bread, on a phone, in seconds.</p>
+          <p class="mt-4 text-sm text-ink-3">Made-up businesses, real design. Not clients.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8 lg:col-span-7 lg:justify-end">
+          <ConceptPhone variant="groomer" />
+          <ConceptPhone variant="bakery" />
+        </div>
+      </div>
     </div>
   </section>
 
