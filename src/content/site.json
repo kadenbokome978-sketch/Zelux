@@ -15,15 +15,46 @@
     "status": "Taking on new client builds · Direct with Kaden"
   },
   "pillars": [
-    { "index": "01", "label": "Direct delivery", "title": "You speak to the builder.", "body": "No hand-offs to junior staff after a sales call. The person you meet is the person shipping the work." },
-    { "index": "02", "label": "Commercial first", "title": "Built to win work, not design awards.", "body": "Fast pages, clear offers, online booking, and systems that take repetitive admin off your plate." },
-    { "index": "03", "label": "Zero bloat", "title": "Clean scope, clear price.", "body": "A fixed quote within 48 hours of an intro call. You own your domain, your accounts and your code." }
+    {
+      "index": "01",
+      "label": "Direct delivery",
+      "title": "You speak to the builder.",
+      "body": "No hand-offs to junior staff after a sales call. The person you meet is the person shipping the work."
+    },
+    {
+      "index": "02",
+      "label": "Commercial first",
+      "title": "Built to win work, not design awards.",
+      "body": "Fast pages, clear offers, online booking, and systems that take repetitive admin off your plate."
+    },
+    {
+      "index": "03",
+      "label": "Zero bloat",
+      "title": "Clean scope, clear price.",
+      "body": "A fixed quote within 48 hours of an intro call. You own your domain, your accounts and your code."
+    }
   ],
   "steps": [
-    { "index": "01", "title": "20-min intro call", "body": "Tell me what's slowing the business down or costing you leads. No pitch deck." },
-    { "index": "02", "title": "Clear scope in 48 hours", "body": "A plain-English proposal: exactly what gets built, the timeline, and the fixed price." },
-    { "index": "03", "title": "Build & review", "body": "You see working progress early and sign off the design before anything goes live." },
-    { "index": "04", "title": "Launch & handover", "body": "Live on your domain, accounts in your name, with optional rolling care afterwards." }
+    {
+      "index": "01",
+      "title": "Day 1: 20-min call",
+      "body": "Tell me what's slowing the business down or costing you leads. No pitch deck."
+    },
+    {
+      "index": "02",
+      "title": "Within 48 hours: fixed quote",
+      "body": "A plain-English proposal: exactly what gets built, the timeline, and the fixed price."
+    },
+    {
+      "index": "03",
+      "title": "Weeks 1–3: build & review",
+      "body": "You see working progress early and sign off the design before anything goes live."
+    },
+    {
+      "index": "04",
+      "title": "Launch & handover",
+      "body": "Live on your domain, accounts in your name, with optional rolling care afterwards."
+    }
   ],
   "about": {
     "eyebrow": "About Zelux",
@@ -45,10 +76,78 @@
       "title": "Clear, fixed-scope pricing.",
       "body": "Bespoke websites start from £900 (no VAT charged), with optional rolling monthly care after launch. Automation builds are scoped to size after a 20-minute call."
     },
-    "points": ["Fixed quote in 48 hours", "Staged payments", "No VAT charged", "You own everything"]
+    "points": [
+      "Fixed quote in 48 hours",
+      "Staged payments",
+      "No VAT charged",
+      "You own everything"
+    ]
   },
   "closing": {
     "title": "Ready to get it built?",
     "body": "Book a 20-minute call. Tell me what you're trying to fix or launch, and I'll tell you plainly if I can help."
+  },
+  "speed": [
+    "Fixed quote in 48 hours",
+    "Live in 1–3 weeks",
+    "No VAT on top"
+  ],
+  "value": {
+    "title": "Faster to launch.",
+    "titleAccent": "Cheaper to run. Built to earn.",
+    "intro": "Every build is judged on three things: the time it saves you, the money it saves you, and the work it brings in.",
+    "groups": [
+      {
+        "label": "Save time",
+        "points": [
+          {
+            "t": "Quote in 48 hours, live in 1–3 weeks",
+            "b": "One 20-minute call, then a fixed written quote. No discovery phase, no month of meetings."
+          },
+          {
+            "t": "Admin that runs without you",
+            "b": "Bookings, reminders, invoice chasing and review requests happen on their own, so evenings stay yours."
+          },
+          {
+            "t": "Nothing to manage",
+            "b": "Hosting, domain, DNS and updates are set up and looked after. You never need to log in to anything technical."
+          }
+        ]
+      },
+      {
+        "label": "Save money",
+        "points": [
+          {
+            "t": "No VAT added",
+            "b": "Zelux isn't VAT registered, so a £1,000 quote costs £1,000. A VAT-registered agency would bill £1,200 for the same figure."
+          },
+          {
+            "t": "Fixed price, paid in stages",
+            "b": "No day rates and no surprise invoices. You know the full cost before any work starts."
+          },
+          {
+            "t": "No lock-in, no hostage fees",
+            "b": "Your domain, code and accounts are in your name. Care plans are rolling monthly with 30 days' notice."
+          }
+        ]
+      },
+      {
+        "label": "Make money",
+        "points": [
+          {
+            "t": "Built around one job: getting you work",
+            "b": "Every page leads to an enquiry, a booking or a sale. Nothing is there just to look busy."
+          },
+          {
+            "t": "Reply first, win the job",
+            "b": "New enquiries get an answer within minutes, even while you're on a job. The first business to reply is usually the one that gets hired."
+          },
+          {
+            "t": "Bookings while you sleep",
+            "b": "Customers book and pay online at 11pm on a Sunday, instead of waiting for you to call back on Monday."
+          }
+        ]
+      }
+    ]
   }
 }
