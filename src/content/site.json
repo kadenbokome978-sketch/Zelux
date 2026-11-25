@@ -47,7 +47,7 @@
     },
     {
       "index": "03",
-      "title": "Weeks 1–3: build & review",
+      "title": "Within 7 days: build & review",
       "body": "You see working progress early and sign off the design before anything goes live."
     },
     {
@@ -78,7 +78,7 @@
     },
     "points": [
       "Fixed quote in 48 hours",
-      "Staged payments",
+      "Live in 7 days or £100 off",
       "No VAT charged",
       "You own everything"
     ]
@@ -89,7 +89,7 @@
   },
   "speed": [
     "Fixed quote in 48 hours",
-    "Live in 1–3 weeks",
+    "Live in 7 days, guaranteed",
     "No VAT on top"
   ],
   "value": {
@@ -101,8 +101,8 @@
         "label": "Save time",
         "points": [
           {
-            "t": "Quote in 48 hours, live in 1–3 weeks",
-            "b": "One 20-minute call, then a fixed written quote. No discovery phase, no month of meetings."
+            "t": "Quote in 48 hours, live in 7 days",
+            "b": "One 20-minute call, then a fixed written quote. Sites up to 5 pages are live within a week, guaranteed."
           },
           {
             "t": "Admin that runs without you",
@@ -159,5 +159,10 @@
       "No chatbot gimmicks and no tech for the sake of it.",
       "Every account sits in your name, so you can leave whenever you like."
     ]
+  },
+  "guarantee": {
+    "title": "The 7-day guarantee",
+    "short": "Live in 7 days or £100 off.",
+    "terms": "Sites up to 5 pages go live within 7 days, or you get £100 off the final invoice. The 7 days start once the quote is accepted and your copy, photos and logins are in, and pause while a design is waiting on your feedback."
   }
 }
