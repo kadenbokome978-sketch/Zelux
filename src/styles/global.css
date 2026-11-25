@@ -203,13 +203,15 @@
 
 /* Reveal on scroll — only when motion is welcome and JS has run */
 @media (prefers-reduced-motion: no-preference) {
-  .js [data-reveal] {
+  /* Only below-the-fold blocks are ever hidden: reveal.ts marks on-screen ones as .is-in before adding .reveal-ready */
+  .reveal-ready [data-reveal]:not(.is-in) {
     opacity: 0;
     transform: translateY(12px);
+  }
+  .reveal-ready [data-reveal].is-revealing {
     transition: opacity 700ms var(--ease-out-soft), transform 700ms var(--ease-out-soft);
     transition-delay: var(--d, 0ms);
   }
-  .js [data-reveal].is-in { opacity: 1; transform: none; }
 
   .sig-node-on { animation: sig-node 5.5s linear infinite; }
 }

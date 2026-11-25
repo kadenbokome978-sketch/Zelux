@@ -89,6 +89,10 @@ const jsonLd = {
     <Footer />
     <script>
       import '../scripts/reveal.ts';
+      // Smooth scrolling + scroll animations load after the page is idle, so they never delay first paint.
+      const loadMotion = () => import('../scripts/motion.ts');
+      if (document.readyState === 'complete') setTimeout(loadMotion, 0);
+      else addEventListener('load', () => ('requestIdleCallback' in window ? requestIdleCallback(loadMotion, { timeout: 2000 }) : setTimeout(loadMotion, 200)), { once: true });
     </script>
   </body>
 </html>

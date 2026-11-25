@@ -2,7 +2,7 @@
 
 Marketing site for Zelux (zelux.co.uk): Kaden Ekuma Bokome's web + business systems studio. UK sole trader, Hampshire, not VAT registered. Contact kaden@zelux.co.uk.
 
-Astro 7 (static) + Tailwind CSS 4 + TypeScript. All copy lives in `src/content/*.json`. Tokens and component classes live in `src/styles/global.css`.
+Astro 7 (static) + Tailwind CSS 4 + TypeScript, with React islands (`@astrojs/react`) for React Bits components, GSAP + ScrollTrigger for scroll animation and Lenis for desktop smooth scrolling (see the motion-and-interaction skill). All copy lives in `src/content/*.json`. Tokens and component classes live in `src/styles/global.css`.
 
 ## Workflow
 

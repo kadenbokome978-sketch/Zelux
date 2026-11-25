@@ -70,6 +70,7 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
     btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     menu.classList.toggle('hidden', !open);
     document.body.style.overflow = open ? 'hidden' : '';
+    if (open) window.lenis?.stop(); else window.lenis?.start();
     if (open) menu.querySelector<HTMLElement>('a')?.focus();
     else if (returnFocus) btn.focus();
   };
