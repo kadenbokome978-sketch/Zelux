@@ -1,0 +1,83 @@
+[
+  {
+    "id": "enquiries",
+    "task": "Replying to new enquiries",
+    "auto": "02",
+    "trigger": "Someone fills in your form, messages on Facebook or Instagram, or emails you",
+    "steps": ["Sorted by job type, area and urgency", "A reply is drafted in your words", "A call slot is offered from your calendar", "The lead is logged with where it came from"],
+    "approve": "You check the drafted reply before it goes, or let routine ones send on their own",
+    "tools": ["email", "social", "calendar", "sheets", "crm"]
+  },
+  {
+    "id": "booking",
+    "task": "Booking and rescheduling",
+    "auto": "05",
+    "trigger": "A customer picks a slot from your real availability",
+    "steps": ["Confirmation sent straight away", "Reminder the day before", "They can move or cancel without ringing you", "Your diary updates itself"],
+    "approve": "You set the hours, buffers and which jobs can be booked online",
+    "tools": ["calendar", "email", "payments"]
+  },
+  {
+    "id": "invoices",
+    "task": "Chasing unpaid invoices",
+    "auto": "04",
+    "trigger": "A job is marked as done",
+    "steps": ["Invoice goes out the same day", "Polite reminder at 7 days, another at 14", "Payments are matched to the right invoice", "You get a list of anything still overdue"],
+    "approve": "You set the timings and the wording, and anything past 30 days comes to you",
+    "tools": ["accounts", "email", "payments"]
+  },
+  {
+    "id": "reviews",
+    "task": "Asking for reviews",
+    "auto": "07",
+    "trigger": "A job is finished or an order is delivered",
+    "steps": ["A day or two later, a short message with a one-tap Google review link", "One reminder if there's no response", "Then it stops"],
+    "approve": "You choose which customers get asked, and nothing is sent to anyone who complained",
+    "tools": ["email", "sms", "crm"]
+  },
+  {
+    "id": "questions",
+    "task": "Answering the same questions",
+    "auto": "06",
+    "trigger": "A customer asks something on your site or by message",
+    "steps": ["Answered from replies you've written and approved", "Anything new or unusual is handed to you", "The full conversation comes with it"],
+    "approve": "It only ever uses answers you've signed off. Anything else waits for you",
+    "tools": ["website", "email", "social"]
+  },
+  {
+    "id": "quotes",
+    "task": "Following up quotes",
+    "auto": "01",
+    "trigger": "You send a quote",
+    "steps": ["A friendly check-in after 3 days", "A last nudge after a week", "Replies come straight to your inbox", "Accepted quotes are flagged so you can book the job"],
+    "approve": "You write the messages once and can stop the follow-up on any quote",
+    "tools": ["email", "sheets", "crm"]
+  },
+  {
+    "id": "reporting",
+    "task": "Pulling numbers together",
+    "auto": "10",
+    "trigger": "Every Monday morning, or whenever suits",
+    "steps": ["Sales, enquiries and where they came from collected", "Put into one short report", "Sent to your inbox"],
+    "approve": "You choose the numbers that matter. Nothing to log in to",
+    "tools": ["sheets", "accounts", "shop", "website"]
+  },
+  {
+    "id": "social",
+    "task": "Posting on social media",
+    "auto": "03",
+    "trigger": "You write a month of posts in one sitting",
+    "steps": ["Each post is scheduled for the day you picked", "Goes out to each channel", "A weekly note of what went out"],
+    "approve": "Nothing posts that you haven't written or approved",
+    "tools": ["social"]
+  },
+  {
+    "id": "orders",
+    "task": "Order and delivery updates",
+    "auto": "09",
+    "trigger": "An order is placed",
+    "steps": ["Confirmation email", "Dispatch email with tracking", "Delivered email", "Low-stock alert when a product runs low"],
+    "approve": "You write the emails once and set the stock levels",
+    "tools": ["shop", "email"]
+  }
+]

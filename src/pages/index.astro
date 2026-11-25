@@ -2,11 +2,11 @@
 import Base from '../layouts/Base.astro';
 import LeadFlow from '../components/LeadFlow.astro';
 import WorkShowcase from '../components/WorkShowcase.astro';
+import Detector from '../components/Detector.astro';
 import Faq from '../components/Faq.astro';
 import ClosingBand from '../components/ClosingBand.astro';
 import site from '../content/site.json';
 import services from '../content/services.json';
-import automations from '../content/automations.json';
 
 const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricing.fixedQuote;
 ---
@@ -29,8 +29,8 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
       <div class="mt-8 grid gap-8 md:mt-12 md:grid-cols-12 md:items-end" data-reveal style="--d:160ms">
         <p class="lead max-w-[52ch] md:col-span-7">{site.hero.subtitle}</p>
         <div class="flex flex-wrap items-center gap-x-7 gap-y-2 md:col-span-5 md:justify-end">
-          <a href="/book" class="btn-primary btn-lg">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
-          <a href="/services" class="btn-ghost">See what we build</a>
+          <a href="/book" class="btn-primary btn-lg">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#time-saver" class="btn-ghost">Find what to automate ↓</a>
         </div>
       </div>
       <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-hairline pt-5 text-[0.9375rem] font-medium text-ink" data-reveal style="--d:200ms">
@@ -51,14 +51,28 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
         <h2 class="h-statement">You speak to the person who builds it.</h2>
         <p class="mt-6 max-w-[46ch] text-[1.0625rem] leading-relaxed text-deep-ink-2">{site.pillars[0].body}</p>
       </div>
-      <ul class="grid gap-px self-end overflow-hidden rounded-[2px] border border-deep-line bg-deep-line lg:col-span-5">
-        {site.pillars.slice(1).map((p, i) => (
-          <li class="bg-deep p-6" data-reveal style={`--d:${(i + 1) * 90}ms`}>
-            <h3 class="text-[1.375rem] font-medium leading-tight tracking-[-0.02em]">{p.title}</h3>
-            <p class="mt-2 text-[0.9375rem] leading-relaxed text-deep-ink-2">{p.body}</p>
-          </li>
-        ))}
-      </ul>
+      <div class="self-end lg:col-span-5" data-reveal style="--d:90ms">
+        <h3 class="text-[1.375rem] font-medium tracking-[-0.02em]">{site.promises.title}</h3>
+        <ul class="mt-4 divide-y divide-deep-line border-y border-deep-line">
+          {site.promises.items.map((t) => (
+            <li class="flex gap-3 py-3 text-[0.9375rem] leading-relaxed text-deep-ink-2">
+              <svg class="mt-1 shrink-0 text-accent-on-deep" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.75" /></svg>{t}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIME-SAVER DETECTOR -->
+  <section id="time-saver" class="scroll-mt-16 border-b border-hairline bg-surface">
+    <div class="container-z py-16 md:py-24">
+      <div class="max-w-[46rem]" data-reveal>
+        <p class="eyebrow">Try it</p>
+        <h2 class="h-section mt-4">What should stop <em class="text-accent">taking your time?</em></h2>
+        <p class="body mt-4">Pick the jobs that eat your week. You'll get a plain blueprint for each one: what starts it, what happens, and where you stay in control. <a href="/services#automations" class="text-ink underline decoration-hairline-strong underline-offset-4 hover:text-accent">See all ten automations</a>.</p>
+      </div>
+      <div class="mt-10 md:mt-12" data-reveal style="--d:90ms"><Detector /></div>
     </div>
   </section>
 
@@ -118,29 +132,6 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
         <a href="/work" class="btn-ghost">All work →</a>
       </div>
       <div class="mt-10 md:mt-12"><WorkShowcase /></div>
-    </div>
-  </section>
-
-  <!-- AUTOMATIONS -->
-  <section id="automations" class="scroll-mt-16 border-t border-hairline">
-    <div class="container-z grid gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-10">
-      <div class="lg:col-span-4" data-reveal>
-        <p class="eyebrow">Automations</p>
-        <h2 class="h-section mt-4">Admin that <em class="text-accent">runs itself.</em></h2>
-        <p class="body mt-5 max-w-[36ch]">Ten jobs most small businesses still do by hand. Each one is wired into the tools you already use.</p>
-        <a href="/services#automations" class="btn-ghost mt-4">How each one works →</a>
-      </div>
-      <ol class="grid gap-x-10 sm:grid-cols-2 lg:col-span-8">
-        {automations.map((a, i) => (
-          <li class="border-t border-hairline" data-reveal style={`--d:${(i % 2) * 60}ms`}>
-            <a href={`/services#auto-${a.index}`} class="group flex min-h-12 items-baseline gap-4 py-3 sm:py-4">
-              <span class="font-mono text-[0.6875rem] text-accent">{a.index}</span>
-              <span class="text-[1.125rem] leading-snug tracking-[-0.015em] text-ink transition-colors group-hover:text-accent-hover">{a.title}</span>
-              <span class="ml-auto text-ink-3 opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">→</span>
-            </a>
-          </li>
-        ))}
-      </ol>
     </div>
   </section>
 

@@ -5,12 +5,12 @@
   "founder": "Kaden Ekuma Bokome",
   "location": "Hampshire, UK",
   "legalLine": "Kaden Ekuma Bokome (UK Sole Trader) · Hampshire, UK · Not VAT registered",
-  "tagline": "Websites & business systems.",
+  "tagline": "We design the front door. We automate the back office.",
   "calLink": "kaden/20min",
   "hero": {
     "eyebrow": "Hampshire, UK · Websites & business systems",
-    "titleLead": "Websites and business systems,",
-    "titleItalic": "built properly.",
+    "titleLead": "Your website should win you work.",
+    "titleItalic": "Your admin should run itself.",
     "subtitle": "For UK businesses tired of dated websites and manual admin. You deal directly with the person designing, building and wiring up the system. No account managers, no bloated retainers.",
     "status": "Taking on new client builds · Direct with Kaden"
   },
@@ -148,6 +148,16 @@
           }
         ]
       }
+    ]
+  },
+  "promises": {
+    "title": "No black boxes.",
+    "items": [
+      "Nothing goes live until it's been tested with real examples from your business.",
+      "Anything that speaks for you, like a reply or a review request, waits for your approval until you say otherwise.",
+      "No made-up savings figures. If it can't be measured, it won't be promised.",
+      "No chatbot gimmicks and no tech for the sake of it.",
+      "Every account sits in your name, so you can leave whenever you like."
     ]
   }
 }

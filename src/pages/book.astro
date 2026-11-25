@@ -146,6 +146,11 @@ const agenda = [
     status.textContent = msg;
     status.className = `rounded-[2px] border px-4 py-3 text-sm ${ok ? 'border-[#9cc9ae] text-[#1d5c3a] bg-[#e9f4ec]' : 'border-[#e2a49f] text-[#8c1d17] bg-[#fbeceb]'}`;
   };
+  // Prefill from the homepage time-saver (?need=...)
+  const need = new URLSearchParams(location.search).get('need');
+  const msgField = document.getElementById('f-msg') as HTMLTextAreaElement | null;
+  if (need && msgField && !msgField.value) msgField.value = need.slice(0, 600);
+
   // JS takes over validation so each field gets its own message.
   if (form) form.noValidate = true;
   const fields = form ? Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]')) : [];
