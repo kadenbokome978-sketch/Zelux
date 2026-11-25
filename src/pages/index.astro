@@ -6,6 +6,7 @@ import ClosingBand from '../components/ClosingBand.astro';
 import site from '../content/site.json';
 import services from '../content/services.json';
 import work from '../content/work.json';
+import automations from '../content/automations.json';
 
 const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricing.fixedQuote;
 ---
@@ -19,7 +20,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
       <div class="lg:col-span-7 lg:pr-6">
         <p class="eyebrow" data-reveal>{site.hero.eyebrow}</p>
         <h1 class="h-display mt-6" data-reveal style="--d:80ms">
-          {site.hero.titleLead} <em class="italic text-brass">{site.hero.titleItalic}</em>
+          {site.hero.titleLead} <em class="text-brass">{site.hero.titleItalic}</em>
         </h1>
         <p class="lead mt-6 max-w-[54ch]" data-reveal style="--d:160ms">{site.hero.subtitle}</p>
         <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-2" data-reveal style="--d:240ms">
@@ -51,7 +52,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
   <section>
     <div class="container-z py-16 md:py-24">
       <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
-        <h2 class="h-section">Three things, <em class="italic text-brass">done well.</em></h2>
+        <h2 class="h-section">Three things, <em class="text-brass">done well.</em></h2>
         <a href="/services" class="btn-ghost">Full scope & what's included →</a>
       </div>
       <div class="mt-10 border-t border-hairline">
@@ -67,13 +68,37 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
     </div>
   </section>
 
+  <!-- AUTOMATIONS -->
+  <section id="automations" class="scroll-mt-16 border-t border-hairline">
+    <div class="container-z py-16 md:py-24">
+      <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
+        <div>
+          <p class="eyebrow">Automations</p>
+          <h2 class="h-section mt-4">Admin that <em class="text-brass">runs itself.</em></h2>
+        </div>
+        <a href="/services#automations" class="btn-ghost">How each one works →</a>
+      </div>
+      <ul class="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[2px] border border-hairline bg-hairline lg:grid-cols-5">
+        {automations.map((a, i) => (
+          <li data-reveal style={`--d:${(i % 5) * 50}ms`}>
+            <a href={`/services#auto-${a.index}`} class="group flex h-full flex-col bg-canvas p-4 transition-colors hover:bg-surface sm:p-5">
+              <span class="font-mono text-[0.6875rem] text-brass">{a.index}</span>
+              <span class="mt-3 text-[0.9375rem] font-medium leading-snug tracking-[-0.01em] text-ink group-hover:text-brass-hover sm:text-base">{a.title}</span>
+              <span class="mt-2 hidden text-[0.8125rem] leading-relaxed text-ink-3 sm:block">{a.body.split('. ')[0]}.</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <!-- PROCESS + PRICING (bone band) -->
   <section class="band-bone">
     <div class="container-z py-16 md:py-24">
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-8">
         <div class="lg:col-span-4" data-reveal>
           <p class="eyebrow">How it works</p>
-          <h2 class="h-section mt-5">Plain steps, <em class="italic text-brass-deep">one price.</em></h2>
+          <h2 class="h-section mt-5">Plain steps, <em class="text-brass-deep">one price.</em></h2>
           <p class="body mt-5 max-w-[40ch]">{pricing.body}</p>
           <a href="/book" class="btn-dark mt-8">Book a 20-min call <span class="arrow" aria-hidden="true">→</span></a>
         </div>
@@ -98,7 +123,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
     <div class="container-z grid gap-14 py-16 md:py-24 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-5" data-reveal>
         <p class="eyebrow">About</p>
-        <h2 class="h-section mt-5"><em class="italic">{site.about.title}</em></h2>
+        <h2 class="h-section mt-5"><em>{site.about.title}</em></h2>
         <p class="lead mt-6 !text-ink">{site.about.paragraphs[0]}</p>
         <p class="body mt-4">{site.about.paragraphs[2]}</p>
       </div>
@@ -133,7 +158,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
   <!-- FAQ -->
   <section class="border-t border-hairline">
     <div class="container-z grid gap-8 py-16 md:grid-cols-12 md:gap-8 md:py-24">
-      <h2 class="h-section md:col-span-4" data-reveal>Straight <em class="italic text-brass">answers.</em></h2>
+      <h2 class="h-section md:col-span-4" data-reveal>Straight <em class="text-brass">answers.</em></h2>
       <div class="md:col-span-8"><Faq /></div>
     </div>
   </section>
