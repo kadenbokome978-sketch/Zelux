@@ -1,7 +1,36 @@
 [
   {
-    "_note": "PLACEHOLDER: replace with James Green Sports once live (est. Dec 2026) and Clause 8.4 applies. Do not publish before launch or if James opts out in writing.",
+    "_note": "Shown with Dean's written approval (confirmed by Kaden, 25 Nov 2026).",
     "index": "01",
+    "title": "Forge",
+    "sector": "Mobile welding · Havant, Hampshire",
+    "status": "Live · Client site",
+    "friction": "A mobile MIG and TIG welder who needed drivers with MOT failures, chassis work and rust repairs to find him and ask for a quote.",
+    "built": "Designed and built the website: services, trade work, quote requests and click-to-call, made to work on a phone at the roadside.",
+    "outcome": "Live at forgeweldinguk.com.",
+    "role": "designed and built by Zelux.",
+    "isPlaceholder": false,
+    "href": "https://www.forgeweldinguk.com",
+    "image": "/work/forge-desktop.webp",
+    "imageMobile": "/work/forge-mobile.webp"
+  },
+  {
+    "index": "02",
+    "title": "KrapMaps",
+    "sector": "Founder work · Community bin map app",
+    "status": "Live · Co-founded",
+    "friction": "People can't find a bin when they need one. Kaden co-founded KrapMaps with Harley Treagust to fix that with a crowdsourced map.",
+    "built": "Built the krapmaps.app marketing site, plus social content systems and internal dashboards as content and operations lead.",
+    "outcome": "Co-founded venture, not a Zelux client project.",
+    "role": "co-founder; built the marketing site.",
+    "isPlaceholder": false,
+    "href": "https://krapmaps.app",
+    "image": "/work/krapmaps-desktop.webp",
+    "imageMobile": "/work/krapmaps-mobile.webp"
+  },
+  {
+    "_note": "PLACEHOLDER: replace with James Green Sports once live (est. Dec 2026) and Clause 8.4 applies. Do not publish before launch or if James opts out in writing.",
+    "index": "03",
     "title": "Sports coaching platform",
     "sector": "Coaching · Sport",
     "status": "In build · Launch est. Dec 2026",
@@ -10,28 +39,5 @@
     "outcome": "Case study published after launch.",
     "isPlaceholder": true,
     "href": null
-  },
-  {
-    "_note": "PLACEHOLDER: only show Forge (forgeweldinguk.com) if Dean explicitly approves in writing.",
-    "index": "02",
-    "title": "Local trade website & lead system",
-    "sector": "Trades",
-    "status": "Slot reserved · Permission pending",
-    "friction": "Held back until the client signs off publication.",
-    "built": "Website and lead system. The full write-up follows sign-off.",
-    "outcome": "Available for review on request.",
-    "isPlaceholder": true,
-    "href": null
-  },
-  {
-    "index": "03",
-    "title": "KrapMaps",
-    "sector": "Founder work · Consumer travel app",
-    "status": "Live · Co-founded",
-    "friction": "Travellers can't find a bin when they need one. Kaden co-founded KrapMaps with Harley Treagust to fix that with a crowdsourced map.",
-    "built": "Content and operations lead: marketing site, social content systems and internal dashboards.",
-    "outcome": "Co-founded venture, not a Zelux client project.",
-    "isPlaceholder": false,
-    "href": "https://krapmaps.app"
   }
 ]

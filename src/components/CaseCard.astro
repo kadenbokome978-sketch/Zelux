@@ -1,6 +1,6 @@
 ---
 interface Props {
-  item: { index: string; title: string; sector: string; status: string; friction: string; built: string; outcome: string; isPlaceholder: boolean; href: string | null };
+  item: { index: string; image?: string; title: string; sector: string; status: string; friction: string; built: string; outcome: string; isPlaceholder: boolean; href: string | null };
   delay?: number;
   headingLevel?: 'h2' | 'h3';
 }
@@ -12,11 +12,13 @@ const rows = [
   ['Outcome', item.outcome],
 ];
 ---
-<article class="panel group flex h-full flex-col transition-colors duration-200 hover:border-hairline-strong" data-reveal style={`--d:${delay}ms`}>
+<article class="panel group flex h-full flex-col overflow-hidden bg-paper transition-colors duration-200 hover:border-hairline-strong" data-reveal style={`--d:${delay}ms`}>
+  {item.image && (
+    <img src={item.image} alt={`${item.title} website homepage`} class="block aspect-[16/9] w-full border-b border-hairline object-cover object-top" loading="lazy" decoding="async" width="1600" height="1000" />
+  )}
   <header class="flex items-start justify-between gap-4 border-b border-hairline p-6">
     <div>
-      <p class="font-mono text-xs text-accent">{item.index}</p>
-      <Heading class="mt-3 font-serif text-[1.75rem] leading-[1.1] text-ink">{item.title}</Heading>
+      <Heading class="font-serif text-[1.75rem] leading-[1.1] text-ink">{item.title}</Heading>
       <p class="mt-2 text-sm text-ink-3">{item.sector}</p>
     </div>
     <span
@@ -24,7 +26,7 @@ const rows = [
         'shrink-0 rounded-[2px] border px-2 py-1 font-mono text-[0.625rem] uppercase tracking-[0.12em]',
         item.isPlaceholder ? 'border-hairline text-ink-3' : 'border-hairline-accent text-accent',
       ]}
-    >{item.isPlaceholder ? 'Slot reserved' : 'Live'}</span>
+    >{item.isPlaceholder ? (item.status.startsWith('In build') ? 'In build' : 'Slot reserved') : 'Live'}</span>
   </header>
   <dl class="flex-1 divide-y divide-hairline">
     {rows.map(([k, v]) => (

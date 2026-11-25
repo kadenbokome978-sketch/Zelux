@@ -13,7 +13,7 @@ Proof is the thing the site is shortest on, so every real project should become 
 |---|---|
 | KrapMaps | Always "co-founded with Harley Treagust". Never a Zelux client. OK to show. |
 | James Green Sports | Only after launch (~Dec 2026) and once contract Clause 8.4 applies, unless he opts out in writing. Until then: the "Sports coaching platform" placeholder. |
-| Forge (forgeweldinguk.com) | Only with Dean's written approval. Until then: the "Local trade website & lead system" placeholder. |
+| Forge (forgeweldinguk.com) | Approved in writing by Dean (confirmed 25 Nov 2026). Live on the homepage and /work with real screenshots. No results claimed until Dean shares real numbers. |
 | Anyone else | Ask Kaden whether written permission exists. If not, anonymise ("a Hampshire roofing firm") and say so. |
 
 ## Structure

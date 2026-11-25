@@ -26,7 +26,7 @@ Astro 7 (static) + Tailwind CSS 4 + TypeScript, with React islands (`@astrojs/re
 - Never mention "AI" anywhere on the site (copy, meta, schema, alt text, images). `npm run check` enforces it.
 - No em dashes in visible text. Plain UK English.
 - No fabricated proof: no fake clients, logos, stats, testimonials or savings figures.
-- KrapMaps is "co-founded with Harley Treagust", never a client. James Green Sports only after launch + Clause 8.4. Forge only with Dean's written approval.
+- KrapMaps is "co-founded with Harley Treagust", never a client. James Green Sports only after launch + Clause 8.4. Forge is shown with Dean's written approval (confirmed 25 Nov 2026).
 - New commitments (prices, guarantees, response times) need Kaden's OK. Current ones are listed in the brand-voice skill.
 - Keep pages compact. Kaden dislikes long scrolly pages, oversized type and marquees.
 - Progressive enhancement: everything readable and usable without JS; respect reduced motion.

@@ -36,7 +36,7 @@ description: How Zelux copy should sound, with banned words, claims rules and th
 - No fabricated proof: no invented clients, logos, stats, testimonials or savings figures. Example timings must be labelled illustrative.
 - KrapMaps is always "co-founded with Harley Treagust", never a Zelux client.
 - James Green Sports: not named until launch (~Dec 2026) and contract Clause 8.4 applies, unless he opts out in writing.
-- Forge (forgeweldinguk.com): not named without Dean's written approval.
+- Forge (forgeweldinguk.com): Dean approved it in writing (confirmed by Kaden, 25 Nov 2026). Shown by name with real screenshots. Describe only what the live site shows; no invented results.
 
 ## Banned words and phrases
 
