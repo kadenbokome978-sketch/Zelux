@@ -12,7 +12,12 @@
     "isPlaceholder": false,
     "href": "https://www.forgeweldinguk.com",
     "image": "/work/forge-desktop.webp",
-    "imageMobile": "/work/forge-mobile.webp"
+    "imageMobile": "/work/forge-mobile.webp",
+    "desktopLong": "/work/forge-desktop-long.webp",
+    "mobileLong": "/work/forge-mobile-long.webp",
+    "frame": "#0b0a09",
+    "bar": "#2a2825",
+    "barInk": "#e9e2d8"
   },
   {
     "index": "02",
@@ -26,7 +31,12 @@
     "isPlaceholder": false,
     "href": "https://krapmaps.app",
     "image": "/work/krapmaps-desktop.webp",
-    "imageMobile": "/work/krapmaps-mobile.webp"
+    "imageMobile": "/work/krapmaps-mobile.webp",
+    "desktopLong": "/work/krapmaps-desktop-long.webp",
+    "mobileLong": "/work/krapmaps-mobile-long.webp",
+    "frame": "#22040f",
+    "bar": "#fbd3e2",
+    "barInk": "#22040f"
   },
   {
     "_note": "PLACEHOLDER: replace with James Green Sports once live (est. Dec 2026) and Clause 8.4 applies. Do not publish before launch or if James opts out in writing.",

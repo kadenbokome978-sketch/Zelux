@@ -1,0 +1,63 @@
+---
+// Laptop + phone view of a real site, side by side (no overlap), framed in the project's own colours.
+// Images are full-length screenshots: hovering (or focusing) pans down through the whole page.
+// On touch screens the active carousel slide does one slow pass down and back on its own.
+interface Props {
+  title: string;
+  host: string;
+  desktop: string; // full-length, 1200px wide
+  mobile?: string; // full-length, 480px wide
+  frame: string; // phone frame colour
+  bar: string; // browser bar background
+  barInk: string; // browser bar text
+  eager?: boolean;
+  hinted?: boolean; // show the hover hint outside the carousel
+}
+const { title, host, desktop, mobile, frame, bar, barInk, eager = false, hinted = false } = Astro.props;
+---
+<div class:list={['ss', hinted && 'is-hinted']} style={`--frame:${frame};--bar:${bar};--bar-ink:${barInk}`}>
+  <div class="ss-browser">
+    <div class="ss-bar" aria-hidden="true"><i></i><i></i><i></i><span>{host}</span><b class="ss-hint">Hover to scroll ↓</b></div>
+    <div class="ss-view">
+      <img src={desktop} alt={`${title} website on a laptop, full page`} loading={eager ? 'eager' : 'lazy'} decoding="async" width="1200" height="2400" />
+    </div>
+  </div>
+  {mobile && (
+    <div class="ss-phone">
+      <div class="ss-screen">
+        <img src={mobile} alt={`${title} website on a phone, full page`} loading="lazy" decoding="async" width="480" height="3692" />
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .ss { position: relative; display: flex; align-items: flex-end; gap: clamp(0.75rem, 1.6vw, 1.25rem); width: 100%; }
+  .ss-browser { flex: 1 1 auto; min-width: 0; overflow: hidden; border-radius: 14px 14px 0 0; background: var(--bar); }
+  .ss-bar { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; color: var(--bar-ink); }
+  .ss-bar i { width: 8px; height: 8px; border-radius: 999px; background: currentColor; opacity: 0.35; }
+  .ss-bar span { margin-left: 8px; font-family: var(--font-mono); font-size: 0.6875rem; opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ss-view { aspect-ratio: 16 / 12; overflow: hidden; background: #fff; }
+  .ss-phone { flex: 0 0 23%; max-width: 190px; min-width: 84px; padding: 6px 6px 0; border-radius: 26px 26px 0 0; background: var(--frame); }
+  .ss-screen { aspect-ratio: 9 / 18; overflow: hidden; border-radius: 20px 20px 0 0; background: #fff; }
+  .ss img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; }
+
+  .ss-hint { display: none; margin-left: auto; font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 600; opacity: 0; transition: opacity var(--dur-ui); }
+
+  /* Flat media queries on purpose: nested ones with :global() were mangled by the CSS minifier. */
+  @media (hover: hover) and (pointer: fine) {
+    .ss-hint { display: inline; }
+    .ss.is-hinted .ss-hint { opacity: 0.75; }
+    .ss:hover .ss-hint { opacity: 0; }
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .ss img { transition: object-position 7s cubic-bezier(0.45, 0, 0.55, 1); }
+    .ss-phone img { transition-duration: 8s; }
+    .ss:hover img, .ss:focus-within img { object-position: 50% 100%; }
+  }
+  @media (hover: none) and (prefers-reduced-motion: no-preference) {
+    :global(.pc-slide.is-active) .ss img, .ss.is-hinted img { animation: ss-pan 16s cubic-bezier(0.45, 0, 0.55, 1) 1s 2 alternate both; }
+  }
+  @keyframes ss-pan { from { object-position: 50% 0%; } to { object-position: 50% 100%; } }
+  @media (max-width: 520px) { .ss-bar span { display: none; } }
+</style>

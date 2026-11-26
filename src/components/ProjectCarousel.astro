@@ -5,8 +5,9 @@
 // Never auto-advances (WCAG 2.2.2, and Kaden dislikes things that move on their own).
 import work from '../content/work.json';
 import ConceptPhone from './ConceptPhone.astro';
+import SiteShowcase from './SiteShowcase.astro';
 
-type Work = (typeof work)[number] & { image?: string; imageMobile?: string; theme?: string };
+type Work = (typeof work)[number] & { image?: string; imageMobile?: string; desktopLong?: string; mobileLong?: string; frame?: string; bar?: string; barInk?: string };
 type Slide =
   | { kind: 'work'; item: Work; theme: Theme }
   | { kind: 'concept'; variant: 'groomer' | 'bakery'; title: string; sector: string; body: string; theme: Theme };
@@ -60,16 +61,8 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
         </div>
 
         <div class="pc-visual">
-          {s.kind === 'work' && s.item.image ? (
-            <div class="pc-device">
-              <div class="pc-browser">
-                <div class="pc-bar" aria-hidden="true"><i></i><i></i><i></i><span>{s.item.href && host(s.item.href)}</span></div>
-                <img src={s.item.image} alt={`${s.item.title} website on a laptop`} loading="lazy" decoding="async" width="1600" height="1000" />
-              </div>
-              {s.item.imageMobile && (
-                <img class="pc-phone" src={s.item.imageMobile} alt={`${s.item.title} website on a phone`} loading="lazy" decoding="async" width="600" height="1298" />
-              )}
-            </div>
+          {s.kind === 'work' && s.item.desktopLong ? (
+            <SiteShowcase title={s.item.title} host={s.item.href ? host(s.item.href) : ''} desktop={s.item.desktopLong} mobile={s.item.mobileLong} frame={s.item.frame!} bar={s.item.bar!} barInk={s.item.barInk!} hinted />
           ) : s.kind === 'work' ? (
             <div class="pc-soon" aria-hidden="true">
               <span class="pc-soon-ring"></span>
@@ -105,6 +98,10 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
     scrollbar-width: none; border-radius: var(--radius-card);
   }
   .pc-track::-webkit-scrollbar { display: none; }
+    /* Phones: show the laptop view full width (the phone view adds little on a phone) */
+  @media (max-width: 640px) { .pc-visual :global(.ss-phone) { display: none; } }
+  /* Smaller screens: equal-height cards, copy at the top, screenshots sitting on the bottom edge */
+  @media (max-width: 1023px) { .pc-slide { min-height: 0; align-content: space-between; } }
   /* Native snapping only for touch, where a flick has momentum. Mouse/trackpad snapping is done in JS
      (CSS snap made slow trackpad swipes and wheel scrolls spring back to the same slide). */
   @media (pointer: coarse) { .pc-track { scroll-snap-type: x mandatory; } }
@@ -122,7 +119,7 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
   }
   @media (min-width: 640px) { .pc-slide { padding: 2.5rem 2.5rem 0; } }
   @media (min-width: 1024px) {
-    .pc-slide { flex-basis: 84%; grid-template-columns: 5fr 7fr; padding: 3rem 0 0 3rem; min-height: 32rem; }
+    .pc-slide { flex-basis: 86%; grid-template-columns: 4fr 8fr; gap: 2.5rem; padding: 3rem 0 0 3rem; min-height: 34rem; }
   }
   /* Slides that aren't in focus sit back slightly, so the active one leads. JS adds .is-active. */
   :global(.js) .pc-slide:not(.is-active) { transform: scale(0.96); }
@@ -135,7 +132,7 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
   }
   .pc-title { margin-top: 0.5rem; font-family: var(--font-serif); font-size: clamp(2rem, 3.4vw, 2.75rem); line-height: 1.02; letter-spacing: -0.03em; font-weight: 500; }
   .pc-sector { font-size: 0.9375rem; color: var(--muted); }
-  .pc-body { max-width: 44ch; font-size: 0.9375rem; line-height: 1.65; color: var(--muted); }
+  .pc-body { max-width: 40ch; font-size: 0.9375rem; line-height: 1.65; color: var(--muted); }
   .pc-body strong { color: var(--ink); font-weight: 600; }
   .pc-link {
     margin-top: 0.5rem; display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding: 0 1.1rem;
@@ -145,23 +142,8 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
   .pc-link:active { transform: scale(0.97); }
   @media (hover: hover) and (pointer: fine) { .pc-link:hover { transform: translateY(-2px); } }
 
-  .pc-visual { align-self: end; display: flex; justify-content: center; }
-  .pc-device { position: relative; width: 100%; padding-right: 14%; }
-  @media (min-width: 1024px) { .pc-device { padding-right: 18%; margin-right: -1px; } }
-  .pc-browser {
-    overflow: hidden; border-radius: 14px 14px 0 0; background: #fcfdff;
-    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.12);
-  }
-  .pc-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #eef2f7; }
-  .pc-bar i { width: 8px; height: 8px; border-radius: 999px; background: #c5cdd9; }
-  .pc-bar span { margin-left: 8px; font-family: var(--font-mono); font-size: 0.625rem; color: #5b677a; }
-  .pc-browser img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
-  .pc-phone {
-    position: absolute; right: 0; bottom: 0; width: 30%; max-width: 190px; min-width: 92px;
-    border: 6px solid #0b1120; border-bottom: 0; border-radius: 22px 22px 0 0; background: #0b1120;
-    transition: transform var(--dur-slow) var(--ease-out-soft);
-  }
-  :global(.js) .pc-slide:not(.is-active) .pc-phone { transform: translateY(18px); }
+  .pc-visual { align-self: end; display: flex; justify-content: center; min-width: 0; }
+  @media (min-width: 1024px) { .pc-visual { padding-right: 2.5rem; } }
 
   .pc-soon { position: relative; display: grid; place-items: center; width: 100%; height: 18rem; margin-bottom: 2rem; }
   .pc-soon-ring { position: absolute; width: 14rem; height: 14rem; border-radius: 999px; border: 1px dashed var(--line); }

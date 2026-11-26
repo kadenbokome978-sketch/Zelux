@@ -3,9 +3,10 @@ import Base from '../layouts/Base.astro';
 import SectionHead from '../components/SectionHead.astro';
 import ClosingBand from '../components/ClosingBand.astro';
 import ConceptPhone from '../components/ConceptPhone.astro';
+import SiteShowcase from '../components/SiteShowcase.astro';
 import work from '../content/work.json';
 
-type Item = (typeof work)[number] & { image?: string; imageMobile?: string };
+type Item = (typeof work)[number] & { image?: string; imageMobile?: string; desktopLong?: string; mobileLong?: string; frame?: string; bar?: string; barInk?: string };
 const live = (work as Item[]).filter((w) => !w.isPlaceholder);
 const building = (work as Item[]).filter((w) => w.isPlaceholder);
 // Brand tints for each live project (text pairs checked for contrast)
@@ -45,20 +46,9 @@ const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '');
                 <a href={w.href} target="_blank" rel="noopener" class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-[0.9375rem] font-semibold" style={`background:${t.ink};color:${t.bg}`}>Visit {host(w.href)} <span aria-hidden="true">↗</span></a>
               )}
             </div>
-            {w.image && (
-              <div class:list={['relative px-6 pt-2 md:px-10 lg:col-span-7 lg:pt-10', i % 2 === 1 && 'lg:order-1']}>
-                <div class="relative pr-[16%]">
-                  <div class="overflow-hidden rounded-t-[14px] bg-paper shadow-[0_0_0_1px_rgb(0_0_0/0.12)]">
-                    <div class="flex items-center gap-1.5 bg-surface px-3 py-2" aria-hidden="true">
-                      <i class="h-2 w-2 rounded-full bg-[#c5cdd9]"></i><i class="h-2 w-2 rounded-full bg-[#c5cdd9]"></i><i class="h-2 w-2 rounded-full bg-[#c5cdd9]"></i>
-                      <span class="ml-2 font-mono text-[0.625rem] text-ink-3">{w.href && host(w.href)}</span>
-                    </div>
-                    <img src={w.image} alt={`${w.title} website on a laptop`} class="block aspect-[16/10] w-full object-cover object-top" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" width="1600" height="1000" />
-                  </div>
-                  {w.imageMobile && (
-                    <img src={w.imageMobile} alt={`${w.title} website on a phone`} class="absolute bottom-0 right-0 w-[30%] max-w-[200px] rounded-t-[22px] border-[6px] border-b-0 border-[#0b1120] bg-[#0b1120]" loading="lazy" decoding="async" width="600" height="1298" />
-                  )}
-                </div>
+            {w.desktopLong && (
+              <div class:list={['px-6 pt-2 md:px-10 lg:col-span-7 lg:pt-10', i % 2 === 1 && 'lg:order-1']}>
+                <SiteShowcase title={w.title} host={w.href ? host(w.href) : ''} desktop={w.desktopLong} mobile={w.mobileLong} frame={w.frame!} bar={w.bar!} barInk={w.barInk!} eager={i === 0} hinted />
               </div>
             )}
           </div>
