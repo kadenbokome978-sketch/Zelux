@@ -292,3 +292,21 @@ h1 em, h2 em, h3 em { font-style: normal; }
 /* KrapMaps wordmark in its own brand face (Lilita One, uppercase), as on krapmaps.app */
 .font-krap { font-family: "Lilita One", var(--font-serif) !important; font-weight: 400 !important; text-transform: uppercase; letter-spacing: 0.02em !important; }
 @media (min-width: 1536px) { .hero-grid { background-size: 100% 100%, calc((1280px - 4rem) / 12) 100%; } }
+
+/* Phones: the opening hero fills exactly the first screen (under the header, above the tab bar),
+   so nothing is sliced in half by the bottom edge when the page first loads. */
+@media (max-width: 767px) {
+  .hero-first { display: flex; flex-direction: column; justify-content: center; min-height: calc(100svh - 4rem - 1.5rem - var(--tabbar, 0px)); padding-bottom: 1rem; }
+  .hero-first .h-hero { font-size: clamp(1.875rem, min(9vw, 5.2svh), 2.5rem); }
+  html.m-tabs { --tabbar: calc(52px + env(safe-area-inset-bottom)); }
+}
+
+/* Phones: every page's opening block fills the first screen, so the fold never slices text */
+@media (max-width: 767px) {
+  .first-screen { display: flex; flex-direction: column; justify-content: center; min-height: calc(100svh - 4rem - var(--fs-off, 0px) - var(--tabbar, 0px)); }
+}
+/* Very short phones (iPhone SE): drop the hero's promise row so the rest fits; the promises appear again further down */
+@media (max-width: 767px) and (max-height: 600px) {
+  .hero-first ul { display: none; }
+  .first-screen > nav[aria-label='Services on this page'], .first-screen .fs-optional { display: none; }
+}

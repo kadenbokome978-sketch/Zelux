@@ -1,6 +1,6 @@
 # Zelux — zelux.co.uk
 
-Production site for Zelux, websites and business systems by Kaden Ekuma Bokome.
+Production site for Zelux, websites and business systems by Kaden Bokome.
 Built from the NEXUS Brain brief `Zelux Website Build Brief.md` (25 Nov 2026).
 
 **Stack:** Astro 7 (static) · Tailwind CSS 4 (Vite plugin) · TypeScript · React islands for [React Bits](https://github.com/DavidHDev/react-bits) components · [GSAP](https://github.com/greensock/GSAP) + ScrollTrigger · [Lenis](https://github.com/darkroomengineering/lenis) smooth scrolling (desktop wheel only, off for reduced motion) · self-hosted Geist + Geist Mono. Motion scripts load after the page is idle so they never slow first paint.

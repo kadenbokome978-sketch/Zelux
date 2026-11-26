@@ -2,9 +2,9 @@
   "name": "Zelux",
   "url": "https://zelux.co.uk",
   "email": "kaden@zelux.co.uk",
-  "founder": "Kaden Ekuma Bokome",
+  "founder": "Kaden Bokome",
   "location": "Hampshire, UK",
-  "legalLine": "Kaden Ekuma Bokome (UK Sole Trader) · Hampshire, UK · Not VAT registered",
+  "legalLine": "Kaden Bokome (UK Sole Trader) · Hampshire, UK · Not VAT registered",
   "tagline": "We design the front door. We automate the back office.",
   "calLink": "",
   "hero": {
@@ -12,7 +12,8 @@
     "titleLead": "Your website should win you work.",
     "titleItalic": "Your admin should run itself.",
     "subtitle": "For UK businesses tired of dated websites and manual admin. You deal directly with the person designing, building and wiring up the system. No account managers, no bloated retainers.",
-    "status": "Taking on new builds · Hampshire, UK"
+    "status": "Taking on new builds · Hampshire, UK",
+    "subtitleShort": "Dated website, admin eating your evenings? You deal directly with the person who builds it."
   },
   "pillars": [
     {
@@ -60,7 +61,7 @@
     "eyebrow": "About Zelux",
     "title": "Built lean, on purpose.",
     "paragraphs": [
-      "I'm Kaden Ekuma Bokome, an independent web and systems builder based in Hampshire, UK.",
+      "I'm Kaden Bokome, an independent web and systems builder based in Hampshire, UK.",
       "Most small and mid-sized businesses get stuck between two bad options: cheap templates that look generic and convert poorly, or agencies charging £10,000+ for three months of meetings.",
       "Zelux sits between the two. A site designed for your business and built to load fast, with the admin around it automated where that saves real time. You deal with me from the first call to launch."
     ],

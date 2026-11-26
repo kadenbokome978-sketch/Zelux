@@ -5,7 +5,7 @@ description: How Zelux copy should sound, with banned words, claims rules and th
 
 # Zelux brand voice
 
-**Who's talking:** Kaden Ekuma Bokome, an independent web and systems builder in Hampshire, UK. First person ("I") in personal sections and FAQs, "Zelux" for the business.
+**Who's talking:** Kaden Bokome, an independent web and systems builder in Hampshire, UK. First person ("I") in personal sections and FAQs, "Zelux" for the business.
 
 **Who's listening:** UK small business owners, mostly trades, coaches and local service businesses. They're busy, sceptical of agencies, and care about time, money and getting work in.
 
