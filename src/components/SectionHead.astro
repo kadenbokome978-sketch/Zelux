@@ -3,12 +3,12 @@ interface Props { index?: string; eyebrow: string; title: string; italic?: strin
 const { index, eyebrow, title, italic, intro, as = 'h2' } = Astro.props;
 const Tag = as;
 ---
-<div class="grid gap-6 md:grid-cols-12 md:gap-8" data-reveal>
-  <p class="eyebrow md:col-span-3 md:pt-3">
+<div class="max-w-[60rem]" data-reveal>
+  <p class="eyebrow">
     {index && <span class="text-accent">{index}</span>}{index && <span class="mx-2 text-hairline">/</span>}{eyebrow}
   </p>
-  <div class="md:col-span-9">
-    <Tag class={as === 'h1' ? 'h-display' : 'h-section'}>
+  <div class="mt-5">
+    <Tag class={as === 'h1' ? 'h-hero !max-w-[24ch]' : 'h-section'}>
       {title}{italic && <> <em class="text-accent">{italic}</em></>}
     </Tag>
     {intro && <p class="lead mt-6 max-w-[58ch]">{intro}</p>}

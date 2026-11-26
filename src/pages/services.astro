@@ -13,14 +13,14 @@ const serviceIcon: Record<string, string> = { websites: 'website', automation: '
 >
   <section class="container-z pb-12 pt-14 md:pb-16 md:pt-20">
     <SectionHead as="h1" eyebrow="Services" title="What I build," italic="and what I don't." intro="Three focused services, written the way the contract reads: what's included, what isn't, and how long it takes." />
-    <nav aria-label="Services on this page" class="mt-12 flex flex-wrap gap-2" data-reveal>
+    <nav aria-label="Services on this page" class="-mx-5 mt-10 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0" data-reveal>
       {services.map((s) => (
-        <a href={`#${s.slug}`} class="inline-flex min-h-11 items-center gap-2.5 rounded-full border border-hairline bg-paper px-4 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent">
+        <a href={`#${s.slug}`} class="inline-flex min-h-11 shrink-0 items-center gap-2.5 whitespace-nowrap rounded-full border border-hairline bg-paper px-4 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent">
           <svg viewBox="0 0 24 24" class="h-4 w-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[serviceIcon[s.slug]]} /></svg>{s.title}
         </a>
       ))}
-      <a href="#automations" class="inline-flex min-h-11 items-center gap-2.5 rounded-full border border-hairline bg-paper px-4 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent">
-        <svg viewBox="0 0 24 24" class="h-4 w-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons.invoices} /></svg>The ten automations
+      <a href="#automations" class="inline-flex min-h-11 shrink-0 items-center gap-2.5 whitespace-nowrap rounded-full border border-hairline bg-paper px-4 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent">
+        <svg viewBox="0 0 24 24" class="h-4 w-4 text-accent" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6v6H4V4Zm10 0h6v6h-6V4ZM4 14h6v6H4v-6Zm10 0h6v6h-6v-6Z" /></svg>The ten automations
       </a>
     </nav>
   </section>
@@ -29,17 +29,18 @@ const serviceIcon: Record<string, string> = { websites: 'website', automation: '
     {services.map((s, i) => (
       <section id={s.slug} class="scroll-mt-20 overflow-hidden rounded-[calc(var(--radius-card)+0.5rem)] border border-hairline bg-paper" data-reveal>
         <div class="grid lg:grid-cols-12">
-          <div class:list={['p-6 md:p-10 lg:col-span-6', i === 1 ? 'bg-deep text-deep-ink' : 'bg-surface']}>
-            <span class:list={['grid h-14 w-14 place-items-center rounded-[16px]', i === 1 ? 'bg-accent-on-deep text-deep' : 'bg-accent text-on-accent']}>
+          <div class:list={['p-6 md:p-10 lg:col-span-6', 'bg-surface']}>
+            <span class:list={['grid h-14 w-14 place-items-center rounded-[16px]', 'bg-accent text-on-accent']}>
               <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[serviceIcon[s.slug]]} /></svg>
             </span>
-            <h2 class="h-section mt-6">{s.title}</h2>
-            <p class:list={['mt-4 text-[1.0625rem] leading-relaxed', i === 1 ? 'text-deep-ink-2' : 'text-ink-2']}>{s.summary}</p>
-            <div class:list={['mt-6 rounded-inner p-4', i === 1 ? 'bg-deep-2' : 'bg-paper']}>
-              <p class:list={['font-mono text-[0.6875rem] uppercase tracking-[0.12em]', i === 1 ? 'text-accent-on-deep' : 'text-accent-hover']}>Best if</p>
-              <p class:list={['mt-1.5 text-[0.9375rem] leading-relaxed', i === 1 ? 'text-deep-ink' : 'text-ink']}>{s.bestFor}</p>
+            <p class="mt-6 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent-hover">{s.index} · Fixed price · quoted within 48 hours</p>
+            <h2 class="h-section mt-2">{s.title}</h2>
+            <p class:list={['mt-4 text-[1.0625rem] leading-relaxed', 'text-ink-2']}>{s.summary}</p>
+            <div class:list={['mt-6 rounded-inner p-4', 'bg-paper']}>
+              <p class:list={['font-mono text-[0.6875rem] uppercase tracking-[0.12em]', 'text-accent-hover']}>Best if</p>
+              <p class:list={['mt-1.5 text-[0.9375rem] leading-relaxed', 'text-ink']}>{s.bestFor}</p>
             </div>
-            <p class:list={['mt-6 text-sm', i === 1 ? 'text-deep-ink-2' : 'text-ink-2']}><strong class:list={[i === 1 ? 'text-deep-ink' : 'text-ink']}>Timeline:</strong> {s.timeline}</p>
+            <p class:list={['mt-6 text-sm', 'text-ink-2']}><strong class:list={['text-ink']}>Timeline:</strong> {s.timeline}</p>
           </div>
           <div class="grid content-start gap-6 p-6 md:p-10 lg:col-span-6">
             <div>
@@ -71,18 +72,18 @@ const serviceIcon: Record<string, string> = { websites: 'website', automation: '
   <section id="automations" class="scroll-mt-16 border-t border-hairline bg-surface">
     <div class="container-z py-14 md:py-20">
       <div class="grid gap-4 lg:grid-cols-12 lg:items-end" data-reveal>
-        <h2 class="h-section lg:col-span-7">Ten ways to get <em class="text-accent">hours back.</em></h2>
-        <p class="body lg:col-span-5">Each one is set up around the tools you already use, tested with real examples, and handed over with plain-English notes.</p>
+        <h2 class="h-section lg:col-span-7">Ten ways to get hours back.</h2>
+        <p class="body lg:col-span-5">Each one is set up around the tools you already use, tested with real examples, and handed over with plain‑English notes.</p>
       </div>
-      <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         {automations.map((a) => (
           <li id={`auto-${a.index}`} class="scroll-mt-20" data-reveal>
-            <a href={`/automations/${a.slug}`} class="group flex h-full flex-col gap-4 rounded-card border border-hairline bg-paper p-6 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-accent">
+            <a href={`/automations/${a.slug}`} class="group flex h-full flex-col gap-3 rounded-card border border-hairline bg-paper p-5 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-accent">
               <span class="grid h-12 w-12 place-items-center rounded-[14px] bg-accent-tint text-accent-hover transition-colors group-hover:bg-accent group-hover:text-on-accent">
                 <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[a.icon]} /></svg>
               </span>
-              <span class="text-[1.125rem] font-semibold tracking-[-0.015em] text-ink">{a.title}</span>
-              <span class="text-[0.9375rem] leading-relaxed text-ink-2">{a.body.split('. ')[0].replace(/\.$/, '')}.</span>
+              <span class="text-[1.0625rem] font-semibold leading-snug tracking-[-0.015em] text-ink">{a.title}</span>
+              <span class="text-[0.875rem] leading-relaxed text-ink-2">{(a.body.split('. ')[0].length < 40 ? a.body.split('. ').slice(0, 2).join('. ') : a.body.split('. ')[0]).replace(/\.$/, '')}.</span>
               <span class="mt-auto text-sm font-semibold text-accent">How it works →</span>
             </a>
           </li>

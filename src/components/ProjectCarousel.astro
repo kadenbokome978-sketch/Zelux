@@ -64,9 +64,12 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
           {s.kind === 'work' && s.item.desktopLong ? (
             <SiteShowcase title={s.item.title} host={s.item.href ? host(s.item.href) : ''} desktop={s.item.desktopLong} mobile={s.item.mobileLong} frame={s.item.frame!} bar={s.item.bar!} barInk={s.item.barInk!} hinted />
           ) : s.kind === 'work' ? (
-            <div class="pc-soon" aria-hidden="true">
-              <span class="pc-soon-ring"></span>
-              <span class="pc-soon-text">Preview after launch</span>
+            <div class="pc-sheet">
+              <p class="pc-sheet-k"><span aria-hidden="true"></span>Build sheet · name shared after launch</p>
+              <ul>
+                {['Bespoke coaching site', 'Online booking', 'Payments', 'Integrated merch shop'].map((t) => <li>{t}<i>In build</i></li>)}
+              </ul>
+              <p class="pc-sheet-f">{s.item.status.replace(/^In build · /, '')}</p>
             </div>
           ) : (
             <div class="pc-concept"><ConceptPhone variant={s.variant} /></div>
@@ -119,7 +122,9 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
   }
   @media (min-width: 640px) { .pc-slide { padding: 2.5rem 2.5rem 0; } }
   @media (min-width: 1024px) {
-    .pc-slide { flex-basis: 86%; grid-template-columns: 4fr 8fr; gap: 2.5rem; padding: 3rem 0 0 3rem; min-height: 34rem; }
+    .pc-slide { flex-basis: 86%; grid-template-columns: 4fr 8fr; gap: 2.5rem; padding: 3rem 0 0 3rem; min-height: 34rem; align-items: start; }
+    .pc-slide .pc-visual { align-self: end; }
+    .pc-track { -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--fl, 0px), #000 calc(100% - var(--fr, 56px)), transparent); mask-image: linear-gradient(90deg, transparent, #000 var(--fl, 0px), #000 calc(100% - var(--fr, 56px)), transparent); }
   }
   /* Slides that aren't in focus sit back slightly, so the active one leads. JS adds .is-active. */
   :global(.js) .pc-slide:not(.is-active) { transform: scale(0.96); }
@@ -145,9 +150,14 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
   .pc-visual { align-self: end; display: flex; justify-content: center; min-width: 0; }
   @media (min-width: 1024px) { .pc-visual { padding-right: 2.5rem; } }
 
-  .pc-soon { position: relative; display: grid; place-items: center; width: 100%; height: 18rem; margin-bottom: 2rem; }
-  .pc-soon-ring { position: absolute; width: 14rem; height: 14rem; border-radius: 999px; border: 1px dashed var(--line); }
-  .pc-soon-text { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .pc-sheet { width: 100%; max-width: 30rem; margin-bottom: 2.5rem; padding: 1.25rem 1.5rem; border-radius: var(--radius-card); background: #16213a; border: 1px solid var(--line); }
+  .pc-sheet-k { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .pc-sheet-k span { width: 8px; height: 8px; border-radius: 999px; background: var(--ac); }
+  .pc-sheet ul { margin: 1rem 0 0; padding: 0; list-style: none; }
+  .pc-sheet li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.8rem 0; border-top: 1px solid var(--line); font-weight: 600; }
+  .pc-sheet li i { font-style: normal; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ac); }
+  @media (max-width: 1023px) { .pc-sheet { margin-bottom: 1.25rem; padding: 1rem 1.1rem; } .pc-sheet li { padding: 0.6rem 0; font-size: 0.9375rem; } }
+  .pc-sheet-f { padding-top: 0.8rem; border-top: 1px solid var(--line); font-size: 0.875rem; color: var(--muted); }
   .pc-concept { margin-bottom: -6rem; }
   .pc-concept :global(figcaption) { display: none; }
 
@@ -163,7 +173,8 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
   }
   .pc-btn:active:not(:disabled) { transform: scale(0.94); }
   .pc-btn:disabled { opacity: 0.4; cursor: default; }
-  @media (hover: hover) and (pointer: fine) { .pc-btn:not(:disabled):hover { background: var(--color-ink); color: var(--color-canvas); border-color: var(--color-ink); } }
+  .pc-btn[data-dir='1']:not(:disabled) { background: var(--color-ink); color: var(--color-canvas); border-color: var(--color-ink); }
+  @media (hover: hover) and (pointer: fine) { .pc-btn[data-dir='-1']:not(:disabled):hover { border-color: var(--color-ink); } .pc-btn[data-dir='1']:not(:disabled):hover { background: var(--color-accent); border-color: var(--color-accent); } }
   :global(html:not(.js)) .pc-buttons, :global(html:not(.js)) .pc-count { display: none; }
 </style>
 
@@ -183,6 +194,9 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
       bar?.style.setProperty('--p', String((i + 1) / slides.length));
       prev.disabled = i <= 0;
       next.disabled = i >= slides.length - 1;
+      // Edge fades only where there's another slide to see
+      track.style.setProperty('--fl', i > 0 ? '56px' : '0px');
+      track.style.setProperty('--fr', i < slides.length - 1 ? '56px' : '0px');
     };
     const paintActive = (i: number) => slides.forEach((s, j) => s.classList.toggle('is-active', j === i));
 

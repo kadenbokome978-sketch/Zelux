@@ -66,6 +66,11 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
             <p class="hp-sub">Prices</p>
             {services.map(([a, b]) => <p class="hp-row"><b>{a}</b><i>{b}</i></p>)}
           </div>
+          <div class="hp-areas">
+            <p class="hp-sub">Areas covered</p>
+            <p class="hp-chips"><span>Havant</span><span>Waterlooville</span><span>Emsworth</span><span>Horndean</span><span>Cowplain</span></p>
+          </div>
+          <div class="hp-band"><b>Booking takes under a minute.</b><span>Pick a slot, get a text, done.</span></div>
           <p class="hp-footer">Brookfield Plumbing · Mon to Sat, 8 till 6</p>
         </div>
 
@@ -101,7 +106,7 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
     </div>
   </div>
   <figcaption class="hp-cap">
-    <span>Concept: a local plumber · not a client</span>
+    <span>Concept site · not a client</span>
     <button type="button" class="hp-pause" aria-pressed="false">Pause demo</button>
   </figcaption>
 </figure>
@@ -116,7 +121,7 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
   .hp-icons { display: flex; gap: 5px; align-items: center; }
   .hp-icons svg { height: 10px; fill: currentColor; }
 
-  .hp-view { position: absolute; inset: 44px 0 50px; overflow: hidden; }
+  .hp-view { position: absolute; inset: 44px 0 50px; overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 14px); mask-image: linear-gradient(transparent, #000 14px); }
   .hp-page { padding: 0 16px 20px; }
   .hp-head { display: flex; align-items: center; justify-content: space-between; height: 48px; }
   .hp-logo { display: flex; align-items: center; gap: 8px; line-height: 1.05; }
@@ -139,6 +144,11 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
   .hp-sub { font-size: 11px; font-weight: 700; opacity: 0.85; }
   .hp-row { display: flex; justify-content: space-between; padding: 10px 12px; border-radius: 12px; background: #15493b; font-size: 12px; }
   .hp-row i { font-style: normal; opacity: 0.85; }
+  .hp-areas { margin-top: 18px; }
+  .hp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .hp-chips span { padding: 5px 10px; border-radius: 999px; border: 1px solid #2a5a4b; font-size: 10.5px; }
+  .hp-band { display: grid; gap: 2px; margin-top: 16px; padding: 12px 14px; border-radius: 14px; background: #f2b33d; color: #1d1a10; font-size: 11px; }
+  .hp-band b { font-family: var(--font-serif); font-size: 14px; }
   .hp-footer { margin-top: 16px; font-size: 10px; text-align: center; opacity: 0.7; }
 
   /* booking sheet */
@@ -172,7 +182,7 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
   /* tap markers */
   .hp-tap { position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 999px; background: rgb(15 23 42 / 0.28); box-shadow: 0 0 0 2px rgb(255 255 255 / 0.7); opacity: 0; pointer-events: none; }
 
-  .hp-cap { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink-3); }
+  .hp-cap { display: flex; align-items: center; justify-content: space-between; white-space: nowrap; gap: 10px; margin-top: 14px; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink-3); }
   .hp-pause { flex: none; min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--color-hairline-strong); background: var(--color-paper); color: var(--color-ink); font: inherit; letter-spacing: 0.06em; }
   :global(html:not(.js)) .hp-pause { display: none; }
 

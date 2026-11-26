@@ -9,7 +9,7 @@ export const icons: Record<string, string> = {
   reporting: 'M4 20V10m6 10V4m6 16v-7m4 7H2',
   social: 'M4 10v4h3l6 4V6L7 10H4Zm13-1.5a4 4 0 0 1 0 7',
   orders: 'M3 7l9-4 9 4-9 4-9-4Zm0 0v10l9 4 9-4V7m-9 4v10',
-  stock: 'M4 20h16M6 20V9h4v11m4 0V4h4v16',
+  stock: 'M6 16v-5a6 6 0 1 1 12 0v5l2 2H4l2-2Zm4 4.5h4',
   website: 'M3 5h18v14H3V5Zm0 4h18',
   care: 'M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z',
   cog: 'M12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0-6 1.5 2.6 3-.4.4 3L19.5 9l-1.2 2.8L19.5 15l-2.6 1.2-.4 3-3-.4L12 21l-1.5-2.6-3 .4-.4-3L4.5 15l1.2-2.8L4.5 9l2.6-1.2.4-3 3 .4L12 3Z',

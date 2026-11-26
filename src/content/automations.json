@@ -1,8 +1,8 @@
 [
   {
     "index": "01",
-    "title": "Email marketing sequences",
-    "body": "A welcome email the day someone signs up, something useful a few days later, and a nudge if they go quiet. You write them once and every new subscriber gets them in order.",
+    "title": "Following up quotes",
+    "body": "Every quote you send gets a friendly check-in after 3 days and a last nudge after a week, so none go cold. The same works for new sign-ups: a welcome email, something useful a few days later, and a nudge if they go quiet.",
     "slug": "email-marketing-sequences",
     "icon": "quotes",
     "seoTitle": "Automated email follow-ups",
@@ -10,7 +10,7 @@
   },
   {
     "index": "02",
-    "title": "CRM lead capture and follow-up",
+    "title": "Replying to new enquiries",
     "body": "Enquiries from your website, Facebook and Instagram land in one list, tagged with where they came from. Each gets a reply within minutes in your own words, and you can see who still needs a call.",
     "slug": "crm-lead-capture-and-follow-up",
     "icon": "enquiries",
@@ -19,7 +19,7 @@
   },
   {
     "index": "03",
-    "title": "Social media scheduling",
+    "title": "Posting on social media",
     "body": "Write a month of posts in one sitting and pick the days. They go out to each channel on schedule while you're on the tools.",
     "slug": "social-media-scheduling",
     "icon": "social",
@@ -28,7 +28,7 @@
   },
   {
     "index": "04",
-    "title": "Automated invoicing and payments",
+    "title": "Chasing unpaid invoices",
     "body": "When a job is marked done, the invoice goes out. Unpaid after 7 days, a polite reminder follows, then another at 14 (you set the timings). Payments that land are matched to the right invoice.",
     "slug": "automated-invoicing-and-payments",
     "icon": "invoices",
@@ -37,7 +37,7 @@
   },
   {
     "index": "05",
-    "title": "Appointment booking",
+    "title": "Booking and rescheduling",
     "body": "Customers pick a slot from your real availability, get a confirmation straight away and a reminder the day before. They can move or cancel without ringing you.",
     "slug": "appointment-booking",
     "icon": "booking",
@@ -46,8 +46,8 @@
   },
   {
     "index": "06",
-    "title": "Customer support chat",
-    "body": "A chat box that answers the questions you already get asked, using answers you've approved. Anything it can't handle comes to you with the conversation attached.",
+    "title": "Answering the same questions",
+    "body": "Questions that come in by email, form or DM get a reply built from answers you've already approved. Anything new or unusual comes straight to you, with the message attached. Not a chatbot.",
     "slug": "customer-support-chat",
     "icon": "questions",
     "seoTitle": "Answers to common questions",
@@ -55,7 +55,7 @@
   },
   {
     "index": "07",
-    "title": "Review collection",
+    "title": "Asking for reviews",
     "body": "A day or two after the job, the customer gets a short message with a one-tap link to your Google reviews. One reminder if they don't respond, then it stops.",
     "slug": "review-collection",
     "icon": "reviews",
@@ -64,7 +64,7 @@
   },
   {
     "index": "08",
-    "title": "Inventory alerts",
+    "title": "Low-stock alerts",
     "body": "Set a minimum for each product. When stock drops below it, you get a text or email saying what's low and how fast it's been selling.",
     "slug": "inventory-alerts",
     "icon": "stock",
@@ -72,7 +72,7 @@
   },
   {
     "index": "09",
-    "title": "Order and shipping notifications",
+    "title": "Order and delivery updates",
     "body": "Customers get an email when they order, when it ships with tracking, and when it's delivered. That's most \"where's my order?\" messages gone.",
     "slug": "order-and-shipping-notifications",
     "icon": "orders",
@@ -81,7 +81,7 @@
   },
   {
     "index": "10",
-    "title": "Analytics reporting",
+    "title": "Pulling numbers together",
     "body": "Sales, enquiries and where they came from, in one short report every Monday morning or whenever suits. No logging in to five dashboards.",
     "slug": "analytics-reporting",
     "icon": "reporting",

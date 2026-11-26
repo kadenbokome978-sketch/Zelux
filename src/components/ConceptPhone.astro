@@ -3,14 +3,14 @@
 // Every concept is fictional and labelled as such on the page. Not a client, not proof.
 interface Props {
   variant: 'plumber' | 'groomer' | 'bakery';
-  size?: 'lg' | 'md';
+  size?: 'lg' | 'md' | 'sm';
   toast?: boolean;
 }
 const { variant, size = 'md', toast = false } = Astro.props;
 
 const concepts = {
   plumber: {
-    label: 'Concept: a local plumber',
+    label: 'Concept · plumber',
     brand: 'Brookfield',
     brandSub: 'Plumbing & Heating',
     bg: '#0e3b2f', ink: '#f3f1e7', accent: '#f2b33d', accentInk: '#1d1a10', soft: '#15493b', line: '#2a5a4b',
@@ -25,7 +25,7 @@ const concepts = {
     toastBody: 'Boiler service · Tue 9:00',
   },
   groomer: {
-    label: 'Concept: a dog groomer',
+    label: 'Concept · groomer',
     brand: 'Muddy Paws',
     brandSub: 'Grooming studio',
     bg: '#fbe9e2', ink: '#3b1f2b', accent: '#a8325a', accentInk: '#fff7f9', soft: '#f6d7cc', line: '#ebc3b6',
@@ -39,7 +39,7 @@ const concepts = {
     toastBody: 'Biscuit · Full groom · Fri 10:00',
   },
   bakery: {
-    label: 'Concept: a bakery',
+    label: 'Concept · bakery',
     brand: 'Corner Loaf',
     brandSub: 'Bakery & coffee',
     bg: '#1f1a17', ink: '#f6ecdf', accent: '#e8c07a', accentInk: '#241c12', soft: '#2b241f', line: '#3d332c',
@@ -54,7 +54,7 @@ const concepts = {
   },
 } as const;
 const c = concepts[variant];
-const w = size === 'lg' ? 300 : 260;
+const w = size === 'lg' ? 300 : size === 'sm' ? 216 : 260;
 ---
 <figure class="concept" style={`--w:${w}px`} aria-label={`${c.label}. Example design, not a real client.`}>
   <div
@@ -98,7 +98,7 @@ const w = size === 'lg' ? 300 : 260;
       )}
     </div>
   </div>
-  <figcaption>{c.label} <span>· not a client</span></figcaption>
+  <figcaption>{c.label}<span>Not a client</span></figcaption>
 </figure>
 
 <style>
@@ -145,8 +145,8 @@ const w = size === 'lg' ? 300 : 260;
   .toast b { display: block; font-weight: 600; }
   .toast i { display: block; font-style: normal; color: #475569; }
   .toast .dot { width: 26px; height: 26px; flex: none; border-radius: 8px; background: #16a34a; box-shadow: inset 0 0 0 7px #16a34a, inset 0 0 0 9px #fff; }
-  figcaption { margin-top: 12px; text-align: center; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ink-3); }
-  figcaption span { color: var(--color-ink-3); }
+  figcaption { margin-top: 12px; text-align: center; white-space: nowrap; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ink-3); }
+  figcaption span { display: block; margin-top: 2px; color: var(--color-ink-3); }
 
   /* The booking alert drops in shortly after the page loads. Static when motion is reduced. */
   @media (prefers-reduced-motion: no-preference) {

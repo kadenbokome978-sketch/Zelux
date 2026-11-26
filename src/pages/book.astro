@@ -23,14 +23,16 @@ const agenda = [
       <!-- Booking -->
       <div class="lg:col-span-7">
         <p class="eyebrow" data-reveal>Book a call</p>
-        <h1 class="h-section mt-6 !text-[clamp(2.5rem,5vw,4rem)]" data-reveal style="--d:80ms">Book a 20-minute <em class="text-accent">intro call.</em></h1>
-        <ol class="mt-8 border-t border-hairline" data-reveal style="--d:160ms">
-          {agenda.map((a, i) => (
-            <li class="flex gap-5 border-b border-hairline py-4 text-ink-2">
-              <span class="pt-0.5 font-mono text-xs text-accent">0{i + 1}</span>{a}
+        <h1 class="h-section mt-6 !text-[clamp(2.25rem,4vw,3.25rem)]" data-reveal style="--d:80ms">Book a free <span class="whitespace-nowrap">20-min</span> call.</h1>
+        <p class="lead mt-4 max-w-[48ch]" data-reveal style="--d:120ms">Video or phone, whichever suits. No pitch deck, and no obligation.</p>
+        <p class="mt-8 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-3" data-reveal style="--d:160ms">On the call</p>
+        <ul class="mt-3 border-t border-hairline" data-reveal style="--d:160ms">
+          {agenda.map((a) => (
+            <li class="flex items-center gap-4 border-b border-hairline py-4 text-ink-2">
+              <span class="h-px w-4 shrink-0 bg-accent" aria-hidden="true"></span>{a}
             </li>
           ))}
-        </ol>
+        </ul>
 
         {hasCal ? (
         <div class="panel mt-10 overflow-hidden" data-reveal style="--d:200ms">
@@ -51,7 +53,7 @@ const agenda = [
             <h2 class="font-serif text-[1.5rem] leading-tight text-ink">How booking works</h2>
             <ol class="mt-5 grid gap-4">
               {[
-                ['Send a short note', 'Use the form or email kaden@zelux.co.uk. A couple of lines is plenty.'],
+                ['Send a short note', `Use the form, or email ${site.email}. A couple of lines is plenty.`],
                 ['I reply within one working day', 'With two or three times that suit, by video or phone.'],
                 ['20 minutes, no pitch', 'You leave knowing what a build would cost and how long it would take.'],
               ].map(([t, b], i) => (
@@ -61,18 +63,17 @@ const agenda = [
                 </li>
               ))}
             </ol>
-            <a href={`mailto:${site.email}?subject=${encodeURIComponent('20-minute call')}`} class="btn-ghost mt-4">Or email {site.email} directly →</a>
           </div>
         )}
       </div>
 
       <!-- Enquiry form -->
-      <aside class="lg:col-span-5 lg:pt-[7.5rem]" data-reveal style="--d:240ms">
-        <div class="panel p-6 md:p-8 lg:sticky lg:top-24">
+      <aside class="lg:col-span-5" data-reveal style="--d:240ms">
+        <div id="enquiry" class="panel p-6 md:p-8 lg:sticky lg:top-24">
           <h2 class="font-serif text-[2rem] leading-tight text-ink">{hasCal ? 'Prefer to write first?' : 'Tell me what you need'}</h2>
           <p class="body mt-3 text-[0.9375rem]">Send a short note. I reply personally, usually within one working day.</p>
 
-          <form id="enquiry" class="mt-8 grid gap-5" method="post" action={formAction} enctype={web3Key ? undefined : 'text/plain'} data-key={web3Key}>
+          <form id="enquiry-form" class="mt-8 grid gap-5" method="post" action={formAction} enctype={web3Key ? undefined : 'text/plain'} data-key={web3Key}>
             {web3Key && <input type="hidden" name="access_key" value={web3Key} />}
             <input type="hidden" name="subject" value="New enquiry from zelux.co.uk" />
             <input type="hidden" name="from_name" value="Zelux website" />
@@ -80,12 +81,12 @@ const agenda = [
 
             <div class="grid gap-2">
               <label for="f-name" class="text-sm text-ink">Name</label>
-              <input id="f-name" name="name" class="field" autocomplete="name" required aria-describedby="f-name-err" />
+              <input id="f-name" name="name" class="field" autocomplete="name" placeholder="Sam Taylor" required aria-describedby="f-name-err" />
               <p id="f-name-err" class="field-error hidden">Please add your name.</p>
             </div>
             <div class="grid gap-2">
               <label for="f-email" class="text-sm text-ink">Email</label>
-              <input id="f-email" name="email" type="email" class="field" autocomplete="email" inputmode="email" required aria-describedby="f-email-err" />
+              <input id="f-email" name="email" type="email" class="field" autocomplete="email" inputmode="email" placeholder="sam@yourbusiness.co.uk" required aria-describedby="f-email-err" />
               <p id="f-email-err" class="field-error hidden">Please add an email address I can reply to, like name@business.co.uk.</p>
             </div>
             <div class="grid gap-2">
@@ -105,7 +106,7 @@ const agenda = [
             </button>
             <p class="text-xs leading-relaxed text-ink-3">
               Your details are only used to reply to you. See the <a href="/privacy" class="underline underline-offset-2 hover:text-ink">privacy policy</a>.
-              Or email <a href={`mailto:${site.email}`} class="text-ink-2 underline underline-offset-2 hover:text-ink">{site.email}</a>.
+              {hasCal && <>Or email <a href={`mailto:${site.email}`} class="text-ink-2 underline underline-offset-2 hover:text-ink">{site.email}</a>.</>}
             </p>
           </form>
         </div>
@@ -161,7 +162,7 @@ const agenda = [
   }
 
   // ---- Web3Forms enquiry ----
-  const form = document.getElementById('enquiry') as HTMLFormElement | null;
+  const form = document.getElementById('enquiry-form') as HTMLFormElement | null;
   const status = document.getElementById('form-status')!;
   const show = (msg: string, ok: boolean) => {
     status.textContent = msg;

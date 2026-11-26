@@ -1,5 +1,6 @@
 ---
 import Wordmark from './Wordmark.astro';
+import site from '../content/site.json';
 interface Props { currentPath: string }
 const { currentPath } = Astro.props;
 const links = [
@@ -25,7 +26,7 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
           </li>
         ))}
       </ul>
-      <a href="/book" class="btn-primary !min-h-10 !px-4 !text-[0.875rem]">Book a free call</a>
+      <a href="/book" class:list={['btn-primary !min-h-10 !px-4 !text-[0.875rem]', currentPath.startsWith('/book') && 'ring-2 ring-accent-tint ring-offset-2 ring-offset-canvas']} aria-current={currentPath.startsWith('/book') ? 'page' : undefined}>Book a free call</a>
     </nav>
 
     <a id="menu-fallback" href="#footer-nav" class="md:hidden flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.12em] text-ink-2">Menu</a>
@@ -49,7 +50,7 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
       <ul>
         {links.map((l, i) => (
           <li class="menu-item border-b border-hairline" style={`--i:${i}`}>
-            <a href={l.href} class="flex min-h-14 items-center justify-between font-serif text-[1.75rem] text-ink">
+            <a href={l.href} class="flex min-h-14 items-center justify-between font-serif text-[1.5rem] text-ink">
               {l.label}
               <span class="text-ink-3" aria-hidden="true">→</span>
             </a>
@@ -57,6 +58,10 @@ const isActive = (href: string) => href !== '/#about' && currentPath.startsWith(
         ))}
       </ul>
       <a href="/book" class="menu-item btn-primary mt-6 w-full" style="--i:3">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a>
+      <div class="menu-item mt-6 flex flex-wrap items-center justify-between gap-3 text-sm text-ink-2" style="--i:4">
+        <span class="inline-flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-live" aria-hidden="true"></span>Taking on new builds</span>
+        <a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center text-ink underline decoration-hairline-strong underline-offset-4">{site.email}</a>
+      </div>
     </nav>
   </div>
 </header>

@@ -44,8 +44,8 @@
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Motion scale: one easing, three durations. Don't invent one-off timings. */
-  --dur-fast: var(--dur-fast);   /* colour, opacity feedback */
-  --dur-ui: var(--dur-ui);     /* transforms, underlines, toggles */
+  --dur-fast: 160ms;   /* colour, opacity feedback */
+  --dur-ui: 220ms;   /* transforms, underlines, toggles */
   --dur-slow: 600ms;   /* scroll reveals */
 }
 
@@ -118,7 +118,7 @@
   .h-hero {
     font-family: var(--font-serif);
     font-weight: 500;
-    font-size: clamp(2.25rem, 4.6vw, 4rem);
+    font-size: clamp(2.25rem, 4.2vw, 3.5rem);
     line-height: 1.02;
     letter-spacing: -0.03em;
     text-wrap: balance;
@@ -127,12 +127,14 @@
   .h-statement {
     font-family: var(--font-serif);
     font-weight: 500;
-    font-size: clamp(2rem, 3.8vw, 3.25rem);
-    line-height: 1.04;
+    font-size: clamp(1.875rem, 3.2vw, 2.75rem);
+    line-height: 1.06;
     letter-spacing: -0.04em;
     text-wrap: balance;
   }
   .lead { font-size: clamp(1.0625rem, 1.4vw, 1.25rem); line-height: 1.6; color: var(--color-ink-2); text-wrap: pretty; }
+  p, li, dd { text-wrap: pretty; }
+  [id] { scroll-margin-top: 5.5rem; }
   .body { line-height: 1.65; color: var(--color-ink-2); text-wrap: pretty; }
 
   .btn-primary {
@@ -151,7 +153,7 @@
   @media (hover: hover) and (pointer: fine) { .btn-primary:hover .arrow { transform: translateX(3px); } }
 
   .btn-ghost {
-    display: inline-flex; align-items: center; min-height: 48px; padding: 0 0.25rem;
+    display: inline-flex; align-items: center; min-height: 48px; padding: 0;
     color: var(--color-ink); font-size: 0.9375rem;
     background-image: linear-gradient(var(--color-accent), var(--color-accent));
     background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 calc(100% - 12px);
@@ -195,12 +197,14 @@
   .svc-title {
     font-family: var(--font-serif); font-weight: 500;
     font-size: clamp(1.625rem, 2.6vw, 2.25rem); line-height: 1.1; letter-spacing: -0.035em; text-wrap: balance;
-    color: var(--color-ink); transition: color var(--dur-ui), transform 300ms var(--ease-out-soft);
+    color: var(--color-ink); transition: color var(--dur-ui);
   }
+  .svc-move { transition: transform 300ms var(--ease-out-soft); }
   .svc-row:focus-visible .svc-title { color: var(--color-accent); }
   /* Hover styles only where a real pointer can hover (no sticky hover after a tap on touch screens) */
   @media (hover: hover) and (pointer: fine) {
-    .svc-row:hover .svc-title { color: var(--color-accent); transform: translateX(6px); }
+    .svc-row:hover .svc-title { color: var(--color-accent); }
+    .svc-row:hover .svc-move { transform: translateX(6px); }
     .svc-row:hover .svc-arrow { border-color: var(--color-accent); background: var(--color-accent); color: var(--color-on-accent); transform: rotate(-45deg); }
   }
   .svc-arrow {
@@ -213,13 +217,12 @@
 
   /* Process: oversized step numerals */
   .step-num {
-    font-family: var(--font-serif); font-weight: 500;
-    font-size: clamp(2.5rem, 3.6vw, 3.25rem); line-height: 0.95; letter-spacing: -0.06em;
-    color: var(--color-deep-ink); font-variant-numeric: tabular-nums;
+    font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1; letter-spacing: 0.12em;
+    color: var(--color-accent-on-deep); font-variant-numeric: tabular-nums;
   }
 
   /* Long-form legal / prose */
-  .prose-z { max-width: 68ch; color: var(--color-ink-2); line-height: 1.7; }
+  .prose-z { max-width: 66ch; color: var(--color-ink-2); line-height: 1.7; }
   .prose-z h2 { font-family: var(--font-sans); font-weight: 500; color: var(--color-ink); font-size: 1.625rem; line-height: 1.2; margin: 3rem 0 1rem; letter-spacing: -0.03em; }
   .prose-z h3 { color: var(--color-ink); font-weight: 500; margin: 1.75rem 0 0.5rem; }
   .prose-z p { margin: 0 0 1rem; }
@@ -228,7 +231,7 @@
   .prose-z li::marker { color: var(--color-accent); }
   .prose-z a { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-hairline-strong); text-underline-offset: 3px; }
   .prose-z a:hover { text-decoration-color: var(--color-accent); }
-  .prose-z strong { color: var(--color-ink); font-weight: 500; }
+  .prose-z strong { color: var(--color-ink); font-weight: 400; }
 }
 
 /* Reveal on scroll — only when motion is welcome and JS has run */
@@ -256,7 +259,7 @@
 .js .faq-item[data-open="true"] .faq-panel { grid-template-rows: 1fr; }
 /* Closing is quicker than opening */
 .js .faq-item[data-open="false"] .faq-panel { transition-duration: var(--dur-ui); }
-.faq-item[data-open="true"] .faq-icon { transform: rotate(45deg); color: var(--color-accent); }
+.faq-item[data-open="true"] .faq-icon { transform: rotate(45deg); }
 html:not(.js) .faq-icon { display: none; }
 
 /* No-JS: the menu button can't work, so show a plain link to the footer navigation instead */
@@ -271,3 +274,9 @@ h1 em, h2 em, h3 em { font-style: normal; }
 /* Hero: faint hairline grid that fades out toward the bottom */
 .hero-grid { background-image: linear-gradient(var(--color-canvas), transparent 30%, transparent 70%, var(--color-canvas)), linear-gradient(90deg, #edf1f6 1px, transparent 1px); background-size: 100% 100%, calc((min(100vw, 1160px) - 2.5rem) / 12) 100%; background-position: 0 0, center top; }
 
+
+/* Live status dot: one soft ping, then rest (reduced motion: static) */
+@media (prefers-reduced-motion: no-preference) {
+  .live-ping { animation: live-ping 2.4s var(--ease-out-soft) infinite; }
+}
+@keyframes live-ping { 0% { transform: scale(1); opacity: 0.6; } 70%, 100% { transform: scale(2.6); opacity: 0; } }

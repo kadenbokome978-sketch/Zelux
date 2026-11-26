@@ -33,6 +33,7 @@ const first = blueprints[0].id;
       ))}
     </div>
     <p class="dt-small">Runs in your browser. Nothing you pick is sent anywhere.</p>
+    <p class="dt-other">Job not listed? <a href="/book#enquiry">Tell me what it is →</a></p>
   </div>
 
   <div class="min-w-0 lg:col-span-7">
@@ -60,7 +61,7 @@ const first = blueprints[0].id;
               <p class="dt-tools"><span>Works with</span>{b.tools.map((t) => <i>{toolLabel[t]}</i>)}</p>
               <div class="dt-actions">
                 <a class="btn-primary" href={`/book?need=${encodeURIComponent(need)}#enquiry`}>Get this built <span class="arrow" aria-hidden="true">→</span></a>
-                <a class="btn-ghost" href={`/automations/${slugFor(b.auto)}`}>More detail</a>
+                <a class="btn-ghost" href={`/automations/${slugFor(b.auto)}`}>How it works <span aria-hidden="true" class="ml-1.5">→</span></a>
               </div>
             </div>
           </article>
@@ -71,8 +72,9 @@ const first = blueprints[0].id;
 </div>
 
 <style>
-  .dt-ask { font-weight: 600; color: var(--color-ink); font-size: 1.0625rem; }
-  .dt-tiles { margin-top: 1rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+  .dt-ask { font-weight: 600; color: var(--color-ink); font-size: 1.0625rem; line-height: 1.3; }
+  @media (min-width: 1024px) { .dt-ask { margin-top: -0.15rem; } }
+  .dt-tiles { margin-top: 1rem; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 0.5rem; }
   .dt-tile {
     display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 0.75rem;
     min-height: 6.25rem; padding: 0.85rem; border-radius: var(--radius-inner);
@@ -89,12 +91,17 @@ const first = blueprints[0].id;
   }
   /* Below desktop: one swipeable row, so the blueprint sits right under what you tapped */
   @media (max-width: 1023px) {
-    .dt-tiles { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 9.25rem; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 0.25rem; scrollbar-width: none; }
+    .dt-tiles { grid-template-columns: none; grid-auto-rows: auto; grid-auto-flow: column; grid-auto-columns: 9.25rem; overflow-x: auto; -webkit-mask-image: linear-gradient(90deg, #000 80%, transparent); mask-image: linear-gradient(90deg, #000 80%, transparent); padding-right: 3rem; scroll-snap-type: x proximity; padding-bottom: 0.25rem; scrollbar-width: none; }
     .dt-tiles::-webkit-scrollbar { display: none; }
     .dt-tile { min-height: 5.5rem; scroll-snap-align: start; }
     .dt-small { margin-top: 0.5rem; }
   }
   .dt-small { margin-top: 1rem; font-size: 0.8125rem; color: var(--color-ink-3); }
+  .dt-other { margin-top: 0.75rem; font-size: 0.9375rem; color: var(--color-ink-2); }
+  .dt-other a { color: var(--color-ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--color-hairline-strong); text-underline-offset: 4px; }
+  .dt-other a:hover { color: var(--color-accent); text-decoration-color: currentColor; }
+  /* All cards share one grid cell, so the panel is as tall as the tallest and nothing below jumps */
+  :global(.js) .dt-card[hidden] { display: block; visibility: hidden; }
 
   .dt-stage { display: grid; }
   .dt-card { grid-area: 1 / 1; overflow: hidden; border-radius: calc(var(--radius-card) + 0.25rem); background: var(--color-paper); border: 1px solid var(--color-hairline); }

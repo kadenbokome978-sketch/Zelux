@@ -12,7 +12,7 @@
     "titleLead": "Your website should win you work.",
     "titleItalic": "Your admin should run itself.",
     "subtitle": "For UK businesses tired of dated websites and manual admin. You deal directly with the person designing, building and wiring up the system. No account managers, no bloated retainers.",
-    "status": "Taking on new client builds · Direct with Kaden"
+    "status": "Taking on new builds · Hampshire, UK"
   },
   "pillars": [
     {
@@ -37,7 +37,7 @@
   "steps": [
     {
       "index": "01",
-      "title": "Day 1: 20-min call",
+      "title": "Day 1: intro call",
       "body": "Tell me what's slowing the business down or costing you leads. No pitch deck."
     },
     {
@@ -85,7 +85,7 @@
     ]
   },
   "closing": {
-    "title": "Ready to get it built?",
+    "title": "Tell me what's eating your week.",
     "body": "Book a 20-minute call. Tell me what you're trying to fix or launch, and I'll tell you plainly if I can help."
   },
   "speed": [
@@ -164,7 +164,7 @@
   "guarantee": {
     "title": "The 7-day guarantee",
     "short": "Live in 7 days or £100 off.",
-    "terms": "Sites up to 5 pages go live within 7 days, or you get £100 off the final invoice. The 7 days start once the quote is accepted and your copy, photos and logins are in, and pause while a design is waiting on your feedback."
+    "terms": "Sites up to 5 pages go live within 7 days, or you get £100 off the final invoice. The seven days start once the quote is accepted and your copy, photos and logins are in, and pause while a design is waiting on your feedback."
   },
   "_calNote": "Set PUBLIC_CAL_LINK in Vercel (or calLink here) to your Cal.com username/event, e.g. zelux/20min. 'none' or empty hides the calendar."
 }

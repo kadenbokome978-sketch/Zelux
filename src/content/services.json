@@ -18,7 +18,13 @@
       "Photography or video shoots (I'll advise on what's worth getting)",
       "Ongoing content writing, unless agreed in scope"
     ],
-    "timeline": "Sites up to 5 pages: live within 7 days, or £100 off. Bigger sites and shops get a fixed date in the quote."
+    "timeline": "Sites up to 5 pages: live within 7 days, or £100 off. Bigger sites and shops get a fixed date in the quote.",
+    "tag": "Live in 7 days",
+    "chips": [
+      "Mobile-first design",
+      "Booking or payments",
+      "SEO foundations"
+    ]
   },
   {
     "index": "02",
@@ -38,7 +44,13 @@
       "Replacing systems that already work well",
       "Software licences (these sit in your name, at your cost)"
     ],
-    "timeline": "Scoped to size. Most focused workflows ship within 1–2 weeks."
+    "timeline": "Scoped to size. Most focused workflows ship within 1–2 weeks.",
+    "tag": "1–2 weeks per workflow",
+    "chips": [
+      "Enquiry routing",
+      "Follow-ups",
+      "Weekly reports"
+    ]
   },
   {
     "index": "03",
@@ -50,12 +62,19 @@
       "Uptime and form monitoring",
       "Small content changes and new pages",
       "Security and dependency updates",
-      "Priority fixes if anything breaks"
+      "Priority fixes if anything breaks",
+      "Rolling monthly, cancel with 30 days' notice. No lock-in."
     ],
     "notIncluded": [
       "Full redesigns (quoted separately)",
-      "Lock-in. Rolling monthly, cancel with 30 days' notice"
+      "Long contracts or exit fees"
     ],
-    "timeline": "Rolling monthly, after launch."
+    "timeline": "Rolling monthly, after launch.",
+    "tag": "Rolling monthly",
+    "chips": [
+      "Hosting & updates",
+      "New pages",
+      "Priority fixes"
+    ]
   }
 ]

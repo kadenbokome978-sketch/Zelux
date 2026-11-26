@@ -60,4 +60,6 @@ const { title, host, desktop, mobile, frame, bar, barInk, eager = false, hinted 
   }
   @keyframes ss-pan { from { object-position: 50% 0%; } to { object-position: 50% 100%; } }
   @media (max-width: 520px) { .ss-bar span { display: none; } }
+  /* Phones show the laptop view only, so give it more height */
+  @media (max-width: 640px) { .ss-view { aspect-ratio: 1 / 1.1; } }
 </style>

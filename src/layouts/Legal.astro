@@ -4,13 +4,11 @@ interface Props { title: string; description: string; heading: string; updated: 
 const { title, description, heading, updated } = Astro.props;
 ---
 <Base title={title} description={description}>
-  <section class="container-z pb-24 pt-20 md:pb-32 md:pt-28">
-    <div class="grid gap-10 md:grid-cols-12 md:gap-8">
-      <div class="md:col-span-3">
-        <p class="eyebrow md:sticky md:top-28">Legal · Updated {updated}</p>
-      </div>
-      <div class="md:col-span-9">
-        <h1 class="h-section">{heading}</h1>
+  <section class="container-z pb-20 pt-14 md:pb-28 md:pt-20">
+    <div>
+      <div>
+        <p class="eyebrow">Legal · Updated <span class="whitespace-nowrap">{updated}</span></p>
+        <h1 class="h-section mt-5">{heading}</h1>
         <div class="prose-z mt-10">
           <slot />
         </div>

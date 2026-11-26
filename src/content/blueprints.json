@@ -159,14 +159,14 @@
   },
   {
     "id": "stock",
-    "task": "Keeping an eye on stock",
+    "task": "Low-stock alerts",
     "auto": "08",
     "detector": false,
     "trigger": "Stock of a product drops below the minimum you set",
     "steps": [
       "You get a text or email saying what's running low",
       "It shows how fast that product has been selling",
-      "You reorder in time instead of finding an empty shelf"
+      "A weekly low-stock summary lands in your inbox"
     ],
     "approve": "You set the minimum for each product, and nothing is ordered without you",
     "tools": [

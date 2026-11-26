@@ -1,5 +1,7 @@
 ---
-import faqs from '../content/faqs.json';
+import defaultFaqs from '../content/faqs.json';
+interface Props { items?: { q: string; a: string }[] }
+const faqs = Astro.props.items ?? defaultFaqs;
 ---
 <div class="border-t border-hairline" data-reveal>
   {faqs.map((f, i) => (
@@ -13,7 +15,7 @@ import faqs from '../content/faqs.json';
           id={`faq-btn-${i}`}
         >
           <span>{f.q}</span>
-          <span class="faq-icon text-xl leading-none text-ink-3 transition-transform duration-300" aria-hidden="true">+</span>
+          <span class="faq-icon grid h-8 w-8 shrink-0 place-items-center rounded-full border border-hairline text-accent transition-transform duration-300" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></span>
         </button>
       </h3>
       <div class="faq-panel" id={`faq-${i}`} role="region" aria-labelledby={`faq-btn-${i}`}>
