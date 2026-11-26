@@ -28,8 +28,8 @@ const reserved = (work as Work[]).filter((w) => w.isPlaceholder);
 const slides: Slide[] = [
   ...live.map((item) => ({ kind: 'work' as const, item, theme: themeFor(item) })),
   ...reserved.map((item) => ({ kind: 'work' as const, item, theme: themes.sport })),
-  { kind: 'concept', variant: 'groomer', title: 'Muddy Paws', sector: 'Concept · Dog groomer', body: 'Pick a groom, pick a time, get a reminder the day before. Built around one job: filling the diary without phone tag.', theme: themes.groomer },
-  { kind: 'concept', variant: 'bakery', title: 'Corner Loaf', sector: 'Concept · Bakery', body: 'Order tonight, collect from 7:30 without queueing. Built around one job: selling tomorrow’s bake before it’s baked.', theme: themes.bakery },
+  { kind: 'concept', variant: 'groomer', title: 'Muddy Paws', sector: 'Dog groomer', body: 'Pick a groom, pick a time, get a reminder the day before. Built around one job: filling the diary without phone tag.', theme: themes.groomer },
+  { kind: 'concept', variant: 'bakery', title: 'Corner Loaf', sector: 'Bakery', body: 'Order tonight, collect from 7:30 without queueing. Built around one job: selling tomorrow’s bake before it’s baked.', theme: themes.bakery },
 ];
 const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '');
 const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co-founded') ? 'Live · Co-founded' : 'Live · Client');
@@ -45,7 +45,7 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
         style={`--bg:${s.theme.bg};--ink:${s.theme.ink};--muted:${s.theme.muted};--ac:${s.theme.accent};--line:${s.theme.line}`}
       >
         <div class="pc-copy">
-          <span class="pc-badge">{s.kind === 'work' ? badge(s.item) : 'Concept · not a client'}</span>
+          <span class="pc-badge">{s.kind === 'work' ? badge(s.item) : 'Concept'}</span>
           <h3 class:list={['pc-title', s.kind === 'work' && s.item.title === 'KrapMaps' && 'font-krap']}>{s.kind === 'work' ? s.item.title : s.title}</h3>
           <p class="pc-sector">{s.kind === 'work' ? s.item.sector : s.sector}</p>
           {s.kind === 'work' ? (

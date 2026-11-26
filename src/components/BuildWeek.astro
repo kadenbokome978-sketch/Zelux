@@ -9,7 +9,7 @@ const shortLabels = ['Day 1', 'Day 2', 'Days 3–6', 'Day 7'];
 const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
 const shortNames = ['Call', 'Quote', 'Build', 'Live'];
 ---
-<figure id="buildweek" class="bw" data-stage="3" data-styled="true" aria-label="Example: one week from first call to a live website. Day 1 call notes, day 2 a fixed quote is accepted, days 3 to 6 the design is built and reviewed, day 7 it goes live on the customer's own domain. Made-up business.">
+<figure id="buildweek" class="bw" data-stage="3" data-styled="true" aria-label="Example: one week from first call to a live website. Day 1 call notes, day 2 a fixed quote is accepted, days 3 to 6 the design is built and reviewed, day 7 it goes live on the customer's own domain.">
   <div class="bw-days" role="group" aria-label="Show a day">
     {names.map((n, i) => (
       <button type="button" class="bw-day" data-go={i} aria-pressed={i === 3 ? 'true' : 'false'}>
@@ -94,7 +94,7 @@ const shortNames = ['Call', 'Quote', 'Build', 'Live'];
     <p class="bw-say" aria-live="polite">
       {site.steps.map((s, i) => <span class="bw-say-i" data-i={i}>{s.body}</span>)}
     </p>
-    <span class="bw-meta"><span>Example build · made-up business</span><button type="button" class="bw-replay">Play again ↺</button></span>
+    <span class="bw-meta"><button type="button" class="bw-replay">Play again ↺</button></span>
   </figcaption>
 </figure>
 
@@ -195,7 +195,7 @@ const shortNames = ['Call', 'Quote', 'Build', 'Live'];
   .bw-say { display: grid; min-height: 3em; font-size: 0.9375rem; line-height: 1.55; color: var(--color-deep-ink); }
   .bw-say-i { grid-area: 1 / 1; opacity: 0; transition: opacity var(--dur-ui); }
   .bw[data-stage='0'] .bw-say-i[data-i='0'], .bw[data-stage='1'] .bw-say-i[data-i='1'], .bw[data-stage='2'] .bw-say-i[data-i='2'], .bw[data-stage='3'] .bw-say-i[data-i='3'] { opacity: 1; }
-  .bw-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--color-deep-line); font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-deep-ink-2); }
+  .bw-meta { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--color-deep-line); font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-deep-ink-2); }
   .bw-replay { flex: none; min-height: 36px; padding: 0 0.9rem; border-radius: 999px; border: 1px solid var(--color-deep-line); color: var(--color-deep-ink); font: inherit; letter-spacing: 0.06em; }
   @media (hover: hover) and (pointer: fine) { .bw-replay:hover { border-color: var(--color-deep-ink-2); } }
   .bw-short { display: none; }
@@ -226,8 +226,14 @@ const shortNames = ['Call', 'Quote', 'Build', 'Live'];
     .bw-quote li { padding-bottom: 5px; }
     .bw-quote li i { font-size: 10px; }
     .bw-quote li:nth-child(3) { display: none; }
+    .bw-notes li:nth-child(4) { display: none; }
+    .bw-doc { bottom: 12px; overflow: hidden; }
     .bw-stamp { top: 10px; right: 10px; font-size: 10px; padding: 3px 7px; }
-    .bw-comment { right: 10px; left: 10px; bottom: 10px; max-width: none; }
+    .bw-comment { right: 10px; left: 10px; bottom: 8px; max-width: none; gap: 8px; padding: 7px 10px; font-size: 11px; line-height: 1.3; }
+    .bw-comment b { display: none; }
+    .bw-comment-a { width: 20px; height: 20px; font-size: 10px; }
+    .bw-comment-done { padding: 2px 7px; font-size: 10px; }
+    .bw-h { font-size: 16.5px; }
   }
 </style>
 

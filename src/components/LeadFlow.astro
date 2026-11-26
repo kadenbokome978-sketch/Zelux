@@ -75,7 +75,6 @@ const flows: Record<'before' | 'after', Step[]> = {
   ))}
 
   <figcaption class="lf-foot">
-    <span>Illustrative example · Sarah is made up</span>
     <button type="button" class="lf-replay">Play again ↺</button>
   </figcaption>
 </figure>
@@ -166,7 +165,7 @@ const flows: Record<'before' | 'after', Step[]> = {
   .lf-crm span:first-child { font-weight: 600; color: var(--color-ink); }
   .lf-crm span:last-child { border: 0; color: var(--color-live); font-weight: 600; }
 
-  .lf-foot { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--lf-line); display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lf-muted); }
+  .lf-foot { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--lf-line); display: flex; justify-content: flex-end; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lf-muted); }
   .lf-replay { flex: none; white-space: nowrap; min-height: 36px; padding: 0 0.9rem; border-radius: 999px; border: 1px solid var(--lf-line); font: inherit; color: var(--color-deep-ink); letter-spacing: 0.06em; }
   @media (hover: hover) and (pointer: fine) {
     .lf-replay:hover, .lf-node:hover { border-color: var(--color-deep-ink-2); }

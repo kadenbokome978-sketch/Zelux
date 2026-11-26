@@ -11,7 +11,7 @@ const services = [
 ];
 const slots = ['9:00', '11:30', '13:30', '15:00'];
 ---
-<figure class="hp" aria-label="Example: a customer books a boiler service on a plumber's phone-friendly website in a few taps. Made-up business, not a client.">
+<figure class="hp" aria-label="Example: a customer books a boiler service on a plumber's phone-friendly website in a few taps.">
   <div class="hp-phone" aria-hidden="true">
     <div class="hp-screen">
       <!-- iOS status bar -->
@@ -108,7 +108,6 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
     </div>
   </div>
   <figcaption class="hp-cap">
-    <span data-p="cap">Concept site · not a client</span>
     <button type="button" class="hp-pause" aria-pressed="false">Pause demo</button>
   </figcaption>
 </figure>
@@ -192,7 +191,7 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
   /* tap markers */
   .hp-tap { position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 999px; background: rgb(15 23 42 / 0.28); box-shadow: 0 0 0 2px rgb(255 255 255 / 0.7); opacity: 0; pointer-events: none; }
 
-  .hp-cap { display: flex; align-items: center; justify-content: space-between; white-space: nowrap; gap: 10px; margin-top: 14px; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink-3); }
+  .hp-cap { display: flex; align-items: center; justify-content: center; white-space: nowrap; gap: 10px; margin-top: 14px; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink-3); }
   .hp-pause { flex: none; min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--color-hairline-strong); background: var(--color-paper); color: var(--color-ink); font: inherit; letter-spacing: 0.06em; }
   :global(html:not(.js)) .hp-pause { display: none; }
 
@@ -254,7 +253,6 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
       };
       t.services.forEach(([a, b], n) => { v[`s${n}`] = a; v[`v${n}`] = b; });
       v.listTitle = t.services[0][1].startsWith('from') ? 'Prices' : 'Services';
-      v.cap = r_typed(p) ? 'Your preview · made up' : 'Concept site · not a client';
       if (!p) { v.kicker = 'Gas Safe · Havant & Waterlooville'; }
       fill(el, v);
       if (heroArt) heroArt.innerHTML = t.icon ? artSvg(t) : vanArt;
