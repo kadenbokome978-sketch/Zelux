@@ -140,7 +140,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- PROCESS + PRICING (deep band) -->
   <section data-tab="services" class="band-deep">
-    <div class="container-z py-8 md:py-24">
+    <div class="container-z max-md:py-0 py-8 md:py-24">
       <div class="grid gap-8 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-8 lg:gap-y-6">
         <div data-fit="process-week" class="grid gap-6 lg:contents">
           <div class="lg:col-span-4 lg:row-start-1" data-reveal>
@@ -162,7 +162,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
             </span>
             <div>
               <p class="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent-on-deep">{site.guarantee.title}</p>
-              <h3 class="mt-1 text-[1.5rem] font-semibold leading-tight tracking-[-0.025em] text-deep-ink">{site.guarantee.short}</h3>
+              <h3 class="mt-1 text-[1.25rem] font-semibold leading-tight tracking-[-0.025em] text-balance text-deep-ink md:text-[1.5rem]">{site.guarantee.short}</h3>
             </div>
           </div>
           <p class="hidden text-[0.9375rem] leading-relaxed text-deep-ink-2 sm:block md:col-span-7">{site.guarantee.terms}</p>

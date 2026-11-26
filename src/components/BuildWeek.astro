@@ -5,14 +5,16 @@
 // The business (Brookfield Plumbing) is made up and labelled as an example.
 import site from '../content/site.json';
 const labels = ['Day 1', 'Day 2', 'Days 3 to 6', 'Day 7'];
+const shortLabels = ['Day 1', 'Day 2', 'Days 3–6', 'Day 7'];
 const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
+const shortNames = ['Call', 'Quote', 'Build', 'Live'];
 ---
 <figure id="buildweek" class="bw" data-stage="3" data-styled="true" aria-label="Example: one week from first call to a live website. Day 1 call notes, day 2 a fixed quote is accepted, days 3 to 6 the design is built and reviewed, day 7 it goes live on the customer's own domain. Made-up business.">
   <div class="bw-days" role="group" aria-label="Show a day">
     {names.map((n, i) => (
       <button type="button" class="bw-day" data-go={i} aria-pressed={i === 3 ? 'true' : 'false'}>
-        <span class="bw-day-k">{labels[i]}</span>
-        <span class="bw-day-n">{n}</span>
+        <span class="bw-day-k"><span class="bw-long">{labels[i]}</span><span class="bw-short" aria-hidden="true">{shortLabels[i]}</span></span>
+        <span class="bw-day-n"><span class="bw-long">{n}</span><span class="bw-short" aria-hidden="true">{shortNames[i]}</span></span>
         <span class="bw-day-bar" aria-hidden="true"><i></i></span>
       </button>
     ))}
@@ -196,7 +198,14 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
   .bw-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--color-deep-line); font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-deep-ink-2); }
   .bw-replay { flex: none; min-height: 36px; padding: 0 0.9rem; border-radius: 999px; border: 1px solid var(--color-deep-line); color: var(--color-deep-ink); font: inherit; letter-spacing: 0.06em; }
   @media (hover: hover) and (pointer: fine) { .bw-replay:hover { border-color: var(--color-deep-ink-2); } }
+  .bw-short { display: none; }
   @media (max-width: 640px) {
+    .bw-long { display: none; }
+    .bw-short { display: inline; }
+    .bw-day { text-align: center; }
+    .bw-day-k { white-space: nowrap; }
+    .bw-cards { display: none; }
+    .bw-site { grid-template-rows: auto 1fr; }
     .bw-view { height: 12rem; }
     .bw-day-bar { display: none; }
     .bw-browser { margin-top: 0.6rem; }
