@@ -14,7 +14,7 @@ npm run build
 npm run check          # CHROME_PATH=/path/to/chromium if Playwright's browser isn't installed
 ```
 
-`npm run check` covers: axe WCAG 2.2 AA at 390px and 1280px on every page, sideways scroll at 390px, no-JS rendering (no hidden reveal blocks, menu fallback, FAQ readable), no "AI", no em dashes. CI runs the same on every push (`.github/workflows/quality.yml`) plus Lighthouse.
+`npm run check` covers: axe WCAG 2.2 AA at 390px and 1280px on every page, sideways scroll at 390px plus 320 to 1920px (9 widths), no-JS rendering (no hidden reveal blocks, menu fallback, FAQ readable), no "AI", no em dashes. CI runs the same on every push (`.github/workflows/quality.yml`) plus Lighthouse.
 
 ## 2. Lighthouse (mobile)
 
