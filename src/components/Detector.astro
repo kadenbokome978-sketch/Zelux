@@ -124,6 +124,7 @@ const first = blueprints[0].id;
   }
   .dt-control { display: flex; gap: 0.75rem; padding: 0.85rem 1rem; border-radius: var(--radius-inner); background: #ecfdf3; color: #14532d; font-size: 0.9375rem; line-height: 1.45; }
   .dt-control svg { flex: none; width: 22px; height: 22px; margin-top: 1px; fill: none; stroke: #15803d; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  @media (max-width: 640px) { .dt-tools { display: none !important; } .dt-body { padding: 1.1rem; gap: 0.9rem; } .dt-head { padding: 1rem 1.1rem; } }
   .dt-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; font-size: 0.8125rem; }
   .dt-tools span { margin-right: 0.25rem; color: var(--color-ink-3); }
   .dt-tools i { font-style: normal; padding: 0.25rem 0.65rem; border-radius: 999px; background: var(--color-surface); color: var(--color-ink-2); }

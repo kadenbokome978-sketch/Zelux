@@ -42,7 +42,9 @@ const serviceIcon: Record<string, string> = { websites: 'website', automation: '
             </div>
             <p class:list={['mt-6 text-sm', 'text-ink-2']}><strong class:list={['text-ink']}>Timeline:</strong> {s.timeline}</p>
           </div>
-          <div class="grid content-start gap-6 p-6 md:p-10 lg:col-span-6">
+          <details class="svc-more lg:col-span-6" open>
+          <summary class="svc-sum">What's included, and what isn't<span aria-hidden="true">+</span></summary>
+          <div class="grid content-start gap-6 p-6 pt-2 md:p-10 lg:pt-10">
             <div>
               <h3 class="text-[1.0625rem] font-semibold text-ink">What's included</h3>
               <ul class="mt-4 grid gap-3">
@@ -64,27 +66,28 @@ const serviceIcon: Record<string, string> = { websites: 'website', automation: '
               </ul>
             </div>
           </div>
+          </details>
         </div>
       </section>
     ))}
   </div>
 
   <section id="automations" class="scroll-mt-16 border-t border-hairline bg-surface">
-    <div class="container-z py-14 md:py-20">
+    <div class="container-z py-12 md:py-20">
       <div class="grid gap-4 lg:grid-cols-12 lg:items-end" data-reveal>
         <h2 class="h-section lg:col-span-7">Ten ways to get hours back.</h2>
         <p class="body lg:col-span-5">Each one is set up around the tools you already use, tested with real examples, and handed over with plain‑English notes.</p>
       </div>
-      <ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <ul class="mt-8 grid grid-cols-2 gap-2.5 sm:mt-10 sm:gap-3 lg:grid-cols-5">
         {automations.map((a) => (
           <li id={`auto-${a.index}`} class="scroll-mt-20" data-reveal>
-            <a href={`/automations/${a.slug}`} class="group flex h-full flex-col gap-3 rounded-card border border-hairline bg-paper p-5 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-accent">
-              <span class="grid h-12 w-12 place-items-center rounded-[14px] bg-accent-tint text-accent-hover transition-colors group-hover:bg-accent group-hover:text-on-accent">
+            <a href={`/automations/${a.slug}`} class="group flex h-full flex-col gap-2.5 rounded-card border border-hairline bg-paper p-4 sm:gap-3 sm:p-5 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-accent">
+              <span class="grid h-10 w-10 place-items-center rounded-[12px] bg-accent-tint sm:h-12 sm:w-12 sm:rounded-[14px] text-accent-hover transition-colors group-hover:bg-accent group-hover:text-on-accent">
                 <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[a.icon]} /></svg>
               </span>
-              <span class="text-[1.0625rem] font-semibold leading-snug tracking-[-0.015em] text-ink">{a.title}</span>
-              <span class="text-[0.875rem] leading-relaxed text-ink-2">{(a.body.split('. ')[0].length < 40 ? a.body.split('. ').slice(0, 2).join('. ') : a.body.split('. ')[0]).replace(/\.$/, '')}.</span>
-              <span class="mt-auto text-sm font-semibold text-accent">How it works →</span>
+              <span class="text-[0.9375rem] font-semibold leading-snug tracking-[-0.015em] text-ink sm:text-[1.0625rem]">{a.title}</span>
+              <span class="hidden text-[0.875rem] leading-relaxed text-ink-2 sm:block">{(a.body.split('. ')[0].length < 40 ? a.body.split('. ').slice(0, 2).join('. ') : a.body.split('. ')[0]).replace(/\.$/, '')}.</span>
+              <span class="mt-auto text-[0.8125rem] font-semibold text-accent sm:text-sm">How it works →</span>
             </a>
           </li>
         ))}
@@ -93,4 +96,18 @@ const serviceIcon: Record<string, string> = { websites: 'website', automation: '
   </section>
 
   <ClosingBand />
+  <style>
+    .svc-sum { display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 1.5rem; font-weight: 600; color: var(--color-ink); cursor: pointer; list-style: none; border-top: 1px solid var(--color-hairline); }
+    .svc-sum::-webkit-details-marker { display: none; }
+    .svc-sum span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; border: 1px solid var(--color-hairline); color: var(--color-accent); transition: transform var(--dur-ui) var(--ease-out-soft); }
+    .svc-more[open] .svc-sum span { transform: rotate(45deg); }
+    @media (min-width: 1024px) { .svc-sum { display: none; } }
+  </style>
+  <script>
+    // Phones: start the long lists folded away. Desktop (and no JS): always open.
+    const mq = matchMedia('(min-width: 1024px)');
+    const set = () => document.querySelectorAll<HTMLDetailsElement>('.svc-more').forEach((d) => (d.open = mq.matches || location.hash === `#${d.closest('section')?.id}`));
+    set();
+    mq.addEventListener('change', set);
+  </script>
 </Base>

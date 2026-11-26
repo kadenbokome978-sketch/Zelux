@@ -99,7 +99,7 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
 <style>
   .bw { --p-bg: #0e3b2f; --p-soft: #15493b; --p-line: #2a5a4b; --p-ac: #f2b33d; --p-acink: #1d1a10; --p-ink: #f3f1e7; margin: 0; }
   .bw-days { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
-  @media (max-width: 640px) { .bw-days { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .bw-days { gap: 0.3rem; } .bw-day { padding: 0.5rem 0.45rem 0.55rem; } .bw-day-k { font-size: 0.5625rem; letter-spacing: 0.06em; } .bw-day-n { font-size: 0.75rem; line-height: 1.2; } }
   .bw-day { display: grid; gap: 0.2rem; padding: 0.7rem 0.8rem 0.8rem; border-radius: var(--radius-inner); text-align: left; background: var(--color-deep-2); border: 1px solid var(--color-deep-line); color: var(--color-deep-ink-2); transition: border-color var(--dur-ui), color var(--dur-ui), background-color var(--dur-ui); }
   .bw-day-k { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; }
   .bw-day-n { font-weight: 600; font-size: 0.9375rem; color: var(--color-deep-ink); }

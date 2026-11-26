@@ -4,7 +4,7 @@
 // (no motion on touch, none with reduced motion), so nothing competes with the demos above.
 import services from '../content/services.json';
 ---
-<div class="sc-grid">
+<div class="sc-grid" role="region" aria-label="Services, swipe for more" tabindex="0">
   {services.map((s, i) => (
     <a href={`/services#${s.slug}`} class="sc group" data-reveal style={`--d:${i * 70}ms`}>
       <div class:list={['sc-vis', `sc-vis-${s.slug}`]} aria-hidden="true">
@@ -50,6 +50,13 @@ import services from '../content/services.json';
 
 <style>
   .sc-grid { display: grid; gap: 1rem; }
+  /* Phones: one swipeable row instead of three tall cards */
+  @media (max-width: 899px) {
+    .sc-grid { grid-auto-flow: column; grid-auto-columns: min(84%, 22rem); overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -1.25rem; padding: 0.25rem 1.25rem 0.75rem; scroll-padding-inline: 1.25rem; scrollbar-width: none; }
+    .sc-grid::-webkit-scrollbar { display: none; }
+    .sc { scroll-snap-align: start; }
+    .sc-vis { height: 9.5rem; }
+  }
   @media (min-width: 900px) { .sc-grid { grid-template-columns: repeat(3, 1fr); } }
   .sc { display: flex; flex-direction: column; padding: 0.75rem 0.75rem 1.4rem; border-radius: calc(var(--radius-card) + 0.25rem); background: var(--color-paper); border: 1px solid var(--color-hairline); color: var(--color-ink); transition: border-color var(--dur-ui), transform var(--dur-ui) var(--ease-out-soft), box-shadow var(--dur-ui); }
   .sc > :not(.sc-vis) { margin-inline: 0.75rem; }

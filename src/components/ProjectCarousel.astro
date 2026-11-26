@@ -50,7 +50,7 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
           <p class="pc-sector">{s.kind === 'work' ? s.item.sector : s.sector}</p>
           {s.kind === 'work' ? (
             <>
-              <p class="pc-body">{s.item.friction}</p>
+              <p class="pc-body pc-friction">{s.item.friction}</p>
               <p class="pc-body"><strong>{s.item.isPlaceholder ? 'Being built: ' : 'What I built: '}</strong>{s.item.built}</p>
               {s.item.href && (
                 <a class="pc-link" href={s.item.href} target="_blank" rel="noopener">Visit {host(s.item.href)} <span aria-hidden="true">↗</span></a>
@@ -178,6 +178,7 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
   .pc-btn[data-dir='1']:not(:disabled) { background: var(--color-ink); color: var(--color-canvas); border-color: var(--color-ink); }
   @media (hover: hover) and (pointer: fine) { .pc-btn[data-dir='-1']:not(:disabled):hover { border-color: var(--color-ink); } .pc-btn[data-dir='1']:not(:disabled):hover { background: var(--color-accent); border-color: var(--color-accent); } }
   :global(html:not(.js)) .pc-buttons, :global(html:not(.js)) .pc-count { display: none; }
+  @media (max-width: 640px) { .pc-friction { display: none; } .pc-copy { gap: 0.6rem; } .pc-track .pc-slide { padding: 1.5rem 1.25rem 0; } }
 </style>
 
 <script>

@@ -18,10 +18,10 @@ const agenda = [
   title="Book a 20-Minute Intro Call | Zelux"
   description="Book a free 20-minute call with Kaden at Zelux to talk through your website or automation project, or send a short enquiry. Reply within one working day."
 >
-  <section class="container-z pb-20 pt-16 md:pb-28 md:pt-24">
-    <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
+  <section class="container-z pb-14 pt-10 md:pb-28 md:pt-24">
+    <div class="grid gap-8 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-0">
       <!-- Booking -->
-      <div class="lg:col-span-7">
+      <div class="lg:col-span-7 lg:col-start-1 lg:row-start-1">
         <p class="eyebrow" data-reveal>Book a call</p>
         <h1 class="h-section mt-6 !text-[clamp(2.25rem,4vw,3.25rem)]" data-reveal style="--d:80ms">Book a free <span class="whitespace-nowrap">20-min</span> call.</h1>
         <p class="lead mt-4 max-w-[48ch]" data-reveal style="--d:120ms">Video or phone, whichever suits. No pitch deck, and no obligation.</p>
@@ -34,41 +34,9 @@ const agenda = [
           ))}
         </ul>
 
-        {hasCal ? (
-        <div class="panel mt-10 overflow-hidden" data-reveal style="--d:200ms">
-          <div class="flex items-center justify-between border-b border-hairline px-4 py-3">
-            <span class="eyebrow !text-[0.6875rem]">Calendar · 20 min · Video call</span>
-            <a href={`https://cal.com/${calLink}`} target="_blank" rel="noopener" class="link-u font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-2 hover:text-ink">Open in new tab ↗</a>
-          </div>
-          <div id="cal-inline" class="min-h-[560px] w-full" data-cal-link={calLink}>
-            <div id="cal-fallback" class="flex min-h-[560px] flex-col items-center justify-center gap-4 p-8 text-center">
-              <span class="h-6 w-6 animate-spin rounded-full border border-hairline border-t-accent motion-reduce:animate-none" aria-hidden="true"></span>
-              <p class="text-sm text-ink-3">Loading calendar…</p>
-              <a href={`https://cal.com/${calLink}`} target="_blank" rel="noopener" class="btn-ghost text-sm">Calendar not loading? Open booking page ↗</a>
-            </div>
-          </div>
-        </div>
-        ) : (
-          <div class="mt-10 rounded-card border border-hairline bg-paper p-6 md:p-8" data-reveal style="--d:200ms">
-            <h2 class="font-serif text-[1.5rem] leading-tight text-ink">How booking works</h2>
-            <ol class="mt-5 grid gap-4">
-              {[
-                ['Send a short note', `Use the form, or email ${site.email}. A couple of lines is plenty.`],
-                ['I reply within one working day', 'With two or three times that suit, by video or phone.'],
-                ['20 minutes, no pitch', 'You leave knowing what a build would cost and how long it would take.'],
-              ].map(([t, b], i) => (
-                <li class="flex gap-4">
-                  <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent-tint font-mono text-xs font-semibold text-accent-hover">{i + 1}</span>
-                  <span><strong class="block font-semibold text-ink">{t}</strong><span class="text-[0.9375rem] text-ink-2">{b}</span></span>
-                </li>
-              ))}
-            </ol>
-          </div>
-        )}
       </div>
-
       <!-- Enquiry form -->
-      <aside class="lg:col-span-5" data-reveal style="--d:240ms">
+      <aside class="lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1" data-reveal style="--d:240ms">
         <div id="enquiry" class="panel p-6 md:p-8 lg:sticky lg:top-24">
           <h2 class="font-serif text-[2rem] leading-tight text-ink">{hasCal ? 'Prefer to write first?' : 'Tell me what you need'}</h2>
           <p class="body mt-3 text-[0.9375rem]">Send a short note. I reply personally, usually within one working day.</p>
@@ -111,6 +79,40 @@ const agenda = [
           </form>
         </div>
       </aside>
+      <div class="lg:col-span-7 lg:col-start-1 lg:row-start-2">
+        {hasCal ? (
+        <div class="panel mt-10 overflow-hidden" data-reveal style="--d:200ms">
+          <div class="flex items-center justify-between border-b border-hairline px-4 py-3">
+            <span class="eyebrow !text-[0.6875rem]">Calendar · 20 min · Video call</span>
+            <a href={`https://cal.com/${calLink}`} target="_blank" rel="noopener" class="link-u font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-2 hover:text-ink">Open in new tab ↗</a>
+          </div>
+          <div id="cal-inline" class="min-h-[560px] w-full" data-cal-link={calLink}>
+            <div id="cal-fallback" class="flex min-h-[560px] flex-col items-center justify-center gap-4 p-8 text-center">
+              <span class="h-6 w-6 animate-spin rounded-full border border-hairline border-t-accent motion-reduce:animate-none" aria-hidden="true"></span>
+              <p class="text-sm text-ink-3">Loading calendar…</p>
+              <a href={`https://cal.com/${calLink}`} target="_blank" rel="noopener" class="btn-ghost text-sm">Calendar not loading? Open booking page ↗</a>
+            </div>
+          </div>
+        </div>
+        ) : (
+          <div class="rounded-card border border-hairline bg-paper p-6 md:p-8 lg:mt-10" data-reveal style="--d:200ms">
+            <h2 class="font-serif text-[1.5rem] leading-tight text-ink">How booking works</h2>
+            <ol class="mt-5 grid gap-4">
+              {[
+                ['Send a short note', `Use the form, or email ${site.email}. A couple of lines is plenty.`],
+                ['I reply within one working day', 'With two or three times that suit, by video or phone.'],
+                ['20 minutes, no pitch', 'You leave knowing what a build would cost and how long it would take.'],
+              ].map(([t, b], i) => (
+                <li class="flex gap-4">
+                  <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent-tint font-mono text-xs font-semibold text-accent-hover">{i + 1}</span>
+                  <span><strong class="block font-semibold text-ink">{t}</strong><span class="text-[0.9375rem] text-ink-2">{b}</span></span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
+      </div>
+
     </div>
   </section>
 </Base>

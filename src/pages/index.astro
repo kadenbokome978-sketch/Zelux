@@ -31,7 +31,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
   <!-- HERO -->
   <section class="hero-grid relative">
     <div class="container-z pb-10 pt-10 md:pb-14 md:pt-16">
-      <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-8">
+      <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-8">
         <div class="lg:col-span-7 lg:col-start-1 lg:row-start-1">
           <p class="inline-flex items-center gap-2 rounded-full border border-hairline bg-paper px-3 py-1.5 text-[0.8125rem] font-medium text-ink-2" data-reveal>
             <span class="relative flex h-2 w-2" aria-hidden="true"><span class="live-ping absolute inset-0 rounded-full bg-live"></span><span class="relative h-2 w-2 rounded-full bg-live"></span></span>{site.hero.status}
@@ -39,12 +39,12 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
           <h1 class="h-hero mt-6" data-reveal style="--d:50ms">
             {site.hero.titleLead} <em class="text-accent">{site.hero.titleItalic}</em>
           </h1>
-          <p class="lead mt-6 max-w-[52ch]" data-reveal style="--d:100ms">{site.hero.subtitle}</p>
-          <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-2" data-reveal style="--d:150ms">
+          <p class="lead mt-5 max-w-[52ch] sm:mt-6" data-reveal style="--d:100ms">{site.hero.subtitle}</p>
+          <div class="mt-6 flex flex-wrap items-center gap-x-7 gap-y-1 sm:mt-8" data-reveal style="--d:150ms">
             <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }}><a href="/book" class="btn-primary btn-lg">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
             <a href="#time-saver" class="btn-ghost">Find what to automate ↓</a>
           </div>
-          <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-hairline pt-5 text-[0.9375rem] font-medium text-ink" data-reveal style="--d:200ms">
+          <ul class="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-hairline pt-4 text-[0.8125rem] font-medium text-ink sm:mt-8 sm:gap-x-6 sm:gap-y-2 sm:pt-5 sm:text-[0.9375rem]" data-reveal style="--d:200ms">
             {site.speed.map((t) => (
               <li class="flex items-center gap-2.5"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" class="text-accent"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.75" /></svg>{t}</li>
             ))}
@@ -62,11 +62,11 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- STATEMENT (accent band) -->
   <section class="band-deep">
-    <div class="container-z grid gap-10 py-16 md:py-28 lg:grid-cols-12 lg:gap-10">
+    <div class="container-z grid gap-10 py-12 md:py-28 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-7" data-reveal>
         <ScrollReveal client:visible containerClassName="h-statement" baseOpacity={0.42} enableBlur={false} baseRotation={0} stagger={0.08} wordAnimationEnd="center 40%" text="You speak to the person who builds it." />
         <p class="mt-6 max-w-[46ch] text-[1.0625rem] leading-relaxed text-deep-ink-2">{site.pillars[0].body}</p>
-        <a href={`mailto:${site.email}`} class="group mt-10 inline-flex items-center gap-3 rounded-full border border-deep-line py-1.5 pl-1.5 pr-4 text-sm text-deep-ink transition-colors hover:border-accent-on-deep">
+        <a href={`mailto:${site.email}`} class="group mt-6 inline-flex max-w-full items-center gap-3 rounded-full border border-deep-line sm:mt-10 py-1.5 pl-1.5 pr-4 text-sm text-deep-ink transition-colors hover:border-accent-on-deep">
           <span class="grid h-8 w-8 place-items-center rounded-full bg-accent-on-deep font-serif text-base text-deep" aria-hidden="true">K</span>
           <span>Straight to my inbox: <span class="text-accent-on-deep">{site.email}</span></span>
         </a>
@@ -75,11 +75,11 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
         <h3 class="text-[1.375rem] font-medium tracking-[-0.02em]">{site.promises.title}</h3>
         <ul class="mt-4 divide-y divide-deep-line border-y border-deep-line">
           {site.promises.items.map((t, i) => (
-            <li class="flex items-start gap-4 py-3.5 text-[0.9375rem] leading-relaxed text-deep-ink-2">
-              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-[11px] bg-deep-2 text-accent-on-deep ring-1 ring-deep-line" aria-hidden="true">
+            <li class="flex items-start gap-3 py-2.5 text-[0.875rem] leading-relaxed text-deep-ink-2 sm:gap-4 sm:py-3.5 sm:text-[0.9375rem]">
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-[10px] bg-deep-2 sm:h-9 sm:w-9 sm:rounded-[11px] text-accent-on-deep ring-1 ring-deep-line" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d={promiseIcons[i % promiseIcons.length]} /></svg>
               </span>
-              <span class="pt-1.5">{t}</span>
+              <span class="pt-1 sm:pt-1.5">{t}</span>
             </li>
           ))}
         </ul>
@@ -89,7 +89,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- BEFORE / AFTER DEMO -->
   <section class="border-b border-hairline">
-    <div class="container-z py-16 md:py-24">
+    <div class="container-z py-12 md:py-24">
       <div class="grid gap-4 lg:grid-cols-12 lg:items-end" data-reveal>
         <h2 class="h-section lg:col-span-7">Same enquiry.<br class="hidden sm:block" /> Two very different days.</h2>
         <p class="body lg:col-span-5">Flip between doing it by hand and a connected system, and watch where the job goes.</p>
@@ -100,7 +100,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- TIME-SAVER DETECTOR -->
   <section id="time-saver" class="scroll-mt-16 border-b border-hairline bg-surface">
-    <div class="container-z py-14 md:py-20">
+    <div class="container-z py-12 md:py-20">
       <div class="max-w-[46rem]" data-reveal>
         <p class="eyebrow">Try it</p>
         <h2 class="h-section mt-4">What should stop taking your time?</h2>
@@ -112,7 +112,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- SERVICES -->
   <section>
-    <div class="container-z py-16 md:py-24">
+    <div class="container-z py-12 md:py-24">
       <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
         <h2 class="h-section">Three things, done well.</h2>
         <a href="/services" class="btn-ghost">Full scope & what's included →</a>
@@ -123,7 +123,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- PORTFOLIO -->
   <section id="portfolio" class="scroll-mt-16 border-t border-hairline">
-    <div class="container-z py-16 md:py-24">
+    <div class="container-z py-12 md:py-24">
       <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
         <div>
           <h2 class="h-section">Two live builds. More on the bench.</h2>
@@ -137,7 +137,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- PROCESS + PRICING (deep band) -->
   <section class="band-deep">
-    <div class="container-z py-16 md:py-24">
+    <div class="container-z py-12 md:py-24">
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-8">
         <div class="lg:col-span-4" data-reveal>
           <p class="eyebrow">How it works</p>
@@ -158,7 +158,8 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
               <h3 class="mt-1 text-[1.5rem] font-semibold leading-tight tracking-[-0.025em] text-deep-ink">{site.guarantee.short}</h3>
             </div>
           </div>
-          <p class="text-[0.9375rem] leading-relaxed text-deep-ink-2 md:col-span-7">{site.guarantee.terms}</p>
+          <p class="hidden text-[0.9375rem] leading-relaxed text-deep-ink-2 sm:block md:col-span-7">{site.guarantee.terms}</p>
+          <p class="text-[0.875rem] leading-relaxed text-deep-ink-2 sm:hidden">Sites up to 5 pages, from the day your quote is accepted and your copy and photos are in.</p>
         </SpotlightCard>
       </div>
     </div>
@@ -166,18 +167,18 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- ABOUT -->
   <section id="about" class="scroll-mt-16 border-t border-hairline">
-    <div class="container-z grid items-stretch gap-6 py-16 md:py-24 lg:grid-cols-12 lg:gap-8">
+    <div class="container-z grid items-stretch gap-6 py-12 md:py-24 lg:grid-cols-12 lg:gap-8">
       <!-- Profile card (the monogram tile is where a photo goes) -->
       <aside class="relative isolate overflow-hidden rounded-[calc(var(--radius-card)+0.5rem)] bg-deep p-6 text-deep-ink md:p-8 lg:col-span-5 [&>*:not([aria-hidden])]:relative [&>*:not([aria-hidden])]:z-[1]" data-reveal>
         <div class="flex items-start justify-between gap-4">
-          <span class="grid h-24 w-24 place-items-center rounded-[26px] bg-accent-on-deep font-serif text-[3.25rem] leading-none text-deep md:h-28 md:w-28 md:text-[3.75rem]" aria-hidden="true">K</span>
+          <span class="grid h-16 w-16 place-items-center rounded-[20px] bg-accent-on-deep font-serif text-[2.25rem] leading-none text-deep md:h-28 md:w-28 md:rounded-[26px] md:text-[3.75rem]" aria-hidden="true">K</span>
           <span class="inline-flex items-center gap-2 rounded-full border border-deep-line px-3 py-1.5 text-xs font-semibold text-deep-ink">
             <span class="h-2 w-2 rounded-full bg-[#4ade80]" aria-hidden="true"></span>Taking on new builds
           </span>
         </div>
-        <h2 class="mt-8 font-serif text-[clamp(1.75rem,3vw,2.25rem)] leading-tight">{site.founder}</h2>
+        <h2 class="mt-5 font-serif text-[clamp(1.5rem,3vw,2.25rem)] leading-tight md:mt-8">{site.founder}</h2>
         <p class="mt-1 text-deep-ink-2">Web &amp; systems builder · Hampshire, UK</p>
-        <ul class="mt-8 grid gap-3 border-t border-deep-line pt-6 text-[0.9375rem]">
+        <ul class="mt-8 hidden gap-3 border-t border-deep-line pt-6 text-[0.9375rem] md:grid">
           {[
             'One person, from first call to launch',
             'Plain-English updates, no account managers',
@@ -192,23 +193,23 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
         <span class="pointer-events-none absolute -bottom-36 -right-36 -z-0 hidden h-80 w-80 rounded-full border border-deep-line opacity-60 md:block" aria-hidden="true"></span>
       </aside>
 
-      <div class="flex flex-col justify-between gap-8 lg:col-span-7" data-reveal style="--d:80ms">
+      <div class="flex flex-col justify-between gap-6 md:gap-8 lg:col-span-7" data-reveal style="--d:80ms">
         <div>
           <p class="eyebrow">Why Zelux exists</p>
-          <p class="mt-4 font-serif text-[clamp(1.75rem,3.2vw,2.625rem)] leading-[1.12] tracking-[-0.03em] text-ink">
+          <p class="mt-4 font-serif text-[clamp(1.5rem,3.2vw,2.625rem)] leading-[1.12] tracking-[-0.03em] text-ink">
             Most small businesses get stuck between <span class="text-ink-3">cheap templates</span> and <span class="text-ink-3">£10,000 agencies.</span> <span class="text-accent">Zelux is the bit in between.</span>
           </p>
           <p class="body mt-5 max-w-[58ch]">{site.about.detail}</p>
         </div>
-        <dl class="grid grid-cols-3 gap-3">
+        <dl class="grid grid-cols-3 gap-2 sm:gap-3">
           {[
             ['1', 'person you deal with'],
             ['48h', 'to a fixed quote'],
             ['7 days', 'to a live site'],
           ].map(([n, l]) => (
-            <div class="rounded-card border border-hairline bg-paper p-4 md:p-5">
+            <div class="rounded-card border border-hairline bg-paper p-3 sm:p-4 md:p-5">
               <dt class="whitespace-nowrap font-serif text-[clamp(1.5rem,3.4vw,2.5rem)] leading-none tracking-[-0.03em] text-accent">{n}</dt>
-              <dd class="mt-2 text-sm leading-snug text-ink-2">{l}</dd>
+              <dd class="mt-1.5 text-xs leading-snug text-ink-2 sm:mt-2 sm:text-sm">{l}</dd>
             </div>
           ))}
         </dl>
