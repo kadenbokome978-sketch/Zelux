@@ -356,7 +356,7 @@ h1 em, h2 em, h3 em { font-style: normal; }
 /* Phones: dark panels get a fixed, generous inner space (was tied to screen height and came out tight) */
 @media (max-width: 767px) {
   html.m-tabs { --band-pad: 3rem; }
-  html.m-tabs .cb > .container-z { row-gap: 2rem; }
+  html.m-tabs .cb > .container-z { row-gap: 1.5rem; }
 }
 @media (max-width: 767px) and (max-height: 600px) {
   html.m-tabs { --band-pad: 2rem; }

@@ -22,7 +22,7 @@ const tiles = [
     </div>
     <div class="lg:col-span-7">
       <p class="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent-on-deep">If you start <span class="cb-today-word">today</span></p>
-      <ol class="cb-line mt-4">
+      <ol class="cb-line mt-4 max-md:mt-6">
         {tiles.map((t, i) => (
           <li class="cb-tile" style={`--i:${i}`}>
             <span class="cb-date" data-off={t.off}>{t.k}</span>
