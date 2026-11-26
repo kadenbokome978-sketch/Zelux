@@ -322,24 +322,27 @@ h1 em, h2 em, h3 em { font-style: normal; }
 }
 /* Very short phones (iPhone SE): a little less breathing room so every section still fits */
 @media (max-width: 767px) and (max-height: 600px) {
-  [data-fit] > .container-z { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+  html.m-tabs section[data-fit] > .container-z { padding-top: 1.25rem; padding-bottom: 1.25rem; }
   .phone-slot { min-height: calc(100svh - 64px - var(--tabbar, 0px) - 12px); }
   .first-group { gap: 0.6rem; padding-bottom: 0.25rem; }
   .hero-first .h-hero { font-size: 1.6rem; }
 }
 
-/* Phones (tab mode): every section is exactly one screen tall with its content centred,
-   so the rhythm is identical all the way down; scrolling settles gently on each one. */
+/* Phones (tab mode): one even rhythm. Every section hugs its content with the same padding,
+   and each still fits a single screen (npm run check). */
 @media (max-width: 767px) {
-  html.m-tabs { --screen: calc(100svh - 64px - var(--tabbar, 0px)); scroll-snap-type: y proximity; }
-  html.m-tabs [data-fit]:not([data-fit='footer']) {
-    min-height: var(--screen); display: flex; flex-direction: column; justify-content: center;
-    scroll-snap-align: start; scroll-margin-top: 4rem;
-  }
-  html.m-tabs [data-fit] > .container-z { width: 100%; }
-  html.m-tabs [data-fit^='process-'] { padding-block: 1.75rem; }
-  html.m-tabs .band-deep { margin-block: 0.5rem; }
+  html.m-tabs { --sec-pad: clamp(1.25rem, 3.6svh, 2.25rem); }
+  html.m-tabs section[data-fit] > .container-z { padding-top: var(--sec-pad); padding-bottom: var(--sec-pad); }
+  html.m-tabs [data-fit='process-week'] { padding-top: var(--sec-pad); }
+  html.m-tabs [data-fit='process-price'] { padding-bottom: var(--sec-pad); }
+  html.m-tabs .band-deep { margin-block: 0.75rem; }
 }
 @media (max-width: 767px) and (max-height: 600px) {
-  html.m-tabs [data-fit^='process-'] { padding-block: 0.9rem; }
+  html.m-tabs [data-fit='process-week'] { padding-top: 1.25rem; } html.m-tabs [data-fit='process-price'] { padding-bottom: 1.25rem; }
+}
+@media (max-width: 767px) and (max-height: 600px) {
+  html.m-tabs { --sec-pad: 0.75rem; }
+}
+@media (max-width: 767px) and (max-height: 600px) {
+  html.m-tabs [data-fit='process-week'] .bw-view { height: 12.5rem; }
 }

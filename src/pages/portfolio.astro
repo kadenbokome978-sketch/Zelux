@@ -76,9 +76,9 @@ const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '');
         <h2 class="font-serif text-[1.625rem] text-ink">Concept builds</h2>
         <p class="body mt-2 max-w-[52ch]">Made-up businesses, real design: the kind of site I build, each one around a single job.</p>
         <div class="concepts mt-8 grid grid-cols-2 justify-items-center gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-6">
-          <ConceptPhone variant="plumber" size="sm" />
-          <ConceptPhone variant="groomer" size="sm" />
-          <ConceptPhone variant="bakery" size="sm" />
+          <div class="cp-wrap"><ConceptPhone variant="plumber" size="sm" /></div>
+          <div class="cp-wrap"><ConceptPhone variant="groomer" size="sm" /></div>
+          <div class="cp-wrap"><ConceptPhone variant="bakery" size="sm" /></div>
         </div>
       </div>
     </div>
@@ -87,6 +87,10 @@ const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '');
   <ClosingBand />
   <style>
     /* Phones: two small phones a row, the third centred below. No sideways scrolling. */
-    @media (max-width: 639px) { .concepts > :global(*) { zoom: 0.72; } .concepts > :global(*:last-child) { grid-column: 1 / -1; } }
+    @media (max-width: 639px) {
+      .cp-wrap { width: 156px; height: 320px; }
+      .cp-wrap > :global(*) { transform: scale(0.72); transform-origin: top left; }
+      .concepts > .cp-wrap:last-child { grid-column: 1 / -1; }
+    }
   </style>
 </Base>

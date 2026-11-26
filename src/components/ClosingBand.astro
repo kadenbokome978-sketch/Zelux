@@ -6,7 +6,7 @@ import Magnet from './react-bits/Magnet';
 const tiles = [
   { k: 'Today', t: 'Free 20-min call', off: 0 },
   { k: 'Within 48 hours', t: 'Fixed quote', off: 2 },
-  { k: 'Up to 7 days later', t: 'Your site could be live', off: 9 },
+  { k: 'Up to 7 days later', t: 'Your site could be live', short: 'Could be live', off: 9 },
 ];
 ---
 <section data-fit="closing" class="band-deep cb relative overflow-hidden">
@@ -26,7 +26,7 @@ const tiles = [
         {tiles.map((t, i) => (
           <li class="cb-tile" style={`--i:${i}`}>
             <span class="cb-date" data-off={t.off}>{t.k}</span>
-            <span class="cb-t">{t.t}</span>
+            <span class="cb-t"><span class="max-sm:hidden">{t.t}</span><span class="sm:hidden">{t.short ?? t.t}</span></span>
           </li>
         ))}
       </ol>
@@ -56,7 +56,7 @@ const tiles = [
   // Name the visitor's business on the last tile if they tried it in the hero
   onPreview((p) => {
     const r = resolve(p);
-    document.querySelectorAll<HTMLElement>('.cb-tile:last-child .cb-t').forEach((el) => (el.textContent = r.typed ? `${r.name} could be live` : 'Your site could be live'));
+    document.querySelectorAll<HTMLElement>('.cb-tile:last-child .cb-t').forEach((el) => (el.firstElementChild!.textContent = r.typed ? `${r.name} could be live` : 'Your site could be live'));
   });
   // Swap the relative labels for real dates, e.g. "Thu 26 Nov" → "Sat 28 Nov" → "Sat 5 Dec".
   const fmt = new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });

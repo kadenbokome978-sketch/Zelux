@@ -114,13 +114,15 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
 </figure>
 
 <style>
-  .hp { --cycle: 14s; --p-bg: #0e3b2f; --p-soft: #15493b; --p-line: #2a5a4b; --p-ac: #f2b33d; --p-acink: #1d1a10; --p-ink: #f3f1e7; margin: 0; width: 300px; }
-  /* Phones: scale the whole demo so phone + caption fit one screen under the header and tab bar */
-  @media (max-width: 767px) { .hp { zoom: 0.9; } }
-  @media (max-width: 767px) and (max-height: 780px) { .hp { zoom: 0.84; } }
-  @media (max-width: 767px) and (max-height: 700px) { .hp { zoom: 0.74; } }
-  @media (max-width: 767px) and (max-height: 640px) { .hp { zoom: 0.56; } }
-  @media (min-width: 768px) and (max-width: 1023px) { .hp { zoom: 0.86; } }
+  .hp { --cycle: 14s; flex: none; --p-bg: #0e3b2f; --p-soft: #15493b; --p-line: #2a5a4b; --p-ac: #f2b33d; --p-acink: #1d1a10; --p-ink: #f3f1e7; margin: 0; width: 300px; }
+  /* Scaled with transform (not zoom: Safari doesn't scale text with zoom). The negative margin
+     gives back the space the scaled-down demo no longer uses. 670px = phone + caption. */
+  .hp { --s: 1; transform: scale(var(--s)); transform-origin: top center; margin-bottom: calc((var(--s) - 1) * 670px); }
+  @media (max-width: 767px) { .hp { --s: 0.9; } }
+  @media (max-width: 767px) and (max-height: 780px) { .hp { --s: 0.82; } }
+  @media (max-width: 767px) and (max-height: 700px) { .hp { --s: 0.74; } }
+  @media (max-width: 767px) and (max-height: 640px) { .hp { --s: 0.56; } }
+  @media (min-width: 768px) and (max-width: 1023px) { .hp { --s: 0.86; } }
   .hp-phone { width: 300px; height: 620px; padding: 10px; border-radius: 48px; background: #0b1120; box-shadow: inset 0 0 0 1.5px #334155, 0 30px 60px -30px rgb(15 23 42 / 0.45); }
   .hp-screen { position: relative; height: 100%; overflow: hidden; border-radius: 38px; background: var(--p-bg); color: var(--p-ink); font-family: var(--font-sans); }
 
