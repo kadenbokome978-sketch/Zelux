@@ -15,7 +15,7 @@ type Theme = { bg: string; ink: string; muted: string; accent: string; line: str
 
 const themes: Record<string, Theme> = {
   forge: { bg: '#1c1b19', ink: '#f4efe7', muted: '#c9c1b6', accent: '#f08a4b', line: '#3a3732' },
-  krapmaps: { bg: '#ee4a86', ink: '#22040f', muted: '#33081b', accent: '#2a0614', line: '#f27aa5' },
+  krapmaps: { bg: '#c42862', ink: '#ffffff', muted: '#fde4ee', accent: '#ffffff', line: '#d9528a' },
   sport: { bg: '#0f172a', ink: '#f1f5f9', muted: '#a5b1c4', accent: '#6ea0ff', line: '#263352' },
   groomer: { bg: '#fbe9e2', ink: '#3b1f2b', muted: '#6b4452', accent: '#a8325a', line: '#ebc3b6' },
   bakery: { bg: '#241e1a', ink: '#f6ecdf', muted: '#cdbfae', accent: '#e8c07a', line: '#3d332c' },
@@ -148,7 +148,8 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
   @media (hover: hover) and (pointer: fine) { .pc-link:hover { transform: translateY(-2px); } }
 
   .pc-visual { align-self: end; display: flex; justify-content: center; min-width: 0; }
-  @media (min-width: 1024px) { .pc-visual { padding-right: 2.5rem; } }
+  .pc-visual { padding-bottom: 1.5rem; }
+  @media (min-width: 1024px) { .pc-visual { padding-right: 2.5rem; padding-bottom: 2.5rem; } }
 
   .pc-sheet { width: 100%; max-width: 30rem; margin-bottom: 2.5rem; padding: 1.25rem 1.5rem; border-radius: var(--radius-card); background: #16213a; border: 1px solid var(--line); }
   .pc-sheet-k { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
