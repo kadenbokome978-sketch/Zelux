@@ -168,15 +168,56 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
 
   <!-- ABOUT -->
   <section id="about" class="scroll-mt-16 border-t border-hairline">
-    <div class="container-z grid gap-14 py-16 md:py-24 lg:grid-cols-12 lg:gap-10">
-      <div class="lg:col-span-5" data-reveal>
-        <h2 class="h-section"><em>{site.about.title}</em></h2>
-        <p class="lead mt-6 !text-ink">{site.about.paragraphs[0]}</p>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7 lg:pt-10" data-reveal style="--d:120ms">
-        <p class="body">{site.about.paragraphs[1]}</p>
-        <p class="body mt-4">{site.about.paragraphs[2]}</p>
-        <a href="/book" class="btn-ghost mt-4">Talk it through on a 20-min call →</a>
+    <div class="container-z grid items-stretch gap-6 py-16 md:py-24 lg:grid-cols-12 lg:gap-8">
+      <!-- Profile card (the monogram tile is where a photo goes) -->
+      <aside class="relative isolate overflow-hidden rounded-[calc(var(--radius-card)+0.5rem)] bg-deep p-6 text-deep-ink md:p-8 lg:col-span-5 [&>*:not([aria-hidden])]:relative [&>*:not([aria-hidden])]:z-[1]" data-reveal>
+        <div class="flex items-start justify-between gap-4">
+          <span class="grid h-24 w-24 place-items-center rounded-[26px] bg-accent-on-deep font-serif text-[3.25rem] leading-none text-deep md:h-28 md:w-28 md:text-[3.75rem]" aria-hidden="true">K</span>
+          <span class="inline-flex items-center gap-2 rounded-full border border-deep-line px-3 py-1.5 text-xs font-semibold text-deep-ink">
+            <span class="h-2 w-2 rounded-full bg-[#4ade80]" aria-hidden="true"></span>Taking on new builds
+          </span>
+        </div>
+        <h2 class="mt-8 font-serif text-[clamp(1.75rem,3vw,2.25rem)] leading-tight">{site.founder}</h2>
+        <p class="mt-1 text-deep-ink-2">Web &amp; systems builder · Hampshire, UK</p>
+        <ul class="mt-8 grid gap-3 border-t border-deep-line pt-6 text-[0.9375rem]">
+          {[
+            'One person, from first call to launch',
+            'Plain-English updates, no account managers',
+            'Usually replies within one working day',
+          ].map((t) => (
+            <li class="flex gap-3 text-deep-ink">
+              <svg class="mt-1 shrink-0 text-accent-on-deep" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.75" /></svg>{t}
+            </li>
+          ))}
+        </ul>
+        <span class="pointer-events-none absolute -bottom-24 -right-24 -z-0 hidden h-56 w-56 rounded-full border border-deep-line md:block" aria-hidden="true"></span>
+        <span class="pointer-events-none absolute -bottom-36 -right-36 -z-0 hidden h-80 w-80 rounded-full border border-deep-line opacity-60 md:block" aria-hidden="true"></span>
+      </aside>
+
+      <div class="flex flex-col justify-between gap-8 lg:col-span-7" data-reveal style="--d:80ms">
+        <div>
+          <p class="eyebrow">Why Zelux exists</p>
+          <p class="mt-4 font-serif text-[clamp(1.75rem,3.2vw,2.625rem)] leading-[1.12] tracking-[-0.03em] text-ink">
+            Most small businesses get stuck between <span class="text-ink-3">cheap templates</span> and <span class="text-ink-3">£10,000 agencies.</span> <span class="text-accent">Zelux is the bit in between.</span>
+          </p>
+          <p class="body mt-5 max-w-[58ch]">{site.about.detail}</p>
+        </div>
+        <dl class="grid grid-cols-3 gap-3">
+          {[
+            ['1', 'person you deal with'],
+            ['48h', 'to a fixed quote'],
+            ['7 days', 'to a live site'],
+          ].map(([n, l]) => (
+            <div class="rounded-card border border-hairline bg-paper p-4 md:p-5">
+              <dt class="whitespace-nowrap font-serif text-[clamp(1.5rem,3.4vw,2.5rem)] leading-none tracking-[-0.03em] text-accent">{n}</dt>
+              <dd class="mt-2 text-sm leading-snug text-ink-2">{l}</dd>
+            </div>
+          ))}
+        </dl>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <a href="/book" class="btn-primary">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="/portfolio" class="btn-ghost">See the portfolio</a>
+        </div>
       </div>
     </div>
   </section>
