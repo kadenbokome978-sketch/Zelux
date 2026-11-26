@@ -52,6 +52,12 @@ const tiles = [
 </style>
 
 <script>
+  import { onPreview, resolve } from '../scripts/personalise';
+  // Name the visitor's business on the last tile if they tried it in the hero
+  onPreview((p) => {
+    const r = resolve(p);
+    document.querySelectorAll<HTMLElement>('.cb-tile:last-child .cb-t').forEach((el) => (el.textContent = r.typed ? `${r.name} could be live` : 'Your site could be live'));
+  });
   // Swap the relative labels for real dates, e.g. "Thu 26 Nov" → "Sat 28 Nov" → "Sat 5 Dec".
   const fmt = new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
   document.querySelectorAll<HTMLElement>('.cb-date[data-off]').forEach((el) => {

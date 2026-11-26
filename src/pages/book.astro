@@ -172,6 +172,13 @@ const agenda = [
   const need = new URLSearchParams(location.search).get('need');
   const msgField = document.getElementById('f-msg') as HTMLTextAreaElement | null;
   if (need && msgField && !msgField.value) msgField.value = need.slice(0, 600);
+  // Tried it on the homepage? Start the note with their business
+  try {
+    const pv = JSON.parse(sessionStorage.getItem('zelux-preview') || 'null');
+    if (pv && pv.name && msgField && !msgField.value) msgField.value = `I run ${String(pv.name).slice(0, 26)}. I'd like a site like the preview on your homepage.`;
+    const biz = document.getElementById('f-biz') as HTMLInputElement | null;
+    if (pv && pv.name && biz && !biz.value) biz.value = String(pv.name).slice(0, 26);
+  } catch { /* storage blocked: nothing to prefill */ }
 
   // JS takes over validation so each field gets its own message.
   if (form) form.noValidate = true;

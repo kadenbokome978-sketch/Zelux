@@ -70,3 +70,7 @@ Motion must explain something, guide attention or give feedback. If it does none
 - Added JS per interaction: aim under 5 KB gzipped on top of the shared GSAP/React runtime. No third-party CDN scripts.
 - Above-the-fold content must never start hidden (the reveal script only hides below-the-fold blocks). An earlier version delayed LCP from 1.4s to 2.3s this way.
 - Total blocking time stays ~0ms in Lighthouse; CLS stays 0. Reserve space (min-height) for anything that fills in later.
+
+## "See it with your business" (homepage)
+
+`src/scripts/personalise.ts` holds eight trade templates (made-up default names, colours, copy). The hero `TryIt` box saves `{ name, trade }` to sessionStorage and fires `zelux:preview`; HeroPhone, BuildWeek and ClosingBand listen with `onPreview()` and re-dress themselves ([data-p] text + `--p-*` colour vars), and /book prefills the note. It's templating on the visitor's device: never describe it as generated, never send the input anywhere. Hidden without JS; the rebuild sweep is skipped with reduced motion. To add a trade, add an entry to `trades` (check the hero phone still fits).

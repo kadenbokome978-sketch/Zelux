@@ -24,7 +24,7 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
       <span class="bw-url">
         <svg class="bw-lock" viewBox="0 0 12 14"><rect x="1.5" y="6" width="9" height="7" rx="1.5" /><path d="M3.5 6V4.5a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="currentColor" stroke-width="1.3" /></svg>
         <span class="bw-url-preview">preview · not public yet</span>
-        <span class="bw-url-live">yourbusiness.co.uk</span>
+        <span class="bw-url-live" data-p="domain">yourbusiness.co.uk</span>
       </span>
       <span class="bw-live"><span></span>Live</span>
     </div>
@@ -33,15 +33,15 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
       <!-- the example site: wireframe first, then it styles itself in -->
       <div class="bw-site">
         <div class="bw-nav">
-          <span class="bw-logo s" style="--k:0"><b>B</b>Brookfield</span>
+          <span class="bw-logo s" style="--k:0"><b data-p="initial">B</b><span data-p="name">Brookfield</span></span>
           <span class="bw-links"><span class="s" style="--k:1">Services</span><span class="s" style="--k:1">Prices</span><span class="s" style="--k:1">Areas</span></span>
-          <span class="bw-cta s" style="--k:2">Book a visit</span>
+          <span class="bw-cta s" style="--k:2" data-p="cta">Book a visit</span>
         </div>
         <div class="bw-hero">
           <div class="bw-copy">
-            <span class="bw-kick s" style="--k:3">Gas Safe · Havant</span>
-            <span class="bw-h s" style="--k:3">Boiler playing up? Book a visit in two taps.</span>
-            <span class="bw-btns"><span class="bw-btn s" style="--k:4">Book a visit</span><span class="bw-btn2 s" style="--k:4">Call us</span></span>
+            <span class="bw-kick s" style="--k:3" data-p="kicker">Gas Safe · Havant</span>
+            <span class="bw-h s" style="--k:3" data-p="h1">Boiler playing up? Book a visit in two taps.</span>
+            <span class="bw-btns"><span class="bw-btn s" style="--k:4" data-p="cta">Book a visit</span><span class="bw-btn2 s" style="--k:4" data-p="ghost">Call us</span></span>
           </div>
           <div class="bw-art s" style="--k:5">
             <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMax slice"><path d="M0 84 L30 64 L62 80 L96 56 L134 78 L166 60 L200 86 V120 H0Z" fill="#1b5645" /><rect y="96" width="200" height="24" fill="#103c30" /><g transform="translate(36 44)"><rect y="8" width="86" height="38" rx="6" fill="#f3f1e7" /><path d="M86 18 h18 q8 0 11 8 l6 13 v7 h-35z" fill="#f3f1e7" /><rect y="30" width="121" height="6" fill="#f2b33d" /><circle cx="22" cy="47" r="8" fill="#0b1120" /><circle cx="100" cy="47" r="8" fill="#0b1120" /></g></svg>
@@ -49,7 +49,7 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
         </div>
         <div class="bw-cards">
           {[['Boiler service', 'from £85'], ['Leak or repair', 'from £60'], ['New radiator', 'from £180']].map(([a, b], i) => (
-            <span class="bw-card s" style={`--k:${6 + i}`}><b>{a}</b><i>{b}</i></span>
+            <span class="bw-card s" style={`--k:${6 + i}`}><b data-p={`s${i}`}>{a}</b><i data-p={`v${i}`}>{b}</i></span>
           ))}
         </div>
       </div>
@@ -57,19 +57,19 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
       <!-- Day 1: call notes -->
       <div class="bw-doc bw-notes">
         <p class="bw-doc-k">Call notes · 20 min</p>
-        <p class="bw-doc-t">Brookfield Plumbing</p>
+        <p class="bw-doc-t" data-p="title">Brookfield Plumbing</p>
         <ul>
-          <li style="--n:0">Missed calls while on jobs = missed work</li>
-          <li style="--n:1">Wants online booking with real slots</li>
-          <li style="--n:2">5 pages, prices shown up front</li>
-          <li style="--n:3">Keep the van photo, lose the clip art</li>
+          <li style="--n:0" data-p="n0">Missed calls while on jobs = missed work</li>
+          <li style="--n:1" data-p="n1">Wants online booking with real slots</li>
+          <li style="--n:2" data-p="n2">5 pages, prices shown up front</li>
+          <li style="--n:3" data-p="n3">Keep the van photo, lose the clip art</li>
         </ul>
       </div>
 
       <!-- Day 2: fixed quote -->
       <div class="bw-doc bw-quote">
         <p class="bw-doc-k">Quote · fixed price</p>
-        <p class="bw-doc-t">Brookfield website</p>
+        <p class="bw-doc-t" data-p="qtitle">Brookfield website</p>
         <ul>
           <li><span>5-page website, mobile-first</span><i>Included</i></li>
           <li><span>Online booking + reminders</span><i>Included</i></li>
@@ -81,8 +81,8 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
 
       <!-- Days 3 to 6: a review comment -->
       <div class="bw-comment">
-        <span class="bw-comment-a">D</span>
-        <span><b>Client</b>Can the main button say “Book a visit”?</span>
+        <span class="bw-comment-a" data-p="initial">B</span>
+        <span><b>Client</b><span data-p="comment">Can the main button say “Book a visit”?</span></span>
         <span class="bw-comment-done">Done ✓</span>
       </div>
     </div>
@@ -97,7 +97,7 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
 </figure>
 
 <style>
-  .bw { margin: 0; }
+  .bw { --p-bg: #0e3b2f; --p-soft: #15493b; --p-line: #2a5a4b; --p-ac: #f2b33d; --p-acink: #1d1a10; --p-ink: #f3f1e7; margin: 0; }
   .bw-days { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
   @media (max-width: 640px) { .bw-days { grid-template-columns: 1fr 1fr; } }
   .bw-day { display: grid; gap: 0.2rem; padding: 0.7rem 0.8rem 0.8rem; border-radius: var(--radius-inner); text-align: left; background: var(--color-deep-2); border: 1px solid var(--color-deep-line); color: var(--color-deep-ink-2); transition: border-color var(--dur-ui), color var(--dur-ui), background-color var(--dur-ui); }
@@ -130,24 +130,24 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
   .bw-view { position: relative; height: clamp(17rem, 30vw, 21rem); overflow: hidden; background: #fcfdff; }
 
   /* the example site. Every .s piece is a grey block until data-styled, then styles in one after another */
-  .bw-site { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto; gap: 14px; padding: 14px 18px 18px; background: #0e3b2f; transition: background-color 500ms var(--ease-out-soft) 100ms; }
+  .bw-site { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto; gap: 14px; padding: 14px 18px 18px; background: var(--p-bg); transition: background-color 500ms var(--ease-out-soft) 100ms; }
   .bw-nav { display: flex; align-items: center; gap: 12px; }
-  .bw-logo { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-serif); font-weight: 600; font-size: 14px; color: #f3f1e7; }
-  .bw-logo b { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: #f2b33d; color: #1d1a10; font-size: 12px; }
-  .bw-links { display: flex; gap: 12px; margin-left: auto; font-size: 11px; color: #c9d8cf; }
+  .bw-logo { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-serif); font-weight: 600; font-size: 14px; color: var(--p-ink); }
+  .bw-logo b { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: var(--p-ac); color: var(--p-acink); font-size: 12px; }
+  .bw-links { display: flex; gap: 12px; margin-left: auto; font-size: 11px; color: color-mix(in srgb, var(--p-ink) 75%, transparent); }
   @media (max-width: 520px) { .bw-links { display: none; } .bw-cta { margin-left: auto; } }
-  .bw-cta { padding: 5px 12px; border-radius: 999px; background: #f2b33d; color: #1d1a10; font-size: 11px; font-weight: 700; }
+  .bw-cta { padding: 5px 12px; border-radius: 999px; background: var(--p-ac); color: var(--p-acink); font-size: 11px; font-weight: 700; }
   .bw-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; min-height: 0; }
   .bw-copy { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; }
-  .bw-kick { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #c9d8cf; }
-  .bw-h { font-family: var(--font-serif); font-weight: 600; font-size: clamp(17px, 2.3vw, 26px); line-height: 1.05; letter-spacing: -0.03em; color: #f3f1e7; }
+  .bw-kick { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--p-ink) 75%, transparent); }
+  .bw-h { font-family: var(--font-serif); font-weight: 600; font-size: clamp(17px, 2.3vw, 26px); line-height: 1.05; letter-spacing: -0.03em; color: var(--p-ink); }
   .bw-btns { display: flex; gap: 8px; }
-  .bw-btn { padding: 7px 14px; border-radius: 999px; background: #f2b33d; color: #1d1a10; font-size: 11px; font-weight: 700; }
-  .bw-btn2 { padding: 7px 14px; border-radius: 999px; box-shadow: inset 0 0 0 1px #2a5a4b; color: #f3f1e7; font-size: 11px; font-weight: 700; }
-  .bw-art { overflow: hidden; border-radius: 12px; background: #15493b; }
+  .bw-btn { padding: 7px 14px; border-radius: 999px; background: var(--p-ac); color: var(--p-acink); font-size: 11px; font-weight: 700; }
+  .bw-btn2 { padding: 7px 14px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--p-line); color: var(--p-ink); font-size: 11px; font-weight: 700; }
+  .bw-art { overflow: hidden; border-radius: 12px; background: var(--p-soft); }
   .bw-art svg { display: block; width: 100%; height: 100%; transition: opacity 400ms var(--ease-out-soft) calc(var(--k) * 140ms); }
   .bw-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .bw-card { display: flex; justify-content: space-between; gap: 6px; padding: 9px 10px; border-radius: 10px; background: #15493b; font-size: 11px; color: #f3f1e7; }
+  .bw-card { display: flex; justify-content: space-between; gap: 6px; padding: 9px 10px; border-radius: 10px; background: var(--p-soft); font-size: 11px; color: var(--p-ink); }
   .bw-card i { font-style: normal; opacity: 0.8; }
   @media (max-width: 520px) { .bw-card i { display: none; } .bw-hero { grid-template-columns: 1fr; } .bw-art { display: none; } .bw-h { font-size: 20px; } }
   .bw-btn, .bw-btn2, .bw-cta, .bw-card b { white-space: nowrap; }
@@ -183,7 +183,7 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
   /* review comment (Days 3 to 6) */
   .bw-comment { position: absolute; z-index: 3; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; max-width: 19rem; padding: 10px 12px; border-radius: 12px; background: #fcfdff; color: #0f172a; font-size: 12px; line-height: 1.35; box-shadow: 0 18px 40px -16px rgb(15 23 42 / 0.5); opacity: 0; transform: translateY(10px); transition: opacity 300ms, transform 400ms var(--ease-out-soft); }
   .bw-comment b { display: block; font-size: 11px; color: #475569; }
-  .bw-comment-a { display: grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 999px; background: #f2b33d; color: #1d1a10; font-weight: 700; }
+  .bw-comment-a { display: grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 999px; background: var(--p-ac); color: var(--p-acink); font-weight: 700; }
   .bw-comment-done { flex: none; padding: 3px 8px; border-radius: 999px; background: #dcfce7; color: #14532d; font-weight: 700; font-size: 11px; opacity: 0; }
   .bw[data-stage='2'][data-styled='true'] .bw-comment { opacity: 1; transform: none; transition-delay: 1.4s; }
   .bw[data-stage='2'][data-styled='true'] .bw-comment-done { animation: bw-on 300ms 2.4s both; }
@@ -207,8 +207,22 @@ const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
 </style>
 
 <script>
+  import { onPreview, resolve, paint, fill, artSvg } from '../scripts/personalise';
   const fig = document.getElementById('buildweek');
   if (fig) {
+    // Build the visitor's own business if they tried it in the hero
+    const art = fig.querySelector<HTMLElement>('.bw-art');
+    const van = art?.innerHTML ?? '';
+    onPreview((p) => {
+      const { t, name, initial, domain } = resolve(p);
+      paint(fig, t.colors);
+      const v: Record<string, string> = { name, initial, domain, kicker: p ? t.kicker : 'Gas Safe · Havant', h1: t.h1, cta: t.cta, ghost: t.ghost,
+        title: `${name} ${t.sub}`, qtitle: `${name} website`, comment: `Can the main button say “${t.cta}”?` };
+      t.services.forEach(([a, b], n) => { v[`s${n}`] = a; v[`v${n}`] = b; });
+      t.notes.forEach((x, n) => { v[`n${n}`] = x; });
+      fill(fig, v);
+      if (art) art.innerHTML = t.icon ? artSvg(t) : van;
+    });
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const days = Array.from(fig.querySelectorAll<HTMLButtonElement>('.bw-day'));
     const STEP = 2800;

@@ -28,7 +28,7 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
       <div class="hp-view">
         <div class="hp-page">
           <header class="hp-head">
-            <span class="hp-logo"><span class="hp-mark">B</span><span><b>Brookfield</b><i>Plumbing &amp; Heating</i></span></span>
+            <span class="hp-logo"><span class="hp-mark" data-p="initial">B</span><span><b data-p="name">Brookfield</b><i data-p="sub">Plumbing &amp; Heating</i></span></span>
             <span class="hp-call">Call</span>
           </header>
 
@@ -50,28 +50,28 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
           </div>
 
           <div class="hp-copy">
-            <p class="hp-kicker">Gas Safe · Havant &amp; Waterlooville</p>
-            <p class="hp-h1">Boiler playing up? Book a visit in two taps.</p>
+            <p class="hp-kicker" data-p="kicker">Gas Safe · Havant &amp; Waterlooville</p>
+            <p class="hp-h1" data-p="h1">Boiler playing up? Book a visit in two taps.</p>
             <div class="hp-ctas">
-              <span class="hp-btn hp-book">Book a visit<span class="hp-tap hp-tap-1"></span></span>
-              <span class="hp-btn hp-ghost">Call us</span>
+              <span class="hp-btn hp-book"><span data-p="cta">Book a visit</span><span class="hp-tap hp-tap-1"></span></span>
+              <span class="hp-btn hp-ghost" data-p="ghost">Call us</span>
             </div>
             <ul class="hp-trust">
-              <li>Fixed prices before you book</li>
-              <li>Same-week visits</li>
+              <li data-p="trust0">Fixed prices before you book</li>
+              <li data-p="trust1">Same-week visits</li>
             </ul>
           </div>
 
           <div class="hp-services">
-            <p class="hp-sub">Prices</p>
-            {services.map(([a, b]) => <p class="hp-row"><b>{a}</b><i>{b}</i></p>)}
+            <p class="hp-sub" data-p="listTitle">Prices</p>
+            {services.map(([a, b], n) => <p class="hp-row"><b data-p={`s${n}`}>{a}</b><i data-p={`v${n}`}>{b}</i></p>)}
           </div>
           <div class="hp-areas">
             <p class="hp-sub">Areas covered</p>
             <p class="hp-chips"><span>Havant</span><span>Waterlooville</span><span>Emsworth</span><span>Horndean</span><span>Cowplain</span></p>
           </div>
           <div class="hp-band"><b>Booking takes under a minute.</b><span>Pick a slot, get a text, done.</span></div>
-          <p class="hp-footer">Brookfield Plumbing · Mon to Sat, 8 till 6</p>
+          <p class="hp-footer"><span data-p="name">Brookfield</span> · Mon to Sat, 8 till 6</p>
         </div>
 
         <!-- booking sheet -->
@@ -79,44 +79,46 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
           <span class="hp-grab"></span>
           <div class="hp-choose">
             <p class="hp-sheet-title">Book a visit</p>
-            <p class="hp-sheet-sub">Boiler service · from £85</p>
+            <p class="hp-sheet-sub" data-p="sheetSub">Boiler service · from £85</p>
             <div class="hp-days"><span class="is-on">Tue 14</span><span>Wed 15</span><span>Thu 16</span></div>
             <div class="hp-slots">
               {slots.map((t, i) => <span class:list={['hp-slot', i === 0 && 'hp-pick']}>{t}{i === 0 && <span class="hp-tap hp-tap-2"></span>}</span>)}
             </div>
-            <span class="hp-btn hp-confirm">Confirm booking<span class="hp-tap hp-tap-3"></span></span>
+            <span class="hp-btn hp-confirm">Confirm<span class="hp-tap hp-tap-3"></span></span>
           </div>
           <div class="hp-done">
             <span class="hp-check"><svg viewBox="0 0 24 24"><path d="m6 12.5 4 4 8-9" /></svg></span>
             <p class="hp-sheet-title">You’re booked</p>
-            <p class="hp-sheet-sub">Tue 14 · 9:00 · Boiler service</p>
-            <p class="hp-note">We’ll text when we’re on the way.</p>
+            <p class="hp-sheet-sub" data-p="doneSub">Tue 14 · 9:00 · Boiler service</p>
+            <p class="hp-note" data-p="note">We’ll text when we’re on the way.</p>
           </div>
         </div>
       </div>
 
       <!-- Safari address bar -->
-      <div class="hp-safari"><span class="hp-url"><svg viewBox="0 0 12 14"><rect x="1.5" y="6" width="9" height="7" rx="1.5" /><path d="M3.5 6V4.5a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="currentColor" stroke-width="1.3" /></svg>yourbusiness.co.uk</span></div>
+      <div class="hp-safari"><span class="hp-url"><svg viewBox="0 0 12 14"><rect x="1.5" y="6" width="9" height="7" rx="1.5" /><path d="M3.5 6V4.5a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="currentColor" stroke-width="1.3" /></svg><span data-p="domain">yourbusiness.co.uk</span></span></div>
+
+      <span class="hp-sweep"></span>
 
       <!-- incoming text -->
       <div class="hp-toast">
         <span class="hp-msg-icon"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5Z" /></svg></span>
-        <span class="hp-toast-body"><b>Brookfield <i>now</i></b>Booked for Tue 9:00. We’ll text when we’re on the way.</span>
+        <span class="hp-toast-body"><b><span data-p="name">Brookfield</span> <i>now</i></b>Booked for Tue 9:00. <span data-p="note">We’ll text when we’re on the way.</span></span>
       </div>
     </div>
   </div>
   <figcaption class="hp-cap">
-    <span>Concept site · not a client</span>
+    <span data-p="cap">Concept site · not a client</span>
     <button type="button" class="hp-pause" aria-pressed="false">Pause demo</button>
   </figcaption>
 </figure>
 
 <style>
-  .hp { --cycle: 14s; margin: 0; width: 300px; }
+  .hp { --cycle: 14s; --p-bg: #0e3b2f; --p-soft: #15493b; --p-line: #2a5a4b; --p-ac: #f2b33d; --p-acink: #1d1a10; --p-ink: #f3f1e7; margin: 0; width: 300px; }
   .hp-phone { width: 300px; height: 620px; padding: 10px; border-radius: 48px; background: #0b1120; box-shadow: inset 0 0 0 1.5px #334155, 0 30px 60px -30px rgb(15 23 42 / 0.45); }
-  .hp-screen { position: relative; height: 100%; overflow: hidden; border-radius: 38px; background: #0e3b2f; color: #f3f1e7; font-family: var(--font-sans); }
+  .hp-screen { position: relative; height: 100%; overflow: hidden; border-radius: 38px; background: var(--p-bg); color: var(--p-ink); font-family: var(--font-sans); }
 
-  .hp-status { position: absolute; z-index: 4; inset: 0 0 auto; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px 0 30px; font-size: 13px; font-weight: 600; background: #0e3b2f; }
+  .hp-status { position: absolute; z-index: 4; inset: 0 0 auto; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px 0 30px; font-size: 13px; font-weight: 600; background: var(--p-bg); }
   .hp-island { position: absolute; left: 50%; top: 10px; width: 88px; height: 26px; margin-left: -44px; border-radius: 999px; background: #0b1120; }
   .hp-icons { display: flex; gap: 5px; align-items: center; }
   .hp-icons svg { height: 10px; fill: currentColor; }
@@ -127,8 +129,8 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
   .hp-logo { display: flex; align-items: center; gap: 8px; line-height: 1.05; }
   .hp-logo b { display: block; font-family: var(--font-serif); font-size: 15px; font-weight: 600; }
   .hp-logo i { display: block; font-style: normal; font-size: 9.5px; opacity: 0.8; }
-  .hp-mark { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: #f2b33d; color: #1d1a10; font-family: var(--font-serif); font-weight: 700; font-size: 14px; }
-  .hp-call { padding: 6px 12px; border-radius: 999px; border: 1px solid #2a5a4b; font-size: 11px; font-weight: 600; }
+  .hp-mark { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: var(--p-ac); color: var(--p-acink); font-family: var(--font-serif); font-weight: 700; font-size: 14px; }
+  .hp-call { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--p-line); font-size: 11px; font-weight: 600; }
   .hp-hero { overflow: hidden; border-radius: 16px; }
   .hp-art { display: block; width: 100%; height: auto; }
   .hp-copy { padding-top: 14px; }
@@ -136,18 +138,18 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
   .hp-h1 { margin-top: 6px; font-family: var(--font-serif); font-size: 25px; line-height: 1.04; font-weight: 600; letter-spacing: -0.03em; }
   .hp-ctas { display: flex; gap: 8px; margin-top: 14px; }
   .hp-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; height: 38px; padding: 0 14px; border-radius: 999px; font-size: 12px; font-weight: 700; }
-  .hp-book { background: #f2b33d; color: #1d1a10; }
-  .hp-ghost { border: 1px solid #2a5a4b; }
+  .hp-book { background: var(--p-ac); color: var(--p-acink); }
+  .hp-ghost { border: 1px solid var(--p-line); }
   .hp-trust { display: grid; gap: 4px; margin: 14px 0 0; padding: 0; list-style: none; font-size: 11px; opacity: 0.9; }
-  .hp-trust li::before { content: '✓  '; color: #f2b33d; font-weight: 700; }
+  .hp-trust li::before { content: '✓  '; color: var(--p-ac); font-weight: 700; }
   .hp-services { margin-top: 18px; display: grid; gap: 6px; }
   .hp-sub { font-size: 11px; font-weight: 700; opacity: 0.85; }
-  .hp-row { display: flex; justify-content: space-between; padding: 10px 12px; border-radius: 12px; background: #15493b; font-size: 12px; }
+  .hp-row { display: flex; justify-content: space-between; padding: 10px 12px; border-radius: 12px; background: var(--p-soft); font-size: 12px; }
   .hp-row i { font-style: normal; opacity: 0.85; }
   .hp-areas { margin-top: 18px; }
   .hp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-  .hp-chips span { padding: 5px 10px; border-radius: 999px; border: 1px solid #2a5a4b; font-size: 10.5px; }
-  .hp-band { display: grid; gap: 2px; margin-top: 16px; padding: 12px 14px; border-radius: 14px; background: #f2b33d; color: #1d1a10; font-size: 11px; }
+  .hp-chips span { padding: 5px 10px; border-radius: 999px; border: 1px solid var(--p-line); font-size: 10.5px; }
+  .hp-band { display: grid; gap: 2px; margin-top: 16px; padding: 12px 14px; border-radius: 14px; background: var(--p-ac); color: var(--p-acink); font-size: 11px; }
   .hp-band b { font-family: var(--font-serif); font-size: 14px; }
   .hp-footer { margin-top: 16px; font-size: 10px; text-align: center; opacity: 0.7; }
 
@@ -159,10 +161,10 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
   .hp-sheet-sub { margin-top: 2px; font-size: 12px; color: #475569; }
   .hp-days { display: flex; gap: 6px; margin-top: 14px; }
   .hp-days span { flex: 1; padding: 8px 0; border-radius: 10px; border: 1px solid #dde3eb; text-align: center; font-size: 11.5px; font-weight: 600; }
-  .hp-days .is-on { background: #0e3b2f; border-color: #0e3b2f; color: #f3f1e7; }
+  .hp-days .is-on { background: var(--p-ac); border-color: var(--p-ac); color: var(--p-acink); }
   .hp-slots { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
   .hp-slot { position: relative; padding: 11px 0; border-radius: 10px; border: 1px solid #dde3eb; text-align: center; font-size: 13px; font-weight: 600; }
-  .hp-confirm { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; background: #0e3b2f; color: #f3f1e7; font-size: 13px; }
+  .hp-confirm { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; background: var(--p-ac); color: var(--p-acink); font-size: 13px; }
   .hp-done { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: 0; }
   .hp-check { display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: 12px; border-radius: 999px; background: #15803d; }
   .hp-check svg { width: 34px; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 0; }
@@ -208,17 +210,50 @@ const slots = ['9:00', '11:30', '13:30', '15:00'];
   @keyframes hp-press-book { 0%, 34% { transform: none; filter: none; } 36% { transform: scale(0.95); filter: brightness(0.9); } 39%, 100% { transform: none; filter: none; } }
   @keyframes hp-sheet { 0%, 38% { transform: translateY(105%); } 43%, 90% { transform: none; } 95%, 100% { transform: translateY(105%); } }
   @keyframes hp-tap2 { 0%, 48% { opacity: 0; transform: scale(0.6); } 50% { opacity: 1; transform: scale(1); } 53% { opacity: 1; transform: scale(0.82); } 56%, 100% { opacity: 0; transform: scale(1.3); } }
-  @keyframes hp-pick { 0%, 52% { background: transparent; border-color: #dde3eb; color: #0f172a; } 53%, 92% { background: #f2b33d; border-color: #f2b33d; color: #1d1a10; } 96%, 100% { background: transparent; border-color: #dde3eb; color: #0f172a; } }
+  @keyframes hp-pick { 0%, 52% { background: transparent; border-color: #dde3eb; color: #0f172a; } 53%, 92% { background: var(--p-ac); border-color: var(--p-ac); color: var(--p-acink); } 96%, 100% { background: transparent; border-color: #dde3eb; color: #0f172a; } }
   @keyframes hp-tap3 { 0%, 59% { opacity: 0; transform: scale(0.6); } 61% { opacity: 1; transform: scale(1); } 64% { opacity: 1; transform: scale(0.82); } 67%, 100% { opacity: 0; transform: scale(1.3); } }
   @keyframes hp-press-confirm { 0%, 63% { transform: none; } 64.5% { transform: scale(0.97); } 66%, 100% { transform: none; } }
   @keyframes hp-choose { 0%, 66% { opacity: 1; } 68%, 96% { opacity: 0; } 98%, 100% { opacity: 1; } }
   @keyframes hp-done { 0%, 67% { opacity: 0; transform: translateY(8px); } 70%, 92% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
   @keyframes hp-tick { 0%, 68% { stroke-dashoffset: 24; } 73%, 100% { stroke-dashoffset: 0; } }
   @keyframes hp-toast { 0%, 74% { transform: translateY(-170%); opacity: 0; } 78%, 89% { transform: none; opacity: 1; } 93%, 100% { transform: translateY(-170%); opacity: 0; } }
+
+  .hp-screen, .hp-status, .hp-row, .hp-mark, .hp-book { transition: background-color 500ms var(--ease-out-soft), color 500ms var(--ease-out-soft); }
+  /* "Rebuild" sweep when the visitor's business is applied */
+  .hp-sweep { position: absolute; z-index: 6; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(180deg, transparent 0%, rgb(255 255 255 / 0.55) 45%, rgb(255 255 255 / 0.9) 50%, rgb(255 255 255 / 0.55) 55%, transparent 100%); background-size: 100% 300%; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hp.is-rebuilding .hp-sweep { animation: hp-sweep 750ms var(--ease-out-soft); }
+    .hp.is-rebuilding .hp-phone { animation: hp-pop 750ms var(--ease-out-soft); }
+  }
+  @keyframes hp-sweep { 0% { opacity: 1; background-position: 0 100%; } 100% { opacity: 1; background-position: 0 0%; } }
+  @keyframes hp-pop { 0% { transform: none; } 30% { transform: scale(0.97) rotate(-1deg); } 100% { transform: none; } }
 </style>
 
 <script>
+  import { onPreview, resolve, paint, fill, artSvg } from '../scripts/personalise';
+  const r_typed = (p: Parameters<typeof resolve>[0]) => resolve(p).typed;
   document.querySelectorAll<HTMLElement>('.hp').forEach((el) => {
+    // Re-dress the phone as the visitor's own business (see personalise.ts)
+    const heroArt = el.querySelector<HTMLElement>('.hp-hero');
+    const vanArt = heroArt?.innerHTML ?? '';
+    let first = true;
+    onPreview((p) => {
+      const { t, name, initial, domain } = resolve(p);
+      paint(el, t.colors);
+      const v: Record<string, string> = {
+        name, initial, domain, sub: t.sub, kicker: t.kicker, h1: t.h1, cta: t.cta, ghost: t.ghost, trust0: t.trust[0], trust1: t.trust[1], note: t.note,
+        sheetSub: `${t.services[0][0]} · ${t.services[0][1]}`, doneSub: `Tue 14 · 9:00 · ${t.services[0][0]}`,
+      };
+      t.services.forEach(([a, b], n) => { v[`s${n}`] = a; v[`v${n}`] = b; });
+      v.listTitle = t.services[0][1].startsWith('from') ? 'Prices' : 'Services';
+      v.cap = r_typed(p) ? 'Your preview · made up' : 'Concept site · not a client';
+      if (!p) { v.kicker = 'Gas Safe · Havant & Waterlooville'; }
+      fill(el, v);
+      if (heroArt) heroArt.innerHTML = t.icon ? artSvg(t) : vanArt;
+      if (!first) { el.classList.remove('is-rebuilding'); void el.offsetWidth; el.classList.add('is-rebuilding'); }
+      first = false;
+    });
+    el.addEventListener('animationend', (e) => { if ((e as AnimationEvent).animationName.includes('hp-sweep')) el.classList.remove('is-rebuilding'); });
     const btn = el.querySelector<HTMLButtonElement>('.hp-pause');
     btn?.addEventListener('click', () => {
       const paused = el.classList.toggle('is-paused');

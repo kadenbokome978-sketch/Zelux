@@ -4,6 +4,7 @@ import LeadFlow from '../components/LeadFlow.astro';
 import ProjectCarousel from '../components/ProjectCarousel.astro';
 import Detector from '../components/Detector.astro';
 import HeroPhone from '../components/HeroPhone.astro';
+import TryIt from '../components/TryIt.astro';
 import BuildWeek from '../components/BuildWeek.astro';
 import ServiceCards from '../components/ServiceCards.astro';
 import ScrollReveal from '../components/react-bits/ScrollReveal';
@@ -30,8 +31,8 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
   <!-- HERO -->
   <section class="hero-grid relative">
     <div class="container-z pb-10 pt-10 md:pb-14 md:pt-16">
-      <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
-        <div class="lg:col-span-7">
+      <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-8">
+        <div class="lg:col-span-7 lg:col-start-1 lg:row-start-1">
           <p class="inline-flex items-center gap-2 rounded-full border border-hairline bg-paper px-3 py-1.5 text-[0.8125rem] font-medium text-ink-2" data-reveal>
             <span class="relative flex h-2 w-2" aria-hidden="true"><span class="live-ping absolute inset-0 rounded-full bg-live"></span><span class="relative h-2 w-2 rounded-full bg-live"></span></span>{site.hero.status}
           </p>
@@ -49,7 +50,10 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
             ))}
           </ul>
         </div>
-        <div class="flex justify-center lg:col-span-5 lg:justify-end" data-reveal style="--d:200ms">
+        <div class="mx-auto -mt-2 w-full max-w-[26rem] self-start lg:col-span-6 lg:col-start-1 lg:row-start-2 lg:mx-0 lg:max-w-[34rem]" data-reveal style="--d:250ms">
+          <TryIt />
+        </div>
+        <div class="flex justify-center lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:justify-end" data-reveal style="--d:200ms">
           <HeroPhone />
         </div>
       </div>

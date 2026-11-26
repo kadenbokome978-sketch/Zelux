@@ -1,0 +1,59 @@
+---
+// "See it with your business": type a name, pick a trade, and the phone (and the rest of the page) re-dresses itself.
+// JS-only feature, so it's hidden without JS. Nothing typed here leaves the browser.
+import { trades } from '../scripts/personalise';
+---
+<div class="ti" id="tryit">
+  <p class="ti-k"><span class="ti-spark" aria-hidden="true">✦</span>See it with your business</p>
+  <div class="ti-row">
+    <label class="sr-only" for="ti-name">Your business name</label>
+    <input id="ti-name" class="ti-in" type="text" maxlength="26" autocomplete="organization" placeholder="Your business name" spellcheck="false" />
+    <label class="sr-only" for="ti-trade">Your trade</label>
+    <select id="ti-trade" class="ti-sel">
+      {Object.entries(trades).map(([k, t]) => <option value={k}>{t.label}</option>)}
+    </select>
+  </div>
+  <p class="ti-foot"><span class="ti-status" aria-live="polite">Watch the phone change as you type.</span><button type="button" class="ti-reset" hidden>Reset</button></p>
+</div>
+
+<style>
+  .ti { padding: 0.9rem; border-radius: calc(var(--radius-card) + 0.25rem); background: var(--color-paper); border: 1px solid var(--color-hairline); box-shadow: 0 20px 40px -32px rgb(15 23 42 / 0.4); }
+  :global(html:not(.js)) .ti { display: none; }
+  .ti-k { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 600; color: var(--color-ink); }
+  .ti-spark { color: var(--color-accent); }
+  .ti-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; margin-top: 0.65rem; }
+  @media (max-width: 420px) { .ti-row { grid-template-columns: 1fr; } }
+  .ti-in, .ti-sel { min-height: 48px; padding: 0 0.9rem; border-radius: var(--radius-inner); border: 1px solid var(--color-hairline-strong); background: var(--color-canvas); color: var(--color-ink); font-size: 1rem; transition: border-color var(--dur-fast); }
+  .ti-in::placeholder { color: #6b7686; }
+  .ti-in:focus, .ti-sel:focus { border-color: var(--color-accent); outline: 2px solid var(--color-accent-tint); outline-offset: 0; }
+  .ti-sel { padding-right: 2.2rem; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23475569' stroke-width='1.6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.85rem center; }
+  .ti-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.55rem; font-size: 0.8125rem; color: var(--color-ink-3); }
+  .ti-reset { min-height: 32px; padding: 0 0.6rem; border-radius: 999px; font-size: 0.8125rem; color: var(--color-ink-2); text-decoration: underline; text-underline-offset: 3px; }
+</style>
+
+<script>
+  import { load, save, resolve } from '../scripts/personalise';
+  const root = document.getElementById('tryit');
+  if (root) {
+    const name = root.querySelector<HTMLInputElement>('#ti-name')!;
+    const trade = root.querySelector<HTMLSelectElement>('#ti-trade')!;
+    const status = root.querySelector<HTMLElement>('.ti-status')!;
+    const reset = root.querySelector<HTMLButtonElement>('.ti-reset')!;
+    const start = load();
+    if (start) { name.value = start.name; trade.value = start.trade; reset.hidden = false; }
+    let timer = 0;
+    const apply = () => {
+      const p = { name: name.value, trade: trade.value };
+      save(p);
+      const r = resolve(p);
+      status.textContent = r.typed ? `Showing ${r.name} on ${r.domain}. It follows you down the page.` : `Showing a ${r.t.label.toLowerCase()} site. Add your name too.`;
+      reset.hidden = false;
+    };
+    name.addEventListener('input', () => { clearTimeout(timer); timer = window.setTimeout(apply, 350); });
+    trade.addEventListener('change', apply);
+    reset.addEventListener('click', () => {
+      name.value = ''; trade.value = 'plumber'; save(null); reset.hidden = true;
+      status.textContent = 'Watch the phone change as you type.';
+    });
+  }
+</script>
