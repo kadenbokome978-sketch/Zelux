@@ -305,7 +305,7 @@ h1 em, h2 em, h3 em { font-style: normal; }
 
 /* Phones: every page's opening block fills the first screen, so the fold never slices text */
 @media (max-width: 767px) {
-  .first-screen { display: flex; flex-direction: column; justify-content: center; min-height: calc(100svh - 64px - var(--fs-off, 0px) - var(--tabbar, 0px)); }
+  .first-screen { padding-top: 0.5rem; }
 }
 /* Very short phones (iPhone SE): drop the hero's promise row so the rest fits; the promises appear again further down */
 @media (max-width: 767px) and (max-height: 600px) {

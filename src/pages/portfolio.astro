@@ -21,34 +21,34 @@ const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '');
   title="Portfolio: Websites & Systems | Zelux"
   description="Websites and systems built by Zelux, shown with permission: Forge, a mobile welder in Havant, and KrapMaps. No invented logos or stats."
 >
-  <section class="first-screen container-z pb-10 pt-14 md:pb-14 md:pt-20">
+  <section class="first-screen container-z pb-8 pt-8 md:pb-14 md:pt-20">
     <SectionHead as="h1" eyebrow="Portfolio" title="Real projects." italic="Real permission." intro="Every client project here is live and shown with the owner's say-so. Builds in progress and concepts are labelled as such." />
   </section>
 
-  <div class="container-z grid gap-6 pb-14 md:pb-20">
+  <div class="container-z grid gap-4 pb-10 md:gap-6 md:pb-20">
     {live.map((w, i) => {
       const t = tint[w.title] ?? tint.Forge;
       return (
         <article class="overflow-hidden rounded-[calc(var(--radius-card)+0.5rem)]" style={`background:${t.bg};color:${t.ink}`} data-reveal>
           <div class="grid items-center gap-8 lg:grid-cols-12">
-            <div class:list={['p-6 md:p-10 lg:col-span-5', i % 2 === 1 && 'lg:order-2']}>
+            <div class:list={['p-5 md:p-10 lg:col-span-5', i % 2 === 1 && 'lg:order-2']}>
               <span class="inline-flex rounded-full border px-3 py-1 font-mono text-[0.6875rem] uppercase tracking-[0.12em]" style={`border-color:${t.line}`}>{w.status.includes('Co-founded') ? 'Live · Co-founded' : 'Live · Client'}</span>
-              <h2 class:list={['mt-5 font-serif text-[clamp(2.25rem,4vw,3.25rem)] leading-none tracking-[-0.03em]', w.title === 'KrapMaps' && 'font-krap']}>{w.title}</h2>
+              <h2 class:list={['mt-4 font-serif text-[clamp(2rem,4vw,3.25rem)] leading-none tracking-[-0.03em]', w.title === 'KrapMaps' && 'font-krap']}>{w.title}</h2>
               <p class="mt-2 text-[0.9375rem]" style={`color:${t.muted}`}>{w.sector}</p>
-              <dl class="mt-8 grid gap-5">
+              <dl class="mt-5 grid gap-5 md:mt-8">
                 {[['The problem', w.friction], ['What I built', w.built], ['Where it is now', w.outcome]].map(([k, v]) => (
-                  <div class="border-t pt-4" style={`border-color:${t.line}`}>
+                  <div class:list={['border-t pt-4', k !== 'What I built' && 'max-md:hidden']} style={`border-color:${t.line}`}>
                     <dt class="font-mono text-[0.6875rem] uppercase tracking-[0.12em]" style={`color:${t.muted}`}>{k}</dt>
                     <dd class="mt-1.5 text-[1rem] leading-relaxed">{v}</dd>
                   </div>
                 ))}
               </dl>
               {w.href && (
-                <a href={w.href} target="_blank" rel="noopener" class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-[0.9375rem] font-semibold" style={`background:${t.ink};color:${t.bg}`}>Visit {host(w.href)} <span aria-hidden="true">↗</span></a>
+                <a href={w.href} target="_blank" rel="noopener" class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-[0.9375rem] font-semibold md:mt-8" style={`background:${t.ink};color:${t.bg}`}>Visit {host(w.href)} <span aria-hidden="true">↗</span></a>
               )}
             </div>
             {w.desktopLong && (
-              <div class:list={['px-6 pb-6 pt-2 md:px-10 md:pb-10 lg:col-span-7 lg:py-10', i % 2 === 1 && 'lg:order-1']}>
+              <div class:list={['px-5 pb-5 md:px-10 md:pb-10 lg:col-span-7 lg:py-10', i % 2 === 1 && 'lg:order-1']}>
                 <SiteShowcase title={w.title} host={w.href ? host(w.href) : ''} desktop={w.desktopLong} mobile={w.mobileLong} frame={w.frame!} bar={w.bar!} barInk={w.barInk!} eager={i === 0} hinted />
               </div>
             )}
@@ -75,8 +75,11 @@ const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '');
       <div class="min-w-0 lg:col-span-8" data-reveal style="--d:60ms">
         <h2 class="font-serif text-[1.625rem] text-ink">Concept builds</h2>
         <p class="body mt-2 max-w-[52ch]">Made-up businesses, real design: the kind of site I build, each one around a single job.</p>
-        <div class="concepts mt-8 grid grid-cols-2 justify-items-center gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-6">
-          <div class="cp-wrap"><ConceptPhone variant="plumber" size="sm" /></div>
+        <div class="cp-seg" role="tablist" aria-label="Concept builds">
+          {['Plumber', 'Groomer', 'Bakery'].map((l, i) => <button type="button" role="tab" class="cp-seg-b" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-i={i}>{l}</button>)}
+        </div>
+        <div class="concepts mt-6 grid justify-items-center gap-6 sm:mt-8 sm:grid-cols-3">
+          <div class="cp-wrap on"><ConceptPhone variant="plumber" size="sm" /></div>
           <div class="cp-wrap"><ConceptPhone variant="groomer" size="sm" /></div>
           <div class="cp-wrap"><ConceptPhone variant="bakery" size="sm" /></div>
         </div>
@@ -86,11 +89,28 @@ const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '');
 
   <ClosingBand />
   <style>
-    /* Phones: two small phones a row, the third centred below. No sideways scrolling. */
+    .cp-seg { display: none; }
+    /* Phones (with JS): pick one concept at a time, shown full size. Without JS all three stack. */
     @media (max-width: 639px) {
-      .cp-wrap { width: 156px; height: 320px; }
-      .cp-wrap > :global(*) { transform: scale(0.72); transform-origin: top left; }
-      .concepts > .cp-wrap:last-child { grid-column: 1 / -1; }
+      :global(.js) .cp-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.25rem; margin-top: 1.25rem; padding: 0.25rem; border-radius: 999px; background: var(--color-paper); border: 1px solid var(--color-hairline); }
+      .cp-seg-b { min-height: 40px; border-radius: 999px; font-size: 0.875rem; font-weight: 600; color: var(--color-ink-2); }
+      .cp-seg-b[aria-selected='true'] { background: var(--color-accent); color: var(--color-on-accent); }
+      :global(.js) .cp-wrap:not(.on) { display: none; }
     }
   </style>
+  <script>
+    const seg = document.querySelector<HTMLElement>('.cp-seg');
+    if (seg) {
+      const tabs = Array.from(seg.querySelectorAll<HTMLButtonElement>('.cp-seg-b'));
+      const phones = Array.from(document.querySelectorAll<HTMLElement>('.cp-wrap'));
+      const pick = (n: number, focus = false) => {
+        tabs.forEach((t, i) => { t.setAttribute('aria-selected', String(i === n)); t.tabIndex = i === n ? 0 : -1; if (i === n && focus) t.focus(); });
+        phones.forEach((p, i) => p.classList.toggle('on', i === n));
+      };
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => pick(i));
+        t.addEventListener('keydown', (e) => { const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); pick((i + d + tabs.length) % tabs.length, true); } });
+      });
+    }
+  </script>
 </Base>
