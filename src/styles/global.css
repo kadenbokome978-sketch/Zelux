@@ -362,3 +362,4 @@ h1 em, h2 em, h3 em { font-style: normal; }
   html.m-tabs { --band-pad: 2rem; }
   html.m-tabs .cb > .container-z { row-gap: 1.25rem; }
 }
+@media (max-width: 767px) and (max-height: 600px) { html.m-tabs .cb .cb-line { margin-top: 0.6rem; } html.m-tabs .cb > .container-z { row-gap: 1rem; } }
