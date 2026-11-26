@@ -43,3 +43,7 @@ Every page has one job: get the right visitor to book the free 20-minute call (`
 - [ ] Guarantee / risk reversal present where a price or timeline is discussed
 - [ ] No unverifiable claims, no "AI", no em dashes
 - [ ] Section count didn't grow without removing something
+
+## Phone tabs (homepage)
+
+Below 768px the homepage runs as five tabs with an app-style bar at the bottom (`MobileTabs.astro`): Overview, Automate, Services, Work, About. A section joins a tab with `data-tab="…"`; the closing band and footer show under every tab, and each tab ends with a "Next" button. In-page links (#time-saver, /#about) open the right tab first, and the URL hash follows the tab. Without JS, or on tablets and desktops, it's one page as normal. A new homepage section needs a `data-tab`, or it will be hidden on phones.
