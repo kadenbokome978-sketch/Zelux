@@ -1,7 +1,7 @@
 // Site checks: run after `npm run build`. Usage: npm run check
 // Serves dist/ locally, then for every page checks:
 //   - axe WCAG 2.2 AA (phone and desktop width)
-//   - no horizontal scroll at phone width
+//   - no horizontal scroll at any width from 320px to 1920px
 //   - with JavaScript off: no hidden content, FAQ answers readable, menu fallback shown
 //   - copy rules: no "AI", no em dashes in visible text
 // Exits non-zero on any failure.
@@ -47,6 +47,16 @@ for (const vp of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
       if (/\bAI\b/.test(text)) fail(`${p} mentions "AI"`);
       if (text.includes('—')) fail(`${p} contains an em dash`);
     }
+  }
+  await page.close();
+}
+
+// Every device size: nothing may scroll sideways, from a small phone to a wide desktop
+for (const width of [320, 360, 414, 600, 768, 834, 1024, 1280, 1920]) {
+  const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+  for (const p of PAGES) {
+    await page.goto(base + p);
+    if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) fail(`${p} scrolls sideways at ${width}px`);
   }
   await page.close();
 }

@@ -90,6 +90,8 @@
 @layer components {
   .container-z { max-width: 1160px; margin-inline: auto; padding-inline: 1.25rem; }
   @media (min-width: 640px) { .container-z { padding-inline: 2rem; } }
+  /* Big screens: a little wider, so nothing looks lost in the middle */
+  @media (min-width: 1536px) { .container-z { max-width: 1280px; } }
 
   .eyebrow {
     font-family: var(--font-mono);
@@ -186,6 +188,8 @@
   /* Deep band: the supporting colour */
   .band-deep { background: var(--color-deep); color: var(--color-deep-ink); margin-inline: 0.5rem; border-radius: calc(var(--radius-card) + 0.75rem); }
   @media (min-width: 768px) { .band-deep { margin-inline: 1rem; border-radius: 2.5rem; } }
+  /* Very wide screens: the dark bands stop growing and sit centred */
+  @media (min-width: 1600px) { .band-deep { max-width: 1480px; margin-inline: auto; } }
   .band-deep .eyebrow { color: var(--color-deep-ink-2); }
   .band-deep .body, .band-deep .lead { color: var(--color-deep-ink-2); }
   .band-deep ::selection { background: var(--color-accent-on-deep); color: var(--color-deep); }
@@ -283,3 +287,4 @@ h1 em, h2 em, h3 em { font-style: normal; }
 
 /* KrapMaps wordmark in its own brand face (Lilita One, uppercase), as on krapmaps.app */
 .font-krap { font-family: "Lilita One", var(--font-serif) !important; font-weight: 400 !important; text-transform: uppercase; letter-spacing: 0.02em !important; }
+@media (min-width: 1536px) { .hero-grid { background-size: 100% 100%, calc((1280px - 4rem) / 12) 100%; } }

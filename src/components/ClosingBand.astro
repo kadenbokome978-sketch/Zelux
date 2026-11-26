@@ -12,15 +12,15 @@ const tiles = [
 <section class="band-deep cb relative overflow-hidden">
   <div class="cb-glow" aria-hidden="true"></div>
   <div class="container-z relative grid gap-8 py-12 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-8" data-reveal>
-    <div class="lg:col-span-6">
+    <div class="lg:col-span-5">
       <h2 class="h-section max-w-[18ch]">{site.closing.title}</h2>
       <p class="body mt-4 max-w-[48ch] text-[1.0625rem]">{site.closing.body}</p>
       <div class="mt-6 flex flex-col gap-2 sm:mt-8 sm:flex-row sm:items-center sm:gap-6">
-        <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }} wrapperClassName="w-full sm:w-auto" innerClassName="w-full"><a href="/book" class="btn-primary btn-lg w-full">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
-        <a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center text-sm text-deep-ink-2 underline decoration-deep-line underline-offset-4 hover:text-deep-ink">or email {site.email}</a>
+        <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }} wrapperClassName="w-full sm:w-auto" innerClassName="w-full"><a href="/book" class="btn-primary btn-lg w-full whitespace-nowrap">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
+        <a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center whitespace-nowrap text-sm text-deep-ink-2 underline decoration-deep-line underline-offset-4 hover:text-deep-ink">or email {site.email}</a>
       </div>
     </div>
-    <div class="lg:col-span-6">
+    <div class="lg:col-span-7">
       <p class="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent-on-deep">If you start <span class="cb-today-word">today</span></p>
       <ol class="cb-line mt-4">
         {tiles.map((t, i) => (
