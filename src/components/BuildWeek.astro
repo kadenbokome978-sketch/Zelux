@@ -1,0 +1,245 @@
+---
+// "A week, start to live": a browser that builds an example site in four stages, one per step.
+// Plays through once when it scrolls into view (never loops), then rests on "Live". Day buttons jump
+// to any stage, "Play again" replays. No JS or reduced motion: the finished, live state is shown.
+// The business (Brookfield Plumbing) is made up and labelled as an example.
+import site from '../content/site.json';
+const labels = ['Day 1', 'Day 2', 'Days 3 to 6', 'Day 7'];
+const names = ['Intro call', 'Fixed quote', 'Build & review', 'Live'];
+---
+<figure id="buildweek" class="bw" data-stage="3" data-styled="true" aria-label="Example: one week from first call to a live website. Day 1 call notes, day 2 a fixed quote is accepted, days 3 to 6 the design is built and reviewed, day 7 it goes live on the customer's own domain. Made-up business.">
+  <div class="bw-days" role="group" aria-label="Show a day">
+    {names.map((n, i) => (
+      <button type="button" class="bw-day" data-go={i} aria-pressed={i === 3 ? 'true' : 'false'}>
+        <span class="bw-day-k">{labels[i]}</span>
+        <span class="bw-day-n">{n}</span>
+        <span class="bw-day-bar" aria-hidden="true"><i></i></span>
+      </button>
+    ))}
+  </div>
+
+  <div class="bw-browser" aria-hidden="true">
+    <div class="bw-chrome">
+      <i></i><i></i><i></i>
+      <span class="bw-url">
+        <svg class="bw-lock" viewBox="0 0 12 14"><rect x="1.5" y="6" width="9" height="7" rx="1.5" /><path d="M3.5 6V4.5a2.5 2.5 0 0 1 5 0V6" fill="none" stroke="currentColor" stroke-width="1.3" /></svg>
+        <span class="bw-url-preview">preview · not public yet</span>
+        <span class="bw-url-live">yourbusiness.co.uk</span>
+      </span>
+      <span class="bw-live"><span></span>Live</span>
+    </div>
+
+    <div class="bw-view">
+      <!-- the example site: wireframe first, then it styles itself in -->
+      <div class="bw-site">
+        <div class="bw-nav">
+          <span class="bw-logo s" style="--k:0"><b>B</b>Brookfield</span>
+          <span class="bw-links"><span class="s" style="--k:1">Services</span><span class="s" style="--k:1">Prices</span><span class="s" style="--k:1">Areas</span></span>
+          <span class="bw-cta s" style="--k:2">Book a visit</span>
+        </div>
+        <div class="bw-hero">
+          <div class="bw-copy">
+            <span class="bw-kick s" style="--k:3">Gas Safe · Havant</span>
+            <span class="bw-h s" style="--k:3">Boiler playing up? Book a visit in two taps.</span>
+            <span class="bw-btns"><span class="bw-btn s" style="--k:4">Book a visit</span><span class="bw-btn2 s" style="--k:4">Call us</span></span>
+          </div>
+          <div class="bw-art s" style="--k:5">
+            <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMax slice"><path d="M0 84 L30 64 L62 80 L96 56 L134 78 L166 60 L200 86 V120 H0Z" fill="#1b5645" /><rect y="96" width="200" height="24" fill="#103c30" /><g transform="translate(36 44)"><rect y="8" width="86" height="38" rx="6" fill="#f3f1e7" /><path d="M86 18 h18 q8 0 11 8 l6 13 v7 h-35z" fill="#f3f1e7" /><rect y="30" width="121" height="6" fill="#f2b33d" /><circle cx="22" cy="47" r="8" fill="#0b1120" /><circle cx="100" cy="47" r="8" fill="#0b1120" /></g></svg>
+          </div>
+        </div>
+        <div class="bw-cards">
+          {[['Boiler service', 'from £85'], ['Leak or repair', 'from £60'], ['New radiator', 'from £180']].map(([a, b], i) => (
+            <span class="bw-card s" style={`--k:${6 + i}`}><b>{a}</b><i>{b}</i></span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Day 1: call notes -->
+      <div class="bw-doc bw-notes">
+        <p class="bw-doc-k">Call notes · 20 min</p>
+        <p class="bw-doc-t">Brookfield Plumbing</p>
+        <ul>
+          <li style="--n:0">Missed calls while on jobs = missed work</li>
+          <li style="--n:1">Wants online booking with real slots</li>
+          <li style="--n:2">5 pages, prices shown up front</li>
+          <li style="--n:3">Keep the van photo, lose the clip art</li>
+        </ul>
+      </div>
+
+      <!-- Day 2: fixed quote -->
+      <div class="bw-doc bw-quote">
+        <p class="bw-doc-k">Quote · fixed price</p>
+        <p class="bw-doc-t">Brookfield website</p>
+        <ul>
+          <li><span>5-page website, mobile-first</span><i>Included</i></li>
+          <li><span>Online booking + reminders</span><i>Included</i></li>
+          <li><span>Hosting, domain, accounts in your name</span><i>Included</i></li>
+          <li class="bw-quote-total"><span>One fixed price · no VAT on top</span></li>
+        </ul>
+        <span class="bw-stamp">Accepted ✓</span>
+      </div>
+
+      <!-- Days 3 to 6: a review comment -->
+      <div class="bw-comment">
+        <span class="bw-comment-a">D</span>
+        <span><b>Client</b>Can the main button say “Book a visit”?</span>
+        <span class="bw-comment-done">Done ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <figcaption class="bw-foot">
+    <p class="bw-say" aria-live="polite">
+      {site.steps.map((s, i) => <span class="bw-say-i" data-i={i}>{s.body}</span>)}
+    </p>
+    <span class="bw-meta"><span>Example build · made-up business</span><button type="button" class="bw-replay">Play again ↺</button></span>
+  </figcaption>
+</figure>
+
+<style>
+  .bw { margin: 0; }
+  .bw-days { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+  @media (max-width: 640px) { .bw-days { grid-template-columns: 1fr 1fr; } }
+  .bw-day { display: grid; gap: 0.2rem; padding: 0.7rem 0.8rem 0.8rem; border-radius: var(--radius-inner); text-align: left; background: var(--color-deep-2); border: 1px solid var(--color-deep-line); color: var(--color-deep-ink-2); transition: border-color var(--dur-ui), color var(--dur-ui), background-color var(--dur-ui); }
+  .bw-day-k { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .bw-day-n { font-weight: 600; font-size: 0.9375rem; color: var(--color-deep-ink); }
+  .bw-day-bar { position: relative; height: 2px; margin-top: 0.45rem; border-radius: 2px; background: var(--color-deep-line); overflow: hidden; }
+  .bw-day-bar i { position: absolute; inset: 0; background: var(--color-accent-on-deep); transform: scaleX(0); transform-origin: left; }
+  .bw-day.done .bw-day-bar i { transform: none; }
+  .bw-day[aria-pressed='true'] { border-color: var(--color-accent-on-deep); color: var(--color-accent-on-deep); }
+  .bw-day[aria-pressed='true'] .bw-day-bar i { transform: none; }
+  .bw.is-playing .bw-day[aria-pressed='true'] .bw-day-bar i { animation: bw-fill var(--bw-step, 2.8s) linear both; }
+  @keyframes bw-fill { from { transform: scaleX(0); } to { transform: none; } }
+  @media (hover: hover) and (pointer: fine) { .bw-day:hover { border-color: var(--color-deep-ink-2); } }
+
+  /* browser */
+  .bw-browser { margin-top: 0.9rem; overflow: hidden; border-radius: 16px; background: #e8edf4; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.6); }
+  .bw-chrome { display: flex; align-items: center; gap: 6px; height: 38px; padding: 0 12px; background: #e8edf4; color: #0f172a; }
+  .bw-chrome > i { width: 9px; height: 9px; border-radius: 999px; background: #c5cdd9; }
+  .bw-url { position: relative; display: inline-flex; align-items: center; gap: 6px; margin: 0 auto; min-width: 0; padding: 5px 14px; border-radius: 9px; background: #fcfdff; font-size: 12px; color: #475569; }
+  .bw-lock { width: 10px; fill: currentColor; opacity: 0; transition: opacity var(--dur-ui); }
+  .bw-url-live { display: none; color: #0f172a; font-weight: 600; }
+  .bw[data-stage='3'] .bw-lock { opacity: 1; color: #15803d; }
+  .bw[data-stage='3'] .bw-url-preview { display: none; }
+  .bw[data-stage='3'] .bw-url-live { display: inline; }
+  .bw-live { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; background: #dcfce7; color: #14532d; font-size: 11px; font-weight: 700; opacity: 0; transform: scale(0.8); transition: opacity var(--dur-ui), transform 300ms var(--ease-out-soft); }
+  .bw-live span { width: 6px; height: 6px; border-radius: 999px; background: #15803d; }
+  .bw[data-stage='3'] .bw-live { opacity: 1; transform: none; }
+  @media (max-width: 520px) { .bw-live { display: none; } .bw-chrome > i { display: none; } }
+
+  .bw-view { position: relative; height: clamp(17rem, 30vw, 21rem); overflow: hidden; background: #fcfdff; }
+
+  /* the example site. Every .s piece is a grey block until data-styled, then styles in one after another */
+  .bw-site { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto; gap: 14px; padding: 14px 18px 18px; background: #0e3b2f; transition: background-color 500ms var(--ease-out-soft) 100ms; }
+  .bw-nav { display: flex; align-items: center; gap: 12px; }
+  .bw-logo { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-serif); font-weight: 600; font-size: 14px; color: #f3f1e7; }
+  .bw-logo b { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: #f2b33d; color: #1d1a10; font-size: 12px; }
+  .bw-links { display: flex; gap: 12px; margin-left: auto; font-size: 11px; color: #c9d8cf; }
+  @media (max-width: 520px) { .bw-links { display: none; } .bw-cta { margin-left: auto; } }
+  .bw-cta { padding: 5px 12px; border-radius: 999px; background: #f2b33d; color: #1d1a10; font-size: 11px; font-weight: 700; }
+  .bw-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; min-height: 0; }
+  .bw-copy { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; }
+  .bw-kick { font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #c9d8cf; }
+  .bw-h { font-family: var(--font-serif); font-weight: 600; font-size: clamp(17px, 2.3vw, 26px); line-height: 1.05; letter-spacing: -0.03em; color: #f3f1e7; }
+  .bw-btns { display: flex; gap: 8px; }
+  .bw-btn { padding: 7px 14px; border-radius: 999px; background: #f2b33d; color: #1d1a10; font-size: 11px; font-weight: 700; }
+  .bw-btn2 { padding: 7px 14px; border-radius: 999px; box-shadow: inset 0 0 0 1px #2a5a4b; color: #f3f1e7; font-size: 11px; font-weight: 700; }
+  .bw-art { overflow: hidden; border-radius: 12px; background: #15493b; }
+  .bw-art svg { display: block; width: 100%; height: 100%; transition: opacity 400ms var(--ease-out-soft) calc(var(--k) * 140ms); }
+  .bw-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .bw-card { display: flex; justify-content: space-between; gap: 6px; padding: 9px 10px; border-radius: 10px; background: #15493b; font-size: 11px; color: #f3f1e7; }
+  .bw-card i { font-style: normal; opacity: 0.8; }
+  @media (max-width: 520px) { .bw-card i { display: none; } .bw-hero { grid-template-columns: 1fr; } .bw-art { display: none; } .bw-h { font-size: 20px; } }
+  .bw-btn, .bw-btn2, .bw-cta, .bw-card b { white-space: nowrap; }
+  .s { transition: background-color 400ms var(--ease-out-soft), color 400ms var(--ease-out-soft), box-shadow 400ms var(--ease-out-soft); transition-delay: calc(var(--k) * 140ms); }
+
+  /* wireframe look */
+  .bw:not([data-styled='true']) .bw-site { background: #f1f5f9; transition-delay: 0ms; }
+  .bw:not([data-styled='true']) .s { background: #dfe5ee !important; color: transparent !important; box-shadow: none !important; border-radius: 6px; transition-delay: 0ms; }
+  .bw:not([data-styled='true']) .s * { opacity: 0; }
+  .bw:not([data-styled='true']) .bw-art svg { opacity: 0; transition-delay: 0ms; }
+  .bw-logo b, .bw-card * { transition: opacity 300ms; }
+
+  /* overlay documents (Day 1, Day 2) */
+  .bw-doc { position: absolute; z-index: 2; top: 50%; left: 50%; width: min(26rem, calc(100% - 2.5rem)); padding: 18px 20px; border-radius: 14px; background: #fcfdff; color: #0f172a; box-shadow: 0 24px 50px -20px rgb(15 23 42 / 0.45), 0 0 0 1px #dde3eb; opacity: 0; transform: translate(-50%, -46%) scale(0.97); pointer-events: none; transition: opacity 350ms var(--ease-out-soft), transform 450ms var(--ease-out-soft); }
+  .bw[data-stage='0'] .bw-notes, .bw[data-stage='1'] .bw-quote { opacity: 1; transform: translate(-50%, -50%); }
+  .bw[data-stage='0'] .bw-site, .bw[data-stage='1'] .bw-site { filter: blur(2px); opacity: 0.55; }
+  .bw-site { transition-property: background-color, filter, opacity; transition-duration: 500ms; }
+  .bw-doc-k { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #2563eb; }
+  .bw-doc-t { margin-top: 2px; font-family: var(--font-serif); font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
+  .bw-doc ul { display: grid; gap: 7px; margin: 12px 0 0; padding: 0; list-style: none; font-size: 13px; color: #334155; }
+  .bw-notes li { display: flex; gap: 8px; }
+  .bw-notes li::before { content: ''; flex: none; width: 6px; height: 6px; margin-top: 6px; border-radius: 999px; background: #2563eb; }
+  .bw[data-stage='0'] .bw-notes li { animation: bw-write 400ms var(--ease-out-soft) both; animation-delay: calc(300ms + var(--n) * 380ms); }
+  @keyframes bw-write { from { opacity: 0; transform: translateX(-6px); } }
+  .bw-quote li { display: flex; justify-content: space-between; gap: 10px; padding-bottom: 7px; border-bottom: 1px solid #e2e8f0; }
+  .bw-quote li i { font-style: normal; font-size: 11px; font-weight: 600; color: #15803d; }
+  .bw-quote .bw-quote-total { border: 0; padding: 0; font-weight: 700; color: #0f172a; }
+  .bw-stamp { position: absolute; right: 16px; top: 16px; padding: 4px 10px; border: 2px solid #15803d; border-radius: 8px; color: #15803d; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; transform: rotate(-8deg); opacity: 0; }
+  .bw[data-stage='1'] .bw-stamp { animation: bw-stamp 380ms var(--ease-out-soft) 1.3s both; }
+  .bw[data-stage='2'] .bw-stamp, .bw[data-stage='3'] .bw-stamp { opacity: 1; }
+  @keyframes bw-stamp { from { opacity: 0; transform: rotate(-8deg) scale(1.6); } to { opacity: 1; transform: rotate(-8deg) scale(1); } }
+
+  /* review comment (Days 3 to 6) */
+  .bw-comment { position: absolute; z-index: 3; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; max-width: 19rem; padding: 10px 12px; border-radius: 12px; background: #fcfdff; color: #0f172a; font-size: 12px; line-height: 1.35; box-shadow: 0 18px 40px -16px rgb(15 23 42 / 0.5); opacity: 0; transform: translateY(10px); transition: opacity 300ms, transform 400ms var(--ease-out-soft); }
+  .bw-comment b { display: block; font-size: 11px; color: #475569; }
+  .bw-comment-a { display: grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 999px; background: #f2b33d; color: #1d1a10; font-weight: 700; }
+  .bw-comment-done { flex: none; padding: 3px 8px; border-radius: 999px; background: #dcfce7; color: #14532d; font-weight: 700; font-size: 11px; opacity: 0; }
+  .bw[data-stage='2'][data-styled='true'] .bw-comment { opacity: 1; transform: none; transition-delay: 1.4s; }
+  .bw[data-stage='2'][data-styled='true'] .bw-comment-done { animation: bw-on 300ms 2.4s both; }
+  @keyframes bw-on { from { opacity: 0; } to { opacity: 1; } }
+
+  .bw-foot { margin-top: 1rem; display: grid; gap: 0.75rem; }
+  .bw-say { display: grid; min-height: 3em; font-size: 0.9375rem; line-height: 1.55; color: var(--color-deep-ink); }
+  .bw-say-i { grid-area: 1 / 1; opacity: 0; transition: opacity var(--dur-ui); }
+  .bw[data-stage='0'] .bw-say-i[data-i='0'], .bw[data-stage='1'] .bw-say-i[data-i='1'], .bw[data-stage='2'] .bw-say-i[data-i='2'], .bw[data-stage='3'] .bw-say-i[data-i='3'] { opacity: 1; }
+  .bw-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--color-deep-line); font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-deep-ink-2); }
+  .bw-replay { flex: none; min-height: 36px; padding: 0 0.9rem; border-radius: 999px; border: 1px solid var(--color-deep-line); color: var(--color-deep-ink); font: inherit; letter-spacing: 0.06em; }
+  @media (hover: hover) and (pointer: fine) { .bw-replay:hover { border-color: var(--color-deep-ink-2); } }
+</style>
+
+<style is:global>
+  /* No JS: the finished site, all four steps readable, no controls */
+  html:not(.js) .bw-replay { display: none; }
+  html:not(.js) .bw-say { display: block; }
+  html:not(.js) .bw-say-i { display: block; opacity: 1; margin-bottom: 0.25rem; }
+  html:not(.js) .bw-day { pointer-events: none; }
+</style>
+
+<script>
+  const fig = document.getElementById('buildweek');
+  if (fig) {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const days = Array.from(fig.querySelectorAll<HTMLButtonElement>('.bw-day'));
+    const STEP = 2800;
+    let timer: number | undefined;
+    let styleTimer: number | undefined;
+
+    const show = (n: number) => {
+      fig.dataset.stage = String(n);
+      clearTimeout(styleTimer);
+      // Day 3 to 6: start as a wireframe, then the design styles itself in
+      if (n < 2) fig.dataset.styled = 'false';
+      else if (n === 2 && !reduce) { fig.dataset.styled = 'false'; styleTimer = window.setTimeout(() => (fig.dataset.styled = 'true'), 450); }
+      else fig.dataset.styled = 'true';
+      days.forEach((d, i) => { d.setAttribute('aria-pressed', String(i === n)); d.classList.toggle('done', i < n); });
+    };
+    const stop = () => { clearInterval(timer); timer = undefined; fig.classList.remove('is-playing'); };
+    const play = () => {
+      stop();
+      if (reduce) { show(3); return; }
+      fig.style.setProperty('--bw-step', `${STEP}ms`);
+      fig.classList.add('is-playing');
+      let n = 0; show(0);
+      timer = window.setInterval(() => {
+        n++; show(n);
+        if (n >= 3) stop(); // once through, then rest on Live
+      }, STEP);
+    };
+    days.forEach((d) => d.addEventListener('click', () => { stop(); show(Number(d.dataset.go)); }));
+    fig.querySelector('.bw-replay')?.addEventListener('click', play);
+    new IntersectionObserver(([e], io) => {
+      if (e.isIntersecting) { play(); io.disconnect(); }
+    }, { threshold: 0.45 }).observe(fig);
+  }
+</script>

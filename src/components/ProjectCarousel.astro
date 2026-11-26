@@ -6,6 +6,7 @@
 import work from '../content/work.json';
 import ConceptPhone from './ConceptPhone.astro';
 import SiteShowcase from './SiteShowcase.astro';
+import '@fontsource/lilita-one/latin-400.css';
 
 type Work = (typeof work)[number] & { image?: string; imageMobile?: string; desktopLong?: string; mobileLong?: string; frame?: string; bar?: string; barInk?: string };
 type Slide =
@@ -45,7 +46,7 @@ const badge = (w: Work) => (w.isPlaceholder ? 'In build' : w.status.includes('Co
       >
         <div class="pc-copy">
           <span class="pc-badge">{s.kind === 'work' ? badge(s.item) : 'Concept · not a client'}</span>
-          <h3 class="pc-title">{s.kind === 'work' ? s.item.title : s.title}</h3>
+          <h3 class:list={['pc-title', s.kind === 'work' && s.item.title === 'KrapMaps' && 'font-krap']}>{s.kind === 'work' ? s.item.title : s.title}</h3>
           <p class="pc-sector">{s.kind === 'work' ? s.item.sector : s.sector}</p>
           {s.kind === 'work' ? (
             <>

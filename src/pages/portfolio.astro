@@ -5,6 +5,7 @@ import ClosingBand from '../components/ClosingBand.astro';
 import ConceptPhone from '../components/ConceptPhone.astro';
 import SiteShowcase from '../components/SiteShowcase.astro';
 import work from '../content/work.json';
+import '@fontsource/lilita-one/latin-400.css';
 
 type Item = (typeof work)[number] & { image?: string; imageMobile?: string; desktopLong?: string; mobileLong?: string; frame?: string; bar?: string; barInk?: string };
 const live = (work as Item[]).filter((w) => !w.isPlaceholder);
@@ -32,7 +33,7 @@ const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '');
           <div class="grid items-center gap-8 lg:grid-cols-12">
             <div class:list={['p-6 md:p-10 lg:col-span-5', i % 2 === 1 && 'lg:order-2']}>
               <span class="inline-flex rounded-full border px-3 py-1 font-mono text-[0.6875rem] uppercase tracking-[0.12em]" style={`border-color:${t.line}`}>{w.status.includes('Co-founded') ? 'Live · Co-founded' : 'Live · Client'}</span>
-              <h2 class="mt-5 font-serif text-[clamp(2.25rem,4vw,3.25rem)] leading-none tracking-[-0.03em]">{w.title}</h2>
+              <h2 class:list={['mt-5 font-serif text-[clamp(2.25rem,4vw,3.25rem)] leading-none tracking-[-0.03em]', w.title === 'KrapMaps' && 'font-krap']}>{w.title}</h2>
               <p class="mt-2 text-[0.9375rem]" style={`color:${t.muted}`}>{w.sector}</p>
               <dl class="mt-8 grid gap-5">
                 {[['The problem', w.friction], ['What I built', w.built], ['Where it is now', w.outcome]].map(([k, v]) => (

@@ -1,16 +1,63 @@
 ---
 import site from '../content/site.json';
 import Magnet from './react-bits/Magnet';
+// The timeline uses today's date (filled in on the visitor's device) and only the existing
+// commitments: a fixed quote within 48 hours, then sites up to 5 pages live within 7 days.
+const tiles = [
+  { k: 'Today', t: 'Free 20-min call', off: 0 },
+  { k: 'Within 48 hours', t: 'Fixed quote', off: 2 },
+  { k: 'Up to 7 days later', t: 'Your site could be live', off: 9 },
+];
 ---
-<section class="band-deep">
-  <div class="container-z flex flex-col gap-10 py-16 md:py-24 lg:flex-row lg:items-center lg:justify-between" data-reveal>
-    <div>
+<section class="band-deep cb relative overflow-hidden">
+  <div class="cb-glow" aria-hidden="true"></div>
+  <div class="container-z relative grid gap-10 py-16 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-8" data-reveal>
+    <div class="lg:col-span-6">
       <h2 class="h-section max-w-[18ch]">{site.closing.title}</h2>
-      <p class="body mt-4 max-w-[52ch] text-[1.0625rem]">{site.closing.body}</p>
+      <p class="body mt-4 max-w-[48ch] text-[1.0625rem]">{site.closing.body}</p>
+      <div class="mt-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+        <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }} wrapperClassName="w-full sm:w-auto" innerClassName="w-full"><a href="/book" class="btn-primary btn-lg w-full">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
+        <a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center text-sm text-deep-ink-2 underline decoration-deep-line underline-offset-4 hover:text-deep-ink">or email {site.email}</a>
+      </div>
     </div>
-    <div class="flex shrink-0 flex-col gap-2 lg:items-end">
-      <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }} wrapperClassName="w-full md:w-auto" innerClassName="w-full"><a href="/book" class="btn-primary btn-lg w-full">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
-      <a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center justify-center text-sm text-deep-ink-2 underline decoration-deep-line underline-offset-4 hover:text-deep-ink lg:justify-end">or email {site.email}</a>
+    <div class="lg:col-span-6">
+      <p class="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent-on-deep">If you start <span class="cb-today-word">today</span></p>
+      <ol class="cb-line mt-4">
+        {tiles.map((t, i) => (
+          <li class="cb-tile" style={`--i:${i}`}>
+            <span class="cb-date" data-off={t.off}>{t.k}</span>
+            <span class="cb-t">{t.t}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-4 text-xs leading-relaxed text-deep-ink-2">For sites up to 5 pages. The 7 days start once your quote is accepted and your copy and photos are in. Miss it and you get £100 off.</p>
     </div>
   </div>
 </section>
+
+<style>
+  .cb-glow { position: absolute; right: -10%; top: -40%; width: 60%; aspect-ratio: 1; border-radius: 999px; background: radial-gradient(closest-side, rgb(110 160 255 / 0.22), transparent); pointer-events: none; }
+  .cb-line { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+  .cb-line::before { content: ''; position: absolute; left: 1rem; right: 1rem; top: 50%; height: 2px; background: linear-gradient(90deg, var(--color-deep-line), var(--color-accent-on-deep)); }
+  .cb-tile { position: relative; display: grid; gap: 0.35rem; padding: 1rem; border-radius: var(--radius-card); background: var(--color-deep-2); border: 1px solid var(--color-deep-line); }
+  .cb-tile:last-child { background: var(--color-accent-on-deep); border-color: var(--color-accent-on-deep); color: var(--color-deep); }
+  .cb-date { font-family: var(--font-serif); font-size: clamp(1.125rem, 1.8vw, 1.5rem); line-height: 1.1; letter-spacing: -0.02em; }
+  .cb-t { font-size: 0.8125rem; color: var(--color-deep-ink-2); }
+  .cb-tile:last-child .cb-t { color: var(--color-deep); font-weight: 600; }
+  @media (max-width: 520px) { .cb-line { grid-template-columns: 1fr; } .cb-line::before { left: 50%; right: auto; top: 0.5rem; bottom: 0.5rem; width: 2px; height: auto; } }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.reveal-ready .is-in) .cb-tile { animation: cb-in 500ms var(--ease-out-soft) both; animation-delay: calc(200ms + var(--i) * 160ms); }
+  }
+  @keyframes cb-in { from { opacity: 0; transform: translateY(10px); } }
+</style>
+
+<script>
+  // Swap the relative labels for real dates, e.g. "Thu 26 Nov" → "Sat 28 Nov" → "Sat 5 Dec".
+  const fmt = new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+  document.querySelectorAll<HTMLElement>('.cb-date[data-off]').forEach((el) => {
+    const d = new Date();
+    d.setDate(d.getDate() + Number(el.dataset.off));
+    el.textContent = fmt.format(d);
+  });
+  document.querySelectorAll('.cb-today-word').forEach((el) => (el.textContent = `today, ${fmt.format(new Date())}`));
+</script>

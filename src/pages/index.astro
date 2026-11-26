@@ -4,14 +4,23 @@ import LeadFlow from '../components/LeadFlow.astro';
 import ProjectCarousel from '../components/ProjectCarousel.astro';
 import Detector from '../components/Detector.astro';
 import HeroPhone from '../components/HeroPhone.astro';
+import BuildWeek from '../components/BuildWeek.astro';
+import ServiceCards from '../components/ServiceCards.astro';
 import ScrollReveal from '../components/react-bits/ScrollReveal';
 import SpotlightCard from '../components/react-bits/SpotlightCard';
 import Magnet from '../components/react-bits/Magnet';
 import Faq from '../components/Faq.astro';
 import ClosingBand from '../components/ClosingBand.astro';
 import site from '../content/site.json';
-import services from '../content/services.json';
 
+// Icons for the five "No black boxes" promises: tested, approval, no made-up numbers, no gimmicks, yours to keep
+const promiseIcons = [
+  'M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3M7.5 14h9',
+  'M12 3 5 6v5.5c0 4.4 3 8.1 7 9.5 4-1.4 7-5.1 7-9.5V6l-7-3Zm-3 9 2 2 4-4',
+  'M4 20V10m6 10V4m6 16v-7M3 3l18 18',
+  'M4 5h16v11H9l-5 4V5Zm5 3 6 6m0-6-6 6',
+  'M14 7a4 4 0 1 1-3.4 6.1L4 19.5V21h3v-2h2v-2h2l1.2-1.2A4 4 0 0 1 14 7Zm2 2h.01',
+];
 const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricing.fixedQuote;
 ---
 <Base
@@ -61,9 +70,12 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
       <div class="self-end lg:col-span-5" data-reveal style="--d:90ms">
         <h3 class="text-[1.375rem] font-medium tracking-[-0.02em]">{site.promises.title}</h3>
         <ul class="mt-4 divide-y divide-deep-line border-y border-deep-line">
-          {site.promises.items.map((t) => (
-            <li class="flex gap-3 py-3 text-[0.9375rem] leading-relaxed text-deep-ink-2">
-              <svg class="mt-1 shrink-0 text-accent-on-deep" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.75" /></svg>{t}
+          {site.promises.items.map((t, i) => (
+            <li class="flex items-start gap-4 py-3.5 text-[0.9375rem] leading-relaxed text-deep-ink-2">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-[11px] bg-deep-2 text-accent-on-deep ring-1 ring-deep-line" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d={promiseIcons[i % promiseIcons.length]} /></svg>
+              </span>
+              <span class="pt-1.5">{t}</span>
             </li>
           ))}
         </ul>
@@ -101,23 +113,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
         <h2 class="h-section">Three things, done well.</h2>
         <a href="/services" class="btn-ghost">Full scope & what's included →</a>
       </div>
-      <div class="mt-10 border-t border-hairline md:mt-14">
-        {services.map((s, i) => (
-          <a href={`/services#${s.slug}`} class="svc-row group grid gap-3 border-b border-hairline py-7 md:grid-cols-12 md:items-center md:gap-8 md:py-8" data-reveal style={`--d:${i * 60}ms`}>
-            <div class="svc-move md:col-span-5">
-              <p class="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-accent">{s.index} · {s.tag}</p>
-              <h3 class="svc-title mt-2">{s.title}</h3>
-            </div>
-            <div class="svc-move md:col-span-6">
-              <p class="body text-[0.9375rem]">{s.summary.split(". ")[0].replace(/\.$/, "")}.</p>
-              <ul class="mt-3 flex flex-wrap gap-2">
-                {s.chips.map((t) => <li class="rounded-full border border-hairline bg-paper px-2.5 py-1 text-xs text-ink-2">{t}</li>)}
-              </ul>
-            </div>
-            <span class="svc-arrow hidden justify-self-end md:col-span-1 md:flex" aria-hidden="true">→</span>
-          </a>
-        ))}
-      </div>
+      <div class="mt-10 md:mt-12"><ServiceCards /></div>
     </div>
   </section>
 
@@ -141,20 +137,11 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
       <div class="grid gap-10 lg:grid-cols-12 lg:gap-8">
         <div class="lg:col-span-4" data-reveal>
           <p class="eyebrow">How it works</p>
-          <h2 class="h-section mt-5">Plain steps, one price.</h2>
+          <h2 class="h-section mt-5">One call. One fixed price. One week to build.</h2>
           <p class="body mt-5 max-w-[40ch]">{pricing.body}</p>
           <a href="/book" class="btn-primary mt-8">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <ol class="grid grid-cols-2 gap-x-6 gap-y-8 self-start lg:col-span-8 xl:grid-cols-4">
-          {site.steps.map((s, i) => (
-            <li class="relative border-t border-deep-line pt-5" data-reveal style={`--d:${i * 50}ms`}>
-              <span class="step-line absolute -top-px left-0 h-px w-full origin-left bg-accent-on-deep" aria-hidden="true"></span>
-              <p class="step-num">{s.index}</p>
-              <h3 class="mt-4 text-[1.25rem] font-semibold tracking-[-0.02em]">{s.title}</h3>
-              <p class="mt-2 max-w-[38ch] text-[0.875rem] leading-relaxed text-deep-ink-2">{s.body}</p>
-            </li>
-          ))}
-        </ol>
+        <div class="min-w-0 lg:col-span-8" data-reveal style="--d:80ms"><BuildWeek /></div>
       </div>
       <div class="mt-12" data-reveal>
         <SpotlightCard client:visible theme="dark" spotlightColor="#6ea0ff" intensity={0.5} borderGlow={0.9} className="grid items-center gap-5 p-6 md:grid-cols-12 md:p-7" style={{ '--spotlight-card-border': '#263352', '--spotlight-card-surface': '#16213a' }}>
