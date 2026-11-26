@@ -89,12 +89,13 @@ const first = blueprints[0].id;
   @media (hover: hover) and (pointer: fine) {
     .dt-tile[aria-checked='false']:hover { border-color: var(--color-accent); transform: translateY(-2px); }
   }
-  /* Below desktop: one swipeable row, so the blueprint sits right under what you tapped */
+  /* Below desktop: a compact 3-column grid, so there's no sideways scrolling */
   @media (max-width: 1023px) {
-    .dt-tiles { grid-template-columns: none; grid-auto-rows: auto; grid-auto-flow: column; grid-auto-columns: 9.25rem; overflow-x: auto; -webkit-mask-image: linear-gradient(90deg, #000 80%, transparent); mask-image: linear-gradient(90deg, #000 80%, transparent); padding-right: 3rem; scroll-snap-type: x proximity; padding-bottom: 0.25rem; scrollbar-width: none; }
-    .dt-tiles::-webkit-scrollbar { display: none; }
-    .dt-tile { min-height: 5.5rem; scroll-snap-align: start; }
+    .dt-tile { min-height: 4.75rem; padding: 0.6rem; gap: 0.4rem; font-size: 0.75rem; }
+    .dt-tile svg { width: 20px; height: 20px; }
     .dt-small { margin-top: 0.5rem; }
+  }
+  .dt-small { margin-top: 0.5rem; }
   }
   .dt-small { margin-top: 1rem; font-size: 0.8125rem; color: var(--color-ink-3); }
   .dt-other { margin-top: 0.75rem; font-size: 0.9375rem; color: var(--color-ink-2); }
@@ -142,7 +143,7 @@ const first = blueprints[0].id;
         t.setAttribute('aria-checked', String(on));
         t.tabIndex = on ? 0 : -1;
         if (on && focus) t.focus();
-        if (on) t.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+        
       });
       cards.forEach((c) => (c.hidden = c.dataset.id !== id));
     };
@@ -151,7 +152,7 @@ const first = blueprints[0].id;
       t.addEventListener('click', (e) => { e.preventDefault(); select(t.dataset.id!); });
       // Radio-group keys: arrows move and select, Space/Enter select.
       t.addEventListener('keydown', (e) => {
-        const cols = matchMedia('(max-width: 1023px)').matches ? 1 : 3;
+        const cols = 3;
         const step = { ArrowRight: 1, ArrowDown: cols, ArrowLeft: -1, ArrowUp: -cols }[e.key];
         if (step) { e.preventDefault(); const n = tiles[(i + step + tiles.length) % tiles.length]; select(n.dataset.id!, true); }
         if (e.key === ' ') { e.preventDefault(); select(t.dataset.id!); }

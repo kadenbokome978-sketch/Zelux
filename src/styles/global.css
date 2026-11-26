@@ -63,6 +63,10 @@
     font-feature-settings: "ss01";
     overflow-x: clip;
   }
+  /* Lock sideways panning at the window too (iPhone Safari ignores it on body alone).
+     hidden on html is safe for the sticky header; body keeps clip so it never becomes a scroller. */
+  html { overflow-x: hidden; }
+  @supports (overflow: clip) { html { overflow-x: clip; } }
   ::selection {
     background: var(--color-accent);
     color: var(--color-on-accent);

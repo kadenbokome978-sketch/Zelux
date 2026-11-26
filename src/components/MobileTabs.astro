@@ -27,16 +27,20 @@ const tabs = [
 </nav>
 
 <style>
+  /* Slim bar flush to the bottom edge. It slides away while you scroll down and comes back on the way up. */
   .mt-bar {
-    position: fixed; z-index: 40; left: 0.5rem; right: 0.5rem; bottom: calc(0.5rem + env(safe-area-inset-bottom));
-    display: grid; grid-template-columns: repeat(5, 1fr); padding: 0.3rem;
-    border-radius: 1.25rem; background: rgb(15 23 42 / 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 18px 40px -16px rgb(15 23 42 / 0.55);
+    position: fixed; z-index: 40; left: 0; right: 0; bottom: 0;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.15rem;
+    padding: 0.3rem 0.4rem calc(0.3rem + env(safe-area-inset-bottom));
+    background: var(--color-paper); box-shadow: 0 -8px 24px -18px rgb(15 23 42 / 0.35);
+    border-top: 1px solid var(--color-hairline);
+    transition: transform 280ms var(--ease-out-soft);
   }
+  .mt-bar.is-away { transform: translateY(110%); }
   .mt-bar[hidden], .mt-next[hidden] { display: none; }
-  .mt-tab { position: relative; display: grid; justify-items: center; gap: 0.2rem; min-height: 52px; padding: 0.45rem 0 0.4rem; border-radius: 1rem; color: var(--color-deep-ink-2); font-size: 0.6875rem; font-weight: 600; transition: color var(--dur-fast), background-color var(--dur-ui); }
-  .mt-tab svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .mt-tab[aria-pressed='true'] { color: var(--color-deep); background: var(--color-accent-on-deep); }
+  .mt-tab { display: grid; justify-items: center; gap: 0.1rem; min-height: 44px; padding: 0.3rem 0 0.25rem; border-radius: 0.75rem; color: var(--color-ink-3); font-size: 0.625rem; font-weight: 600; letter-spacing: 0.01em; transition: color var(--dur-fast), background-color var(--dur-ui); }
+  .mt-tab svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .mt-tab[aria-pressed='true'] { color: var(--color-accent-hover); background: var(--color-accent-tint); }
   .mt-tab:active { transform: scale(0.96); }
 
   .mt-next { padding: 0.5rem 0 2rem; }
@@ -53,7 +57,7 @@ const tabs = [
 <style is:global>
   /* Tab mode: only the chosen tab's sections show; room at the bottom for the bar */
   html.m-tabs [data-tab]:not([data-tab-on]) { display: none !important; }
-  html.m-tabs body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+  html.m-tabs body { padding-bottom: calc(52px + env(safe-area-inset-bottom)); }
 </style>
 
 <script>
@@ -69,6 +73,7 @@ const tabs = [
 
     const show = (id: string, scroll: 'top' | Element | null = 'top') => {
       current = id;
+      bar.classList.remove('is-away');
       sections.forEach((s) => s.toggleAttribute('data-tab-on', s.dataset.tab === id));
       buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.go === id)));
       const i = ids.indexOf(id);
@@ -122,6 +127,19 @@ const tabs = [
       const t = tabFor(location.hash);
       if (t && t.tab !== current) show(t.tab, t.el ?? 'top');
     });
+    // Out of the way while reading: hide on scroll down, show on scroll up, at the top and at the very end
+    let lastY = scrollY, ticking = false;
+    addEventListener('scroll', () => {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(() => {
+        const y = scrollY, dy = y - lastY;
+        const nearEnd = innerHeight + y >= document.documentElement.scrollHeight - 80;
+        if (y < 80 || nearEnd || dy < -6) bar.classList.remove('is-away');
+        else if (dy > 6) bar.classList.add('is-away');
+        lastY = y; ticking = false;
+      });
+    }, { passive: true });
+    bar.addEventListener('focusin', () => bar.classList.remove('is-away'));
     const apply = () => (mq.matches ? enable() : disable());
     mq.addEventListener('change', apply);
     apply();
