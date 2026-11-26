@@ -3,6 +3,7 @@
 //   - axe WCAG 2.2 AA (phone and desktop width)
 //   - no horizontal scroll at any width from 320px to 1920px
 //   - with JavaScript off: no hidden content, FAQ answers readable, menu fallback shown
+//   - phones: every homepage section fits one screen (iPhone 13 and SE sizes)
 //   - copy rules: no "AI", no em dashes in visible text
 // Exits non-zero on any failure.
 import { createServer } from 'node:http';
@@ -42,6 +43,21 @@ for (const vp of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
     const { violations } = await page.evaluate(() => window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] }));
     for (const v of violations) fail(`${p} @${vp.width}px axe ${v.id} (${v.nodes.length}): ${v.help}`);
     if (vp.width < 500 && await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) fail(`${p} scrolls sideways at ${vp.width}px`);
+    // Content poking past the screen edge, even where the page clips it (it still looks cut off)
+    if (vp.width < 500) {
+      const off = await page.evaluate(() => {
+        const W = innerWidth, out = [];
+        for (const e of document.querySelectorAll('body *')) {
+          const r = e.getBoundingClientRect();
+          if (!r.width || r.right <= W + 1 || e.closest('[aria-hidden="true"]')) continue;
+          let a = e.parentElement, clipped = false;
+          while (a && a !== document.body) { if (['hidden', 'clip', 'auto', 'scroll'].includes(getComputedStyle(a).overflowX) && a.getBoundingClientRect().right <= W + 1) { clipped = true; break; } a = a.parentElement; }
+          if (!clipped) out.push(`${e.tagName.toLowerCase()}.${String(e.className).split(' ')[0]}`);
+        }
+        return [...new Set(out)].slice(0, 3);
+      });
+      if (off.length) fail(`${p} content past the screen edge at ${vp.width}px: ${off.join(', ')}`);
+    }
     if (vp.width > 500) {
       const text = await page.evaluate(() => document.body.innerText + ' ' + document.title + ' ' + (document.querySelector('meta[name=description]')?.content || ''));
       if (/\bAI\b/.test(text)) fail(`${p} mentions "AI"`);
@@ -57,6 +73,23 @@ for (const width of [320, 360, 414, 600, 768, 834, 1024, 1280, 1920]) {
   for (const p of PAGES) {
     await page.goto(base + p);
     if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) fail(`${p} scrolls sideways at ${width}px`);
+  }
+  await page.close();
+}
+
+// Phones: every homepage section fits one screen (between the header and the tab bar)
+for (const vp of [{ width: 390, height: 664 }, { width: 375, height: 568 }]) {
+  const page = await browser.newPage({ viewport: vp, reducedMotion: 'reduce' });
+  await page.goto(base + '/');
+  for (const tab of ['overview', 'automate', 'services', 'work', 'about']) {
+    await page.evaluate((t) => document.querySelector(`.mt-tab[data-go="${t}"]`)?.click(), tab);
+    await page.waitForTimeout(150);
+    const over = await page.evaluate(() => {
+      const avail = innerHeight - 64 - (document.querySelector('.mt-bar')?.offsetHeight || 0);
+      return [...document.querySelectorAll('[data-fit]')].filter((e) => e.getClientRects().length)
+        .map((e) => [e.dataset.fit, Math.round(e.getBoundingClientRect().height), avail]).filter(([, h, a]) => h > a);
+    });
+    for (const [name, h, a] of over) fail(`/ section "${name}" is ${h}px, taller than a ${vp.width}x${vp.height} phone screen (${a}px)`);
   }
   await page.close();
 }

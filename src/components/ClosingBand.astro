@@ -9,12 +9,12 @@ const tiles = [
   { k: 'Up to 7 days later', t: 'Your site could be live', off: 9 },
 ];
 ---
-<section class="band-deep cb relative overflow-hidden">
+<section data-fit="closing" class="band-deep cb relative overflow-hidden">
   <div class="cb-glow" aria-hidden="true"></div>
-  <div class="container-z relative grid gap-8 py-12 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-8" data-reveal>
+  <div class="container-z relative grid gap-6 py-8 md:gap-8 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-8" data-reveal>
     <div class="lg:col-span-5">
       <h2 class="h-section max-w-[18ch]">{site.closing.title}</h2>
-      <p class="body mt-4 max-w-[48ch] text-[1.0625rem]">{site.closing.body}</p>
+      <p class="body mt-4 max-w-[48ch] text-[1.0625rem] max-md:hidden">{site.closing.body}</p>
       <div class="mt-6 flex flex-col gap-2 sm:mt-8 sm:flex-row sm:items-center sm:gap-6">
         <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }} wrapperClassName="w-full sm:w-auto" innerClassName="w-full"><a href="/book" class="btn-primary btn-lg w-full whitespace-nowrap">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
         <a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center whitespace-nowrap text-sm text-deep-ink-2 underline decoration-deep-line underline-offset-4 hover:text-deep-ink">or email {site.email}</a>
@@ -30,7 +30,7 @@ const tiles = [
           </li>
         ))}
       </ol>
-      <p class="mt-4 text-xs leading-relaxed text-deep-ink-2">For sites up to 5 pages. The 7 days start once your quote is accepted and your copy and photos are in. Miss it and you get £100 off.</p>
+      <p class="mt-3 text-xs leading-relaxed text-deep-ink-2 md:mt-4">For sites up to 5 pages. The 7 days start once your quote is accepted and your copy and photos are in. Miss it and you get £100 off.</p>
     </div>
   </div>
 </section>

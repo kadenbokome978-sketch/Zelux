@@ -16,6 +16,7 @@ import { icons } from '../content/icons';
 const first = blueprints[0].id;
 ---
 <div id="detector" class="dt grid gap-6 lg:grid-cols-12 lg:gap-8">
+  <div class="dt-backdrop" aria-hidden="true"></div>
   <div class="min-w-0 lg:col-span-5">
     <p class="dt-ask">Pick the job that eats most of your week</p>
     <div class="dt-tiles" role="radiogroup" aria-label="Jobs">
@@ -32,11 +33,12 @@ const first = blueprints[0].id;
         </a>
       ))}
     </div>
-    <p class="dt-small">Runs in your browser. Nothing you pick is sent anywhere.</p>
+    <p class="dt-small"><span class="dt-small-main">Runs in your browser. Nothing you pick is sent anywhere.</span><span class="dt-tap-hint"> Tap a job to see how it runs.</span></p>
     <p class="dt-other">Job not listed? <a href="/book#enquiry">Tell me what it is →</a></p>
   </div>
 
-  <div class="min-w-0 lg:col-span-7">
+  <div class="dt-panel min-w-0 lg:col-span-7" aria-label="How it would run">
+    <div class="dt-sheet-bar"><span class="dt-grab" aria-hidden="true"></span><button type="button" class="dt-close">Close <span aria-hidden="true">✕</span></button></div>
     <div class="dt-stage" aria-live="polite">
       {blueprints.map((b) => {
         const need = `I'd like to stop spending time on ${b.task.toLowerCase()}.`;
@@ -95,9 +97,25 @@ const first = blueprints[0].id;
     .dt-tile svg { width: 20px; height: 20px; }
     .dt-small { margin-top: 0.5rem; }
   }
-  .dt-small { margin-top: 0.5rem; }
-  }
   .dt-small { margin-top: 1rem; font-size: 0.8125rem; color: var(--color-ink-3); }
+  .dt-tap-hint { display: none; }
+  .dt-sheet-bar, .dt-backdrop { display: none; }
+  /* Phones (with JS): tap a job and its blueprint slides up as a sheet, so the section fits one screen */
+  @media (max-width: 767px) {
+    :global(.js) .dt-tap-hint { display: inline; }
+    :global(.js) .dt-panel {
+      position: fixed; z-index: 70; left: 0; right: 0; bottom: 0; max-height: 88svh; overflow-y: auto; overscroll-behavior: contain;
+      padding: 0 0.75rem calc(0.75rem + env(safe-area-inset-bottom)); border-radius: 1.5rem 1.5rem 0 0; background: var(--color-canvas);
+      box-shadow: 0 -20px 50px -20px rgb(15 23 42 / 0.5); transform: translateY(105%); visibility: hidden;
+      transition: transform 320ms var(--ease-out-soft), visibility 0s linear 320ms;
+    }
+    :global(.js) .dt.is-open .dt-panel { transform: none; visibility: visible; transition: transform 320ms var(--ease-out-soft); }
+    :global(.js) .dt-sheet-bar { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.25rem; background: var(--color-canvas); }
+    .dt-grab { width: 40px; height: 4px; margin-left: calc(50% - 20px); border-radius: 999px; background: var(--color-hairline-strong); }
+    .dt-close { min-height: 40px; padding: 0 0.9rem; border-radius: 999px; border: 1px solid var(--color-hairline); background: var(--color-paper); font-size: 0.875rem; font-weight: 600; color: var(--color-ink); }
+    :global(.js) .dt-backdrop { display: block; position: fixed; inset: 0; z-index: 65; background: rgb(15 23 42 / 0.45); opacity: 0; pointer-events: none; transition: opacity 280ms; }
+    :global(.js) .dt.is-open .dt-backdrop { opacity: 1; pointer-events: auto; }
+  }
   .dt-other { margin-top: 0.75rem; font-size: 0.9375rem; color: var(--color-ink-2); }
   .dt-other a { color: var(--color-ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--color-hairline-strong); text-underline-offset: 4px; }
   .dt-other a:hover { color: var(--color-accent); text-decoration-color: currentColor; }
@@ -130,6 +148,12 @@ const first = blueprints[0].id;
   .dt-tools span { margin-right: 0.25rem; color: var(--color-ink-3); }
   .dt-tools i { font-style: normal; padding: 0.25rem 0.65rem; border-radius: 999px; background: var(--color-surface); color: var(--color-ink-2); }
   .dt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; padding-top: 0.25rem; }
+  @media (max-width: 767px) {
+    .dt-small { font-size: 0.875rem; color: var(--color-ink-2); }
+    .dt-small-main { display: none; }
+    .dt-tile { min-height: 4.25rem; }
+    .dt-other { margin-top: 0.4rem; }
+  }
 </style>
 
 <script>
@@ -147,9 +171,33 @@ const first = blueprints[0].id;
       });
       cards.forEach((c) => (c.hidden = c.dataset.id !== id));
     };
+    // Phones: the blueprint is a bottom sheet (a modal dialog while open)
+    const phone = matchMedia('(max-width: 767px)');
+    const panel = root.querySelector<HTMLElement>('.dt-panel')!;
+    const closeBtn = root.querySelector<HTMLButtonElement>('.dt-close')!;
+    let opener: HTMLElement | null = null;
+    const setDialog = () => {
+      if (phone.matches) { panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true'); }
+      else { panel.removeAttribute('role'); panel.removeAttribute('aria-modal'); close(false); }
+    };
+    const open = (from: HTMLElement) => {
+      opener = from; root.classList.add('is-open'); document.body.style.overflow = 'hidden';
+      window.lenis?.stop(); panel.scrollTop = 0; requestAnimationFrame(() => closeBtn.focus());
+    };
+    const close = (refocus = true) => {
+      if (!root.classList.contains('is-open')) return;
+      root.classList.remove('is-open'); document.body.style.overflow = ''; window.lenis?.start();
+      if (refocus) opener?.focus();
+    };
+    closeBtn.addEventListener('click', () => close());
+    root.querySelector('.dt-backdrop')?.addEventListener('click', () => close());
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    phone.addEventListener('change', setDialog);
+    setDialog();
+
     tiles.forEach((t, i) => {
       t.tabIndex = t.getAttribute('aria-checked') === 'true' ? 0 : -1;
-      t.addEventListener('click', (e) => { e.preventDefault(); select(t.dataset.id!); });
+      t.addEventListener('click', (e) => { e.preventDefault(); select(t.dataset.id!); if (phone.matches) open(t); });
       // Radio-group keys: arrows move and select, Space/Enter select.
       t.addEventListener('keydown', (e) => {
         const cols = 3;

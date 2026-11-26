@@ -293,12 +293,14 @@ h1 em, h2 em, h3 em { font-style: normal; }
 .font-krap { font-family: "Lilita One", var(--font-serif) !important; font-weight: 400 !important; text-transform: uppercase; letter-spacing: 0.02em !important; }
 @media (min-width: 1536px) { .hero-grid { background-size: 100% 100%, calc((1280px - 4rem) / 12) 100%; } }
 
-/* Phones: the opening hero fills exactly the first screen (under the header, above the tab bar),
-   so nothing is sliced in half by the bottom edge when the page first loads. */
+/* Phones: the opening text and the try-it box share exactly the first screen (under the header,
+   above the tab bar); the hero phone then gets a screen of its own. Nothing is sliced by the fold. */
 @media (max-width: 767px) {
-  .hero-first { display: flex; flex-direction: column; justify-content: center; min-height: calc(100svh - 4rem - 1.5rem - var(--tabbar, 0px)); padding-bottom: 1rem; }
-  .hero-first .h-hero { font-size: clamp(1.875rem, min(9vw, 5.2svh), 2.5rem); }
-  html.m-tabs { --tabbar: calc(52px + env(safe-area-inset-bottom)); }
+  .first-group { display: flex; flex-direction: column; justify-content: center; gap: 1.25rem; min-height: calc(100svh - 4rem - 1.5rem - var(--tabbar, 0px)); padding-bottom: 0.75rem; }
+  .first-group .tryit-slot { margin: 0; max-width: none; }
+  .hero-first .h-hero { font-size: clamp(1.75rem, min(8.6vw, 4.9svh), 2.4rem); }
+  .phone-slot { min-height: calc(100svh - 4rem - var(--tabbar, 0px) - 6px); align-items: center; }
+  html.m-tabs { --tabbar: calc(56px + env(safe-area-inset-bottom)); }
 }
 
 /* Phones: every page's opening block fills the first screen, so the fold never slices text */
@@ -309,4 +311,19 @@ h1 em, h2 em, h3 em { font-style: normal; }
 @media (max-width: 767px) and (max-height: 600px) {
   .hero-first ul { display: none; }
   .first-screen > nav[aria-label='Services on this page'], .first-screen .fs-optional { display: none; }
+}
+
+/* Phones: type and spacing follow the screen height a little, so each section fits one screen
+   from an iPhone SE up (16px on tall phones, never below 13px). */
+@media (max-width: 767px) {
+  html { font-size: clamp(13px, calc(100svh / 46), 16px); }
+  /* Form fields stay at 16px or iPhones zoom in when you tap them */
+  input, select, textarea, .field { font-size: 16px !important; }
+}
+/* Very short phones (iPhone SE): a little less breathing room so every section still fits */
+@media (max-width: 767px) and (max-height: 600px) {
+  [data-fit] > .container-z { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+  .phone-slot { min-height: calc(100svh - 4rem - var(--tabbar, 0px) - 12px); }
+  .first-group { gap: 0.6rem; padding-bottom: 0.25rem; }
+  .hero-first .h-hero { font-size: 1.6rem; }
 }

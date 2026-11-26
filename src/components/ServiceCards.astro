@@ -4,9 +4,14 @@
 // (no motion on touch, none with reduced motion), so nothing competes with the demos above.
 import services from '../content/services.json';
 ---
+<div class="sc-seg" role="tablist" aria-label="Services">
+  {services.map((s, i) => (
+    <button type="button" role="tab" class="sc-seg-b" id={`sc-tab-${s.slug}`} aria-controls={`sc-${s.slug}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-i={i}>{['Websites', 'Automation', 'Care'][i]}</button>
+  ))}
+</div>
 <div class="sc-grid">
   {services.map((s, i) => (
-    <a href={`/services#${s.slug}`} class="sc group" data-reveal style={`--d:${i * 70}ms`}>
+    <a href={`/services#${s.slug}`} id={`sc-${s.slug}`} class:list={["sc group", i === 0 && "on"]} data-reveal style={`--d:${i * 70}ms`}>
       <div class:list={['sc-vis', `sc-vis-${s.slug}`]} aria-hidden="true">
         {s.slug === 'websites' && (
           <div class="v-site">
@@ -50,6 +55,15 @@ import services from '../content/services.json';
 
 <style>
   .sc-grid { display: grid; gap: 1rem; }
+  .sc-seg { display: none; }
+  /* Phones (with JS): pick one service at a time so the section fits a screen */
+  @media (max-width: 767px) {
+    :global(.js) .sc-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.25rem; margin-bottom: 0.75rem; padding: 0.25rem; border-radius: 999px; background: var(--color-surface); border: 1px solid var(--color-hairline); }
+    .sc-seg-b { min-height: 40px; border-radius: 999px; font-size: 0.875rem; font-weight: 600; color: var(--color-ink-2); transition: background-color var(--dur-ui), color var(--dur-ui); }
+    .sc-seg-b[aria-selected='true'] { background: var(--color-paper); color: var(--color-ink); box-shadow: 0 4px 10px -6px rgb(15 23 42 / 0.35); }
+    :global(.js) .sc:not(.on) { display: none; }
+    :global(.js) .sc-vis { height: 7rem; }
+  }
   /* Phones: stacked, with a shorter picture */
   @media (max-width: 899px) { .sc-vis { height: 8rem; margin-bottom: 1rem; } .sc { padding-bottom: 1.1rem; } }
   @media (min-width: 900px) { .sc-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -123,4 +137,32 @@ import services from '../content/services.json';
   @keyframes v-dot { 0% { opacity: 1; left: 12.5%; } 95% { opacity: 1; left: 87.5%; } 100% { opacity: 0; left: 87.5%; } }
   @keyframes v-node { 0% { background: var(--color-paper); color: var(--color-ink); border-color: var(--color-hairline); } 15%, 100% { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); } }
   @keyframes v-bar { 0% { transform: scaleY(0.3); background: #bbf7d0; } 100% { transform: none; } }
+  @media (max-width: 767px) {
+    .sc-chips { display: none; }
+    :global(.js) .sc-vis { height: 6rem; }
+    .sc-more { padding-top: 0.75rem; }
+  }
 </style>
+
+<script>
+  const seg = document.querySelector<HTMLElement>('.sc-seg');
+  if (seg) {
+    const tabs = Array.from(seg.querySelectorAll<HTMLButtonElement>('.sc-seg-b'));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.sc-grid .sc'));
+    const pick = (n: number, focus = false) => {
+      tabs.forEach((t, i) => { t.setAttribute('aria-selected', String(i === n)); t.tabIndex = i === n ? 0 : -1; if (i === n && focus) t.focus(); });
+      cards.forEach((c, i) => c.classList.toggle('on', i === n));
+    };
+    // Only behaves as tabs on phones; on bigger screens all three cards show
+    const phone = matchMedia('(max-width: 767px)');
+    const roles = () => cards.forEach((c, i) => { if (phone.matches) { c.setAttribute('role', 'tabpanel'); c.setAttribute('aria-labelledby', tabs[i].id); } else { c.removeAttribute('role'); c.removeAttribute('aria-labelledby'); } });
+    phone.addEventListener('change', roles); roles();
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => pick(i));
+      t.addEventListener('keydown', (e) => {
+        const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (d) { e.preventDefault(); pick((i + d + tabs.length) % tabs.length, true); }
+      });
+    });
+  }
+</script>

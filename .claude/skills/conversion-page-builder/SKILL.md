@@ -47,3 +47,7 @@ Every page has one job: get the right visitor to book the free 20-minute call (`
 ## Phone tabs (homepage)
 
 Below 768px the homepage runs as five tabs with an app-style bar at the bottom (`MobileTabs.astro`): Overview, Automate, Services, Work, About. A section joins a tab with `data-tab="…"`; the closing band and footer show under every tab, and each tab ends with a "Next" button. In-page links (#time-saver, /#about) open the right tab first, and the URL hash follows the tab. Without JS, or on tablets and desktops, it's one page as normal. A new homepage section needs a `data-tab`, or it will be hidden on phones.
+
+## One screen per section on phones (homepage)
+
+Kaden's rule: on a phone, every homepage section fits within one screen (between the header and the tab bar). Each section or sub-block carries `data-fit="name"`, and `npm run check` fails if any is taller than an iPhone 13 (390×664) or SE (375×568) screen. Ways it's done: shorter phone copy (`promises.short`, `hero.subtitleShort`), secondary lines hidden with `max-md:hidden`, the job blueprint as a bottom sheet, services as a 3-way switcher, the process split into two blocks, and type that scales with screen height (`html` font-size on phones). Desktop and tablet are unchanged. A new section needs a `data-fit` and has to pass.
