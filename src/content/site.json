@@ -11,16 +11,16 @@
     "eyebrow": "Hampshire, UK · Websites & business systems",
     "titleLead": "Your website should win you work.",
     "titleItalic": "Your admin should run itself.",
-    "subtitle": "For UK businesses tired of dated websites and manual admin. You deal directly with the person designing, building and wiring up the system. No account managers, no bloated retainers.",
+    "subtitle": "Every missed call, slow reply and evening spent on invoices is work you lose. I build the website and the systems behind it, so enquiries get answered and the admin runs itself. You deal with me, start to finish.",
     "status": "Taking on new builds · Hampshire, UK",
-    "subtitleShort": "Dated website, admin eating your evenings? You deal directly with the person who builds it."
+    "subtitleShort": "Slow replies and evening admin cost you work. I build the site and the systems that fix both."
   },
   "pillars": [
     {
       "index": "01",
       "label": "Direct delivery",
       "title": "You speak to the builder.",
-      "body": "No hand-offs to junior staff after a sales call. The person you meet is the person shipping the work."
+      "body": "On the call you're talking to the person who builds it. Nothing gets lost in a hand-off, because there isn't one."
     },
     {
       "index": "02",
@@ -39,22 +39,22 @@
     {
       "index": "01",
       "title": "Day 1: intro call",
-      "body": "Tell me what's slowing the business down or costing you leads. No pitch deck."
+      "body": "Tell me what's slowing you down or losing you work. No pitch deck, no obligation."
     },
     {
       "index": "02",
       "title": "Within 48 hours: fixed quote",
-      "body": "A plain-English proposal: exactly what gets built, the timeline, and the fixed price."
+      "body": "Exactly what gets built, when, and for what fixed price. No pressure to decide."
     },
     {
       "index": "03",
       "title": "Within 7 days: build & review",
-      "body": "You see working progress early and sign off the design before anything goes live."
+      "body": "You see it working early and sign off the design before anything goes live."
     },
     {
       "index": "04",
       "title": "Launch & handover",
-      "body": "Live on your domain, accounts in your name, with optional rolling care afterwards."
+      "body": "Live on your domain, every account in your name, with optional care afterwards."
     }
   ],
   "about": {
@@ -65,14 +65,14 @@
       "Most small and mid-sized businesses get stuck between two bad options: cheap templates that look generic and convert poorly, or agencies charging £10,000+ for three months of meetings.",
       "Zelux sits between the two. A site designed for your business and built to load fast, with the admin around it automated where that saves real time. You deal with me from the first call to launch."
     ],
-    "detail": "A site designed around your business and built to load fast, with the admin around it automated where that saves real time. You deal with me from the first call to launch, and every account stays in your name."
+    "detail": "A site built around how your customers decide, loading fast on their phones, with the admin around it automated wherever it saves real hours. You deal with me from the first call to launch, and every account stays in your name."
   },
   "pricing": {
     "mode": "fixed-quote",
     "_note": "Switch mode to 'guide' to show the guide-range copy instead.",
     "fixedQuote": {
       "title": "One fixed price. Agreed before work starts.",
-      "body": "Every build is quoted as a fixed project fee within 48 hours of our intro call. No day rates, no surprise invoices, and no VAT charged, so the number you see is the number you pay."
+      "body": "Every build gets one fixed price, in writing, within 48 hours of the call, because it's scoped before it's quoted. No day rates, no surprise invoices, no VAT on top: the number you see is the number you pay."
     },
     "guide": {
       "title": "Clear, fixed-scope pricing.",
@@ -87,7 +87,7 @@
   },
   "closing": {
     "title": "Tell me what's eating your week.",
-    "body": "Book a 20-minute call. Tell me what you're trying to fix or launch, and I'll tell you plainly if I can help."
+    "body": "Twenty minutes, free, no pitch. Tell me what's costing you time or work, and I'll tell you plainly whether I can fix it and what it would cost."
   },
   "speed": [
     "Fixed quote in 48 hours",

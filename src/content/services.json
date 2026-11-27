@@ -3,7 +3,7 @@
     "index": "01",
     "slug": "websites",
     "title": "Websites that bring in work",
-    "summary": "Fast, mobile-first sites built around one job: turning visitors into enquiries, bookings or sales. Includes copy structure, booking or payment setup, and clean SEO foundations.",
+    "summary": "A fast, phone-first site built around one job: turning visitors into enquiries, bookings or sales. Copy structure, booking or payments, and search basics are included.",
     "bestFor": "Your current site looks dated on a phone, hides what you actually do, or relies on back-and-forth emails just to book a slot.",
     "included": [
       "Page structure and copy guidance written around how your buyers decide",
@@ -29,8 +29,8 @@
   {
     "index": "02",
     "slug": "automation",
-    "title": "Workflow automation",
-    "summary": "Automations wired into the tools you already use: enquiry routing, follow-ups, internal knowledge systems and reports.",
+    "title": "Admin that runs itself",
+    "summary": "The copy-paste between your forms, inbox, calendar and spreadsheets, done for you: enquiries routed, follow-ups sent and reports written, in the tools you already use.",
     "bestFor": "You or your team are losing hours each week copying data between inboxes, spreadsheets and booking tools.",
     "included": [
       "A short mapping session to find where time and leads are leaking",
@@ -55,8 +55,8 @@
   {
     "index": "03",
     "slug": "care",
-    "title": "Ongoing care & iteration",
-    "summary": "Hosting, updates, new pages and fixes, without keeping an expensive agency on retainer.",
+    "title": "Care that keeps it earning",
+    "summary": "Hosting, updates, new pages and fixes handled for you, so the site keeps bringing in work without an agency retainer.",
     "bestFor": "You want a site that stays fast and current without having to learn DNS, forms or deployment tools yourself.",
     "included": [
       "Uptime and form monitoring",

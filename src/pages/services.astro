@@ -10,7 +10,7 @@ const serviceSchema = services.map((s) => ({
   '@id': `https://zelux.co.uk/services#${s.slug}`,
   name: s.title,
   description: s.summary,
-  serviceType: s.title,
+  serviceType: ({ websites: 'Web design', automation: 'Workflow automation', care: 'Website maintenance' } as Record<string, string>)[s.slug] ?? s.title,
   provider: { '@id': 'https://zelux.co.uk/#business' },
   areaServed: [{ '@type': 'AdministrativeArea', name: 'Hampshire' }, { '@type': 'Country', name: 'United Kingdom' }],
   url: `https://zelux.co.uk/services#${s.slug}`,
@@ -23,7 +23,7 @@ const serviceIcon: Record<string, string> = { websites: 'website', automation: '
   description="Websites that bring in work, workflow automation, and ongoing care for UK businesses. Clear scope, what's included, what isn't, and a fixed price."
 >
   <section class="first-screen container-z pb-8 pt-8 md:pb-16 md:pt-20">
-    <SectionHead as="h1" eyebrow="Services" title="What I build," italic="and what I don't." intro="Three focused services, written the way the contract reads: what's included, what isn't, and how long it takes." />
+    <SectionHead as="h1" eyebrow="Services" title="What I build," italic="and what I don't." intro="Three services, written the way the contract reads: what's included, what isn't, and how long it takes. No surprises later, because nothing is hidden now." />
     <nav aria-label="Services on this page" class="mt-8 flex flex-wrap gap-2 sm:mt-10" data-reveal>
       {services.map((s) => (
         <a href={`#${s.slug}`} class="inline-flex min-h-11 items-center gap-2 rounded-full border border-hairline bg-paper px-3.5 text-[0.8125rem] font-medium text-ink transition-colors hover:border-accent hover:text-accent sm:gap-2.5 sm:px-4 sm:text-sm">
