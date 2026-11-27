@@ -45,3 +45,7 @@ Unique `<title>` and meta description per page (via `Base.astro` props), one h1,
 ## 5. Report
 
 List what ran and the results. If something failed or was skipped, say so plainly. Don't push with a failing check.
+
+## Deploy order
+
+Push `main` first and wait for the Vercel production deployment to reach READY before pushing the same commit to a session branch. Pushing both at once has twice made Vercel build only the preview and skip production.
