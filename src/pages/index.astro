@@ -44,7 +44,7 @@ const pricing = site.pricing.mode === 'guide' ? site.pricing.guide : site.pricin
           <p class="lead mt-4 max-w-[52ch] sm:mt-6" data-reveal style="--d:100ms"><span class="sm:hidden">{site.hero.subtitleShort}</span><span class="max-sm:hidden">{site.hero.subtitle}</span></p>
           <div class="mt-5 flex flex-wrap items-center gap-x-7 gap-y-1 sm:mt-8" data-reveal style="--d:150ms">
             <Magnet client:idle padding={70} magnetStrength={5} maxOffset={10} spring={{ stiffness: 170, damping: 26 }}><a href="/book" class="btn-primary btn-lg">Book a free 20-min call <span class="arrow" aria-hidden="true">→</span></a></Magnet>
-            <a href="#time-saver" class="btn-ghost max-sm:hidden">Find what to automate ↓</a>
+            <a href="#time-saver" class="btn-ghost max-sm:hidden">Find your biggest time drain ↓</a>
           </div>
           <ul class="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-hairline pt-4 text-[0.8125rem] font-medium text-ink max-md:hidden sm:mt-8 sm:gap-x-6 sm:gap-y-2 sm:pt-5 sm:text-[0.9375rem]" data-reveal style="--d:200ms">
             {site.speed.map((t) => (

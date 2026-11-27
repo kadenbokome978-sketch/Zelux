@@ -60,3 +60,23 @@ Anything not on this list is a new commitment. Ask Kaden before publishing it.
 2. Is there a concrete detail (number, step, tool, time) in every claim?
 3. Run the banned-word grep: `grep -rniE "seamless|elevate|unlock|robust|cutting.edge|innovative|leverage|empower|streamline|smart |supercharge|effortless|transform|solutions|journey" src/content`.
 4. `npm run check` fails on "AI" and em dashes.
+
+## Persuasion (from the Persuasive Copywriting Standard, NEXUS Brain, 27 Nov 2026)
+
+Kaden's standing rule for all NEXUS writing. Copy removes doubt, makes the next step easy and gives a reason to act now, **with real proof only**.
+
+**On every page, check for:**
+1. **Problem first**: name the costly frustration before the service ("admin eating your evenings", "the first business to reply gets the job").
+2. **Outcome, not tool**: "every enquiry gets a reply within minutes", not "CRM integration".
+3. **Loss framing, gently**: inaction as a continuing cost ("another week of leads going cold"), never fear or hype.
+4. **A tiny first step** next to the big ask: try it, pick a job, see it with your business, then the free 20-minute call.
+5. **One primary action per screen**; secondary links quieter.
+6. **Risk reversal beside the CTA**: fixed price in writing, no obligation, £100-off guarantee, you approve before anything goes live, every account in your name.
+7. **Objections answered before they're asked**: who I work with, cost, tools, timing, ownership, VAT, after launch (FAQ covers these).
+8. **Concrete over vague**: "the copy-paste steps between your form and your inbox", not "efficiency".
+9. **Customer words**: use phrases clients actually say (calls, emails, reviews). Save them in the brain as they come in.
+10. **"Because"**: give the reason ("a fixed price, because it's scoped on the call first").
+
+**Proof that exists today (use only these):** Forge (live client, Dean approved), KrapMaps (co-founded with Harley Treagust), fixed quote within 48 hours, live in 7 days or £100 off (sites up to 5 pages), no VAT, staged payments, rolling care with 30 days' notice, direct with Kaden. No client counts, results figures, testimonials, review stars, capacity limits or countdowns until they're real and Kaden approves them.
+
+**Never:** fake scarcity or timers, invented stats or testimonials, "10x" claims, generic agency words (streamline, seamless, leverage, solutions, unlock, elevate, cutting-edge, empower), more than one competing CTA at the point of decision, long forms before value.

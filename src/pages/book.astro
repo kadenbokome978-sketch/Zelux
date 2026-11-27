@@ -72,6 +72,7 @@ const agenda = [
             <button type="submit" class="btn-primary w-full disabled:cursor-wait disabled:opacity-60">
               <span class="label">Send enquiry</span> <span class="arrow" aria-hidden="true">→</span>
             </button>
+            <p class="flex items-center gap-2 text-sm font-medium text-ink"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" class="shrink-0 text-accent"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.75" /></svg>No obligation. You get a fixed price in writing before any work starts.</p>
             <p class="text-xs leading-relaxed text-ink-3">
               Your details are only used to reply to you. See the <a href="/privacy" class="underline underline-offset-2 hover:text-ink">privacy policy</a>.
               {hasCal && <>Or email <a href={`mailto:${site.email}`} class="text-ink-2 underline underline-offset-2 hover:text-ink">{site.email}</a>.</>}

@@ -1,7 +1,30 @@
 [
-  { "q": "Who will I actually be working with?", "a": "Directly with Kaden, from the intro call through to launch and support. No account managers, no hand-offs." },
-  { "q": "What does \"automation\" mean in real terms?", "a": "Connecting your forms, inbox, calendar and spreadsheets so enquiries get answered, routed or logged automatically. Not bolting a gimmick chatbot onto your homepage." },
-  { "q": "Who owns the website and accounts?", "a": "You do. Your domain, payment provider, booking tool and code all sit in accounts in your name." },
-  { "q": "Do you charge VAT?", "a": "No. Zelux operates as a UK sole trader and is not VAT registered, so the quoted price is the total price." },
-  { "q": "How long does a website take?", "a": "Sites up to 5 pages go live within 7 days, guaranteed, or you get £100 off the final invoice. The 7 days start once the quote is accepted and your copy, photos and logins are in, and pause while a design is waiting on your feedback. Bigger sites and shops get a fixed date in the quote." }
+  {
+    "q": "Who will I actually be working with?",
+    "a": "Directly with Kaden, from the intro call through to launch and support. No account managers, no hand-offs."
+  },
+  {
+    "q": "What does it cost?",
+    "a": "A fixed price, quoted in writing within 48 hours of a free 20-minute call, and paid in stages. No day rates, no surprise invoices, and no VAT on top, so the number you see is the number you pay."
+  },
+  {
+    "q": "What does \"automation\" mean in real terms?",
+    "a": "Connecting your forms, inbox, calendar and spreadsheets so enquiries get answered, routed or logged automatically. Not bolting a gimmick chatbot onto your homepage."
+  },
+  {
+    "q": "Will it work with the tools I already use?",
+    "a": "Usually, yes. Everything is built around what you already use, like Gmail or Outlook, your calendar, Xero or QuickBooks, and Stripe. Any licences stay in your name."
+  },
+  {
+    "q": "Who owns the website and accounts?",
+    "a": "You do. Your domain, payment provider, booking tool and code all sit in accounts in your name."
+  },
+  {
+    "q": "Do you charge VAT?",
+    "a": "No. Zelux operates as a UK sole trader and is not VAT registered, so the quoted price is the total price."
+  },
+  {
+    "q": "How long does a website take?",
+    "a": "Sites up to 5 pages go live within 7 days, guaranteed, or you get £100 off the final invoice. The 7 days start once the quote is accepted and your copy, photos and logins are in, and pause while a design is waiting on your feedback. Bigger sites and shops get a fixed date in the quote."
+  }
 ]
