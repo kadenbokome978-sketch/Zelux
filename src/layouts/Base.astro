@@ -6,12 +6,8 @@ import site from '../content/site.json';
 import geistLatin from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
 import displayLatin from '@fontsource-variable/funnel-display/files/funnel-display-latin-wght-normal.woff2?url';
 
-interface Props {
-  title: string;
-  description: string;
-  noindex?: boolean;
-}
-const { title, description, noindex = false } = Astro.props;
+interface Props { title: string; description: string; noindex?: boolean; schema?: Record<string, unknown>[] }
+const { title, description, noindex = false, schema = [] } = Astro.props as { title: string; description: string; noindex?: boolean; schema?: Record<string, unknown>[] };
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
 const canonical = new URL(path === '/' ? '/' : path, site.url).href;
 const ogImage = new URL('/og-image.png', site.url).href;
@@ -31,7 +27,9 @@ const jsonLd = {
       email: site.email,
       image: ogImage,
       description: 'Bespoke websites, workflow automation and connected business systems for UK businesses.',
-      areaServed: { '@type': 'Country', name: 'United Kingdom' },
+      areaServed: [{ '@type': 'AdministrativeArea', name: 'Hampshire' }, { '@type': 'Country', name: 'United Kingdom' }],
+      serviceType: ['Web design', 'Website development', 'Workflow automation', 'Website care'],
+      priceRange: 'Fixed quote',
       address: { '@type': 'PostalAddress', addressRegion: 'Hampshire', addressCountry: 'GB' },
       founder: { '@id': `${site.url}/#founder` },
       knowsAbout: ['Web design', 'Web development', 'Workflow automation', 'Business systems'],
@@ -44,6 +42,15 @@ const jsonLd = {
       email: site.email,
       worksFor: { '@id': `${site.url}/#business` },
     },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      inLanguage: 'en-GB',
+      publisher: { '@id': `${site.url}/#business` },
+    },
+    ...schema,
   ],
 };
 ---

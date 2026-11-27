@@ -4,6 +4,7 @@
 //   - no horizontal scroll at any width from 320px to 1920px
 //   - with JavaScript off: no hidden content, FAQ answers readable, menu fallback shown
 //   - phones: every homepage section fits one screen (iPhone 13 and SE sizes)
+//   - search basics: title and description length, one H1, canonical, valid schema
 //   - copy rules: no "AI", no em dashes in visible text
 // Exits non-zero on any failure.
 import { createServer } from 'node:http';
@@ -90,6 +91,27 @@ for (const vp of [{ width: 390, height: 664 }, { width: 375, height: 568 }]) {
         .map((e) => [e.dataset.fit, Math.round(e.getBoundingClientRect().height), avail]).filter(([, h, a]) => h > a);
     });
     for (const [name, h, a] of over) fail(`/ section "${name}" is ${h}px, taller than a ${vp.width}x${vp.height} phone screen (${a}px)`);
+  }
+  await page.close();
+}
+
+// Search basics on every page (SEO Skills Standard): title, description, one H1, canonical, valid schema
+{
+  const page = await browser.newPage();
+  for (const p of PAGES.filter((x) => x !== '/404')) {
+    await page.goto(base + p);
+    const seo = await page.evaluate(() => {
+      const ld = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => { try { JSON.parse(s.textContent || ''); return true; } catch { return false; } });
+      return {
+        title: document.title, desc: document.querySelector('meta[name=description]')?.getAttribute('content') || '',
+        h1: document.querySelectorAll('h1').length, canonical: !!document.querySelector('link[rel=canonical]'), ld,
+      };
+    });
+    if (seo.title.length < 15 || seo.title.length > 60) fail(`${p} title is ${seo.title.length} characters (keep 15 to 60): "${seo.title}"`);
+    if (seo.desc.length < 70 || seo.desc.length > 160) fail(`${p} meta description is ${seo.desc.length} characters (keep 70 to 160)`);
+    if (seo.h1 !== 1) fail(`${p} has ${seo.h1} H1 headings (needs exactly 1)`);
+    if (!seo.canonical) fail(`${p} has no canonical link`);
+    if (!seo.ld.length || seo.ld.includes(false)) fail(`${p} structured data missing or invalid JSON`);
   }
   await page.close();
 }

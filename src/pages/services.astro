@@ -5,10 +5,21 @@ import ClosingBand from '../components/ClosingBand.astro';
 import services from '../content/services.json';
 import automations from '../content/automations.json';
 import { icons } from '../content/icons';
+const serviceSchema = services.map((s) => ({
+  '@type': 'Service',
+  '@id': `https://zelux.co.uk/services#${s.slug}`,
+  name: s.title,
+  description: s.summary,
+  serviceType: s.title,
+  provider: { '@id': 'https://zelux.co.uk/#business' },
+  areaServed: [{ '@type': 'AdministrativeArea', name: 'Hampshire' }, { '@type': 'Country', name: 'United Kingdom' }],
+  url: `https://zelux.co.uk/services#${s.slug}`,
+}));
 const serviceIcon: Record<string, string> = { websites: 'website', automation: 'cog', care: 'care' };
 ---
 <Base
-  title="Services: Websites, Automation & Care | Zelux"
+  schema={serviceSchema}
+  title="Website Design, Automation & Care in Hampshire | Zelux"
   description="Websites that bring in work, workflow automation, and ongoing care for UK businesses. Clear scope, what's included, what isn't, and a fixed price."
 >
   <section class="first-screen container-z pb-8 pt-8 md:pb-16 md:pt-20">

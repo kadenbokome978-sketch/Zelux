@@ -20,6 +20,7 @@ Astro 7 (static) + Tailwind CSS 4 + TypeScript, with React islands (`@astrojs/re
 | Animation, toggles, interactive pieces | `motion-and-interaction` |
 | Before every push / audits | `accessibility-quality-check` |
 | Portfolio and case studies | `case-study-builder` |
+| Titles, meta, schema, URLs, SEO audits | `seo-standard` |
 
 ## Non-negotiables
 

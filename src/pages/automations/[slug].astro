@@ -28,6 +28,25 @@ const pairs: Record<string, string[]> = {
 };
 const related = pairs[a.index].map((n) => automations.find((x) => x.index === n)!);
 const need = `I'd like to set up ${a.title.toLowerCase()}.`;
+// Search title and description: one phrase per page, kept short so results don't cut them off
+const cap = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+const pageTitle = [`${cap(a.seoTitle)} for UK Small Businesses | Zelux`, `${cap(a.seoTitle)} for Small Businesses | Zelux`, `${cap(a.seoTitle)} | Zelux`].find((t) => t.length <= 60)!;
+const parts = a.body.split('. ');
+const first = (parts[0].length < 70 && parts[1] ? `${parts[0]}. ${parts[1]}` : parts[0]).replace(/\.$/, '');
+const tail = ' Fixed price, set up around your tools.';
+const cut = (t: string, n: number) => (t.length <= n ? t : t.slice(0, t.lastIndexOf(' ', n - 1)).replace(/[,;:]$/, '') + '…');
+const pageDesc = (a as { metaDescription?: string }).metaDescription ?? `${cut(first, 158 - tail.length)}.${tail}`.replace('….', '…');
+const pageUrl = `https://zelux.co.uk/automations/${a.slug}`;
+const schema = [
+  { '@type': 'Service', '@id': `${pageUrl}#service`, name: a.title, serviceType: a.seoTitle, description: a.body, url: pageUrl,
+    provider: { '@id': 'https://zelux.co.uk/#business' },
+    areaServed: [{ '@type': 'AdministrativeArea', name: 'Hampshire' }, { '@type': 'Country', name: 'United Kingdom' }] },
+  { '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Services', item: 'https://zelux.co.uk/services' },
+    { '@type': 'ListItem', position: 2, name: 'Automations', item: 'https://zelux.co.uk/services#automations' },
+    { '@type': 'ListItem', position: 3, name: a.title, item: pageUrl },
+  ] },
+];
 const faqs: [string, string][] = [
   ['How long does it take to set up?', 'Most focused automations are live within 1–2 weeks, tested with real examples from your business first.'],
   ['What does it cost?', 'A fixed price, quoted within 48 hours of a free 20-minute call. No day rates, and no VAT on top because Zelux isn’t VAT registered.'],
@@ -36,8 +55,9 @@ const faqs: [string, string][] = [
 ];
 ---
 <Base
-  title={`${a.seoTitle} for Small Businesses | Zelux`}
-  description={`${a.body.split('. ')[0]}. Set up around the tools you already use, at a fixed price. Hampshire, UK.`}
+  title={pageTitle}
+  description={pageDesc}
+  schema={schema}
 >
   <section class="container-z pb-12 pt-12 md:pb-16 md:pt-16">
     <nav aria-label="Breadcrumb" class="text-sm text-ink-3" data-reveal>

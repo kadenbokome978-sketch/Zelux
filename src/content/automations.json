@@ -6,7 +6,8 @@
     "slug": "email-marketing-sequences",
     "icon": "quotes",
     "seoTitle": "Automated email follow-ups",
-    "blueprint": "quotes"
+    "blueprint": "quotes",
+    "metaDescription": "Every quote gets a friendly check-in after 3 days and a last nudge after a week, so none go cold. Set up around your inbox at a fixed price."
   },
   {
     "index": "02",
@@ -15,7 +16,8 @@
     "slug": "crm-lead-capture-and-follow-up",
     "icon": "enquiries",
     "seoTitle": "Enquiry and lead follow-up",
-    "blueprint": "enquiries"
+    "blueprint": "enquiries",
+    "metaDescription": "Enquiries from your website, Facebook and Instagram in one list, each answered within minutes in your words. Fixed price, no new software."
   },
   {
     "index": "03",
@@ -24,7 +26,8 @@
     "slug": "social-media-scheduling",
     "icon": "social",
     "seoTitle": "Social media scheduling",
-    "blueprint": "social"
+    "blueprint": "social",
+    "metaDescription": "Write a month of posts in one sitting, pick the days, and they go out to each channel on schedule. Set up around your accounts at a fixed price."
   },
   {
     "index": "04",
@@ -33,7 +36,8 @@
     "slug": "automated-invoicing-and-payments",
     "icon": "invoices",
     "seoTitle": "Invoice chasing",
-    "blueprint": "invoices"
+    "blueprint": "invoices",
+    "metaDescription": "Invoices go out when a job is done, with polite reminders at 7 and 14 days and payments matched for you. Works with Xero or QuickBooks. Fixed price."
   },
   {
     "index": "05",
@@ -42,7 +46,8 @@
     "slug": "appointment-booking",
     "icon": "booking",
     "seoTitle": "Online booking and reminders",
-    "blueprint": "booking"
+    "blueprint": "booking",
+    "metaDescription": "Customers book from your real availability, get a confirmation and a reminder, and can move or cancel without ringing you. Fixed price."
   },
   {
     "index": "06",
@@ -51,7 +56,8 @@
     "slug": "customer-support-chat",
     "icon": "questions",
     "seoTitle": "Answers to common questions",
-    "blueprint": "questions"
+    "blueprint": "questions",
+    "metaDescription": "Common questions by email, form or DM answered from replies you've approved; anything new comes to you. Not a chatbot. Fixed price."
   },
   {
     "index": "07",
@@ -60,7 +66,8 @@
     "slug": "review-collection",
     "icon": "reviews",
     "seoTitle": "Review requests",
-    "blueprint": "reviews"
+    "blueprint": "reviews",
+    "metaDescription": "A day or two after each job, customers get a one-tap link to your Google reviews, with one reminder. Set up at a fixed price."
   },
   {
     "index": "08",
@@ -68,7 +75,8 @@
     "body": "Set a minimum for each product. When stock drops below it, you get a text or email saying what's low and how fast it's been selling.",
     "slug": "inventory-alerts",
     "icon": "stock",
-    "seoTitle": "Low-stock alerts"
+    "seoTitle": "Low-stock alerts",
+    "metaDescription": "Set a minimum for each product and get a text or email when stock drops below it, with how fast it's selling. Set up at a fixed price."
   },
   {
     "index": "09",
@@ -77,7 +85,8 @@
     "slug": "order-and-shipping-notifications",
     "icon": "orders",
     "seoTitle": "Order and delivery updates",
-    "blueprint": "orders"
+    "blueprint": "orders",
+    "metaDescription": "Order, dispatch and delivery emails with tracking, sent automatically, so most \"where's my order?\" messages stop. Fixed price."
   },
   {
     "index": "10",
@@ -86,6 +95,7 @@
     "slug": "analytics-reporting",
     "icon": "reporting",
     "seoTitle": "Weekly business report",
-    "blueprint": "reporting"
+    "blueprint": "reporting",
+    "metaDescription": "Sales, enquiries and where they came from in one short report every Monday. No logging in to five dashboards. Set up at a fixed price."
   }
 ]
