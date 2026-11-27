@@ -53,3 +53,19 @@ Google: optimising for AI search is still SEO. So: clear one-paragraph answers n
 ## Not used
 
 Paid data tools (Ahrefs, DataForSEO, SE Ranking): only if Kaden agrees to the cost. Free stand-ins: Google Search Console, Bing Webmaster Tools, PageSpeed Insights.
+
+## Installed tools (27 Nov 2026)
+
+The free parts of both repos are now installed in this project, reviewed first:
+
+- `.claude/seo-kit/`: scripts, schema templates and JSON-LD validator from AgriciDaniel/claude-seo v2.6.3 (MIT, see its README). First run on a machine: `.claude/seo-kit/scripts/claude-seo setup`.
+- Skills in `.claude/skills/`: `seo`, `seo-audit`, `seo-technical`, `seo-local`, `seo-geo`, `seo-schema`, `seo-page`, `seo-sitemap`, `seo-images`, `seo-content`, `seo-plan`, `seo-agentic`, `seo-sxo`, `seo-drift`, `seo-ecommerce`, plus Illyism's `seo-title-optimization`, `seo-roast`, `blitz-seo`. Agents in `.claude/agents/seo-*.md`. Paid-data skills were left out.
+
+The fetchers refuse localhost, so check the build from the project root after `npm run build`:
+
+```bash
+.claude/seo-kit/scripts/claude-seo run page_checks.py --file dist/services.html --base-url https://zelux.co.uk/services --json
+.claude/seo-kit/.venv/bin/python .claude/seo-kit/hooks/validate-schema.py dist/services.html
+```
+
+Baseline (27 Nov 2026): services, portfolio and all 10 automation pages 0 findings out of 45 checks; JSON-LD valid on every page. Expected, not bugs: `noindex` on /404; `thin-content` on /book and /cookies; `first-image-lazy-loaded` on the homepage (the Forge screenshot sits below the first screen, so lazy is right); `title-too-short` on /privacy and /cookies (allowed by the 15-60 rule above). Once a change is live, the URL-based skills (`seo-audit https://zelux.co.uk`, `seo-local`, `seo-geo`, `seo-agentic`) can run against the real site.

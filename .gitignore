@@ -5,3 +5,7 @@ dist/
 .vercel/
 .DS_Store
 .lighthouseci/
+.claude/seo-kit/.venv/
+.claude/seo-kit/.venv.next-*/
+.claude/seo-kit/runtime-state.json
+.claude/seo-kit/ms-playwright/
