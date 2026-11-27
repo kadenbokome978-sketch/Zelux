@@ -74,3 +74,7 @@ Motion must explain something, guide attention or give feedback. If it does none
 ## "See it with your business" (homepage)
 
 `src/scripts/personalise.ts` holds eight trade templates (made-up default names, colours, copy). The hero `TryIt` box saves `{ name, trade }` to sessionStorage and fires `zelux:preview`; HeroPhone, BuildWeek and ClosingBand listen with `onPreview()` and re-dress themselves ([data-p] text + `--p-*` colour vars), and /book prefills the note. It's templating on the visitor's device: never describe it as generated, never send the input anywhere. Hidden without JS; the rebuild sweep is skipped with reduced motion. To add a trade, add an entry to `trades` (check the hero phone still fits).
+
+## Play only when seen
+
+Nothing animates before it's on screen. reveal.ts adds `.in-view` to `.hp`, `.ss` and `.concept` the first time each is 35% visible, and global.css keeps their animations off until then; reveal blocks inside a closed phone tab aren't marked as seen. LeadFlow and BuildWeek start from their own IntersectionObserver. New demos must follow the same rule.

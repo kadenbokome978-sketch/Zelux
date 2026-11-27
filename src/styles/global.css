@@ -363,3 +363,7 @@ h1 em, h2 em, h3 em { font-style: normal; }
   html.m-tabs .cb > .container-z { row-gap: 1.25rem; }
 }
 @media (max-width: 767px) and (max-height: 600px) { html.m-tabs .cb .cb-line { margin-top: 0.6rem; } html.m-tabs .cb > .container-z { row-gap: 1rem; } }
+
+/* Demos wait until they're on screen (reveal.ts adds .in-view the first time) */
+.js .hp:not(.in-view) *, .js .ss:not(.in-view) img, .js .concept:not(.in-view) .toast { animation: none !important; }
+.js .concept:not(.in-view) .toast { opacity: 0; }
